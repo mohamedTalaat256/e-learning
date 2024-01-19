@@ -1,0 +1,30 @@
+<div fxFlex="100" fxLayout="row" style="height: 100vh">
+      <!-- <admin-toolbar-list></admin-toolbar-list> -->
+    <div fxFlex.xl="75" fxFlex.lg="75" fxFlex.sx="95" fxLayout="column" style="overflow: auto;"> 
+      
+        <div class=" m-3" fxFlex="100">
+            
+        </div>
+    </div>
+    <div fxFlex.xl ="25" fxFlex.lg="25" fxFlex.sx="5" fxHide.xs class="">
+       <h2 class="mt-5">lectures</h2>
+        <mat-card *ngFor="let lecture of lectures" class="mat-bg-light my-2">
+            <mat-card-header>
+                <img mat-card-lg-image src="{{lecture.image}}" >
+              <mat-card-title-group class="px-2">
+
+              
+                <mat-card-title>{{lecture.title}}</mat-card-title>
+                <mat-card-subtitle> {{lecture.length}} min | {{lecture.length}} 
+                
+                    <mat-icon>like</mat-icon>
+                </mat-card-subtitle>
+               
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+             
+            </mat-card-content>
+          </mat-card>
+    </div>
+</div> 

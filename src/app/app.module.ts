@@ -38,6 +38,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { CourseDialogFormComponent  } from './layouts/admin/components/course-dialog-form/course-dialog-form.component';
 import { MyCoursesComponent } from './layouts/admin/components/my-courses/my-courses.component';
 import { RatingStarComponent } from './global/rating-star/rating-star.component';
+import { CourseOverviewComponent } from './layouts/public/course-overview/course-overview.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -72,7 +73,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MyCommunityComponent,
     CourseDialogFormComponent,
     MyCoursesComponent,
-    RatingStarComponent
+    RatingStarComponent,
+    CourseOverviewComponent
   ],
   imports: [
     MatSidenavModule,
