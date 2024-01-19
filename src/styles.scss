@@ -1,0 +1,156 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow: hidden;
+}
+
+.app-container {
+    height: 100vh;
+    margin: 0;
+}
+
+.app-sidenav {
+    width: 250px;
+    border: none;
+}
+
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-rebeat {
+    background-repeat: no-repeat;
+}
+
+.bg-img-fit-cover {
+    object-fit: cover;
+}
+
+.circular-spinner-sm {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+}
+
+
+.bg-hidden {
+    background-color: transparent;
+    border: 0px;
+}
+
+.f-w-bold {
+    font-weight: bold;
+}
+
+.circle-avatar-sm {
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.circle-avatar-md {
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.icon-lg {
+    transform: scale(2);
+}
+
+.icon-sm {
+    transform: scale(1.2);
+}
+
+.opacity-8 {
+    opacity: 0.8 !important;
+}
+
+.border-0 {
+    border: none !important;
+}
+.rounded-0 {
+    border-radius: 0px !important;
+}
+.rounded-1 {
+    border-radius: 14px !important;
+}
+.rounded-2 {
+    border-radius: 20px !important;
+}
+
+.f-w-500 {
+    font-weight: 500 !important;
+}
+
+.w-90 {
+    width: 90% !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+.img-radius-sx {
+    height: 30px !important;
+    width: 30px !important;
+    object-fit: scale-down; 
+}
+.img-radius-sm {
+    height: 50px !important;
+    width: 50px !important;
+    object-fit: scale-down;
+    border-radius: 12px;
+}
+
+.img-radius-lg {
+    height: 150px !important;
+    width: 150px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    
+}
+
+.my-card-md{
+    max-height: 260px !important;
+}
+.line-on-text{
+    text-decoration: line-through !important;
+}
+
+ .shadow-sm{
+    box-shadow: 3px 2px 10px 1px #f0f0f0 !important;
+ }
+
+ .full-screen-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+ }
+
+
+ .mat-form-field-outline-start, .mat-form-field-outline-end {
+    border-radius: 0 !important;
+}
+
+.text-capitalize{
+    text-transform: capitalize;
+}

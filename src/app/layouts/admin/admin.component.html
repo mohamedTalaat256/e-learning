@@ -1,0 +1,12 @@
+<div fxFlex="100" fxLayout="row" style="height: 100vh">
+    <div fxFlex.xl ="17" fxFlex.lg="17" fxFlex.sx="5" fxHide.xs class="mat-bg-light">
+        <admin-side-nav-list fxFlex="100"></admin-side-nav-list>
+    </div>
+    <div fxFlex.xl="83" fxFlex.lg="83" fxFlex.sx="95" fxLayout="column" style="overflow: auto;"> 
+        <admin-toolbar-list></admin-toolbar-list>
+        <div class="admin-content m-3" fxFlex="100">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+</div> 

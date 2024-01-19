@@ -1,0 +1,31 @@
+{
+    "email" : "البريد اللإلكتروني",
+    "first_name" : "الاسم الأول",
+    "last_name" : "الاسم الأخير",
+    "username": "اسم المستخدم",
+    "password": "كلمة السر",
+    
+    "register": "تسجيل",
+    "notifications": "الإشعارات",
+    "save":"حفظ",
+    "cancel":"الغاء",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "my_courses": "الدورات الخاصة بي",
+    "add_new_course": "إضافة دورة جديدة",
+    "course_title": "اسم الدورة",
+    "course_describtion": "الوصف",
+    "is_course_free": "هل الدورة مجانية"
+}

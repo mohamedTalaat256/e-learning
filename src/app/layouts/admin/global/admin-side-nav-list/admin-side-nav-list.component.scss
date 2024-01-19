@@ -1,0 +1,18 @@
+@use './../../../../../theme/my-theme.scss' as my-theme;
+.sid-nav-item{
+    font-size: 1.2rem;
+    font-weight: 500; 
+    color: #6b6b6b;
+    cursor: pointer;
+  /*   color: my-theme.$my-secondary; */
+}
+
+.mat-icon{
+
+    transform: scale(1.2);
+}
+ 
+.active { 
+    border-radius: 6px !important;
+    background-color: #ebebeb;
+} 

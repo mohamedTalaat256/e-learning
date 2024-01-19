@@ -1,0 +1,29 @@
+{
+    "email": "email",
+    "first_name" : "first name",
+    "last_name" : "last name",
+    "username": "username",
+    "password": "password",
+    
+    "register": "register",
+    
+    "notifications": "notifications",
+    "save":"save",
+    "cancel":"cancel",
+
+
+
+
+
+
+
+
+
+
+    "my_courses": "my courses",
+    "add_new_course": "add new course",
+    "course_title": "course title",
+    "course_describtion": "course describtion",
+    "is_course_free":"is course free"
+
+}

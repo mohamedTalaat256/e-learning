@@ -1,0 +1,53 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
+
+  
+
+    <!-- ----------------------- -->
+    <div fxFlex="50" fxFlex.xs="90" fxLayoutAlign="space-around center">
+        
+    </div>
+    <!-- -------------------- -->
+    <div fxFlex="50" fxLayoutAlign="end center">
+
+       
+        <button mat-icon-button color="secondary" matTooltip="calender" >
+            <mat-icon>calendar_today</mat-icon>
+        </button>
+
+        <button mat-icon-button color="secondary" matTooltip="Notifications" >
+            <mat-icon>notifications</mat-icon>
+        </button>
+
+
+        <button mat-icon-button color="primary" matTooltip="dark mode" >
+            <mat-icon>brightness_2</mat-icon>
+        </button>
+        
+        
+        <button mat-icon-button class="circle-avatar-sm m-3" matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu"
+        style="background-image: url('https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg');">
+
+    </button>
+
+    <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+        <button mat-menu-item routerLink="#" >
+            <mat-icon color="primary">person</mat-icon><span>My Account</span>
+        </button>
+        <button mat-menu-item routerLink="#">
+            <mat-icon color="accent">settings</mat-icon><span>Settings</span>
+        </button>
+        <button mat-menu-item routerLink="#">
+            <mat-icon color="warn">help</mat-icon><span>Help</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="#">
+            <mat-icon color="danger">exit_to_app</mat-icon>Logout
+        </button>
+
+
+
+    </mat-menu>
+    </div>
+
+
+</div>

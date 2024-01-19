@@ -1,0 +1,29 @@
+<div class="container" fxLayoutAlign="space-around center">
+
+    <div fxLayout="column" fxFlex.xl="50" fxFlex.xs="100" fxFlex.sm="100">
+        <mat-card *ngFor="let user of friends"  style="margin-top: 10px;">
+            <mat-card-header>
+
+                <div fxLayout="row"  fxFlex="100" fxLayoutAlign="space-between center">
+                    <div fxFlex="70">
+                        <div fxLayout="row" fxFlex="100">
+                            <div class="m-2" mat-card-avatar [ngStyle]="{
+                                'background-image':  'url(' + user.profile_image_url + ')' , 'background-size': 'cover'
+                             }" ></div>
+
+                             <div class="m-1">
+                                <mat-card-title>{{user.username}}</mat-card-title>
+                                <mat-card-subtitle>{{user.about}}</mat-card-subtitle>
+                             </div>
+                        </div>
+                    </div>
+                    <div fxFlex="30" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary">message</button>
+                    </div>
+                </div>
+            </mat-card-header>
+        </mat-card>
+    </div>
+    
+    
+</div>

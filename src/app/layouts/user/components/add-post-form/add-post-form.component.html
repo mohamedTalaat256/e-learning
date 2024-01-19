@@ -1,0 +1,34 @@
+<div class="container" fxLayoutAlign="space-around center">
+    <mat-card fxFlex="50" fxFlex.xs="100" fxFlex.sm="100">
+        <mat-card-header>
+            <div fxLayout="row" fxFlex="100" fxLayoutGap="10px">
+                <img src="{{user.profile_image_url}}" class="circle-avatar-md" />
+                <div fxFlex="column">
+                    <mat-card-title>{{user.username}}</mat-card-title>
+                </div>
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" class="mt-2">
+                <mat-form-field fxFlex="75" class="m-0">
+                    <mat-label>What do you think </mat-label>
+                    <input matInput placeholder="What do you think" />
+                </mat-form-field>
+                <button mat-icon-button color="primary" fxFlex="12">
+                    <mat-icon>image</mat-icon>
+                </button>
+                <button mat-flat-button class="color-swatch color-swatch-green " fxFlex="12">
+                    
+                    
+                    post
+                </button>
+            </div>
+            
+
+        </mat-card-content>
+        <mat-action-row *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center"> 
+            <mat-spinner class="m-2" style="height: 30px; width: 30px;"></mat-spinner>
+        </mat-action-row>
+    </mat-card>
+
+</div>

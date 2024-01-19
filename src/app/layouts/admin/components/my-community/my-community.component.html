@@ -1,0 +1,78 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column" fxLayout.xs="column">
+        <span class="f-w-500 mat-headline-4">My Community</span>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20">
+            
+            <button [routerLink]="[ADD_COURSE_URL]" mat-raised-button color="primary">Add Course</button>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxFlex="100%" fxLayoutAlign="start">
+
+        
+        <mat-card *ngFor="let myClasse of myClasses" class="{{myClasse.bg}} rounded-2 m-2 border-0 shadow-sm my-card-md"
+            fxFlex.xl="23.5%" fxFlex.lg="23.5%" fxFlex.md="30%" fxFlex.sm="100%" fxFlex.xs="100%">
+            <mat-card-header>
+                <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+                    <div class="c100 p50 ">
+                        <span>50%</span>
+                        <div class="slice small">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                    <button mat-icon-button> <mat-icon>more_vert</mat-icon></button>
+                </div>
+
+            </mat-card-header>
+            <mat-card-content>
+                <span class="mat-headline-5 mat-text-light-dark">{{myClasse.title}}</span>
+            </mat-card-content>
+            <mat-card-footer class="m-3 p-3 mat-bg-light rounded-2 opacity-8">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+
+
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <mat-icon class="icon-sm mx-2" color="dark">calendar_today</mat-icon>
+                        <span class="f-w-500"> | {{myClasse.date}}</span>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <mat-icon class="icon-sm mx-2" color="dark">supervisor_account</mat-icon>
+                        <span class="f-w-500"> | {{myClasse.students}}</span>
+                    </div>
+
+
+                </div>
+            </mat-card-footer>
+        </mat-card>
+
+    </div>
+
+
+    <div class="px-3" fxLayout="row wrap" fxFlex="100%" fxLayoutAlign="start ">
+
+        <mat-card *ngFor="let topStudent of topStudents" class="rounded-2 m-2 border-0 shadow-sm " fxFlex.xl="31.5%"
+            fxFlex.lg="30.5%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%">
+
+            <mat-card-header fxLayout="row" fxFlex="100%" fxLayoutAlign="space-between center">
+                <span fxFlex="80%" class="mat-headline-5 mat-text-dark">{{topStudent.className}}</span>
+                <span class="mat-headline-6 mat-text-dark">{{topStudent.students.length}} of {{topStudent.allStutentsCount}}</span>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxFlex="100%">
+
+
+                <div *ngFor="let student of topStudent.students" fxLayout="row wrap" fxFlex="100%"
+                    fxLayoutAlign.gt-lg="start center" class="mt-2">
+                    <img src="{{student.profileImage}}" class="circle-avatar-md m-2 " alt="{{student.fullName}}" />
+                    <div fxFlex="70">
+                        <mat-card-title>{{student.fullName}}</mat-card-title>
+                        <mat-card-subtitle class="f-w-500">{{student.rank}} %</mat-card-subtitle>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+</div>

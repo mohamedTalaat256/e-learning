@@ -1,0 +1,76 @@
+<div fxFlex="row" style="height: 100vh;">
+    <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxHide.sm fxHide.xs>
+        <h1 class="mat-headline-4">Register Now</h1>
+        <img src="/assets/images/login.png" class=" ">
+    </div>
+    <div fxFlex="50" fxFlex.lg="80%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxLayoutAlign="center center"
+        class="mat-bg-light-primary">
+        <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="60" class="p-5 mat-bg-light rounded-2 "
+            style="height: 90vh;" [@expandCollapse]="isExpanded ? 'open' : 'closed'">
+            <h2 class="mat-headline-4 mat-text-secondary">
+                {{ isLoginMode? 'login': 'register' }}
+            </h2>
+            <mat-form-field *ngIf="!isLoginMode">
+                <mat-label>{{'first_name'|translate}} </mat-label>
+                <input matInput [placeholder]="'first_name'|translate" type="text">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!isLoginMode">
+                <mat-label>{{'last_name'|translate}} </mat-label>
+                <input matInput [placeholder]="'last_name'|translate" type="text">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>{{'username'|translate}} </mat-label>
+                <input matInput [placeholder]="'username'|translate" type="text">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!isLoginMode">
+                <mat-label>{{'email'|translate}} </mat-label>
+                <input matInput [placeholder]="'email'|translate" type="email">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{'password'|translate}} </mat-label>
+                <input matInput [placeholder]="'password'|translate" type="password">
+            </mat-form-field>
+
+          
+
+            <section  *ngIf="!isLoginMode" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-checkbox color="primary" > <span
+                        class="mat-text-secondary f-w-500">Teacher</span></mat-checkbox>
+                <mat-checkbox color="primary" > <span
+                        class="mat-text-secondary f-w-500">Student</span></mat-checkbox>
+            </section>
+
+            <div fxLayout="row" fxLayoutAlign="end center">
+                <span class="mat-text-primary f-w-500 "> Forgot Password? </span>
+            </div>
+
+
+
+
+
+            <button *ngIf="isLoginMode" type="submit" mat-raised-button color="primary" class="py-3 my-2 ">{{'login' | translate}}</button>
+            <button *ngIf="!isLoginMode" type="submit"  mat-raised-button color="primary" class="py-3 mt-3 my-2 ">{{'register' | translate}}</button>
+            
+            <span class="mat-text-secondary f-w-500 m-auto"> OR </span>
+            
+            <button *ngIf="!isLoginMode"(click)="enableLoginMode()"  mat-raised-button color="light" class="py-3 my-2 ">{{'login' | translate}}</button>
+            <button *ngIf="isLoginMode" (click)="enableRegisterMode()" type="submit" mat-raised-button color="light" class="py-3 mt-3 my-2 ">{{'register' | translate}}</button>
+
+
+            <div class="my-3" fxLayout="row" fxLayoutAlign="center center">
+                <section>
+                    <mat-checkbox color="primary" [(ngModel)]="agreeTremsChecked"></mat-checkbox>
+                </section>
+                <span class="mat-text-secondary f-w-500  my-2 "> By Continuing, you agree to experts shares terms &
+                    condictions & privecy policy </span>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

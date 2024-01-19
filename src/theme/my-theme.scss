@@ -1,0 +1,142 @@
+@use '@angular/material' as mat;
+
+@use './override/mat-button-color-variants' as button-color-variants;
+@use './override/mat-icon-color-variants' as icon-color-variants;
+@use './override/mat-text-color-variants' as text-color-variants;
+@use './override/mat-tap-color-variants' as tap-color-variants;
+@use './override/mat-toolbar-color-variants' as toolbar-color-variants;
+@use './override/mat-stepper-color-variants.scss' as stepper-color-variants;
+@use './override/mat-input-color-variants' as input-color-variants;
+@use './override/mat-background-color-variants' as background-color-variants;
+
+@include mat.core();
+
+$typography-config: mat.define-typography-config(
+  $font-family: 'Roboto, sans-serif',
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400),
+  $headline-6: mat.define-typography-level(20px, 32px, 400),
+  $subtitle-1: mat.define-typography-level(16px, 28px, 400),
+  $subtitle-2: mat.define-typography-level(16px, 28px, 400),
+  $body-1: mat.define-typography-level(14px, 20px, 400),
+  $body-2: mat.define-typography-level(14px, 20px, 400),
+  $caption: mat.define-typography-level(12px, 20px, 400),
+  $button: mat.define-typography-level(14px, 14px, 500),
+);
+
+
+
+$light-background: mat.define-palette(mat.$gray-palette, 50);
+$light-forground: mat.define-palette(mat.$gray-palette, 900);
+
+
+$dark-background: mat.define-palette(mat.$gray-palette, 50);
+$dark-forground: mat.define-palette(mat.$gray-palette, 900);
+
+
+/* basic */
+$my-light: mat.define-palette(mat.$grey-palette, 50);
+$my-primary: mat.define-palette(mat.$blue-palette, 500);
+$my-secondary: mat.define-palette(mat.$grey-palette, 500);
+$my-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$my-success: mat.define-palette(mat.$green-palette, 500);
+$my-danger: mat.define-palette(mat.$red-palette, A700);
+$my-warn: mat.define-palette(mat.$yellow-palette, 900);
+$my-info: mat.define-palette(mat.$teal-palette, 500);
+$my-dark: mat.define-palette(mat.$grey-palette, 900);
+
+
+/* light */
+$my-light-primary: mat.define-palette(mat.$blue-palette, 100);
+$my-light-secondary: mat.define-palette(mat.$grey-palette, 100);
+$my-light-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$my-light-success: mat.define-palette(mat.$green-palette, 100);
+$my-light-danger: mat.define-palette(mat.$red-palette, 100);
+$my-light-warn: mat.define-palette(mat.$yellow-palette, 200);
+$my-light-info: mat.define-palette(mat.$teal-palette, 100);
+$my-light-dark: mat.define-palette(mat.$grey-palette, 600);
+
+
+
+
+$light-color-theme: (
+    light: $my-light,
+    primary: $my-primary,
+    secondary: $my-secondary,
+    accent: $my-accent,
+    warn: $my-warn,
+    success: $my-success,
+    danger: $my-danger,
+    info: $my-info,
+    dark: $my-dark,
+    
+
+    light-primary: $my-light-primary,
+    light-secondary: $my-light-secondary,
+    light-accent: $my-light-accent,
+    light-warn: $my-light-warn,
+    light-success: $my-light-success,
+    light-danger: $my-light-danger,
+    light-info: $my-light-info,
+    light-dark: $my-light-dark,
+
+    background: $light-background,
+    forground: $light-forground,
+);
+
+
+$dark-color-theme: (
+    light: $my-light,
+    primary: $my-primary,
+    secondary: $my-secondary,
+    accent: $my-accent,
+    warn: $my-warn,
+    success: $my-success,
+    danger: $my-danger,
+    info: $my-info,
+    dark: $my-dark,
+
+    light-primary: $my-light-primary,
+    light-secondary: $my-light-secondary,
+    light-accent: $my-light-accent,
+    light-warn: $my-light-warn,
+    light-success: $my-light-success,
+    light-danger: $my-light-danger,
+    light-info: $my-light-info,
+    light-dark: $my-light-dark,
+
+    background: $dark-background,
+    forground: $dark-forground,
+
+);
+@include mat.typography-hierarchy($typography-config);
+
+$light-theme: mat.define-light-theme((
+    color:$light-color-theme,
+    typography: $typography-config,
+    density: 0,
+    )
+);
+
+
+
+
+
+
+// and include mixin above
+@include button-color-variants.color($light-theme, $light-color-theme);
+@include icon-color-variants.color($light-theme, $light-color-theme);
+@include text-color-variants.color($light-theme, $light-color-theme);
+@include tap-color-variants.color($light-theme, $light-color-theme);
+@include toolbar-color-variants.color($light-theme, $light-color-theme);
+@include stepper-color-variants.color($light-theme, $light-color-theme);
+@include input-color-variants.color($light-theme, $light-color-theme);
+@include background-color-variants.color($light-theme, $light-color-theme);
+
+@include mat.all-component-themes($light-theme);
+
+
+

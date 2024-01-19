@@ -1,0 +1,18 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <app-toolbar-list fxFlex="100"></app-toolbar-list>
+</mat-toolbar>
+
+
+<mat-sidenav-container class="app-container">
+    <mat-sidenav #sidenav mode="side" opened  [class.mat-elevation-z4]="true" class="app-sidenav"  >
+        <app-sidenav-list></app-sidenav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <router-outlet ></router-outlet>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
