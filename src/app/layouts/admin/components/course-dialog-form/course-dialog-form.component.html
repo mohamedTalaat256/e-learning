@@ -12,11 +12,24 @@
             <textarea matInput [placeholder]="'course_describtion'|translate" type="text"></textarea>
         </mat-form-field>
 
+
+
+
+
         <section fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-checkbox color="primary"> <span
-                    class="mat-text-secondary f-w-500">{{'is_course_free'|translate}}</span></mat-checkbox>
+           
+            <mat-form-field fxFlex="70">
+                <mat-label>{{'price'|translate}} </mat-label>
+                <input matInput [placeholder]="'price'|translate" type="text">
+            </mat-form-field>
+
+            <mat-checkbox color="primary">
+                <span class="mat-text-secondary f-w-500">{{'is_course_free'|translate}}</span>
+            </mat-checkbox>
+
         </section>
-        
+
+
 
         <div *ngIf="currentFile && progress" class="progress my-3">
             <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
@@ -26,13 +39,14 @@
         </div>
 
         <label for="file-input">
-           
-         <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
+
+            <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
             <img [src]="preview!=='' ? preview : defaultPreview" class="upload-course-img" />
-            <input type="file" id="file-input" accept="image/*" (change)="selectFile($event)" style="visibility: hidden; position: absolute;" />
+            <input type="file" id="file-input" accept="image/*" (change)="selectFile($event)"
+                style="visibility: hidden; position: absolute;" />
         </label>
 
-       
+
 
 
     </div>
