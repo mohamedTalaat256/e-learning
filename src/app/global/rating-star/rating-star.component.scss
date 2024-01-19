@@ -1,0 +1,15 @@
+.mat-icon.half-colored {
+    position: relative;
+    display: inline-block;
+  }
+  
+
+.mat-icon.half-colored::before {
+    content: "star_rate";
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #FFD700; /* Your desired color */
+    background: linear-gradient(to right, transparent 50%, #FFD700 50%);
+  }
