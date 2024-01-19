@@ -39,6 +39,7 @@ import { CourseDialogFormComponent  } from './layouts/admin/components/course-di
 import { MyCoursesComponent } from './layouts/admin/components/my-courses/my-courses.component';
 import { RatingStarComponent } from './global/rating-star/rating-star.component';
 import { CourseOverviewComponent } from './layouts/public/course-overview/course-overview.component';
+import { MinToLength } from './pip/minToLength';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -74,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CourseDialogFormComponent,
     MyCoursesComponent,
     RatingStarComponent,
-    CourseOverviewComponent
+    CourseOverviewComponent,
+    MinToLength 
   ],
   imports: [
     MatSidenavModule,
