@@ -1,7 +1,7 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column" fxLayout.xs="column">
         <span class="f-w-500 mat-headline-4 text-capitalize m-0">{{'my_courses'| translate}}</span>
-        <button (click)="openDialog()" mat-raised-button color="primary">{{'add_new_course'| translate}}</button>
+        <button (click)="openCreateDialog()" mat-raised-button color="primary">{{'add_new_course'| translate}}</button>
     </div>
 
     <div fxLayout="row">
@@ -71,7 +71,7 @@
                         <button mat-menu-item>
                           <mat-icon color="success">class</mat-icon><span>lecture</span>
                       </button>
-                        <button mat-menu-item (click)="openDialog()">
+                        <button mat-menu-item (click)="openEditDialog(element)">
                             <mat-icon color="primary">mode_edit</mat-icon><span>edit</span>
                         </button>
                         <button mat-menu-item routerLink="#">

@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { adminUrls } from '../../constants';
+import { FormMode, adminUrls, dialog_h_md, dialog_w_md } from '../../constants';
 import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CourseDialogFormComponent } from '../course-dialog-form/course-dialog-form.component';
+import { TranslateService } from '@ngx-translate/core';
+import { ComponentUtilsService } from 'src/app/utils/components.utl.service';
 
 
 
@@ -39,7 +41,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class MyCoursesComponent {
   ADD_COURSE_URL:string = adminUrls.addCourse;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+    private translate: TranslateService,
+    private componentUtilsService: ComponentUtilsService
+
+    ) {}
 
   displayedColumns: string[] = ['title', 'describtion', 'price', 'isFree', 'rating', 'enrolledStudents', 'image', 'actions'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -53,38 +59,28 @@ export class MyCoursesComponent {
 
 
 
+ 
 
 
 
 
 
 
+  openCreateDialog() {
+    const data = {
+      title: this.translate.instant('add_new_course'),
+      formMode: FormMode.CREATE
+    };
 
+    this.componentUtilsService.openDialogMd(CourseDialogFormComponent, data);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  openDialog() {
-    const dialogRef = this.dialog.open(CourseDialogFormComponent,{
-      width:'600px',   // Set width to 600px
-      height:'650px',  // Set height to 530px
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  openEditDialog(courseData:any) {
+    const data = {
+      title: this.translate.instant('edit_course'),
+      formMode: FormMode.EDIT,
+      courseData:courseData
+    };
+    this.componentUtilsService.openDialogMd(CourseDialogFormComponent, data);
   }
 }

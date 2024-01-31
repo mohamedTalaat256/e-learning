@@ -22,8 +22,18 @@
 
     "my_courses": "my courses",
     "add_new_course": "add new course",
+    "edit_course": "edit course",
     "course_title": "course title",
     "course_describtion": "course describtion",
-    "is_course_free":"is course free"
+    "is_course_free":"is course free",
+
+
+
+
+
+
+    "max_length_is": "max length is",
+    "max_value_is": "max value is"
+
 
 }

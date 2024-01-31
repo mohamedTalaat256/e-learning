@@ -87,7 +87,7 @@ body {
     border-radius: 0px !important;
 }
 .rounded-1 {
-    border-radius: 14px !important;
+    border-radius: 9px !important;
 }
 .rounded-2 {
     border-radius: 20px !important;
@@ -134,6 +134,10 @@ body {
 .line-on-text{
     text-decoration: line-through !important;
 }
+
+.shadow-xs{
+    box-shadow: 3px 2px 5px 0px #f0f0f0 !important;
+ }
 
  .shadow-sm{
     box-shadow: 3px 2px 10px 1px #f0f0f0 !important;

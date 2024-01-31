@@ -1,21 +1,48 @@
-import { Component } from '@angular/core';
-import { imagePlaceholder } from '../../constants';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormMode, imagePlaceholder } from '../../constants';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+ 
 @Component({
   selector: 'app-course-dialog-form',
   templateUrl: './course-dialog-form.component.html',
   styleUrls: ['./course-dialog-form.component.scss']
 })
-export class CourseDialogFormComponent {
+
+
+export class CourseDialogFormComponent implements OnInit {
   selectedFiles?: FileList;
   currentFile?: File;
   progress = 0;
   message = '';
   preview = '';
   defaultPreview = imagePlaceholder;
- 
-  constructor( ) {}
+  courseForm: FormGroup;
+  formMode: FormMode;
+  title: string;
+  courseData: any = {};
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    private fb:FormBuilder
+  ) {
+
+    console.log(data);
+    this.formMode = data.formMode;
+    this.title = data.title;
+    this.courseData = data.courseData;
+     
+  }
+
+  ngOnInit(): void {
+    if (this.formMode === FormMode.CREATE) {
+      this.courseData = {};
+      this.courseForm = this.createCourseForm();
+    }else{
+      this.courseForm = this.setCourseForm(this.courseData);
+      this.preview = this.courseData.image
+    }
+  }
  
 
   selectFile(event: any): void {
@@ -42,5 +69,33 @@ export class CourseDialogFormComponent {
       }
     }
   }
- 
+
+
+  createCourseForm(){
+    let form = this.fb.group(
+      {
+        //id:           [null],
+        title:        ['', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
+        describtion:  [null, Validators.required, Validators.maxLength(200)],
+        price:        [null, Validators.required], 
+      }
+    );
+
+    return form;
+  }
+
+
+  setCourseForm(course){
+    let form = this.fb.group(
+      {
+       // id:         [course.id],
+        title:       [course.title, Validators.required, Validators.maxLength(5), Validators.minLength(2)],
+        describtion: [course.describtion, Validators.required, Validators.maxLength(200)],
+        price:       [course.price, Validators.required], 
+      }
+    );
+
+    return form;
+  }
+
 }

@@ -25,7 +25,28 @@
 
     "my_courses": "الدورات الخاصة بي",
     "add_new_course": "إضافة دورة جديدة",
+    "edit_course": "تعديل الدورة",
     "course_title": "اسم الدورة",
     "course_describtion": "الوصف",
-    "is_course_free": "هل الدورة مجانية"
+    "is_course_free": "هل الدورة مجانية",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "max_length_is": "أكبر عدد من الأحر المسموح",
+    "min_length_is": "أقل عدد من الأحر المسموح",
+    "max_value_is": "أكبر قيمة مسموح بها",
+    "min_value_is": "أصغر قيمة مسموح بها"
+
 }
