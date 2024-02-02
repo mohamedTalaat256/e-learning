@@ -1,3 +1,5 @@
+
+export const baseURL = 'http://localhost/egypt-air'
 export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
 
 export enum adminUrls {
@@ -11,4 +13,7 @@ export enum FormMode {
 }
 
 export const dialog_w_md = '600px';
-export const dialog_h_md = '650px'; 
+export const dialog_h_md = '650px';
+
+export const dialog_w_lg = '900px';
+export const dialog_h_lg = '90%'; 

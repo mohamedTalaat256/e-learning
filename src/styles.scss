@@ -1,13 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-
+@font-face {
+    font-family: Rubik;
+    src: url(assets/fonts/Rubik-VariableFont_wght.ttf);
+  }
 html,
-body {
+body { 
     height: 100vh;
+    --mdc-outlined-text-field-error-outline-color: #f56917;
+
 }
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+   
     overflow: hidden;
 }
 

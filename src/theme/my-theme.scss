@@ -11,8 +11,8 @@
 
 @include mat.core();
 
-$typography-config: mat.define-typography-config(
-  $font-family: 'Roboto, sans-serif',
+$typography-config: mat.define-typography-config( 
+  $font-family: 'Rubik, sans-serif',
   $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
   $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
   $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),

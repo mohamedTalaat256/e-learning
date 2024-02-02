@@ -26,6 +26,10 @@
     "course_title": "course title",
     "course_describtion": "course describtion",
     "is_course_free":"is course free",
+    "discount": "discount",
+    "start_date": "start date",
+    "end_date": "end date",
+
 
 
 
@@ -33,7 +37,9 @@
 
 
     "max_length_is": "max length is",
-    "max_value_is": "max value is"
+    "min_length_is": "min length is",
+    "max_value_is": "max value is",
+    "min_value_is": "min value is"
 
 
 }

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormMode, imagePlaceholder } from '../../constants';
+import { FormMode, imagePlaceholder } from '../../../../constants/constants';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Course } from 'src/app/model/course.model';
 
  
 @Component({
@@ -14,14 +15,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class CourseDialogFormComponent implements OnInit {
   selectedFiles?: FileList;
   currentFile?: File;
+
   progress = 0;
   message = '';
   preview = '';
   defaultPreview = imagePlaceholder;
   courseForm: FormGroup;
   formMode: FormMode;
+  isCourseFree: boolean=false;
   title: string;
-  courseData: any = {};
+  courseData: Course ;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private fb:FormBuilder
@@ -36,11 +39,20 @@ export class CourseDialogFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.formMode === FormMode.CREATE) {
-      this.courseData = {};
+      this.courseData = {
+        title: '',
+        describtion: '',
+        discount: 0,
+        price: 0,
+        isFree: false,
+        rating: 0,
+        image: this.preview
+      };
       this.courseForm = this.createCourseForm();
     }else{
       this.courseForm = this.setCourseForm(this.courseData);
-      this.preview = this.courseData.image
+      this.preview = this.courseData.image;
+      this.isCourseFree = this.courseData.isFree;
     }
   }
  
@@ -75,9 +87,11 @@ export class CourseDialogFormComponent implements OnInit {
     let form = this.fb.group(
       {
         //id:           [null],
-        title:        ['', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
+        title:        [null,[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
         describtion:  [null, Validators.required, Validators.maxLength(200)],
-        price:        [null, Validators.required], 
+        price:        [0, Validators.required],
+        discount:     [0, ],
+        isfree:       [false,  ], 
       }
     );
 
@@ -85,17 +99,23 @@ export class CourseDialogFormComponent implements OnInit {
   }
 
 
-  setCourseForm(course){
+  setCourseForm(course: Course){
     let form = this.fb.group(
       {
        // id:         [course.id],
-        title:       [course.title, Validators.required, Validators.maxLength(5), Validators.minLength(2)],
-        describtion: [course.describtion, Validators.required, Validators.maxLength(200)],
-        price:       [course.price, Validators.required], 
+        title:       [course.title, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
+        describtion: [course.describtion, [Validators.required, Validators.maxLength(200)]],
+        price:       [course.price, [Validators.required]],
+        discount:    [course.discount, ],
+        isfree:      [course.isFree,  ], 
       }
     );
 
     return form;
+  }
+
+  toggleisCourseFree(){
+    this.isCourseFree = !this.isCourseFree;
   }
 
 }

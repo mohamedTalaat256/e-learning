@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { dialog_h_md, dialog_w_md } from '../layouts/admin/constants';
+import { dialog_h_lg, dialog_h_md, dialog_w_lg, dialog_w_md } from '../constants/constants';
 import { ComponentType } from '@angular/cdk/portal';
 
 @Injectable({
@@ -24,5 +24,18 @@ export class ComponentUtilsService {
             console.log(`Dialog result: ${result}`);
           });
     }
+
+
+    openDialogLG(component :any, data: any){
+      const dialogRef = this.dialog.open(component,{
+          width: dialog_w_lg,  
+          height: dialog_h_lg,
+          data:data
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+  }
  
 }

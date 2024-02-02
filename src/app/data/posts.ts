@@ -4,7 +4,7 @@ import { PostImage } from "../model/post_image,model";
 import { User } from "../model/user,model";
 
 export const postsDummyList: Post[] = [
-
+/* 
     new Post(
         1,
         new User(1, "MohamedTalaat", "Software Engineer", "https://avatars.githubusercontent.com/u/76172138"),
@@ -83,5 +83,5 @@ export const postsDummyList: Post[] = [
         ]
 
     )
-
+ */
 ];

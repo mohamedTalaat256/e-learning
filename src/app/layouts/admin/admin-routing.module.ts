@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MyCommunityComponent } from './components/my-community/my-community.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { CourseDialogFormComponent } from './components/course-dialog-form/course-dialog-form.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
@@ -14,9 +15,11 @@ const routes: Routes = [
       {path:'dashboard', component: DashboardComponent},
       {path:'my-comunity', component: MyCommunityComponent},
       {path:'my-courses', component: MyCoursesComponent},
-      {path:'add-course', component: CourseDialogFormComponent}
+      {path:'add-course', component: CourseDialogFormComponent},
 
 
+
+      {path:'users', component: UsersComponent},
     ]
   }
 ];

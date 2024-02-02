@@ -1,61 +1,86 @@
 <h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
 <mat-dialog-content class="mat-typography">
-    <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="100">
+    <form [formGroup]="courseForm">
+        <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="100">
 
-        <form [formGroup]="courseForm">
-        
+
+
             <mat-form-field class="mt-3">
                 <mat-label>{{'course_title'|translate}} </mat-label>
-                <input matInput formControlName="title"  [placeholder]="'course_title'|translate" type="text" [value]="courseData.title">
+                <input matInput formControlName="title" [placeholder]="'course_title'|translate" type="text"
+                    [value]="courseData.title">
                 <validation-msg [formControl]="$any(courseForm.get('title'))"></validation-msg>
             </mat-form-field>
-    
+
             <mat-form-field>
                 <mat-label>{{'course_describtion'|translate}} </mat-label>
-                <textarea matInput formControlName="describtion" [placeholder]="'course_describtion'|translate" type="text" [value]="courseData.describtion"></textarea>
+                <textarea matInput formControlName="describtion" [placeholder]="'course_describtion'|translate"
+                    type="text" [value]="courseData.describtion"></textarea>
             </mat-form-field>
-    
-    
-    
-    
-    
+
+
             <section fxLayout="row" fxLayoutAlign="space-between center">
-               
-                <mat-form-field fxFlex="70">
-                    <mat-label>{{'price'|translate}} </mat-label>
-                    <input matInput formControlName="price" [placeholder]="'price'|translate" type="text" [value]="courseData.price">
-                </mat-form-field>
-    
-                <mat-checkbox color="primary">
+                <mat-checkbox formControlName="isFree" [checked]="courseData.isFree" (click)="toggleisCourseFree()" color="primary">
                     <span class="mat-text-secondary f-w-500">{{'is_course_free'|translate}}</span>
                 </mat-checkbox>
+
+
+                <div *ngIf="!isCourseFree"  fxFlex="70" fxLayout="row" fxLayoutGap="10" fxLayoutAlign="space-between center">
+                    <mat-form-field fxFlex="50">
+                        <mat-label>{{'price'|translate}} </mat-label>
+                        <input matInput formControlName="price" [placeholder]="'price'|translate" type="text"
+                            [value]="courseData.price">
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="50">
+                        <mat-label>{{'discount'|translate}} </mat-label>
+                        <input matInput formControlName="discount" [placeholder]="'discount'|translate" type="text"
+                            [value]="courseData.discount">
+                    </mat-form-field>
+                </div>
+
+
+                <div *ngIf="isCourseFree" fxFlex="70"  fxLayout="row" fxLayoutGap="10" fxLayoutAlign="space-between center">
+
+                    <mat-form-field fxFlex="50" >
+                        <mat-label>{{'start_date'|translate}}</mat-label>
+                        <input matInput>
+                        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+                    </mat-form-field>
     
+                    <mat-form-field fxFlex="50">
+                        <mat-label>{{'end_date'|translate}}</mat-label>
+                        <input matInput>
+                        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+                    </mat-form-field>
+    
+                </div>
+                
+
+               
+
             </section>
-    
-    
-    
+
+           
+
+
             <div *ngIf="currentFile && progress" class="progress my-3">
                 <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
                     aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
                     {{ progress }}%
                 </div>
             </div>
-    
+
             <label for="file-input">
-    
+
                 <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
                 <img [src]="preview!=='' ? preview : defaultPreview" class="upload-course-img" />
                 <input type="file" id="file-input" accept="image/*" (change)="selectFile($event)"
                     style="visibility: hidden; position: absolute;" />
             </label>
-    
-    
-    
-    
-        </form>
 
-       
-    </div>
+        </div>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="center ">
     <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>

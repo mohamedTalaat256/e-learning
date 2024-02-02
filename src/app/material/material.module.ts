@@ -22,6 +22,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 const materials: any = [
   MatSidenavModule,
@@ -47,7 +48,8 @@ const materials: any = [
   MatSelectModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDatepickerModule
 ];
 
 @NgModule({

@@ -19,8 +19,12 @@
         <mat-icon matListItemIcon color="primary">book</mat-icon>
         <div matListItemTitle class="sid-nav-item">My Courses</div>
     </mat-list-item>
+    <mat-list-item [routerLink]="['/admin/users']" routerLinkActive="active">
+        <mat-icon matListItemIcon color="primary">group</mat-icon>
+        <div matListItemTitle class="sid-nav-item">Users</div>
+    </mat-list-item>
 
-     <mat-list-item>
+    <mat-list-item>
         <mat-icon matListItemIcon color="success" >book</mat-icon>
         <div matListItemTitle class="sid-nav-item">ClassRoom</div>
     </mat-list-item>

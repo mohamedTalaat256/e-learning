@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { adminUrls } from '../../constants';
+import { adminUrls } from '../../../../constants/constants';
 
 
  

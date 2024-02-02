@@ -41,6 +41,7 @@ import { RatingStarComponent } from './global/rating-star/rating-star.component'
 import { CourseOverviewComponent } from './layouts/public/course-overview/course-overview.component';
 import { MinToLength } from './pip/minToLength';
 import { ValidationMsgComponent } from './global/validation-msg/validation-msg.component';
+import { UsersComponent } from './layouts/admin/components/users/users.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -78,7 +79,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RatingStarComponent,
     CourseOverviewComponent,
     MinToLength,
-    ValidationMsgComponent 
+    ValidationMsgComponent,
+    UsersComponent 
   ],
   imports: [
     MatSidenavModule,
