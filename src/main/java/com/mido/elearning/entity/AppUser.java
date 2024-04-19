@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -32,6 +34,7 @@ public class AppUser {
     private String lastName;
 
     private String email;
+    private String password;
 
     @Column(name = "profile_image")
     private String profileImage;
@@ -45,4 +48,26 @@ public class AppUser {
     @JoinColumn(name = "organization_id")
     @JsonBackReference
     private Organization organization;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles" ,
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @OrderColumn(name = "id")
+    private Set<Role> roles = new HashSet<>();
+
+    private boolean isEnabled;
+
+    private boolean isCredentialsNonExpired;
+
+    private boolean isAccountNonLocked;
+
+    private boolean isAccountNonExpired;
+
+
+    public AppUser(Long id) {
+        super();
+        this.id = id;
+    }
 }
