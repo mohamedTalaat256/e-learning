@@ -33,8 +33,10 @@ public class SecurityConfig {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+/*
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
+*/
 
 
 
@@ -50,7 +52,7 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf-> csrf.disable())
-                .exceptionHandling((ex)-> ex.authenticationEntryPoint(unauthorizedHandler))
+              //  .exceptionHandling((ex)-> ex.authenticationEntryPoint(unauthorizedHandler))
 
                 .sessionManagement((sm)-> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth.requestMatchers(PUBLIC_END_POINTS).permitAll())

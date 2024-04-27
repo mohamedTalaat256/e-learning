@@ -6,8 +6,8 @@
 html,
 body { 
     height: 100vh;
-    --mdc-outlined-text-field-error-outline-color: #f56917;
-
+    --mdc-outlined-text-field-error-outline-color: #fd2929;
+    --mdc-outlined-text-field-error-label-text-color: #fd2929;
 }
 
 body {
@@ -63,14 +63,17 @@ body {
     background-size: cover;
     height: 40px;
     width: 40px;
-    border-radius: 50%;
+    border-radius: 50% !important;
+    object-fit: cover;
 }
 
 .circle-avatar-md {
     background-size: cover;
     height: 50px;
     width: 50px;
-    border-radius: 50%;
+    border-radius: 50% !important;
+    object-fit: cover;
+
 }
 
 .icon-lg {
@@ -171,3 +174,107 @@ body {
     width: 200px;
     height: 150px;
 }
+
+
+.my-table {
+   
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+ .my-table td, .my-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .my-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .my-table tr:hover {background-color: #ddd;}
+  
+  .my-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #e0e0e0;
+    color: rgb(110, 110, 110);
+  }
+
+
+
+
+  .form-array-table{ 
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .form-array-table td, .form-array-table th {
+    border: 1px solid #ddd;
+   padding: 14px;
+   padding-bottom: 0px;
+   
+  }
+  
+  .form-array-table td .mat-mdc-form-field{
+    width: 100% !important;
+  }
+  .form-array-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .form-array-table tr:hover {background-color: #f1f1f1;}
+  
+  .form-array-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #e0e0e0;
+    color: rgb(110, 110, 110);
+  }
+  .mdc-text-field--outlined{
+    --mdc-outlined-text-field-outline-width: 0.094rem !important;
+    --mdc-outlined-text-field-outline-color: #cecece;
+  }
+/*   .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  .mat-mdc-form-field-infix{
+    min-height: 45px !important;
+  } */
+  .mat-mdc-form-field-error{
+    color: red !important;
+  }
+
+  .file-input{
+    background-color: #4384ff;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .cursor-hand{
+    cursor: pointer;
+  }
+ 
+  
+  @media print {
+    @page {
+      orientation: landscape !important;
+    }
+    .printMe {
+      visibility: visible;
+      direction: rtl;
+    
+    }
+
+
+    .notPrint{
+      visibility: hidden
+
+    }
+  }
+
+  .word-space{
+    margin-inline-end: 4px;
+}
+/* 
+  .mat-mdc-form-field-infix{
+    height: 13px !important;
+    padding: 5px !important;
+  } */

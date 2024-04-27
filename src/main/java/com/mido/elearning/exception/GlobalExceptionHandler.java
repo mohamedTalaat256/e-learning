@@ -1,6 +1,7 @@
 package com.mido.elearning.exception;
 
 import com.mido.elearning.utils.AppResponse;
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -9,7 +10,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
@@ -42,20 +42,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.Unauthorized.class)
     public ResponseEntity<Object> handleUnauthorizedException(BadCredentialsException ex) {
 
-        return AppResponse.generateResponse("Full authentication is required to access this resource", HttpStatus.UNAUTHORIZED, null, false) ;// ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad Credentials");
+        return   ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid_username_or_password");
     }
 
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException ex) {
 
-        return AppResponse.generateResponse("Invalid Username Or Password", HttpStatus.UNAUTHORIZED, null, false) ;// ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad Credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid_username_or_password");
     }
 
     @ExceptionHandler(InternalError.class)
-    public ResponseEntity<Object> handleInternalServerErrorException(BadCredentialsException ex) {
+    public ResponseEntity<Object> handleInternalServerErrorException(ExecutionControl.InternalException ex) {
 
-        return AppResponse.generateResponse("Internal Server Error", HttpStatus.UNAUTHORIZED, null, false) ;// ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad Credentials");
+        return AppResponse.generateResponse("Internal Server Error", HttpStatus.UNAUTHORIZED, null, false);
     }
 
 

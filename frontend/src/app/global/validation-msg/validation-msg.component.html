@@ -1,18 +1,21 @@
-<ng-container *ngIf="formControl">
-
-    <mat-error *ngIf="formControl?.hasError('maxlength')&& (formControl.dirty || formControl.touched)">
-        <span> {{'max_length_is'|translate}} : {{formControl?.errors?.['maxlength']?.requiredLength}}</span>
-    </mat-error>
-    <mat-error *ngIf="formControl?.hasError('minlength')&& (formControl.dirty || formControl.touched)">
-        <span> {{'min_length_is'|translate}} : {{formControl?.errors?.['minlength']?.requiredLength}}</span>
-    </mat-error>
+<ng-container *ngIf="control">
 
 
-    <mat-error *ngIf="formControl?.hasError('max')&& (formControl.dirty || formControl.touched)">
-        <span> {{'max_value_is'|translate}} : {{formControl?.errors?.['max']?.max}} </span>
-    </mat-error>
+    <span *ngIf="control?.hasError('required')&& (control.dirty || control.touched)">
+        {{fieldName | translate}}  {{'required'|translate}} ! </span>
 
-    <mat-error *ngIf="formControl?.hasError('min')&& (formControl.dirty || formControl.touched)">
-        <span> {{'min_value_is'|translate}} : {{formControl?.errors?.['min']?.max}} </span>
-    </mat-error>
+
+    <span *ngIf="control?.hasError('maxlength')&& (control.dirty || control.touched)"> {{'max_length_is'|translate}} :
+        {{control?.errors?.['maxlength']?.requiredLength}}</span>
+
+    <span *ngIf="control?.hasError('minlength')&& (control.dirty || control.touched)"> {{'min_length_is'|translate}} :
+        {{control?.errors?.['minlength']?.requiredLength}}</span>
+
+    <span *ngIf="control?.hasError('max')&& (control.dirty || control.touched)"> {{'max_value_is'|translate}} :
+        {{control?.errors?.['max']?.max}} </span>
+
+
+     
+        <span *ngIf="control?.hasError('min')&& (control.dirty || control.touched)"> {{'min_value_is'|translate}} : {{control?.errors?.['min']?.max}} </span>
+ 
 </ng-container>

@@ -19,9 +19,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login (@RequestBody LoginRequestDto loginRequest){
-        JWTResponseDto jwtResponseDto = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
 
-        return AppResponse.generateResponse("login success", HttpStatus.OK, jwtResponseDto, true);
+        return new ResponseEntity<Object>(authService.login(loginRequest.getUsername(), loginRequest.getPassword()), HttpStatus.OK);
     }
 
 /*    @PostMapping("/register")
@@ -36,11 +35,11 @@ public class AuthController {
         return ResponseEntity.ok(dto);
     }
 
-    @PostMapping("/logout")
+/*    @PostMapping("/logout")
     public ResponseEntity<Object> logout(@RequestParam String refreshToken) {
         authService.logoutUser(refreshToken);
 
         return AppResponse.generateResponse("logout success", HttpStatus.OK, null, true);
 
-    }
+    }*/
 }

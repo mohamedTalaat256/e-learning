@@ -3,12 +3,13 @@ import {FormControl, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
-  selector: 'validation-msg',
+  selector: 'app-validation-msg',
   templateUrl: './validation-msg.component.html',
   styleUrls: ['./validation-msg.component.scss']
 })
 export class ValidationMsgComponent implements OnInit{
-  @Input() formControl: FormControl;
+  @Input() control: any;
+  @Input() fieldName: string;
 
   constructor(private translate: TranslateService) {
   }

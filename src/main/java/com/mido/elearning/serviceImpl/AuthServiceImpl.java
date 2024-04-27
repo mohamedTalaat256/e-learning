@@ -16,9 +16,11 @@ import com.mido.elearning.service.AuthService;
 import java.util.*;
 
 import com.mido.elearning.service.UserService;
+import com.mido.elearning.utils.AppResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,20 +40,15 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
 
     @Override
-    public JWTResponseDto login(String username, String password) {
+    public AppResponse login(String username, String password) {
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
 
         if (authentication.isAuthenticated()){
-            log.debug("Valid userDetails credentials.");
 
             AppUserDetail userDetails = (AppUserDetail) authentication.getPrincipal();
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            log.debug("SecurityContextHolder updated. [login={}]", username);
-
             TokenInfo tokenInfo = createLoginToken(username, userDetails.getId());
-
             Map<String, String> userData = new HashMap<>();
 
             userData.put("id", userDetails.getId().toString());
@@ -60,21 +57,16 @@ public class AuthServiceImpl implements AuthService {
             userData.put("lastName", userDetails.getLastName());
             userData.put("username", userDetails.getUsername());
             userData.put("roles", userDetails.getAuthorities().toString());
+            userData.put("token", tokenInfo.getAccessToken());
 
-            return JWTResponseDto.builder()
-                    .accessToken(tokenInfo.getAccessToken())
-                    .refreshToken(tokenInfo.getRefreshToken())
-                    .message("login_success")
-                    .userData( userData)
-                    .build();
-        }else {
-
-            return JWTResponseDto.builder()
-                    .accessToken("")
-                    .refreshToken("")
-                    .message("fail to login")
+            return AppResponse.builder()
+                    .ok(true)
+                    .message("user_logged_in_success")
+                    .status(HttpStatus.OK)
+                    .data(userData)
                     .build();
         }
+        return null;
 
 
     }

@@ -13,6 +13,9 @@
             <mat-form-field *ngIf="!isLoginMode">
                 <mat-label>{{'first_name'|translate}} </mat-label>
                 <input matInput [placeholder]="'first_name'|translate" formControlName="firstName" type="text">
+                <mat-error>
+                    <app-validation-msg [control]="authForm.get('firstName')" [fieldName]="'first_name'|translate"></app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field *ngIf="!isLoginMode">
@@ -23,16 +26,25 @@
             <mat-form-field >
                 <mat-label>{{'username'|translate}} </mat-label>
                 <input matInput [placeholder]="'username'|translate" formControlName="username" type="text">
+                <mat-error>
+                    <app-validation-msg [control]="authForm.get('username')" [fieldName]="'username'|translate"></app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field *ngIf="!isLoginMode">
                 <mat-label>{{'email'|translate}} </mat-label>
                 <input matInput [placeholder]="'email'|translate" formControlName="email" type="email">
+                <mat-error>
+                    <app-validation-msg [control]="authForm.get('email')" [fieldName]="'email'|translate"></app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{'password'|translate}} </mat-label>
                 <input matInput [placeholder]="'password'|translate" formControlName="password" type="password">
+                <mat-error>
+                    <app-validation-msg [control]="authForm.get('password')" [fieldName]="'password'|translate"></app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
           

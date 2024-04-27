@@ -9,7 +9,7 @@
                 <mat-label>{{'course_title'|translate}} </mat-label>
                 <input matInput formControlName="title" [placeholder]="'course_title'|translate" type="text"
                     [value]="courseData.title">
-                <validation-msg [formControl]="$any(courseForm.get('title'))"></validation-msg>
+                <app-validation-msg [formControl]="$any(courseForm.get('title'))"></app-validation-msg>
             </mat-form-field>
 
             <mat-form-field>
