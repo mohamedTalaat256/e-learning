@@ -7,6 +7,7 @@ import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Role;
 import com.mido.elearning.entity.TokenInfo;
 import com.mido.elearning.security.AppUserDetail;
+import com.mido.elearning.security.TokenInfoService;
 import com.mido.elearning.service.AuthService;
 
 import java.util.HashMap;
@@ -15,19 +16,13 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 
 
 @Service
