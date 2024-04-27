@@ -6,6 +6,7 @@ import { MyCommunityComponent } from './components/my-community/my-community.com
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { CourseDialogFormComponent } from './components/course-dialog-form/course-dialog-form.component';
 import { UsersComponent } from './components/users/users.component';
+import { authGuardService } from 'src/app/guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
 
 
       {path:'users', component: UsersComponent},
-    ]
+    ],
+    canActivate: [authGuardService]
   }
 ];
 

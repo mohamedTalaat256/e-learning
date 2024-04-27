@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
 
 
   getUsers() {
-    this.userService.getAll().subscribe({
+/*     this.userService.getAll().subscribe({
       next:(response: AppResponse)=>{
         console.log(response);
         this.usersList = response.data;
@@ -41,6 +41,6 @@ export class UsersComponent implements OnInit {
         //this.toastr.error(error.message);
       }
     }
-    );
+    ); */
   }
 }

@@ -9,10 +9,10 @@ import com.mido.elearning.entity.TokenInfo;
 public interface AuthService {
 
     public JWTResponseDto login(String username, String password);
-    public AppUser register(UserDto registerRequest);
 
     public TokenInfo createLoginToken(String userName, Long userId);
 
     public AccessTokenDto refreshAccessToken(String refreshToken);
+
     public void logoutUser(String refreshToken);
 }

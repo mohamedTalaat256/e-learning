@@ -14,6 +14,8 @@ import com.mido.elearning.security.JwtTokenUtils;
 import com.mido.elearning.security.TokenInfoService;
 import com.mido.elearning.service.AuthService;
 import java.util.*;
+
+import com.mido.elearning.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +23,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +35,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authManager;
-    private final HttpServletRequest httpRequest;
-    private final TokenInfoService tokenInfoService;
-    private final JwtTokenUtils jwtTokenUtils;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Override
     public JWTResponseDto login(String username, String password) {
@@ -79,17 +79,6 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-    @Override
-    public AppUser register(UserDto registerRequest) {
-
-            Optional<AppUser> user = userRepository.findUserByEmail(registerRequest.getEmail());
-            if(user.isPresent()){
-                throw new DuplicateRecordException("This Email is already exist");
-            }else{
-                registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-                return userRepository.save(UserMapper.DtoToEntity( registerRequest));
-            }
-    }
 
     @Override
     public TokenInfo createLoginToken(String userName, Long userId) {
@@ -105,4 +94,7 @@ public class AuthServiceImpl implements AuthService {
     public void logoutUser(String refreshToken) {
 
     }
+
+
+
 }

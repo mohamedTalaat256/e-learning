@@ -1,5 +1,5 @@
 
-export const baseURL = 'http://localhost/egypt-air'
+export const baseURL = 'http://localhost:8080/api'
 export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
 
 export enum adminUrls {

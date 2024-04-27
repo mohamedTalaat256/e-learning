@@ -1,38 +1,34 @@
-import { HttpClient } from "@angular/common/http"; 
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";  
-import { baseURL } from "../constants/constants";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject, Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { baseURL } from "../constants/constants"; 
+import { User } from "../model/user,model";
 
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+/*  
+  getAll(): Observable<any> {
+    return this.http.get(baseURL + '/users');
+  }
 
-  getAll( ): Observable<any> {
-    
-    return this.http.get('https://jsonplaceholder.org/users');
-    //return this.http.get(baseURL+'/users');
+  public save(requestbody: UserSaveRequest): Observable<any> {
+    return this.http.post<any>(baseURL + '/users', requestbody);
   }
 
   findById(id: number): Observable<any> {
-    return this.http.get(baseURL+'/users/'+ id )
+    return this.http.get(baseURL + '/users/' + id)
   }
 
   searchUser(searchText: string): Observable<any> {
-    return this.http.get(baseURL+'/users/search/'+ searchText )
+    return this.http.get(baseURL + '/users/search/' + searchText)
   }
-/*   public save(requestbody: DirectorSaveRequest): Observable<any> {
-    return this.http.post<any>(baseURL+'/persons', requestbody);
-  }
-
-  public update(id: number, requestbody: DirectorSaveRequest): Observable<any> {
-    return this.http.put<any>(baseURL+'/persons/'+id, requestbody);
-  }
- */
+ 
   public delete(id: number): Observable<any> {
-    return this.http.post<any>(baseURL+'/persons/delete/'+id,null);
+    return this.http.post<any>(baseURL + '/persons/delete/' + id, null);
   }
-  
+  */
 
-  }
+}

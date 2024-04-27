@@ -5,44 +5,44 @@
     </div>
     <div fxFlex="50" fxFlex.lg="80%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxLayoutAlign="center center"
         class="mat-bg-light-primary">
-        <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="60" class="p-5 mat-bg-light rounded-2 "
+        <form (ngSubmit)="onSubmit()" [formGroup]="authForm" fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="60" class="p-5 mat-bg-light rounded-2 "
             style="height: 90vh;" [@expandCollapse]="isExpanded ? 'open' : 'closed'">
             <h2 class="mat-headline-4 mat-text-secondary">
                 {{ isLoginMode? 'login': 'register' }}
             </h2>
             <mat-form-field *ngIf="!isLoginMode">
                 <mat-label>{{'first_name'|translate}} </mat-label>
-                <input matInput [placeholder]="'first_name'|translate" type="text">
+                <input matInput [placeholder]="'first_name'|translate" formControlName="firstName" type="text">
             </mat-form-field>
 
             <mat-form-field *ngIf="!isLoginMode">
                 <mat-label>{{'last_name'|translate}} </mat-label>
-                <input matInput [placeholder]="'last_name'|translate" type="text">
+                <input matInput [placeholder]="'last_name'|translate" formControlName="lastName" type="text">
             </mat-form-field>
 
             <mat-form-field >
                 <mat-label>{{'username'|translate}} </mat-label>
-                <input matInput [placeholder]="'username'|translate" type="text">
+                <input matInput [placeholder]="'username'|translate" formControlName="username" type="text">
             </mat-form-field>
 
             <mat-form-field *ngIf="!isLoginMode">
                 <mat-label>{{'email'|translate}} </mat-label>
-                <input matInput [placeholder]="'email'|translate" type="email">
+                <input matInput [placeholder]="'email'|translate" formControlName="email" type="email">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{'password'|translate}} </mat-label>
-                <input matInput [placeholder]="'password'|translate" type="password">
+                <input matInput [placeholder]="'password'|translate" formControlName="password" type="password">
             </mat-form-field>
 
           
-
-            <section  *ngIf="!isLoginMode" fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-checkbox color="primary" > <span
-                        class="mat-text-secondary f-w-500">Teacher</span></mat-checkbox>
-                <mat-checkbox color="primary" > <span
-                        class="mat-text-secondary f-w-500">Student</span></mat-checkbox>
-            </section>
+            <mat-form-field *ngIf="!isLoginMode" fxFlex="50">
+                <mat-label>{{'role'|translate}} </mat-label>
+                <mat-select formControlName="role" >
+                    <mat-option value="M">{{'male' | translate}}</mat-option>
+                    <mat-option value="F">{{'female' | translate}}</mat-option>
+                </mat-select> 
+            </mat-form-field>
 
             <div fxLayout="row" fxLayoutAlign="end center">
                 <span class="mat-text-primary f-w-500 "> Forgot Password? </span>
@@ -71,6 +71,6 @@
             </div>
 
 
-        </div>
+        </form>
     </div>
 </div>

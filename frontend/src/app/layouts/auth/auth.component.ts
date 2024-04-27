@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { Router } from '@angular/router';
 import { expandCollapse, slideInOutY } from 'src/app/animation/animations';
+import { AppResponse } from 'src/app/model/app_response.model';
+import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
+import { AuthFormControls } from '../admin/form-controls/auth-form';
 
 @Component({
   selector: 'app-auth',
@@ -9,35 +14,69 @@ import { expandCollapse, slideInOutY } from 'src/app/animation/animations';
   animations:[expandCollapse ,slideInOutY, ]
 })
 export class AuthComponent {
+
   genders: string[]=['MALE', 'FEMALE'];
-
-  loginForm: FormGroup = new FormGroup({});
-
+  
+  authForm: FormGroup = new FormGroup({});
   isLoginMode: boolean = true;
-
-  teacherCheked = false;
-  studentCheked = false;
   agreeTremsChecked = false;
- 
+  isExpanded: boolean = false; 
 
+  constructor( private authServise: AuthService,private router: Router, private authFormControl: AuthFormControls){
 
-  isExpanded: boolean = false;
+    this.authForm =this.authFormControl.createLoginForm();
+  }
+
 
   toggleExpandContainer() {
     this.isExpanded = !this.isExpanded;
   }
-
-  toggleStudentCheked(){
-    this.studentCheked = ! this.studentCheked;
-    this.toggleExpandContainer();
-  }
+ 
   enableRegisterMode(){
     this.isLoginMode = false;
-    this.isExpanded = true; 
+    this.isExpanded = true;
+    this.authForm =this.authFormControl.createRegisterForm();
   }
 
   enableLoginMode(){
     this.isLoginMode = true;
     this.isExpanded = false;
+    this.authForm =this.authFormControl.createLoginForm();
+  
   }
+
+
+
+
+  onSubmit(){
+    
+    if(this.isLoginMode){
+      this.authServise.login(this.authForm.value).subscribe({
+        next:(response: any)=>{ 
+  
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('AUTH_USER', JSON.stringify(response.data.user) );
+  
+          
+          this.router.navigate(['/admin'])
+           
+        },
+        error:(error: AppResponse)=>{ 
+          Swal.fire({ 
+            icon: "error",
+            title: error.message,
+            showConfirmButton: true,
+            timer: 1500
+          });
+        }
+      }); 
+    }else{
+      
+    }
+    
+  }
+
+ 
+
+ 
 }

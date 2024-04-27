@@ -8,12 +8,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/api/auth")
 public class AuthController {
 
     @Autowired
@@ -26,11 +24,11 @@ public class AuthController {
         return AppResponse.generateResponse("login success", HttpStatus.OK, jwtResponseDto, true);
     }
 
-    @PostMapping("/register")
+/*    @PostMapping("/register")
     public ResponseEntity<Object> register (@RequestBody @Valid UserDto registerRequest){
 
         return AppResponse.generateResponse("register success", HttpStatus.OK, authService.register(registerRequest), true);
-    }
+    }*/
 
     @PostMapping("/refresh-token")
     public ResponseEntity<AccessTokenDto> refreshAccessToken(@RequestParam String refreshToken) {
