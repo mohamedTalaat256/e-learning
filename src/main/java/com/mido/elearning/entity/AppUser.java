@@ -3,10 +3,7 @@ package com.mido.elearning.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mido.elearning.enums.Country;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -18,6 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AppUser {
 
 
@@ -27,10 +25,10 @@ public class AppUser {
 
     private String username;
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "firstName")
+    @Column(name = "last_name")
     private String lastName;
 
     private String email;

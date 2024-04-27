@@ -1,7 +1,6 @@
-package com.mido.elearning.utils;
+package com.mido.elearning.security;
 
 
-import com.mido.elearning.security.AppUserDetail;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;

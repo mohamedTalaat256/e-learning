@@ -1,10 +1,7 @@
 package com.mido.elearning.controller;
 
 
-import com.mido.elearning.Dto.AccessTokenDto;
-import com.mido.elearning.Dto.JWTResponseDto;
-import com.mido.elearning.Dto.LoginRequestDto;
-import com.mido.elearning.Dto.RegisterRequestDto;
+import com.mido.elearning.Dto.*;
 import com.mido.elearning.service.AuthService;
 import com.mido.elearning.utils.AppResponse;
 import jakarta.validation.Valid;
@@ -30,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> register (@RequestBody @Valid RegisterRequestDto registerRequest){
+    public ResponseEntity<Object> register (@RequestBody @Valid UserDto registerRequest){
 
         return AppResponse.generateResponse("register success", HttpStatus.OK, authService.register(registerRequest), true);
     }

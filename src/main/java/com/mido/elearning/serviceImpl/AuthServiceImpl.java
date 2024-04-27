@@ -2,17 +2,18 @@ package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.AccessTokenDto;
 import com.mido.elearning.Dto.JWTResponseDto;
-import com.mido.elearning.Dto.RegisterRequestDto;
+import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
-import com.mido.elearning.entity.Role;
 import com.mido.elearning.entity.TokenInfo;
+import com.mido.elearning.exception.DuplicateRecordException;
+import com.mido.elearning.mapping.UserMapper;
+import com.mido.elearning.repository.RoleRepository;
+import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.security.AppUserDetail;
+import com.mido.elearning.security.JwtTokenUtils;
 import com.mido.elearning.security.TokenInfoService;
 import com.mido.elearning.service.AuthService;
-
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,9 +21,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 
 @Service
@@ -30,12 +30,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authManager;
-
     private final HttpServletRequest httpRequest;
-
     private final TokenInfoService tokenInfoService;
-
     private final JwtTokenUtils jwtTokenUtils;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public JWTResponseDto login(String username, String password) {
         Authentication authentication = authManager.authenticate(
@@ -79,23 +80,14 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JWTResponseDto register(RegisterRequestDto registerRequest) {
+    public AppUser register(UserDto registerRequest) {
 
-            Optional<AppUser> user = findUserByEmail(requestDto.getEmail());
+            Optional<AppUser> user = userRepository.findUserByEmail(registerRequest.getEmail());
             if(user.isPresent()){
                 throw new DuplicateRecordException("This Email is already exist");
             }else{
-                requestDto.setPassword(passwordEncoder.encode(requestDto.getPassword()));
-
-                Set<Role> roles = new HashSet<>();
-
-                for (String roleName: requestDto.getRole()){
-
-                    Role role = roleRepo.findRoleByName(roleName);
-                    roles.add(role);
-
-                }
-                return userRepo.save(dtoToEntity.getUser(requestDto,roles));
+                registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+                return userRepository.save(UserMapper.DtoToEntity( registerRequest));
             }
     }
 

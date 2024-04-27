@@ -16,11 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Organization {
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
