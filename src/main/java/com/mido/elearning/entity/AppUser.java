@@ -70,4 +70,8 @@ public class AppUser {
         super();
         this.id = id;
     }
+
+    public Long getId() {
+        return null;
+    }
 }
