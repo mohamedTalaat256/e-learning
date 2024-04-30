@@ -1,7 +1,6 @@
 package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.AcademicSpecializationDto;
-import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.entity.AcademicSpecialization;
 import com.mido.elearning.exception.NoContentException;
 import com.mido.elearning.exception.RecordNotFoundException;
