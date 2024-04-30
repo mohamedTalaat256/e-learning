@@ -20,7 +20,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Object> login (@RequestBody LoginRequestDto loginRequest){
 
-        return new ResponseEntity<Object>(authService.login(loginRequest.getUsername(), loginRequest.getPassword()), HttpStatus.OK);
+        return new ResponseEntity<>(authService.login(loginRequest.getUsername(), loginRequest.getPassword()), HttpStatus.OK);
     }
 
 /*    @PostMapping("/register")
