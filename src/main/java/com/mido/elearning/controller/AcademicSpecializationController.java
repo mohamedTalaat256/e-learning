@@ -1,6 +1,7 @@
 package com.mido.elearning.controller;
 
 
+import com.mido.elearning.Dto.AcademicSpecializationDto;
 import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.serviceImpl.AcademicSpecializationServiceImpl;
 import com.mido.elearning.serviceImpl.FacultyServiceImpl;
@@ -17,13 +18,13 @@ public class AcademicSpecializationController {
     AcademicSpecializationServiceImpl specializationServiceImpl;
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(specializationServiceImpl.save(facultyDto), HttpStatus.OK);
+    public ResponseEntity<Object> save(@RequestBody AcademicSpecializationDto specializationDto){
+        return new ResponseEntity<>(specializationServiceImpl.save(specializationDto), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(specializationServiceImpl.save(facultyDto), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody AcademicSpecializationDto specializationDto){
+        return new ResponseEntity<>(specializationServiceImpl.save(specializationDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
