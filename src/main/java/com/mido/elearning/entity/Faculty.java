@@ -18,7 +18,7 @@ public class Faculty {
 
     @OneToOne
     @JoinColumn(name = "sepicailization_id", referencedColumnName = "id")
-    private AcadimicSepicailization sepicailization;
+    private AcademicSpecialization sepicailization;
 
     @ManyToOne
     @JoinColumn(name = "university_id", referencedColumnName = "id")

@@ -16,7 +16,7 @@ public class FacultyServiceImpl implements FacultyService {
     private final FacultyRepository facultyRepository;
     @Override
     public FacultyDto save(FacultyDto dto) {
-      return FacultyMapper.entityToDto(facultyRepository.save(FacultyMapper.DtoToEntity(dto)));
+      return FacultyMapper.entityToDto(facultyRepository.save(FacultyMapper.dtoToEntity(dto)));
     }
 
     @Override

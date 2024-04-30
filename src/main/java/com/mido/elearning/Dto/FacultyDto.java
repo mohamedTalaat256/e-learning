@@ -11,6 +11,6 @@ import lombok.*;
 public class FacultyDto {
 
     private Long id;
-    private AcadimicSepicailizationDto sepicailization;
+    private AcademicSpecializationDto sepicailization;
     private UniversityDto university;
 }

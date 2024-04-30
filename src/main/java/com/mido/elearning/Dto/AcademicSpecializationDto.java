@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AcadimicSepicailizationDto {
+public class AcademicSpecializationDto {
 
     private String name;
 }

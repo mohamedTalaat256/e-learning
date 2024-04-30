@@ -1,7 +1,6 @@
 package com.mido.elearning.entity;
 
 
-import com.mido.elearning.enums.Country;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AcadimicSepicailization {
+public class AcademicSpecialization {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
