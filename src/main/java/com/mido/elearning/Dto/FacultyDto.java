@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 public class FacultyDto {
 
+    private Long id;
     private AcadimicSepicailizationDto sepicailization;
     private UniversityDto university;
 }

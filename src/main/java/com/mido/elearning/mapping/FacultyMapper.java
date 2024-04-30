@@ -7,7 +7,8 @@ public class FacultyMapper {
 
     public static FacultyDto entityToDto(Faculty entity){
 
-        return FacultyDto.builder().sepicailization(AcadimicSepicailizationMapper.entityToDto(entity.getSepicailization()))
+        return FacultyDto.builder().id(entity.getId())
+                .sepicailization(AcadimicSepicailizationMapper.entityToDto(entity.getSepicailization()))
                 .university(UniversityMapper.entityToDto(entity.getUniversity()))
                 .build();
     }
@@ -15,7 +16,8 @@ public class FacultyMapper {
 
     public static Faculty DtoToEntity(FacultyDto dto){
 
-        return Faculty.builder().sepicailization(AcadimicSepicailizationMapper.dtoToEntity(dto.getSepicailization()))
+        return Faculty.builder().id(dto.getId())
+                .sepicailization(AcadimicSepicailizationMapper.dtoToEntity(dto.getSepicailization()))
                 .university(UniversityMapper.dtoToEntity(dto.getUniversity()))
                 .build();
     }

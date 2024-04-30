@@ -5,7 +5,6 @@ import com.mido.elearning.mapping.FacultyMapper;
 import com.mido.elearning.repository.FacultyRepository;
 import com.mido.elearning.service.FacultyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
