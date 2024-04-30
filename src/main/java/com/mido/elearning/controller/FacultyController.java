@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/faculties")
 public class FacultyController {
 
+
     @Autowired
     FacultyServiceImpl facultyServiceImpl;
 
@@ -27,12 +28,14 @@ public class FacultyController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestParam Long id){
-        return new ResponseEntity<>(facultyServiceImpl.deleteById(id), HttpStatus.OK);
+        try{
+            facultyServiceImpl.deleteById(id);
+            return new ResponseEntity<>("true", HttpStatus.OK);
+        }catch (Exception ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+
+        }
     }
 
-    @DeleteMapping("/find_by_name/{name}")
-    public ResponseEntity<Object> findByName(@RequestParam String name){
-        return new ResponseEntity<>(facultyServiceImpl.findByName(name), HttpStatus.OK);
-    }
 
 }

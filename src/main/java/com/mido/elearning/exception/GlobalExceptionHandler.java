@@ -1,7 +1,6 @@
 package com.mido.elearning.exception;
 
 import com.mido.elearning.utils.AppResponse;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -52,12 +51,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("invalid_username_or_password");
     }
 
-    @ExceptionHandler(InternalError.class)
-    public ResponseEntity<Object> handleInternalServerErrorException(ExecutionControl.InternalException ex) {
-
-        return AppResponse.generateResponse("Internal Server Error", HttpStatus.UNAUTHORIZED, null, false);
-    }
-
 
 
     //add all your exceptions here
@@ -81,4 +74,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.NOT_FOUND, null, true);
     }
+
+    @ExceptionHandler(NoContentException.class)
+    public ResponseEntity<?> handleNoContentException(RecordNotFoundException ex) {
+
+
+        return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.NO_CONTENT, null, true);
+    }
+
+
 }

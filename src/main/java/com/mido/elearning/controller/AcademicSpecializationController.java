@@ -29,7 +29,8 @@ public class AcademicSpecializationController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestParam Long id){
-        return new ResponseEntity<>(specializationServiceImpl.deleteById(id), HttpStatus.OK);
+        specializationServiceImpl.deleteById(id);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @DeleteMapping("/find_by_name/{name}")
