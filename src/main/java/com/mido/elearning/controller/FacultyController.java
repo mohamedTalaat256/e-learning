@@ -21,6 +21,12 @@ public class FacultyController {
         return AppResponse.generateResponse("all_faculties", HttpStatus.OK, facultyServiceImpl.findAll(),true);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
+        return AppResponse.generateResponse("data", HttpStatus.OK, facultyServiceImpl.findById(id),true);
+    }
+
+
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
         return AppResponse.generateResponse("faculty_added_success", HttpStatus.OK,  facultyServiceImpl.save(facultyDto),true);
@@ -28,7 +34,7 @@ public class FacultyController {
 
     @PutMapping("/update")
     public ResponseEntity<Object> update(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(facultyServiceImpl.save(facultyDto), HttpStatus.OK);
+        return new ResponseEntity<>(facultyServiceImpl.update(facultyDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

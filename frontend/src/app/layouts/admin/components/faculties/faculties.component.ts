@@ -15,7 +15,7 @@ import { FacultyCreateDialogComponent } from '../faculty-create-dialog/faculty-c
   templateUrl: './faculties.component.html',
   styleUrls: ['./faculties.component.scss']
 })
-export class FacultiesComponent implements OnInit { 
+export class FacultiesComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private translate: TranslateService,
@@ -38,25 +38,25 @@ export class FacultiesComponent implements OnInit {
   }
   getAllFaculties() {
     this.facultyService.getAll().subscribe({
-          next:(response: AppResponse)=>{  
-            this.dataSource= new MatTableDataSource<Faculty>(response.data);        
-          },
-          error:(error: Error)=>{
-            console.log(error);
-            //this.toastr.error(error.message);
-          }
-        }
-        );
+      next: (response: AppResponse) => {
+        this.dataSource = new MatTableDataSource<Faculty>(response.data);
+      },
+      error: (error: Error) => {
+        console.log(error);
+        //this.toastr.error(error.message);
       }
- 
+    }
+    );
+  }
+
 
   openCreateDialog() {
     const data = {
       title: this.translate.instant('add_new_faculty'),
       formMode: FormMode.CREATE
     };
-    const dialogRef = this.dialog.open(FacultyCreateDialogComponent,{
-      width: dialog_w_md,  
+    const dialogRef = this.dialog.open(FacultyCreateDialogComponent, {
+      width: dialog_w_md,
       height: 'auto',
       data: data
     });
@@ -66,12 +66,20 @@ export class FacultiesComponent implements OnInit {
     });
   }
 
-  openEditDialog(courseData: any) {
+  openEditDialog(facultyData: any) {
     const data = {
-      title: this.translate.instant('edit_course'),
+      title: this.translate.instant('edit_faculty'),
       formMode: FormMode.EDIT,
-      courseData: courseData
+      facultyData: facultyData
     };
-   // this.componentUtilsService.openDialogLG(CourseDialogFormComponent, data);
+    const dialogRef = this.dialog.open(FacultyCreateDialogComponent, {
+      width: dialog_w_md,
+      height: 'auto',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

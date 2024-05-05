@@ -1,5 +1,6 @@
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Injectable} from '@angular/core';  
+import { Faculty } from 'src/app/model/faculty.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +18,12 @@ export class FacultyFormControls {
     );
   }
   
-  createRegisterForm() {
+  setFacultyForm(faculty: Faculty) {
     return this.fb.group(
       {
-        email:    [null, [Validators.required, Validators.email, Validators.maxLength(255)]],
-        username:    [null, [Validators.required, Validators.maxLength(255)]],
-        firstName:    [null, [Validators.required,   Validators.maxLength(255)]],
-        lastName:    [null, [Validators.required,  Validators.maxLength(255)]],
-        role:    [null, [Validators.required,  Validators.maxLength(255)]],
-        password: [null, [Validators.required, Validators.maxLength(255)]],
-        agreeTremsChecked: [null, [Validators.required, Validators.maxLength(255)]]
+        academicSpecialization:  [faculty.sepicailization.id, [Validators.required, Validators.maxLength(255)]],
+        university:              [faculty.university.id, [Validators.required, Validators.maxLength(255)]],
       }
     );
-  }
+  } 
 }

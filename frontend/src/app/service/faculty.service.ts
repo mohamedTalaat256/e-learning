@@ -11,12 +11,17 @@ export class FacultyService {
   getAll(): Observable<any> {
     return this.http.get(baseURL + '/faculties');
   }
+  public save(requestbody: any): Observable<any> {
+    return this.http.post<any>(baseURL + '/faculties/save', requestbody);
+  }
+
+  public update(requestbody: any): Observable<any> {
+    return this.http.put<any>(baseURL + '/faculties/update', requestbody);
+  }
 /*  
   
 
-  public save(requestbody: UserSaveRequest): Observable<any> {
-    return this.http.post<any>(baseURL + '/users', requestbody);
-  }
+
 
   findById(id: number): Observable<any> {
     return this.http.get(baseURL + '/users/' + id)

@@ -10,18 +10,19 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
+
 public class Faculty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "academic_specialization_id", referencedColumnName = "id")
-    private AcademicSpecialization AcademicSpecialization;
+    private AcademicSpecialization academicSpecialization;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "university_id", referencedColumnName = "id")
     private University university;
-
 }

@@ -17,7 +17,7 @@ public class FacultyMapper {
     public static Faculty dtoToEntity(FacultyDto dto){
 
         return Faculty.builder().id(dto.getId())
-                .AcademicSpecialization(AcademicSpecializationMapper.dtoToEntity(dto.getSepicailization()))
+                .academicSpecialization(AcademicSpecializationMapper.dtoToEntity(dto.getSepicailization()))
                 .university(UniversityMapper.dtoToEntity(dto.getUniversity()))
                 .build();
     }

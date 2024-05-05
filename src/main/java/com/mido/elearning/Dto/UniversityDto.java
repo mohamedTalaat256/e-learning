@@ -13,5 +13,5 @@ public class UniversityDto {
 
     private long id;
     private String name;
-    private String country;
+    private Country country;
 }

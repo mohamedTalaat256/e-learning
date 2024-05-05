@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class AcademicSpecialization {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

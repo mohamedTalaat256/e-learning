@@ -1,37 +1,35 @@
 <div class="p-3">
-    <h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
-    <mat-dialog-content class="mat-typography">
-        <form (submit)="onsubmit()" [formGroup]="facultyForm" class="mt-2">
-            <div fxLayout="column" fxLayoutAlign="center "  fxLayoutGap="15">
-    
-                <mat-form-field >
+    <form (ngSubmit)="onSubmit()" [formGroup]="facultyForm" class="mt-2">
+        <h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
+        <mat-dialog-content class="mat-typography">
+            <div fxLayout="column" fxLayoutAlign="center " fxLayoutGap="15">
+                <mat-form-field>
                     <mat-label>{{'academic_specialization'|translate}} </mat-label>
                     <mat-select formControlName="academicSpecialization">
                         <mat-option *ngFor="let s of specializations" [value]="s.id">{{s.name}}</mat-option>
                     </mat-select>
                     <mat-error>
-                        <app-validation-msg [control]="facultyForm.controls['academicSpecialization']" 
-                            [fieldName]="'academic_specialization'" >
+                        <app-validation-msg [control]="facultyForm.controls['academicSpecialization']"
+                            [fieldName]="'academic_specialization'">
                         </app-validation-msg>
                     </mat-error>
                 </mat-form-field>
-    
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>{{'university'|translate}} </mat-label>
                     <mat-select formControlName="university">
-                        <mat-option *ngFor="let u of universities" [value]="u.id">{{u.name}} ({{u.country}})</mat-option>
+                        <mat-option *ngFor="let u of universities" [value]="u.id">{{u.name}}
+                            ({{u.country}})</mat-option>
                     </mat-select>
                     <mat-error>
-                        <app-validation-msg [control]="facultyForm.controls['university']" 
-                            [fieldName]="'university'" >
+                        <app-validation-msg [control]="facultyForm.controls['university']" [fieldName]="'university'">
                         </app-validation-msg>
                     </mat-error>
                 </mat-form-field>
             </div>
-        </form>
-    </mat-dialog-content>
-    <mat-dialog-actions fxLayoutAlign="center ">
-        <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>
-        <button type="submit" mat-raised-button [disabled]="!facultyForm.valid" color="primary">{{'save' | translate}}</button>
-    </mat-dialog-actions>
+        </mat-dialog-content>
+        <mat-dialog-actions fxLayoutAlign="center ">
+            <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>
+            <button type="submit" mat-raised-button [disabled]="!facultyForm.valid" color="primary">{{'save' | translate}}</button>
+        </mat-dialog-actions>
+    </form>
 </div>
