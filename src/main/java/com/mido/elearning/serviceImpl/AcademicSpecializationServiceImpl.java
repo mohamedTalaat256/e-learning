@@ -1,10 +1,12 @@
 package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.AcademicSpecializationDto;
+import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.entity.AcademicSpecialization;
 import com.mido.elearning.exception.NoContentException;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.AcademicSpecializationMapper;
+import com.mido.elearning.mapping.FacultyMapper;
 import com.mido.elearning.repository.AcademicSpecializationRepository;
 import com.mido.elearning.service.AcademicSpecializationService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AcademicSpecializationServiceImpl implements AcademicSpecializationService {
     private final AcademicSpecializationRepository specializationRepository;
+
+
+    @Override
+    public List<AcademicSpecializationDto> findAll() {
+        List<AcademicSpecializationDto> specializations = new ArrayList<>();
+        specializationRepository.findAll().forEach(e-> specializations.add(AcademicSpecializationMapper.entityToDto(e)));
+        return specializations;
+    }
+
     @Override
     public AcademicSpecializationDto save(AcademicSpecializationDto dto) {
         return AcademicSpecializationMapper.entityToDto(specializationRepository.save(AcademicSpecializationMapper.dtoToEntity(dto)));

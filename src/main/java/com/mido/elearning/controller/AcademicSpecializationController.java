@@ -17,6 +17,12 @@ public class AcademicSpecializationController {
     @Autowired
     AcademicSpecializationServiceImpl specializationServiceImpl;
 
+    @GetMapping("")
+    public ResponseEntity<Object> findAll(){
+        return new ResponseEntity<>(specializationServiceImpl.findAll(), HttpStatus.OK);
+    }
+
+
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody AcademicSpecializationDto specializationDto){
         return new ResponseEntity<>(specializationServiceImpl.save(specializationDto), HttpStatus.OK);

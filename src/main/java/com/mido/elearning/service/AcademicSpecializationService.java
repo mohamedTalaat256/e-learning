@@ -7,11 +7,9 @@ import java.util.List;
 
 public interface AcademicSpecializationService {
 
-    public AcademicSpecializationDto save(AcademicSpecializationDto dto);
-
-
-    public void deleteById(Long id);
-
-    public List<AcademicSpecializationDto> findByName(String name);
+    List<AcademicSpecializationDto> findAll();
+    AcademicSpecializationDto save(AcademicSpecializationDto dto);
+    void deleteById(Long id);
+    List<AcademicSpecializationDto> findByName(String name);
 
 }

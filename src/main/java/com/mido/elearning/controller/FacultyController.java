@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/faculties")
 public class FacultyController {
 
-
     @Autowired
     FacultyServiceImpl facultyServiceImpl;
 
