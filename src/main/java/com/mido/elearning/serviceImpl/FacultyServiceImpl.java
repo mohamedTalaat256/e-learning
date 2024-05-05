@@ -12,6 +12,7 @@ import com.mido.elearning.service.FacultyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +24,18 @@ public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository facultyRepository;
     private final AcademicSpecializationRepository specializationRepository;
+
+
+    @Override
+    public List<FacultyDto> findAll() {
+        List<FacultyDto> faculties = new ArrayList<>();
+        facultyRepository.findAll().forEach(e-> faculties.add(FacultyMapper.entityToDto(e)));
+        return faculties;
+    }
+
     @Override
     public FacultyDto save(FacultyDto dto) {
-      return FacultyMapper.entityToDto(facultyRepository.save(FacultyMapper.dtoToEntity(dto)));
+      return  FacultyMapper.entityToDto(facultyRepository.save(FacultyMapper.dtoToEntity(dto)));
     }
 
     @Override

@@ -16,11 +16,11 @@ public class Faculty {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "sepicailization_id", referencedColumnName = "id")
-    private AcademicSpecialization sepicailization;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "academic_specialization_id", referencedColumnName = "id")
+    private AcademicSpecialization AcademicSpecialization;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "university_id", referencedColumnName = "id")
     private University university;
 

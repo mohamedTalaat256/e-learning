@@ -210,7 +210,7 @@ public enum Country {
         this.country = country;
     }
 
-    public String getUrl() {
+    public String getValue() {
         return country;
     }
 

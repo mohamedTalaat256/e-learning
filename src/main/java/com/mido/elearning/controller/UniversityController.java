@@ -1,45 +1,41 @@
 package com.mido.elearning.controller;
 
-
-import com.mido.elearning.Dto.FacultyDto;
-import com.mido.elearning.serviceImpl.FacultyServiceImpl;
+import com.mido.elearning.Dto.UniversityDto;
+import com.mido.elearning.serviceImpl.UniversityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/faculties")
-public class FacultyController {
-
+@RequestMapping("/api/universities")
+public class UniversityController {
 
     @Autowired
-    FacultyServiceImpl facultyServiceImpl;
+    UniversityServiceImpl universityServiceImpl;
 
     @GetMapping("")
     public ResponseEntity<Object> findAll(){
-        return new ResponseEntity<>(facultyServiceImpl.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(universityServiceImpl.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(facultyServiceImpl.save(facultyDto), HttpStatus.OK);
+    public ResponseEntity<Object> save(@RequestBody UniversityDto dto){
+        return new ResponseEntity<>(universityServiceImpl.save(dto), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(facultyServiceImpl.save(facultyDto), HttpStatus.OK);
+    public ResponseEntity<Object> update(@RequestBody UniversityDto dto){
+        return new ResponseEntity<>(universityServiceImpl.save(dto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestParam Long id){
         try{
-            facultyServiceImpl.deleteById(id);
+            universityServiceImpl.deleteById(id);
             return new ResponseEntity<>("true", HttpStatus.OK);
         }catch (Exception ex){
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
         }
     }
-
-
 }

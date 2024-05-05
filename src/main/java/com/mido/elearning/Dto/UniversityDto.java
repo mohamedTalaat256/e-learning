@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 public class UniversityDto {
 
+    private long id;
     private String name;
-    private Country country;
+    private String country;
 }

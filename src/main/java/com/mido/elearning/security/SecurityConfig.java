@@ -60,7 +60,8 @@ public class SecurityConfig {
                          .requestMatchers("/api/entities").hasRole("USER").anyRequest().authenticated()
                  )*/
 
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                //.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
 
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

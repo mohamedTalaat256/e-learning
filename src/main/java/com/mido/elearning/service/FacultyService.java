@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface FacultyService {
 
-    public FacultyDto save(FacultyDto dto);
 
-
-    public void deleteById(Long id);
+    List<FacultyDto> findAll();
+    FacultyDto save(FacultyDto dto);
+    void deleteById(Long id);
 
 
 }

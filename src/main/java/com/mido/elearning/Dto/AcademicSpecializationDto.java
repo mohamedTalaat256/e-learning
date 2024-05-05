@@ -9,5 +9,6 @@ import lombok.*;
 @Builder
 public class AcademicSpecializationDto {
 
+    private Long id;
     private String name;
 }
