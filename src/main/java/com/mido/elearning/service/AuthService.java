@@ -9,11 +9,9 @@ import com.mido.elearning.utils.AppResponse;
 
 public interface AuthService {
 
-    public AppResponse login(String username, String password);
-
-    public TokenInfo createLoginToken(String userName, Long userId);
-
-    public AccessTokenDto refreshAccessToken(String refreshToken);
-
-    public void logoutUser(String refreshToken);
+     AppResponse login(String username, String password);
+    UserDto register(UserDto registerDto);
+     TokenInfo createLoginToken(String userName, Long userId);
+     AccessTokenDto refreshAccessToken(String refreshToken);
+     void logoutUser(String refreshToken);
 }

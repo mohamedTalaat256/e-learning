@@ -28,7 +28,7 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthRoutingModule } from './layouts/auth/auth-routing.module';
 import { TableComponent } from './layouts/user/pages/table/table.component';
 import { ComponentsComponent } from './layouts/user/pages/components/components.component';
-import { DashboardComponent } from './layouts/admin/components/dashboard/dashboard.component';
+import { DashboardComponent } from './layouts/user/components/dashboard/dashboard.component';
 import { AdminRoutingModule } from './layouts/admin/admin-routing.module';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AdminToolbarListComponent } from './layouts/admin/global/admin-toolbar-list/admin-toolbar-list.component';
@@ -42,6 +42,9 @@ import { CourseOverviewComponent } from './layouts/public/course-overview/course
 import { MinToLength } from './pip/minToLength';
 import { UsersComponent } from './layouts/admin/components/users/users.component';
 import { ValidationMsgComponent } from './global/validation-msg/validation-msg.component';
+import { AdminDashboardComponent } from './layouts/admin/components/dashboard/admin-dashboard.component';
+import { FacultiesComponent } from './layouts/admin/components/faculties/faculties.component';
+import { FacultyCreateDialogComponent } from './layouts/admin/components/faculty-create-dialog/faculty-create-dialog.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -59,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AdminToolbarListComponent,
     AppSidenavListComponent,
     UserComponent,
+    AdminDashboardComponent,
     AdminComponent,
     TimeLineComponent,
     ProfileComponent,
@@ -80,7 +84,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CourseOverviewComponent,
     MinToLength,
     ValidationMsgComponent,
-    UsersComponent 
+    UsersComponent,
+    FacultiesComponent,
+    FacultyCreateDialogComponent
   ],
   imports: [
     MatSidenavModule,

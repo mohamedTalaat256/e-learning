@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { Router } from '@angular/router';
 import { expandCollapse, slideInOutY } from 'src/app/animation/animations';
@@ -13,41 +13,38 @@ import { AuthFormControls } from '../admin/form-controls/auth-form';
   styleUrls: ['./auth.component.scss'],
   animations:[expandCollapse ,slideInOutY, ]
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
 
   genders: string[]=['MALE', 'FEMALE'];
   
-  authForm: FormGroup = new FormGroup({});
+  authForm: FormGroup;
   isLoginMode: boolean = true;
   agreeTremsChecked = false;
   isExpanded: boolean = false; 
 
   constructor( private authServise: AuthService,private router: Router, private authFormControl: AuthFormControls){
 
-    this.authForm =this.authFormControl.createLoginForm();
+    
   }
 
+  ngOnInit(): void {
+    this.authForm =this.authFormControl.createLoginForm();
+  }
 
   toggleExpandContainer() {
     this.isExpanded = !this.isExpanded;
   }
- 
-  enableRegisterMode(){
-    this.isLoginMode = false;
-    this.isExpanded = true;
-    this.authForm =this.authFormControl.createRegisterForm();
-  }
 
-  enableLoginMode(){
-    this.isLoginMode = true;
-    this.isExpanded = false;
-    this.authForm =this.authFormControl.createLoginForm();
+  toggleMode(){
+    this.isLoginMode =! this.isLoginMode;
+    this.isExpanded =! this.isExpanded;
+    if(this.isLoginMode){
+      this.authForm =this.authFormControl.createLoginForm();
+    }else{
+      this.authForm =this.authFormControl.createRegisterForm();
+    }
+  }
   
-  }
-
-
-
-
   onSubmit(){
     
     if(this.isLoginMode){
@@ -71,7 +68,24 @@ export class AuthComponent {
         }
       }); 
     }else{
-      
+      this.authServise.register(this.authForm.value).subscribe({
+        next:(response: any)=>{ 
+/*           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('AUTH_USER', JSON.stringify(response.data.user) );
+  
+          
+          this.router.navigate(['/admin']) */
+           
+        },
+        error:(error: AppResponse)=>{ 
+          Swal.fire({ 
+            icon: "error",
+            title: error.message,
+            showConfirmButton: true,
+            timer: 1500
+          });
+        }
+      }); 
     }
     
   }

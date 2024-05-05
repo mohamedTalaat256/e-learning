@@ -3,6 +3,7 @@ package com.mido.elearning.controller;
 
 import com.mido.elearning.Dto.*;
 import com.mido.elearning.service.AuthService;
+import com.mido.elearning.serviceImpl.AuthServiceImpl;
 import com.mido.elearning.utils.AppResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,23 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    AuthService authService;
+    AuthServiceImpl authServiceImpl;
 
     @PostMapping("/login")
     public ResponseEntity<Object> login (@RequestBody LoginRequestDto loginRequest){
 
-        return new ResponseEntity<>(authService.login(loginRequest.getUsername(), loginRequest.getPassword()), HttpStatus.OK);
+        return new ResponseEntity<>(authServiceImpl.login(loginRequest.getUsername(), loginRequest.getPassword()), HttpStatus.OK);
     }
 
-/*    @PostMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<Object> register (@RequestBody @Valid UserDto registerRequest){
 
-        return AppResponse.generateResponse("register success", HttpStatus.OK, authService.register(registerRequest), true);
-    }*/
+        return AppResponse.generateResponse("register success", HttpStatus.OK, authServiceImpl.register(registerRequest), true);
+    }
 
     @PostMapping("/refresh-token")
     public ResponseEntity<AccessTokenDto> refreshAccessToken(@RequestParam String refreshToken) {
-        AccessTokenDto dto = authService.refreshAccessToken(refreshToken);
+        AccessTokenDto dto = authServiceImpl.refreshAccessToken(refreshToken);
         return ResponseEntity.ok(dto);
     }
 

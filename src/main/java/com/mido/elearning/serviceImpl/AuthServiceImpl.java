@@ -38,7 +38,8 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authManager;
     private final UserRepository userRepository;
-
+    private final UserServiceImpl userServiceImpl;
+    private final PasswordEncoder passwordEncoder;
     @Override
     public AppResponse login(String username, String password) {
         Authentication authentication = authManager.authenticate(
@@ -50,14 +51,14 @@ public class AuthServiceImpl implements AuthService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             TokenInfo tokenInfo = createLoginToken(username, userDetails.getId());
             Map<String, String> userData = new HashMap<>();
-
-            userData.put("id", userDetails.getId().toString());
+            log.info(userDetails);
+          //  userData.put("id", userDetails.getId().toString());
             userData.put("email", userDetails.getEmail());
             userData.put("firstName", userDetails.getFirstName());
             userData.put("lastName", userDetails.getLastName());
             userData.put("username", userDetails.getUsername());
             userData.put("roles", userDetails.getAuthorities().toString());
-            userData.put("token", tokenInfo.getAccessToken());
+           // userData.put("token", tokenInfo.getAccessToken());
 
             return AppResponse.builder()
                     .ok(true)
@@ -67,10 +68,18 @@ public class AuthServiceImpl implements AuthService {
                     .build();
         }
         return null;
-
-
     }
 
+    @Override
+    public UserDto register(UserDto registerDto) {
+
+        Optional<AppUser> appUser =	userRepository.findByUsername(registerDto.getUsername());
+        if (appUser.isPresent()) {
+            throw new DuplicateRecordException("This User is already registered  : " + registerDto.getUsername());
+        }
+        registerDto.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        return UserMapper.entityToDto(userRepository.save(UserMapper.DtoToEntity(registerDto)));
+    }
 
     @Override
     public TokenInfo createLoginToken(String userName, Long userId) {

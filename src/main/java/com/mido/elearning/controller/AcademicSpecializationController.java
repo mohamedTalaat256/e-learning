@@ -5,6 +5,7 @@ import com.mido.elearning.Dto.AcademicSpecializationDto;
 import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.serviceImpl.AcademicSpecializationServiceImpl;
 import com.mido.elearning.serviceImpl.FacultyServiceImpl;
+import com.mido.elearning.utils.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,13 @@ public class AcademicSpecializationController {
 
     @GetMapping("")
     public ResponseEntity<Object> findAll(){
-        return new ResponseEntity<>(specializationServiceImpl.findAll(), HttpStatus.OK);
+        return AppResponse.generateResponse("all_academic_specialization", HttpStatus.OK, specializationServiceImpl.findAll(), true);
     }
 
 
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody AcademicSpecializationDto specializationDto){
-        return new ResponseEntity<>(specializationServiceImpl.save(specializationDto), HttpStatus.OK);
+        return AppResponse.generateResponse("academic_specialization_saved_success", HttpStatus.OK, specializationServiceImpl.save(specializationDto), true);
     }
 
     @PutMapping("/update")

@@ -12,7 +12,9 @@ export class AuthService {
   public login(requestbody: LoginRequest): Observable<any> {
     return this.http.post<any>(baseURL + '/auth/login', requestbody);
   }
-
+  public register(requestbody: any): Observable<any> {
+    return this.http.post<any>(baseURL + '/auth/register', requestbody);
+  }
   public getAuthorizationToken() {
     return localStorage.getItem('token');
   }

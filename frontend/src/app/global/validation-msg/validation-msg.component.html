@@ -2,7 +2,7 @@
 
 
     <span *ngIf="control?.hasError('required')&& (control.dirty || control.touched)">
-        {{fieldName | translate}}  {{'required'|translate}} ! </span>
+        {{fieldName | translate}}   {{'required'|translate}} ! </span>
 
 
     <span *ngIf="control?.hasError('maxlength')&& (control.dirty || control.touched)"> {{'max_length_is'|translate}} :

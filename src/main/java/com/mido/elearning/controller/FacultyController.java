@@ -3,6 +3,7 @@ package com.mido.elearning.controller;
 
 import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.serviceImpl.FacultyServiceImpl;
+import com.mido.elearning.utils.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +18,12 @@ public class FacultyController {
 
     @GetMapping("")
     public ResponseEntity<Object> findAll(){
-        return new ResponseEntity<>(facultyServiceImpl.findAll(), HttpStatus.OK);
+        return AppResponse.generateResponse("all_faculties", HttpStatus.OK, facultyServiceImpl.findAll(),true);
     }
 
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(facultyServiceImpl.save(facultyDto), HttpStatus.OK);
+        return AppResponse.generateResponse("faculty_added_success", HttpStatus.OK,  facultyServiceImpl.save(facultyDto),true);
     }
 
     @PutMapping("/update")

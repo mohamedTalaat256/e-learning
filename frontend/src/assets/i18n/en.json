@@ -30,12 +30,13 @@
     "start_date": "start date",
     "end_date": "end date",
 
-
-
-
-
-
-
+    "faculty":"faculty",
+    "all_faculties":"all faculties",
+    "faculties":"faculties",
+    "add_new_faculty":"add new faculty",
+    "academic_specialization":"academic specialization",
+    "university":"university",
+ 
     "max_length_is": "max length is",
     "min_length_is": "min length is",
     "max_value_is": "max value is",

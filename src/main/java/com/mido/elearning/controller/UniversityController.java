@@ -2,6 +2,7 @@ package com.mido.elearning.controller;
 
 import com.mido.elearning.Dto.UniversityDto;
 import com.mido.elearning.serviceImpl.UniversityServiceImpl;
+import com.mido.elearning.utils.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class UniversityController {
 
     @GetMapping("")
     public ResponseEntity<Object> findAll(){
-        return new ResponseEntity<>(universityServiceImpl.findAll(), HttpStatus.OK);
+        return AppResponse.generateResponse("all_universities", HttpStatus.OK, universityServiceImpl.findAll(), true);
     }
 
     @PostMapping("/save")

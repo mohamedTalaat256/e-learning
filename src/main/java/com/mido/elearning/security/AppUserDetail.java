@@ -18,24 +18,15 @@ import java.util.List;
 public class AppUserDetail implements UserDetails {
 
     private Long id ;
-
     private String firstName;
     private String lastName;
-
     private String username;
-
     private String password ;
-
     private String email;
-
     private List<GrantedAuthority> authorities ;
-
     private boolean isEnabled;
-
     private boolean isCredentialsNonExpired;
-
     private boolean isAccountNonLocked;
-
     private boolean isAccountNonExpired;
 
     public AppUserDetail() {

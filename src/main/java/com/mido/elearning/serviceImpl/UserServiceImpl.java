@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<AppUser> appUser =	userRepository.findByUsername(userName);
