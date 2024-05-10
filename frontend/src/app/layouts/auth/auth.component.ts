@@ -6,6 +6,7 @@ import { AppResponse } from 'src/app/model/app_response.model';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
 import { AuthFormControls } from '../admin/form-controls/auth-form';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -48,7 +49,7 @@ export class AuthComponent implements OnInit {
   onSubmit(){
     
     if(this.isLoginMode){
-      this.authServise.login(this.authForm.value).subscribe({
+      this.authServise.login(this.authForm.value).pipe(take(1)).subscribe({
         next:(response: any)=>{ 
   
           localStorage.setItem('token', response.data.token);
@@ -70,7 +71,7 @@ export class AuthComponent implements OnInit {
         }
       }); 
     }else{
-      this.authServise.register(this.authForm.value).subscribe({
+      this.authServise.register(this.authForm.value).pipe(take(1)).subscribe({
         next:(response: any)=>{ 
 /*           localStorage.setItem('token', response.data.token);
           localStorage.setItem('AUTH_USER', JSON.stringify(response.data.user) );

@@ -2,38 +2,52 @@
     <div class="shadow-sm w-100 mt-5 rounded-2">
         <table mat-table [dataSource]="dataSource">
       
-          <!-- Position Column -->
+         
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> id </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
           </ng-container>
-      
-          <!-- Name Column -->
+       
           <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef> username </th>
             <td mat-cell *matCellDef="let element"> {{element.username}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="password">
-            <th mat-header-cell *matHeaderCellDef> password </th>
-            <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> {{'name' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName+ ' '+ element.lastName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> {{'email' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.email }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef> {{'roles' | translate}} </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip-row *ngFor="let role of element.roles" class="mx-1 mat-bg-light-success">
+                {{role.name}}
+              </mat-chip-row> 
+             </td>
           </ng-container>
       
-          <!-- Weight Column -->
+          <ng-container matColumnDef="enabled">
+            <th mat-header-cell *matHeaderCellDef> {{'enabled' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> 
+            
+              <mat-chip-row *ngIf="element.enabled" color="success" >
+                {{'active'|translate}}
+              </mat-chip-row> 
+              <mat-chip-row *ngIf="!element.enabled" color="danger">
+                {{'blocked'|translate}}
+              </mat-chip-row> 
+            </td>
+          </ng-container>
+      
           <ng-container matColumnDef="profile_image_url">
             <th mat-header-cell *matHeaderCellDef> profile_image_url </th>
             <td mat-cell *matCellDef="let element"> {{element.profile_image_url}} </td>
-          </ng-container>
-
-            
-         <!--  <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef> image </th>
-            <td mat-cell *matCellDef="let element">
-               
-              <img src={{element.image}} class="img-radius-sm rounded-2">
-              </td>
-          </ng-container> -->
-
+          </ng-container> 
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Action</th>
             <td mat-cell *matCellDef="let element">

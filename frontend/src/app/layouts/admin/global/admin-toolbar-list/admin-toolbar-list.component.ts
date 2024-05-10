@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AppResponse } from 'src/app/model/app_response.model';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
@@ -16,7 +17,7 @@ export class AdminToolbarListComponent {
   }
 
   logout(){
-    this.authService.logout().subscribe({
+    this.authService.logout().pipe(take(1)).subscribe({
       next:(response: AppResponse)=>{
         if(response.ok){
           localStorage.clear();

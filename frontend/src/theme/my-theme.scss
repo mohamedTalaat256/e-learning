@@ -8,6 +8,7 @@
 @use './override/mat-stepper-color-variants.scss' as stepper-color-variants;
 @use './override/mat-input-color-variants' as input-color-variants;
 @use './override/mat-background-color-variants' as background-color-variants;
+@use './override/mat-chip-variants' as chip-variants;
 
 @include mat.core();
 
@@ -135,6 +136,7 @@ $light-theme: mat.define-light-theme((
 @include stepper-color-variants.color($light-theme, $light-color-theme);
 @include input-color-variants.color($light-theme, $light-color-theme);
 @include background-color-variants.color($light-theme, $light-color-theme);
+@include chip-variants.color($light-theme, $light-color-theme);
 
 @include mat.all-component-themes($light-theme);
 

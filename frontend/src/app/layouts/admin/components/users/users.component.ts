@@ -4,6 +4,7 @@ import { AppResponse } from 'src/app/model/app_response.model';
 import { User } from 'src/app/model/user,model';
 import { UserService } from 'src/app/service/users.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +15,7 @@ export class UsersComponent implements OnInit {
 
   usersList: any; 
 
-  displayedColumns: string[] = ['id', 'username', 'password', 'profile_image_url'];
+  displayedColumns: string[] = ['id', 'username','name', 'email', 'roles', 'enabled', 'profile_image_url', 'actions'];
   dataSource = new MatTableDataSource<User>();  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,7 +31,7 @@ export class UsersComponent implements OnInit {
 
 
   getUsers() {
-/*     this.userService.getAll().subscribe({
+    this.userService.getAll().pipe(take(1)).subscribe({
       next:(response: AppResponse)=>{
         console.log(response);
         this.usersList = response.data;
@@ -41,6 +42,6 @@ export class UsersComponent implements OnInit {
         //this.toastr.error(error.message);
       }
     }
-    ); */
+    );
   }
 }

@@ -49,6 +49,8 @@ import { loaderInterceptor } from './interceptor/loader.interceptor';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { LoadingCircularComponent } from './global/loading-circular/loading-circular.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { ProfilePageComponent } from './layouts/user/components/profile-page/profile-page.component';
+import { ProfileEditComponent } from './layouts/user/components/profile-edit/profile-edit.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -91,7 +93,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     UsersComponent,
     FacultiesComponent,
     FacultyCreateDialogComponent,
-    LoadingCircularComponent
+    LoadingCircularComponent,
+    ProfilePageComponent,
+    ProfileEditComponent
   ],
   imports: [
     MatSidenavModule,

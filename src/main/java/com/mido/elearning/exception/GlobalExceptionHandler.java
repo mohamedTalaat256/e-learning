@@ -82,5 +82,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.NO_CONTENT, null, true);
     }
 
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<?> handleInternalServerErrorException(InternalServerErrorException ex) {
+
+        return  AppResponse.generateResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null, false);
+    }
+
 
 }

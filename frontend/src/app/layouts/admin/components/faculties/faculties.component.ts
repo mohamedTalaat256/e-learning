@@ -10,6 +10,7 @@ import { FacultyService } from 'src/app/service/faculty.service';
 import { ComponentUtilsService } from 'src/app/utils/components.utl.service';
 import { FacultyCreateDialogComponent } from '../faculty-create-dialog/faculty-create-dialog.component';
 import Swal from 'sweetalert2';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-faculties',
@@ -38,7 +39,7 @@ export class FacultiesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   getAllFaculties() {
-    this.facultyService.getAll().subscribe({
+    this.facultyService.getAll().pipe(take(1)).subscribe({
       next: (response: AppResponse) => {
         this.dataSource = new MatTableDataSource<Faculty>(response.data);
       },
@@ -66,7 +67,7 @@ export class FacultiesComponent implements OnInit {
       data: data
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
@@ -83,7 +84,7 @@ export class FacultiesComponent implements OnInit {
       data: data
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }

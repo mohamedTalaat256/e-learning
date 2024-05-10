@@ -30,7 +30,7 @@
     </button>
 
     <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
-        <button mat-menu-item routerLink="#" >
+        <button mat-menu-item [routerLink]="['/admin/edit-profile']" routerLinkActive="active" >
             <mat-icon color="primary">person</mat-icon><span>My Account</span>
         </button>
         <button mat-menu-item routerLink="#">

@@ -9,6 +9,7 @@ import { UsersComponent } from './components/users/users.component';
 import { authGuardService } from 'src/app/guards/auth-guard.guard';
 import { AdminDashboardComponent } from './components/dashboard/admin-dashboard.component';
 import { FacultiesComponent } from './components/faculties/faculties.component';
+import { ProfileEditComponent } from '../user/components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path:'add-course', component: CourseDialogFormComponent},
       {path:'faculties', component: FacultiesComponent},
       {path:'users', component: UsersComponent},
+      {path:'edit-profile', component: ProfileEditComponent},
     ],
     canActivate: [authGuardService]
   }

@@ -15,10 +15,8 @@ const routes: Routes = [
       {path:'friends', component: FriendsComponent},
       {path:'table', component: TableComponent},
       {path:'components', component: ComponentsComponent},
-
-
     ]
-  }
+  },
 ];
 
 @NgModule({

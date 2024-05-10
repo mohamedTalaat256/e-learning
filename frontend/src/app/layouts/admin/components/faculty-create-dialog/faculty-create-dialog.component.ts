@@ -10,6 +10,7 @@ import { UniversityService } from 'src/app/service/univeristy.service';
 import { FacultyService } from 'src/app/service/faculty.service';
 import Swal from 'sweetalert2';
 import { FormMode } from 'src/app/constants/constants';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-faculty-create-dialog',
@@ -46,7 +47,7 @@ export class FacultyCreateDialogComponent implements OnInit {
   }
 
   getAllUniversities(){
-    this.universityService.getAll().subscribe({
+    this.universityService.getAll().pipe(take(1)).subscribe({
       next:(response: AppResponse)=>{  
         if(response.ok){
           this.universities=  response.data;
@@ -60,7 +61,7 @@ export class FacultyCreateDialogComponent implements OnInit {
   }
 
   getAllSepicailizations(){
-    this.academicSpecializationService.getAll().subscribe({
+    this.academicSpecializationService.getAll().pipe(take(1)).subscribe({
       next:(response: AppResponse)=>{  
         if(response.ok){
           this.specializations=  response.data;
@@ -85,7 +86,7 @@ export class FacultyCreateDialogComponent implements OnInit {
           id:this.facultyForm.value.university
         }
       };
-      this.facultyService.save(payload).subscribe({
+      this.facultyService.save(payload).pipe(take(1)).subscribe({
         next:(response: any)=>{
           if(response.ok){
             Swal.fire({ 
@@ -119,7 +120,7 @@ export class FacultyCreateDialogComponent implements OnInit {
           id:this.facultyForm.value.university
         }
       };
-      this.facultyService.update(payload).subscribe({
+      this.facultyService.update(payload).pipe(take(1)).subscribe({
         next:(response: any)=>{
           if(response.ok){
             Swal.fire({ 

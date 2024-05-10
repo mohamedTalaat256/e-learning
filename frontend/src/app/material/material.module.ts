@@ -23,6 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatChipsModule} from '@angular/material/chips';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const materials: any = [
   MatSidenavModule,
@@ -49,7 +51,10 @@ const materials: any = [
   MatCheckboxModule,
   MatDialogModule,
   MatPaginatorModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
