@@ -65,11 +65,6 @@ public class AppUser {
 
 
     public AppUser(Long id) {
-        super();
         this.id = id;
-    }
-
-    public Long getId() {
-        return null;
     }
 }

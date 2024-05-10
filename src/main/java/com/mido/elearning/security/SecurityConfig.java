@@ -8,18 +8,22 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 import java.util.Arrays;
 import java.util.List;
 
 @Configuration
+
 public class SecurityConfig {
+
+
 
     String [] PUBLIC_END_POINTS = {
             "/media/**",
@@ -30,13 +34,10 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-/*
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
-*/
 
 
 
@@ -52,7 +53,7 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf-> csrf.disable())
-              //  .exceptionHandling((ex)-> ex.authenticationEntryPoint(unauthorizedHandler))
+                .exceptionHandling((ex)-> ex.authenticationEntryPoint(unauthorizedHandler))
 
                 .sessionManagement((sm)-> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth.requestMatchers(PUBLIC_END_POINTS).permitAll())
@@ -60,8 +61,7 @@ public class SecurityConfig {
                          .requestMatchers("/api/entities").hasRole("USER").anyRequest().authenticated()
                  )*/
 
-                //.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
 
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -80,8 +80,14 @@ public class SecurityConfig {
         return source;
     }
 
+
+
+
+
     @Bean
     public AuthFilter authFilter() {
         return new AuthFilter();
     }
+
+
 }

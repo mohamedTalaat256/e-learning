@@ -1,15 +1,15 @@
 package com.mido.elearning.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "token_info")
+@Builder
 public class TokenInfo {
 
     @Id
@@ -35,9 +35,5 @@ public class TokenInfo {
     private AppUser user;
 
 
-    public TokenInfo(String accessToken, String refreshToken) {
-        this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
-    }
 
 }

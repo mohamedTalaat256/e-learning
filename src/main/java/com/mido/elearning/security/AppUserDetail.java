@@ -109,4 +109,20 @@ public class AppUserDetail implements UserDetails {
         return isEnabled;
     }
 
+    @Override
+    public String toString() {
+        return "AppUserDetail{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", authorities=" + authorities +
+                ", isEnabled=" + isEnabled +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                '}';
+    }
 }

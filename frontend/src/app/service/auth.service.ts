@@ -30,8 +30,23 @@ export class AuthService {
 
 
   public logout(): Observable<any> { 
+    const refreshToken = localStorage.getItem('refreshToken');
 
-    return this.http.get<any>(baseURL + '/logout');
+    return this.http.post<any>(baseURL + `/auth/logout?refreshToken=${refreshToken}`, null);
+  }
+
+
+  isLogedIn() {
+    return localStorage.getItem('token') != null;
+  }
+
+
+  GetToken() {
+    return localStorage.getItem('token') || '';
+  }
+
+  GetRefreshToken() {
+    return localStorage.getItem('refreshToken') || '';
   }
 
 }

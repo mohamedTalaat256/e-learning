@@ -52,7 +52,10 @@ export class AuthComponent implements OnInit {
         next:(response: any)=>{ 
   
           localStorage.setItem('token', response.data.token);
-          localStorage.setItem('AUTH_USER', JSON.stringify(response.data.user) );
+          localStorage.setItem('refreshToken', response.data.refreshToken);
+
+          
+          localStorage.setItem('AUTH_USER', JSON.stringify(response.data) );
   
           
           this.router.navigate(['/admin'])
@@ -62,8 +65,7 @@ export class AuthComponent implements OnInit {
           Swal.fire({ 
             icon: "error",
             title: error.message,
-            showConfirmButton: true,
-            timer: 1500
+            showConfirmButton: true
           });
         }
       }); 
@@ -81,8 +83,7 @@ export class AuthComponent implements OnInit {
           Swal.fire({ 
             icon: "error",
             title: error.message,
-            showConfirmButton: true,
-            timer: 1500
+            showConfirmButton: true
           });
         }
       }); 

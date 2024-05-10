@@ -45,6 +45,10 @@ import { ValidationMsgComponent } from './global/validation-msg/validation-msg.c
 import { AdminDashboardComponent } from './layouts/admin/components/dashboard/admin-dashboard.component';
 import { FacultiesComponent } from './layouts/admin/components/faculties/faculties.component';
 import { FacultyCreateDialogComponent } from './layouts/admin/components/faculty-create-dialog/faculty-create-dialog.component';
+import { loaderInterceptor } from './interceptor/loader.interceptor';
+import { TokenInterceptor } from './interceptor/token.interceptor';
+import { LoadingCircularComponent } from './global/loading-circular/loading-circular.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -86,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ValidationMsgComponent,
     UsersComponent,
     FacultiesComponent,
-    FacultyCreateDialogComponent
+    FacultyCreateDialogComponent,
+    LoadingCircularComponent
   ],
   imports: [
     MatSidenavModule,
@@ -115,7 +120,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: appearance
-    }
+    },
+    { provide: HTTP_INTERCEPTORS , useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: loaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

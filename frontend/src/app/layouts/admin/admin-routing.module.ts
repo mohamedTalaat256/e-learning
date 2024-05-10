@@ -20,9 +20,6 @@ const routes: Routes = [
       {path:'my-courses', component: MyCoursesComponent},
       {path:'add-course', component: CourseDialogFormComponent},
       {path:'faculties', component: FacultiesComponent},
-
-
-      
       {path:'users', component: UsersComponent},
     ],
     canActivate: [authGuardService]

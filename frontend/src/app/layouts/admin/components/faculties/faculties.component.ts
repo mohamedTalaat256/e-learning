@@ -9,6 +9,7 @@ import { Faculty } from 'src/app/model/faculty.model';
 import { FacultyService } from 'src/app/service/faculty.service';
 import { ComponentUtilsService } from 'src/app/utils/components.utl.service';
 import { FacultyCreateDialogComponent } from '../faculty-create-dialog/faculty-create-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-faculties',
@@ -42,8 +43,12 @@ export class FacultiesComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Faculty>(response.data);
       },
       error: (error: Error) => {
-        console.log(error);
-        //this.toastr.error(error.message);
+        Swal.fire({ 
+          icon: "error",
+          title: error.message,
+          showConfirmButton: true,
+         
+        });
       }
     }
     );
