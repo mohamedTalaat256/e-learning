@@ -56,7 +56,7 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('refreshToken', response.data.refreshToken);
 
           
-          localStorage.setItem('AUTH_USER', JSON.stringify(response.data) );
+          localStorage.setItem('AUTH_USER', JSON.stringify(response.data.authUser) );
   
           
           this.router.navigate(['/admin'])

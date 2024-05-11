@@ -9,6 +9,7 @@ import com.mido.elearning.repository.RoleRepository;
 import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.security.AppUserDetail;
 import com.mido.elearning.service.UserService;
+import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +56,28 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     @Override
     public UserDto updateProfile(UserDto newData) {
         return null;
+    }
+
+    @Override
+    public void updateProfileImage(MultipartFile file) throws IOException {
+
+
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        if (user instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Optional<AppUser> appUser =	userRepository.findByUsername(username);
+            if (!appUser.isPresent()) {
+                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
+            }
+            AppUser currentUser = appUser.get();
+            String fileName = FileUtils.SaveFileAndGetName(file, currentUser.getUsername());
+
+            currentUser.setProfileImage(fileName);
+            userRepository.save(currentUser);
+        }
+
     }
 
     @Override

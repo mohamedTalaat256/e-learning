@@ -39,9 +39,8 @@ public class UserController {
 
     @PostMapping("/updateProfileImage")
     public ResponseEntity<Object>  updateProfileImage(@RequestParam("profileImage")MultipartFile profileImage) throws IOException {
-
-        FileUtils.SaveFileAndGetName(profileImage);
-        return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, FileUtils.SaveFileAndGetName(profileImage) ,true);
+        userServiceImpl.updateProfileImage(profileImage);
+        return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, null  ,true);
 
     }
 

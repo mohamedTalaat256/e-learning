@@ -1,0 +1,103 @@
+
+
+    <div fxLayout="column" fxLayoutAlign="center " fxFlex="100">
+        <div class="rounded-1 shadow-sm px-3 py-2">
+            <h2 mat-dialog-title class="text-capitalize">{{'basic_info'|translate}}</h2>
+
+            <div fxLayout="row" fxLayoutGap="20">
+                <form (ngSubmit)="onSubmit()" [formGroup]="profileForm" enctype="multipart/form-data" fxLayout="column" fxFlex="50">
+                    <div fxLayout="row" fxLayoutGap="20">
+                        <mat-form-field fxFlex="50">
+                            <mat-label>{{'first_name'|translate}} </mat-label>
+                            <input matInput formControlName="firstName" [placeholder]="'first_name'|translate">
+                            <mat-error>
+                                <app-validation-msg [control]="profileForm.get('firstName')"
+                                    [fieldName]="'first_name'"></app-validation-msg>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="50">
+                            <mat-label>{{'last_name'|translate}} </mat-label>
+                            <input matInput formControlName="lastName" [placeholder]="'last_name'|translate">
+                            <mat-error>
+                                <app-validation-msg [control]="profileForm.get('lastName')"
+                                    [fieldName]="'last_name'"></app-validation-msg>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-label>{{'username'|translate}} </mat-label>
+                        <input matInput formControlName="username" [placeholder]="'username'|translate">
+                        <mat-error>
+                            <app-validation-msg [control]="profileForm.get('username')"
+                                [fieldName]="'username'|translate"></app-validation-msg>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="50">
+                        <mat-label>{{'date_of_birth'|translate}}</mat-label>
+                        <input matInput [matDatepicker]="dateOfBirthPicker" formControlName="dateOfBirth">
+                        <mat-datepicker-toggle matIconSuffix [for]="dateOfBirthPicker">
+                            <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #dateOfBirthPicker></mat-datepicker>
+                        <mat-error>
+                            <app-validation-msg [control]="profileForm.get('dateOfBirth')"
+                                [fieldName]="'date_of_birth'"></app-validation-msg>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="50">
+                        <mat-label>{{'nationality'|translate}} </mat-label>
+                        <mat-select formControlName="nationality">
+                            <mat-option *ngFor="let nationality of countries"
+                                [value]="nationality.code">{{nationality.name}}</mat-option>
+    
+                        </mat-select>
+                        <mat-error>
+                            <app-validation-msg [control]="profileForm.get('nationality')"
+                                [fieldName]="'nationality'"></app-validation-msg>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10" class="my-5 ">
+                        <button type="button" mat-raised-button color="danger">{{'cancel' | translate}}</button>
+                        <button type="submit" mat-raised-button color="primary">{{'save' | translate}}</button>
+            
+                    </div>
+
+                </form>
+ 
+                    <div fxLayout="column" fxFlex="50" fxLayoutAlign="center ">
+                        <img [src]="defaultPreview" class="upload-course-img">
+                        <label for="inputTag" (change)="imageSelect($event)">
+                            <mat-card class="upload-image-btn mat-bg-primary">
+                                <mat-icon color="light">camera_alt</mat-icon>
+                            </mat-card>
+                            <input id="inputTag" type="file" hidden />
+                            <button type="button" *ngIf="showUpdateButton" (click)="updateImage()" mat-raised-button
+                                color="primary" class="upload-image-btn">
+                                {{'update_image' | translate}}</button>
+                        </label>
+    
+                        <div *ngIf="fileStatus.status==='progress'">
+                            <mat-progress-bar  class="example-margin" color="primary" mode="determinate" value="fileStatus.percent"
+                            bufferValue="50">
+                        </mat-progress-bar>
+                        </div>
+                       
+    
+                        <div *ngIf="fileStatus.status==='progress'">
+                            <div class="progress">
+                              <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                  {{ fileStatus.requestType }} {{ fileStatus.percent }} 
+                                </div>
+                            </div>
+                          </div> 
+                    </div>
+   
+            </div> 
+        </div> 
+        
+    </div> 

@@ -1,0 +1,6 @@
+<!-- class="spinner-overlay" -->
+<div *ngIf="(loader.isLoading$ | async)" fxFlex="100" fxLayout="column" fxLayoutAlign="center center"
+    class="spinner-overlay">
+    <mat-spinner color="accent" diameter="50"></mat-spinner>
+    <span class="mt-3">{{'loading...'| translate}}</span>
+</div>

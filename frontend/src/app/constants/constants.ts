@@ -1,7 +1,7 @@
 
 export const baseURL = 'http://localhost:8080/api'
 export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
-export const imagesUrls= baseURL+'/img/'; 
+export const profileImagesUrls='http://localhost:8080/media/'; 
 export enum adminUrls {
     dasboard = "/admin/dasboard",
     addCourse = "/admin/add-course",

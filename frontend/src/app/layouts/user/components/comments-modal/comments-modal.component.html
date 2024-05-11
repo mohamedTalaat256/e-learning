@@ -4,7 +4,7 @@
         <mat-card *ngFor="let comment of comments" class="shadow-sm p-2 mt-3">
             <mat-card-header>
                 <div fxLayout="row" fxFlex="100" fxLayoutGap="10px">
-                    <img src="{{comment.user.profileImageUrl}}" class="circle-avatar-md m2" />
+                    <img src="{{comment.user.profileImage}}" class="circle-avatar-md m2" />
                     <div fxFlex="column">
                         <mat-card-title>{{comment.user.username}}</mat-card-title>
                         <mat-card-subtitle>{{comment.createdAt}}</mat-card-subtitle>

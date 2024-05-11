@@ -12,9 +12,7 @@ import { MaterialModule } from './material/material.module';
 import { AppToolbarListComponent } from './global/app-side-navbar/components/app-toolbar-list/app-toolbar-list.component';
 import { AppSidenavListComponent } from './global/app-side-navbar/components/app-sidenav-list/app-sidenav-list.component';
 import { UserComponent } from './layouts/user/user.component';
-import { TimeLineComponent } from './layouts/user/pages/time-line/time-line.component';
 import { ProfileComponent } from './layouts/user/pages/profile/profile.component';
-import { TimelinePostsListComponent } from './layouts/user/components/timeline-posts-list/timeline-posts-list.component';
 import { UserRoutingModule } from './layouts/user/user-routing.module';
 import { FriendsComponent } from './layouts/user/pages/friends/friends.component';
 import { FriendsListComponent } from './layouts/user/components/friends-list/friends-list.component';
@@ -70,9 +68,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     UserComponent,
     AdminDashboardComponent,
     AdminComponent,
-    TimeLineComponent,
+
     ProfileComponent,
-    TimelinePostsListComponent,
     FriendsComponent,
     FriendsListComponent,
     AddPostFormComponent,

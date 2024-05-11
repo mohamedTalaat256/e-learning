@@ -1,0 +1,16 @@
+.upload-course-img {
+    height: 180px;
+    width: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.upload-image-btn {
+    width: 150px;
+    padding: 6px;
+    justify-content: center;
+    align-items: center;
+    margin: 6px;
+    cursor: pointer;
+}

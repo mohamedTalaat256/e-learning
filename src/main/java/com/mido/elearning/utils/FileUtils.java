@@ -14,14 +14,15 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class FileUtils {
 
    // @Value("${directory.upload}")
-    private static final String UPLOAD_DIRECTORY = "src/main/java/com/mido/elearning/media";
+    private static final String UPLOAD_DIRECTORY = "src/main/media";
 
 
-    public static String SaveFileAndGetName(MultipartFile profileImage ) throws IOException {
-        String filename = StringUtils.cleanPath(profileImage.getOriginalFilename());
-        Path fileStorage = get(UPLOAD_DIRECTORY, filename).toAbsolutePath().normalize();
+    public static String SaveFileAndGetName(MultipartFile profileImage, String fileName ) throws IOException {
+       // String filename = StringUtils.cleanPath(profileImage.getOriginalFilename());
+        fileName = fileName+'.'+ StringUtils.getFilenameExtension(profileImage.getOriginalFilename());
+        Path fileStorage = get(UPLOAD_DIRECTORY,  fileName).toAbsolutePath().normalize();
         copy(profileImage.getInputStream(), fileStorage, REPLACE_EXISTING);
 
-        return filename;
+        return fileName;
     }
 }

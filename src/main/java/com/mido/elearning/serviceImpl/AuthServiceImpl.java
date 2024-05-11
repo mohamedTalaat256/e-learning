@@ -58,23 +58,21 @@ public class AuthServiceImpl implements AuthService {
             AppUserDetail userDetails = (AppUserDetail) authentication.getPrincipal();
             SecurityContextHolder.getContext().setAuthentication(authentication);
             TokenInfo tokenInfo = createLoginToken(username, userDetails.getId());
-            Map<String, String> userData = new HashMap<>();
-            log.info( tokenInfo );
-            userData.put("id", userDetails.getId().toString());
-            userData.put("email", userDetails.getEmail());
-            userData.put("firstName", userDetails.getFirstName());
-            userData.put("lastName", userDetails.getLastName());
-            userData.put("username", userDetails.getUsername());
-            userData.put("roles", userDetails.getAuthorities().toString());
-            userData.put("token", tokenInfo.getAccessToken());
-            userData.put("refreshToken", tokenInfo.getRefreshToken());
+            Map<String, Object> userData = new HashMap<>();
+            Optional<AppUser> appUser = userRepository.findById(userDetails.getId());
 
-            return AppResponse.builder()
-                    .ok(true)
-                    .message("user_logged_in_success")
-                    .status(HttpStatus.OK)
-                    .data(userData)
-                    .build();
+            if(appUser.isPresent()){
+                userData.put("authUser", UserMapper.entityToDto(appUser.get()));
+                userData.put("token", tokenInfo.getAccessToken());
+                userData.put("refreshToken", tokenInfo.getRefreshToken());
+
+                return AppResponse.builder()
+                        .ok(true)
+                        .message("user_logged_in_success")
+                        .status(HttpStatus.OK)
+                        .data(userData)
+                        .build();
+            }
         }
         return null;
     }
