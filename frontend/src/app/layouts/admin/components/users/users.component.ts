@@ -5,6 +5,7 @@ import { User } from 'src/app/model/user,model';
 import { UserService } from 'src/app/service/users.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { take } from 'rxjs';
+import { imagePlaceholder, profileImagesUrls } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,9 @@ export class UsersComponent implements OnInit {
 
   usersList: any; 
 
-  displayedColumns: string[] = ['id', 'username','name', 'email', 'roles', 'enabled', 'profile_image_url', 'actions'];
+  profileImageUrls = profileImagesUrls;
+  defaultImage = imagePlaceholder;
+  displayedColumns: string[] = ['id','name', 'email', 'roles', 'enabled', 'actions'];
   dataSource = new MatTableDataSource<User>();  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,8 +41,7 @@ export class UsersComponent implements OnInit {
         this.dataSource= new MatTableDataSource<User>(this.usersList);        
       },
       error:(error: Error)=>{
-        console.log(error);
-        //this.toastr.error(error.message);
+        console.log(error); 
       }
     }
     );
