@@ -26,6 +26,7 @@ public class SecurityConfig {
 
 
     String [] PUBLIC_END_POINTS = {
+           // "api/users/updateProfileImage",
             "/media/**",
             "/api/auth/login",
             "/api/auth/register",
@@ -61,7 +62,8 @@ public class SecurityConfig {
                          .requestMatchers("/api/entities").hasRole("USER").anyRequest().authenticated()
                  )*/
 
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                //.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
 
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

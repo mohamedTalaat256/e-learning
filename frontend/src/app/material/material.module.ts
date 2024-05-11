@@ -25,7 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatChipsModule} from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import {ProgressBarMode, MatProgressBarModule} from '@angular/material/progress-bar'; 
 const materials: any = [
   MatSidenavModule,
   MatMenuModule,
@@ -54,7 +54,8 @@ const materials: any = [
   MatDatepickerModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSliderModule, MatProgressBarModule
 ];
 
 @NgModule({
