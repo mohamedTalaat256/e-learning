@@ -48,11 +48,11 @@
             </mat-form-field>
 
           
-            <mat-form-field *ngIf="!isLoginMode" fxFlex="50">
+            <mat-form-field *ngIf="!isLoginMode" fxFlex="50" formControlName="role">
                 <mat-label>{{'role'|translate}} </mat-label>
                 <mat-select formControlName="role" >
-                    <mat-option value="M">{{'male' | translate}}</mat-option>
-                    <mat-option value="F">{{'female' | translate}}</mat-option>
+                    <mat-option value="STUDENT">{{'student' | translate}}</mat-option>
+                    <mat-option value="TEACHER">{{'teacher' | translate}}</mat-option>
                 </mat-select> 
             </mat-form-field>
 

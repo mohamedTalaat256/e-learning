@@ -110,19 +110,19 @@
 
             <div fxFlex="row" fxFlex="10" fxLayoutAlign="space-between start">
                 <span class="mat-headline-5">My Profile</span>
-                <button mat-fab color="light"> <mat-icon color="primary">edit</mat-icon></button>
+                <button mat-fab color="light" [routerLink]="['/admin/edit-profile']" > <mat-icon color="primary">edit</mat-icon></button>
 
             </div>
 
             <div fxLayout="column" fxFlex="25" fxLayoutAlign="center center">
                 <div class="m2" style="height: 166px; width: 166px; border-radius: 50%;" class="mat-bg-primary">
                     <div class="m2" style="height: 158px; width: 158px; object-fit: cover; border-radius: 50%; margin: 4px; background-color: #ffffff;">
-                    <img src="/assets/images/300_22.jpg" alt="user profile" class="m-1 img-radius-lg" >
+                    <img [src]="user.profileImage" alt="user profile" class="m-1 img-radius-lg" >
                     </div>
                 </div>
 
-                <h1 class="mt-3">Mohamed Talaat</h1>
-                <span class="mat-text-primary">@mohamedTalaat256</span>
+                <h1 class="mt-3">{{user.firstName+ ' '+ user.lastName}}</h1>
+                <span class="mat-text-primary">@{{user.username}}</span>
 
             </div>
             <div fxLayout="row" fxFlex="10" fxLayoutAlign="space-between center" class="mx-2 py-2 px-3 bg-white mt-5 ">

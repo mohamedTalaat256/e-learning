@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,OnInit,ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -10,6 +10,7 @@ import {
   ApexXAxis,
   ApexFill
 } from "ng-apexcharts"; 
+import { getAuthUser } from 'src/app/utils/shared-data';
 
 export interface PeriodicElement {
   name: string;
@@ -43,10 +44,17 @@ export type ChartOptions = {
 })
 
 
-export class AdminDashboardComponent {
+export class AdminDashboardComponent  implements OnInit{
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+
+  user: any;
+  profileImage:string = ''; 
+  ngOnInit(): void {
+    this.user = getAuthUser();
+  }
+
 
   constructor() {
     this.chartOptions = {

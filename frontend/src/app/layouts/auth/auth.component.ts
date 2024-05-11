@@ -51,16 +51,10 @@ export class AuthComponent implements OnInit {
     if(this.isLoginMode){
       this.authServise.login(this.authForm.value).pipe(take(1)).subscribe({
         next:(response: any)=>{ 
-  
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('refreshToken', response.data.refreshToken);
-
-          
           localStorage.setItem('AUTH_USER', JSON.stringify(response.data.authUser) );
-  
-          
-          this.router.navigate(['/admin'])
-           
+          this.router.navigate(['/admin']);
         },
         error:(error: AppResponse)=>{ 
           Swal.fire({ 
@@ -73,11 +67,12 @@ export class AuthComponent implements OnInit {
     }else{
       this.authServise.register(this.authForm.value).pipe(take(1)).subscribe({
         next:(response: any)=>{ 
-/*           localStorage.setItem('token', response.data.token);
-          localStorage.setItem('AUTH_USER', JSON.stringify(response.data.user) );
-  
-          
-          this.router.navigate(['/admin']) */
+          Swal.fire({ 
+            icon: "success",
+            title: response.message
+          });
+
+          this.toggleMode();
            
         },
         error:(error: AppResponse)=>{ 

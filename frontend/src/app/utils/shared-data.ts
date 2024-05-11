@@ -7,9 +7,11 @@ export function getAuthUser(){
 
     const user:User ={
         id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName,
         profileImage: profileImagesUrls+data.profileImage,
         username: data.username,
-        password:null
+        password:null,
 
     };
 

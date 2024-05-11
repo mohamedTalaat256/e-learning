@@ -2,8 +2,10 @@ package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.AccessTokenDto;
 import com.mido.elearning.Dto.JWTResponseDto;
+import com.mido.elearning.Dto.RegisterDto;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
+import com.mido.elearning.entity.Role;
 import com.mido.elearning.entity.TokenInfo;
 import com.mido.elearning.exception.DuplicateRecordException;
 import com.mido.elearning.mapping.UserMapper;
@@ -47,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
     private final HttpServletRequest httpRequest;
     private final TokenInfoService tokenInfoService;
     private final JwtTokenUtils jwtTokenUtils;
+    private final RoleRepository roleRepository;
 
     @Override
     public AppResponse login(String username, String password) {
@@ -78,14 +81,30 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserDto register(UserDto registerDto) {
+    public UserDto register(RegisterDto registerDto) {
 
         Optional<AppUser> appUser =	userRepository.findByUsername(registerDto.getUsername());
         if (appUser.isPresent()) {
             throw new DuplicateRecordException("This User is already registered  : " + registerDto.getUsername());
         }
         registerDto.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-        return UserMapper.entityToDto(userRepository.save(UserMapper.DtoToEntity(registerDto)));
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(new Role(null, registerDto.getRole()));
+
+        AppUser newUser = AppUser.builder().firstName(registerDto.getFirstName())
+                .lastName(registerDto.getLastName())
+                .username(registerDto.getUsername())
+                .email(registerDto.getEmail())
+                .password(registerDto.getPassword())
+                .roles(roles)
+                .isEnabled(true)
+                .isAccountNonLocked(true)
+                .isAccountNonExpired(true)
+                .isAccountNonExpired(true)
+                .build();
+
+        return UserMapper.entityToDto(userRepository.save(newUser));
     }
 
     @Override

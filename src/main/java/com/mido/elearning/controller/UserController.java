@@ -4,7 +4,6 @@ package com.mido.elearning.controller;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.serviceImpl.UserServiceImpl;
 import com.mido.elearning.utils.AppResponse;
-import com.mido.elearning.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

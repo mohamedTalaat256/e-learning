@@ -24,7 +24,7 @@ export class AuthFormControls {
         username:    [null, [Validators.required, Validators.maxLength(255)]],
         firstName:    [null, [Validators.required,   Validators.maxLength(255)]],
         lastName:    [null, [Validators.required,  Validators.maxLength(255)]],
-        role:    [null, [Validators.required,  Validators.maxLength(255)]],
+        role:         [null, [Validators.required,  Validators.maxLength(255)]],
         password: [null, [Validators.required, Validators.maxLength(255)]],
         agreeTremsChecked: [null, [Validators.required, Validators.maxLength(255)]]
       }
