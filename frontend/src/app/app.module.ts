@@ -53,6 +53,7 @@ import { UniveristiesComponent } from './layouts/admin/components/univeristies/u
 import { UniveristyFormDialogComponent } from './layouts/admin/components/univeristy-form-dialog/univeristy-form-dialog.component';
 import { AcademicSpecializationsComponent } from './layouts/admin/components/academic-specializations/academic-specializations.component';
 import { AcademicSpecializationFormDialogComponent } from './layouts/admin/components/academic-specialization-form-dialog/academic-specialization-form-dialog.component';
+import { LangingPageComponent } from './layouts/public/components/langing-page/langing-page.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -100,7 +101,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     UniveristiesComponent,
     UniveristyFormDialogComponent,
     AcademicSpecializationsComponent,
-    AcademicSpecializationFormDialogComponent
+    AcademicSpecializationFormDialogComponent,
+    LangingPageComponent
   ],
   imports: [
     MatSidenavModule,
