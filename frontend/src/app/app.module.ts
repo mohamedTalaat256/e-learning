@@ -49,6 +49,10 @@ import { LoadingCircularComponent } from './global/loading-circular/loading-circ
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ProfilePageComponent } from './layouts/user/components/profile-page/profile-page.component';
 import { ProfileEditComponent } from './layouts/user/components/profile-edit/profile-edit.component';
+import { UniveristiesComponent } from './layouts/admin/components/univeristies/univeristies.component';
+import { UniveristyFormDialogComponent } from './layouts/admin/components/univeristy-form-dialog/univeristy-form-dialog.component';
+import { AcademicSpecializationsComponent } from './layouts/admin/components/academic-specializations/academic-specializations.component';
+import { AcademicSpecializationFormDialogComponent } from './layouts/admin/components/academic-specialization-form-dialog/academic-specialization-form-dialog.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -92,7 +96,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FacultyCreateDialogComponent,
     LoadingCircularComponent,
     ProfilePageComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    UniveristiesComponent,
+    UniveristyFormDialogComponent,
+    AcademicSpecializationsComponent,
+    AcademicSpecializationFormDialogComponent
   ],
   imports: [
     MatSidenavModule,

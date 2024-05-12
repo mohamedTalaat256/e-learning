@@ -1,0 +1,32 @@
+<div class="p-3">
+    <form (ngSubmit)="onSubmit()" [formGroup]="universityForm" class="mt-2">
+        <h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
+        <mat-dialog-content class="mat-typography">
+            <div fxLayout="column" fxLayoutAlign="center " fxLayoutGap="15">
+                <mat-form-field>
+                    <mat-label>{{'name'|translate}} </mat-label> 
+                    <input matInput [placeholder]="'name'|translate" formControlName="name" >
+                    <mat-error>
+                        <app-validation-msg [control]="universityForm.controls['name']"
+                            [fieldName]="'name'">
+                        </app-validation-msg>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{'country'|translate}} </mat-label>
+                    <mat-select formControlName="country">
+                        <mat-option *ngFor="let country of countries" [value]="country.code">{{country.name}} </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        <app-validation-msg [control]="universityForm.controls['country']" [fieldName]="'country'">
+                        </app-validation-msg>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions fxLayoutAlign="center ">
+            <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>
+            <button type="submit" mat-raised-button [disabled]="!universityForm.valid" color="primary">{{'save' | translate}}</button>
+        </mat-dialog-actions>
+    </form>
+</div>

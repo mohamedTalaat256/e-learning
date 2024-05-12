@@ -1,9 +1,9 @@
-import { Sepicailization } from "./sepicailization.model";
+import { AcademicSepicailization } from "./academic-sepicailization.model";
 import { University } from "./university.model";
 
 export interface Faculty{
     id: number,
-    sepicailization: Sepicailization,
+    sepicailization: AcademicSepicailization,
     university: University
 
 }

@@ -21,12 +21,22 @@
     </mat-list-item>
 
     <mat-list-item [routerLink]="['/admin/faculties']" routerLinkActive="active">
-        <mat-icon matListItemIcon color="success" >school</mat-icon>
-        <div matListItemTitle class="sid-nav-item">Faculties</div>
+        <mat-icon matListItemIcon color="dark" >school</mat-icon>
+        <div matListItemTitle class="sid-nav-item">{{'faculties'|translate}}</div>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/admin/academic-specializations']" routerLinkActive="active">
+        <mat-icon matListItemIcon color="success">my_library_books</mat-icon>
+        <div matListItemTitle class="sid-nav-item">{{'specializations'|translate}}</div>
+    </mat-list-item>
+    
+    <mat-list-item [routerLink]="['/admin/univeristies']" routerLinkActive="active">
+        <mat-icon matListItemIcon color="primary">location_city</mat-icon>
+        <div matListItemTitle class="sid-nav-item">{{'univeristies'|translate}}</div>
     </mat-list-item>
 
     <mat-list-item>
-        <mat-icon matListItemIcon color="primary" >insert_chart</mat-icon>
+        <mat-icon matListItemIcon color="primary" >equalizer</mat-icon>
         <div matListItemTitle class="sid-nav-item">Analytics</div>
     </mat-list-item>
 

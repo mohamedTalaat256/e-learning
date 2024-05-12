@@ -11,6 +11,15 @@ export class AcademicSpecializationService {
   getAll(): Observable<any> {
     return this.http.get(baseURL + '/academic_specialization');
   }
+
+  public save(requestbody: any): Observable<any> {
+    return this.http.post<any>(baseURL + '/academic_specialization/save', requestbody);
+  }
+
+  public update(requestbody: any): Observable<any> {
+    return this.http.put<any>(baseURL + '/academic_specialization/update', requestbody);
+  }
+
 /*  
   
 

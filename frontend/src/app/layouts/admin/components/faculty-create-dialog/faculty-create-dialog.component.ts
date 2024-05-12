@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppResponse } from 'src/app/model/app_response.model';
-import { Sepicailization } from 'src/app/model/sepicailization.model';
+import { AcademicSepicailization } from 'src/app/model/academic-sepicailization.model';
 import { AcademicSpecializationService } from 'src/app/service/academicSpecialization.service';
 import { FacultyFormControls } from '../../form-controls/faculty-form';
 import { University } from 'src/app/model/university.model';
@@ -21,7 +21,7 @@ export class FacultyCreateDialogComponent implements OnInit {
   formMode: FormMode = FormMode.CREATE;
   facultyForm: FormGroup;
   title: string;
-  specializations: Sepicailization[];
+  specializations: AcademicSepicailization[];
   universities: University[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,

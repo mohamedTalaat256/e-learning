@@ -10,6 +10,8 @@ import { authGuardService } from 'src/app/guards/auth-guard.guard';
 import { AdminDashboardComponent } from './components/dashboard/admin-dashboard.component';
 import { FacultiesComponent } from './components/faculties/faculties.component';
 import { ProfileEditComponent } from '../user/components/profile-edit/profile-edit.component';
+import { UniveristiesComponent } from './components/univeristies/univeristies.component';
+import { AcademicSpecializationsComponent } from './components/academic-specializations/academic-specializations.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,8 @@ const routes: Routes = [
       {path:'my-courses', component: MyCoursesComponent},
       {path:'add-course', component: CourseDialogFormComponent},
       {path:'faculties', component: FacultiesComponent},
+      {path:'univeristies', component: UniveristiesComponent},
+      {path:'academic-specializations', component: AcademicSpecializationsComponent},
       {path:'users', component: UsersComponent},
       {path:'edit-profile', component: ProfileEditComponent},
     ],

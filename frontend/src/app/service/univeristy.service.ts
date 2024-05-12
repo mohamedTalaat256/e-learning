@@ -11,6 +11,15 @@ export class UniversityService {
   getAll(): Observable<any> {
     return this.http.get(baseURL + '/universities');
   }
+
+  public save(requestbody: any): Observable<any> {
+    return this.http.post<any>(baseURL + '/universities/save', requestbody);
+  }
+
+  public update(requestbody: any): Observable<any> {
+    return this.http.put<any>(baseURL + '/universities/update', requestbody);
+  }
+  
 /*  
   
 

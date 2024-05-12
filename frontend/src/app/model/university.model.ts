@@ -1,4 +1,4 @@
-import { Sepicailization } from "./sepicailization.model";
+import { AcademicSepicailization } from "./academic-sepicailization.model";
 
 export interface University{
     id: number,

@@ -31,7 +31,8 @@ public class AcademicSpecializationController {
 
     @PutMapping("/update")
     public ResponseEntity<Object> update(@RequestBody AcademicSpecializationDto specializationDto){
-        return new ResponseEntity<>(specializationServiceImpl.save(specializationDto), HttpStatus.OK);
+        return AppResponse.generateResponse("academic_specialization_updated_success", HttpStatus.OK, specializationServiceImpl.save(specializationDto), true);
+
     }
 
     @DeleteMapping("/delete/{id}")
