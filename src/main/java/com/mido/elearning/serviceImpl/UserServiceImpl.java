@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
             throw new DuplicateRecordException("This Email is already exist");
         }else{
             registerRequest.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-            return userRepository.save(UserMapper.DtoToEntity( registerRequest));
+            return userRepository.save(UserMapper.dtoToEntity( registerRequest));
         }
     }
 

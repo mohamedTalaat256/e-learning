@@ -58,12 +58,12 @@ public class SecurityConfig {
 
                 .sessionManagement((sm)-> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth.requestMatchers(PUBLIC_END_POINTS).permitAll())
-                /* .authorizeHttpRequests((authorize) -> authorize
-                         .requestMatchers("/api/entities").hasRole("USER").anyRequest().authenticated()
-                 )*/
+                 .authorizeHttpRequests((authorize) -> authorize
+                         .requestMatchers("/api/users").hasAnyAuthority("ADMIN")
+                 )
 
-                //.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                //.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
 
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);

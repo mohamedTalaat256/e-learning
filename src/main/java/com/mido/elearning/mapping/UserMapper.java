@@ -31,7 +31,7 @@ public class UserMapper {
     }
 
 
-    public static AppUser DtoToEntity(UserDto dto){
+    public static AppUser dtoToEntity(UserDto dto){
 
         Set<Role> roles = new HashSet<>();
         dto.getRoles().forEach(e-> roles.add(RoleMapper.dtoToEntity(e)));

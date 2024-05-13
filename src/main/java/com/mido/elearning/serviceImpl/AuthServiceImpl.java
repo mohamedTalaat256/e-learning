@@ -8,6 +8,7 @@ import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Role;
 import com.mido.elearning.entity.TokenInfo;
 import com.mido.elearning.exception.DuplicateRecordException;
+import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.UserMapper;
 import com.mido.elearning.repository.RoleRepository;
 import com.mido.elearning.repository.UserRepository;
@@ -44,7 +45,7 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authManager;
     private final UserRepository userRepository;
-    private final UserServiceImpl userServiceImpl;
+    //private final UserServiceImpl userServiceImpl;
     private final PasswordEncoder passwordEncoder;
     private final HttpServletRequest httpRequest;
     private final TokenInfoService tokenInfoService;
@@ -89,8 +90,15 @@ public class AuthServiceImpl implements AuthService {
         }
         registerDto.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
+
+
+
+        Optional<Role> role = roleRepository.findRoleByName(registerDto.getRole());
+        if(!role.isPresent()){
+            throw  new RecordNotFoundException("role_not_found");
+        }
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role(null, registerDto.getRole()));
+        roles.add(role.get());
 
         AppUser newUser = AppUser.builder().firstName(registerDto.getFirstName())
                 .lastName(registerDto.getLastName())
