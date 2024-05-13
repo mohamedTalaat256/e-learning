@@ -9,6 +9,7 @@ import com.mido.elearning.service.CourseService;
 import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -19,13 +20,13 @@ public class CourseServiceImpl implements CourseService {
 
 
     private final CourseRepository courseRepository;
+
+    private final CourseMapper courseMapper;
     @Override
-    public CourseDto save(CourseUploadRequest courseUploadRequest) throws IOException {
+    public CourseDto save(CourseUploadRequest courseUploadRequest, MultipartFile coverImageFile) throws IOException {
 
-        String courseCoverImageName = FileUtils.SaveFileAndGetName(courseUploadRequest.getCoverImage(), "");
-
-        CourseDto courseDto = CourseMapper.uploadRequestToDto(courseUploadRequest, courseCoverImageName);
-
+       String courseCoverImageName = FileUtils.SaveFileAndGetName(coverImageFile, "course_cover");
+        CourseDto courseDto = courseMapper.uploadRequestToDto(courseUploadRequest, "courseCoverImageName");
         Course newCourse = courseRepository.save(CourseMapper.dtoToEntity(courseDto));
 
         return CourseMapper.entityToDto(newCourse);

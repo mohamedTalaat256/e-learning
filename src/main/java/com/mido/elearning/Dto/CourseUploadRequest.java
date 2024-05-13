@@ -24,5 +24,5 @@ public class CourseUploadRequest {
     private int discount;
     private Date discountStartDate;
     private Date discountEndDate;
-    private MultipartFile coverImage;
+   // private MultipartFile coverImageFile;
 }

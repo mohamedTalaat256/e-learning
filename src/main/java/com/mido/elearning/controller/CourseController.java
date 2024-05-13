@@ -1,16 +1,14 @@
 package com.mido.elearning.controller;
 
 
-import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
-import com.mido.elearning.Dto.FacultyDto;
 import com.mido.elearning.serviceImpl.CourseServiceImpl;
-import com.mido.elearning.serviceImpl.FacultyServiceImpl;
 import com.mido.elearning.utils.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -27,8 +25,10 @@ public class CourseController {
     }*/
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody CourseUploadRequest courseUploadRequest) throws IOException {
-        return AppResponse.generateResponse("course_added_success", HttpStatus.OK,  courseService.save(courseUploadRequest),true);
+    public ResponseEntity<Object> save(@RequestPart CourseUploadRequest courseUploadRequest,  @RequestPart MultipartFile coverImageFile) throws IOException {
+
+
+        return AppResponse.generateResponse("course_added_success", HttpStatus.OK, courseService.save(courseUploadRequest, coverImageFile ),true);
     }
 
     /*@GetMapping("/{id}")

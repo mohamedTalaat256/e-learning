@@ -5,17 +5,21 @@ import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
+import com.mido.elearning.exception.InternalServerErrorException;
 import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Service
 @RequiredArgsConstructor
 public class CourseMapper {
     private final UserRepository userRepository;
@@ -45,7 +49,7 @@ public class CourseMapper {
     public static Course dtoToEntity(CourseDto dto){
         Set<AppUser> enrolledStudents = new HashSet<>();
 
-        dto.getEnrolledStudents().forEach( d -> enrolledStudents.add(UserMapper.dtoToEntity(d)));
+        //dto.getEnrolledStudents().forEach( d -> enrolledStudents.add(UserMapper.dtoToEntity(d)));
 
         return Course.builder().id(dto.getId())
                 .title(dto.getTitle())
@@ -62,7 +66,7 @@ public class CourseMapper {
     }
 
 
-    public static CourseDto uploadRequestToDto(CourseUploadRequest courseUploadRequest, String coverImage){
+    public  CourseDto uploadRequestToDto(CourseUploadRequest courseUploadRequest, String coverImage) throws IOException {
 
         Object user = SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
@@ -71,27 +75,21 @@ public class CourseMapper {
 
             Optional<AppUser> appUser =	userRepository.findByUsername(username);
             if (!appUser.isPresent()) {
-                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
+                throw new UsernameNotFoundException("can_not_upload_the_course_because_uploader_user_not_found ");
             }
-            AppUser currentUser = appUser.get();
-            String fileName = FileUtils.SaveFileAndGetName(file, currentUser.getUsername());
 
-            currentUser.setProfileImage(fileName);
-            userRepository.save(currentUser);
+            return CourseDto.builder().title(courseUploadRequest.getTitle())
+                    .description(courseUploadRequest.getDescription())
+                    .price(courseUploadRequest.getPrice())
+                    .isCourseFree(courseUploadRequest.getIsCourseFree())
+                    .discount(courseUploadRequest.getDiscount())
+                    .discountStartDate(courseUploadRequest.getDiscountStartDate())
+                    .discountEndDate(courseUploadRequest.getDiscountEndDate())
+                    .author(UserMapper.entityToDto(appUser.get()))
+                    .coverImage(coverImage)
+                    .build();
         }
-
-
-        return CourseDto.builder().title(courseUploadRequest.getTitle())
-                .description(courseUploadRequest.getDescription())
-                .price(courseUploadRequest.getPrice())
-                .isCourseFree(courseUploadRequest.getIsCourseFree())
-                .discount(courseUploadRequest.getDiscount())
-                .discountStartDate(courseUploadRequest.getDiscountStartDate())
-                .discountEndDate(courseUploadRequest.getDiscountEndDate())
-                .author(UserMapper.entityToDto(courseUploadRequest.getAuthor()))
-                .coverImage(coverImage)
-                .build();
-
+        throw new InternalServerErrorException("internal_server_error");
     }
 
 }
