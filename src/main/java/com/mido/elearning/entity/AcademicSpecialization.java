@@ -14,7 +14,7 @@ import lombok.*;
 @ToString
 public class AcademicSpecialization {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 }

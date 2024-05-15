@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: '',component: LangingPageComponent },
   { path: 'login', redirectTo: '/login', pathMatch: 'full' },
  // { path: '', redirectTo: '/admin', pathMatch: 'full' },
-  { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' }
+  { path: 'admin', redirectTo: '/admin/dashboard', pathMatch: 'full' },
+  { path: 'cources/:course_id', component: CourseOverviewComponent, },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -20,7 +20,7 @@ public class AppUser {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -54,6 +54,10 @@ public class AppUser {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     @OrderColumn(name = "id")
     private Set<Role> roles = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private Set<Course> uploadedCourses;
 
     private boolean isEnabled;
 

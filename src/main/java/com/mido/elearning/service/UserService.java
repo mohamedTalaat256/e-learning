@@ -1,5 +1,6 @@
 package com.mido.elearning.service;
 
+import com.mido.elearning.Dto.PublicUserDto;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,8 @@ public interface UserService {
 
     AppUser save(UserDto registerRequest);
 
-    List<UserDto> getAll();
+    List<UserDto> findAll();
+    PublicUserDto findById(Long id);
     UserDto getMyProfile();
     UserDto updateProfile(UserDto newData);
     void updateProfileImage(MultipartFile file) throws IOException;

@@ -2,6 +2,7 @@ package com.mido.elearning.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "roles")
@@ -13,8 +14,10 @@ import lombok.*;
 @Builder
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+
+    @NaturalId
     private String name;
 }
