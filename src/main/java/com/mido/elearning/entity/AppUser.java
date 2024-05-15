@@ -56,13 +56,8 @@ public class AppUser {
     private Set<Role> roles = new HashSet<>();
 
 
-    @ManyToMany( cascade = CascadeType.ALL)
-    @JoinTable(name = "users_courses" ,
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    @OrderColumn(name = "id")
-    private Set<Course> courses = new HashSet<>();
-
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private Set<Course> uploadedCourses;
 
     private boolean isEnabled;
 

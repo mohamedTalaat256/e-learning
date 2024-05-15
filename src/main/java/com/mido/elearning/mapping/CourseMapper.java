@@ -59,7 +59,7 @@ public class CourseMapper {
                 .discount(dto.getDiscount())
                 .discountStartDate(dto.getDiscountStartDate())
                 .discountEndDate(dto.getDiscountEndDate())
-                .author(UserMapper.dtoToEntity(dto.getAuthor()))
+                .author( new AppUser(dto.getAuthor().getId()))
                 .coverImage(dto.getCoverImage())
                 .enrolledStudents(enrolledStudents)
                 .build();

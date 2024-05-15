@@ -23,7 +23,12 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<Object> allUsers(){
-        return AppResponse.generateResponse("all_users", HttpStatus.OK, userServiceImpl.getAll(),true);
+        return AppResponse.generateResponse("all_users", HttpStatus.OK, userServiceImpl.findAll(),true);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id){
+        return AppResponse.generateResponse("user_data", HttpStatus.OK, userServiceImpl.findById(id),true);
     }
 
     @GetMapping("/getMyProfile")
@@ -40,7 +45,6 @@ public class UserController {
     public ResponseEntity<Object>  updateProfileImage(@RequestParam("profileImage")MultipartFile profileImage) throws IOException {
         userServiceImpl.updateProfileImage(profileImage);
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, null  ,true);
-
     }
 
 

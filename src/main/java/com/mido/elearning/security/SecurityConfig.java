@@ -58,9 +58,9 @@ public class SecurityConfig {
 
                 .sessionManagement((sm)-> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth.requestMatchers(PUBLIC_END_POINTS).permitAll())
-                 .authorizeHttpRequests((authorize) -> authorize
+                 /*.authorizeHttpRequests((authorize) -> authorize
                          .requestMatchers("/api/users").hasAnyAuthority("ADMIN")
-                 )
+                 )*/
 
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 //.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())

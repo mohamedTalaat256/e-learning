@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -25,10 +27,31 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDto save(CourseUploadRequest courseUploadRequest, MultipartFile coverImageFile) throws IOException {
 
-       String courseCoverImageName = FileUtils.SaveFileAndGetName(coverImageFile, "course_cover");
+       // String courseCoverImageName = FileUtils.SaveFileAndGetName(courseUploadRequest.getCoverImageFile(), "course_cover");
         CourseDto courseDto = courseMapper.uploadRequestToDto(courseUploadRequest, "courseCoverImageName");
         Course newCourse = courseRepository.save(CourseMapper.dtoToEntity(courseDto));
 
         return CourseMapper.entityToDto(newCourse);
+    }
+
+    @Override
+    public List<CourseDto> findAll() {
+        List<CourseDto> data = new ArrayList<>();
+
+        courseRepository.findAll().forEach( e-> data.add(CourseMapper.entityToDto(e)));
+        return data;
+    }
+
+    @Override
+    public CourseDto findById() {
+        return null;
+    }
+
+    @Override
+    public List<CourseDto> findByAuthorId(Long authorId) {
+
+        List<CourseDto> data = new ArrayList<>();
+        courseRepository.findAllByAuthorId(authorId).forEach( e-> data.add(CourseMapper.entityToDto(e)));
+        return data;
     }
 }

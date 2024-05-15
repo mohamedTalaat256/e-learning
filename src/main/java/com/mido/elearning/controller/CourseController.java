@@ -19,24 +19,29 @@ public class CourseController {
     @Autowired
     CourseServiceImpl courseService;
 
-/*    @GetMapping("")
+    @GetMapping("")
     public ResponseEntity<Object> findAll(){
-        return AppResponse.generateResponse("all_faculties", HttpStatus.OK, courseService.findAll(),true);
-    }*/
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findAll(),true);
+    }
 
+    @GetMapping("/authors/{authorId}")
+    public ResponseEntity<Object> findByAuthorId(@PathVariable Long authorId){
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findByAuthorId(authorId),true);
+    }
+
+
+    /*  @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
+        return AppResponse.generateResponse("data", HttpStatus.OK, courseService.findById(id),true);
+    }
+*/
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestPart CourseUploadRequest courseUploadRequest,  @RequestPart MultipartFile coverImageFile) throws IOException {
-
 
         return AppResponse.generateResponse("course_added_success", HttpStatus.OK, courseService.save(courseUploadRequest, coverImageFile ),true);
     }
 
-    /*@GetMapping("/{id}")
-    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
-        return AppResponse.generateResponse("data", HttpStatus.OK, facultyServiceImpl.findById(id),true);
-    }
-
-
+    /*
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
         return AppResponse.generateResponse("faculty_added_success", HttpStatus.OK,  facultyServiceImpl.save(facultyDto),true);

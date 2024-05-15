@@ -1,10 +1,14 @@
 package com.mido.elearning.serviceImpl;
 
+import com.mido.elearning.Dto.CourseDto;
+import com.mido.elearning.Dto.PublicUserDto;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.exception.DuplicateRecordException;
 import com.mido.elearning.exception.InternalServerErrorException;
+import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.UserMapper;
+import com.mido.elearning.repository.CourseRepository;
 import com.mido.elearning.repository.RoleRepository;
 import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.security.AppUserDetail;
@@ -27,13 +31,38 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService  {
     private final UserRepository userRepository;
+    private final CourseRepository courseRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<UserDto> getAll() {
+    public List<UserDto> findAll() {
         List<UserDto> result = new ArrayList<>();
         userRepository.findAll().forEach(e-> result.add(UserMapper.entityToDto(e)));
         return result;
+    }
+
+    @Override
+    public PublicUserDto findById(Long authorId) {
+        Optional<AppUser> appUser =	userRepository.findById(authorId);
+        if (!appUser.isPresent()) {
+            throw new UsernameNotFoundException("This User Not found with selected id :- " + authorId);
+        }
+
+        List<CourseDto> courses = new ArrayList<>();
+        courseRepository.findAllByAuthorId(authorId).forEach( e-> courses.add(CourseMapper.entityToDto(e)));
+
+        return PublicUserDto.builder().id(appUser.get().getId())
+                .email(appUser.get().getEmail())
+                .username(appUser.get().getUsername())
+                .firstName(appUser.get().getFirstName())
+                .lastName(appUser.get().getLastName())
+                .profileImage(appUser.get().getProfileImage())
+                .dateOfBirth(appUser.get().getDateOfBirth())
+                .organization(appUser.get().getOrganization())
+                .nationality(appUser.get().getNationality())
+                .isEnabled(appUser.get().isEnabled())
+                .courses(courses)
+                .build();
     }
 
     @Override

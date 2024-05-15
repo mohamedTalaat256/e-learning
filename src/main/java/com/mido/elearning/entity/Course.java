@@ -15,22 +15,17 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String title;
-
     private String description;
 
     @Column(name = "is_course_free")
     private Boolean isCourseFree;
-
     private BigDecimal price;
-
     private int discount;
 
     @Column(name = "discount_statrt_date")
@@ -43,10 +38,9 @@ public class Course {
     @JoinColumn(name = "auther_id", referencedColumnName = "id")
     private AppUser author;
 
-    @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    @ManyToMany( cascade = CascadeType.ALL)
     private Set<AppUser> enrolledStudents = new HashSet<>();
 
     @Column(name = "cover_image")
     private String coverImage;
-
 }
