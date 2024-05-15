@@ -41,16 +41,14 @@ public class CourseController {
         return AppResponse.generateResponse("course_added_success", HttpStatus.OK, courseService.save(courseUploadRequest, coverImageFile ),true);
     }
 
-    /*
-    @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody FacultyDto facultyDto){
-        return AppResponse.generateResponse("faculty_added_success", HttpStatus.OK,  facultyServiceImpl.save(facultyDto),true);
+    @PostMapping("/updateCourseImage")
+    public ResponseEntity<Object>  updateCourseImage(@RequestParam("courseImage")MultipartFile courseImage) throws IOException {
+        courseService.updateProfileImage(courseImage);
+        return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, null  ,true);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Object> update(@RequestBody FacultyDto facultyDto){
-        return new ResponseEntity<>(facultyServiceImpl.update(facultyDto), HttpStatus.OK);
-    }
+    /*
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@RequestParam Long id){

@@ -13,6 +13,7 @@ public interface CourseService {
     List<CourseDto> findByAuthorId(Long authorId);
     CourseDto findById();
     CourseDto save(CourseUploadRequest courseUploadRequest, MultipartFile coverImageFile) throws IOException;
+    void updateCoverImage(MultipartFile file) throws IOException;
 
 
 
