@@ -68,18 +68,21 @@ public class UserMapper {
 
     public static PublicUserDto entityToPublicUserDto(AppUser entity){
 
-        return PublicUserDto.builder().id(entity.getId())
-                .email(entity.getEmail())
-                .username(entity.getUsername())
-                .firstName(entity.getFirstName())
-                .lastName(entity.getLastName())
-                .profileImage(entity.getProfileImage())
-                .dateOfBirth(entity.getDateOfBirth())
-                .organization(entity.getOrganization())
-                .nationality(entity.getNationality())
-                .isEnabled(entity.isEnabled())
-                // .courses(courses)
-                .build();
+        if (entity != null){
+            return  PublicUserDto.builder().id(entity.getId())
+                    .email(entity.getEmail())
+                    .username(entity.getUsername())
+                    .firstName(entity.getFirstName())
+                    .lastName(entity.getLastName())
+                    .profileImage(entity.getProfileImage())
+                    .dateOfBirth(entity.getDateOfBirth())
+                    .organization(entity.getOrganization())
+                    .nationality(entity.getNationality())
+                    .isEnabled(entity.isEnabled())
+                    .build();
+        }else{
+            return null;
+        }
     }
 
 }

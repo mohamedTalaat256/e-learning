@@ -27,9 +27,5 @@ public class PublicUserDto {
     private Country nationality;
     private Organization organization;
     private boolean isEnabled;
-    private boolean isCredentialsNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isAccountNonExpired;
-    
-    private List<CourseDto> courses;
+    private List<CourseDto> uploadedCourses;
 }

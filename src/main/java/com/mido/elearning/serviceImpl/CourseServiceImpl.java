@@ -6,7 +6,6 @@ import com.mido.elearning.entity.Course;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.repository.CourseRepository;
 import com.mido.elearning.service.CourseService;
-import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseDto> findByAuthorId(Long authorId) {
 
         List<CourseDto> data = new ArrayList<>();
-        courseRepository.findAllByAuthorId(authorId).forEach( e-> data.add(CourseMapper.entityToDto(e)));
+        courseRepository.findAllByAuthorId(authorId).forEach( e->  data.add(CourseMapper.entityToDto(e)));
         return data;
     }
 }

@@ -25,7 +25,7 @@ public class CourseDto {
     private int discount;
     private Date discountStartDate;
     private Date discountEndDate;
-    private UserDto author;
+    private PublicUserDto author;
     private Set<UserDto> enrolledStudents = new HashSet<>();
 
 }

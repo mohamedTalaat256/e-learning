@@ -48,8 +48,15 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
             throw new UsernameNotFoundException("This User Not found with selected id :- " + authorId);
         }
 
-        List<CourseDto> courses = new ArrayList<>();
-        courseRepository.findAllByAuthorId(authorId).forEach( e-> courses.add(CourseMapper.entityToDto(e)));
+        List<CourseDto> uploadedCourses = new ArrayList<>();
+        //courseRepository.findAllByAuthorId(authorId).forEach( e-> uploadedCourses.add(CourseMapper.entityToDto(e)));
+
+        courseRepository.findAllByAuthorId(authorId).forEach(e ->
+                {
+                    e.setAuthor(null);
+                    uploadedCourses.add(CourseMapper.entityToDto(e));
+                }
+        );
 
         return PublicUserDto.builder().id(appUser.get().getId())
                 .email(appUser.get().getEmail())
@@ -61,7 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
                 .organization(appUser.get().getOrganization())
                 .nationality(appUser.get().getNationality())
                 .isEnabled(appUser.get().isEnabled())
-                .courses(courses)
+                .uploadedCourses(uploadedCourses)
                 .build();
     }
 
