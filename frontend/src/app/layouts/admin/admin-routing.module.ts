@@ -11,6 +11,7 @@ import { UniveristiesComponent } from './components/univeristies/univeristies.co
 import { AcademicSpecializationsComponent } from './components/academic-specializations/academic-specializations.component';
 import { ProfileEditComponent } from '../user/components/profile-edit/profile-edit.component';
 import { adminGuardService } from 'src/app/guards/admin-guard.guard';
+import { Page404Component } from 'src/app/global/page404/page404.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       {path:'academic-specializations', component: AcademicSpecializationsComponent},
       {path:'users', component: UsersComponent},
       {path:'edit-profile', component: ProfileEditComponent},
+      { path: '**', pathMatch :'full' , component: Page404Component},
     ],
     canActivate: [adminGuardService]
   }
