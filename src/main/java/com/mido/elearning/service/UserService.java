@@ -17,6 +17,7 @@ public interface UserService {
     UserDto getMyProfile();
     UserDto updateProfile(UserDto newData);
     void updateProfileImage(MultipartFile file) throws IOException;
+    UserDto updatePassword(String newPassword);
 
 
 }

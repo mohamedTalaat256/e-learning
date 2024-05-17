@@ -43,7 +43,7 @@ public class CourseController {
 
     @PostMapping("/updateCourseImage")
     public ResponseEntity<Object>  updateCourseImage(@RequestParam("courseImage")MultipartFile courseImage) throws IOException {
-        courseService.updateProfileImage(courseImage);
+      //  courseService.updateProfileImage(courseImage);
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, null  ,true);
     }
 

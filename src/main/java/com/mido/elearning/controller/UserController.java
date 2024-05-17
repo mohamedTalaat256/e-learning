@@ -34,10 +34,16 @@ public class UserController {
         return AppResponse.generateResponse("you_profile_info", HttpStatus.OK, userServiceImpl.getMyProfile() ,true);
     }
 
-    @PostMapping("/updateMyProfile")
+    @PutMapping("/updateMyProfile")
     public ResponseEntity<Object> updateMyProfile(@RequestBody UserDto newData){
         return AppResponse.generateResponse("you_profile_updated_success", HttpStatus.OK, userServiceImpl.updateProfile(newData) ,true);
     }
+
+    @PutMapping("/updatePassword")
+    public ResponseEntity<Object> updatePassword(@RequestBody String newPassword){
+        return AppResponse.generateResponse("you_profile_updated_success", HttpStatus.OK, userServiceImpl.updatePassword(newPassword) ,true);
+    }
+
 
     @PostMapping("/updateProfileImage")
     public ResponseEntity<Object>  updateProfileImage(@RequestParam("profileImage")MultipartFile profileImage) throws IOException {

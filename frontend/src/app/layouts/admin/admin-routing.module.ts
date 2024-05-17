@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
 import { AdminComponent } from './admin.component';
-import { DashboardComponent } from '../user/components/dashboard/dashboard.component';
 import { MyCommunityComponent } from './components/my-community/my-community.component';
-import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { CoursesComponent } from './components/courses/courses.component';
 import { CourseDialogFormComponent } from './components/course-dialog-form/course-dialog-form.component';
 import { UsersComponent } from './components/users/users.component';
-import { authGuardService } from 'src/app/guards/auth-guard.guard';
 import { AdminDashboardComponent } from './components/dashboard/admin-dashboard.component';
 import { FacultiesComponent } from './components/faculties/faculties.component';
-import { ProfileEditComponent } from '../user/components/profile-edit/profile-edit.component';
 import { UniveristiesComponent } from './components/univeristies/univeristies.component';
 import { AcademicSpecializationsComponent } from './components/academic-specializations/academic-specializations.component';
+import { ProfileEditComponent } from '../user/components/profile-edit/profile-edit.component';
+import { adminGuardService } from 'src/app/guards/admin-guard.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +19,7 @@ const routes: Routes = [
     children: [
       {path:'dashboard', component: AdminDashboardComponent},
       {path:'my-comunity', component: MyCommunityComponent},
-      {path:'my-courses', component: MyCoursesComponent},
+      {path:'courses', component: CoursesComponent},
       {path:'add-course', component: CourseDialogFormComponent},
       {path:'faculties', component: FacultiesComponent},
       {path:'univeristies', component: UniveristiesComponent},
@@ -28,7 +27,7 @@ const routes: Routes = [
       {path:'users', component: UsersComponent},
       {path:'edit-profile', component: ProfileEditComponent},
     ],
-    canActivate: [authGuardService]
+    canActivate: [adminGuardService]
   }
 ];
 

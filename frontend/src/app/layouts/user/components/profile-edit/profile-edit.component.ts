@@ -72,18 +72,16 @@ export class ProfileEditComponent {
           lastName:        [user.lastName, [Validators.required, Validators.maxLength(255)]],
           username:        [user.username, [Validators.required, Validators.maxLength(255)]],
           email:           [user.email, [Validators.required, Validators.maxLength(255)]],
-          password:        [user.password, [Validators.required, Validators.maxLength(255)]],
-          passwordConfirm: [null, [ Validators.maxLength(255)]],
           dateOfBirth:     [user.dateOfBirth, [Validators.required, Validators.maxLength(255)]],
-          nationality:     [user.nationality, [Validators.required, Validators.maxLength(255)]],
-          organization:    this.fb.group({ address: this.fb.array([]) })
+        //  nationality:     [user.nationality, [Validators.required, Validators.maxLength(255)]],
+        //  organization:    this.fb.group({ address: this.fb.array([]) })
          
         }
       );  
   }
   
   onSubmit( ){  
-/*      this.userService.update(this.userId, this.userForm.value).pipe(take(1)).subscribe(
+     this.userService.updateProfile(this.profileForm.value).pipe(take(1)).subscribe(
       {
         next:(response: any)=>{   
           Swal.fire({ 
@@ -102,7 +100,7 @@ export class ProfileEditComponent {
           }); 
         }
       }
-    ); */
+    );
   }
 
  

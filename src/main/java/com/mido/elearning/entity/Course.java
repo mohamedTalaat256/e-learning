@@ -22,11 +22,13 @@ public class Course {
     private long id;
     private String title;
     private String description;
+    private double hours;
 
     @Column(name = "is_course_free")
     private Boolean isCourseFree;
     private BigDecimal price;
     private int discount;
+    private double rating;
 
     @Column(name = "discount_statrt_date")
     private Date discountStartDate;

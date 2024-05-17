@@ -7,13 +7,11 @@ import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
 import com.mido.elearning.exception.InternalServerErrorException;
 import com.mido.elearning.repository.UserRepository;
-import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
@@ -33,6 +31,7 @@ public class CourseMapper {
         return CourseDto.builder().id(entity.getId())
                 .title(entity.getTitle())
                 .description(entity.getDescription())
+                .hours(entity.getHours())
                 .price(entity.getPrice())
                 .isCourseFree(entity.getIsCourseFree())
                 .discount(entity.getDiscount())
@@ -41,6 +40,7 @@ public class CourseMapper {
                 .author(UserMapper.entityToPublicUserDto(entity.getAuthor()))
                 .coverImage(entity.getCoverImage())
                 .enrolledStudents(enrolledStudents)
+                .rating(entity.getRating())
                 .build();
 
     }
@@ -49,11 +49,10 @@ public class CourseMapper {
     public static Course dtoToEntity(CourseDto dto){
         Set<AppUser> enrolledStudents = new HashSet<>();
 
-        //dto.getEnrolledStudents().forEach( d -> enrolledStudents.add(UserMapper.dtoToEntity(d)));
-
         return Course.builder().id(dto.getId())
                 .title(dto.getTitle())
                 .description(dto.getDescription())
+                .hours(dto.getHours())
                 .price(dto.getPrice())
                 .isCourseFree(dto.getIsCourseFree())
                 .discount(dto.getDiscount())
@@ -62,6 +61,7 @@ public class CourseMapper {
                 .author( new AppUser(dto.getAuthor().getId()))
                 .coverImage(dto.getCoverImage())
                 .enrolledStudents(enrolledStudents)
+                .rating(dto.getRating())
                 .build();
     }
 
@@ -80,6 +80,7 @@ public class CourseMapper {
 
             return CourseDto.builder().title(courseUploadRequest.getTitle())
                     .description(courseUploadRequest.getDescription())
+                    .hours(courseUploadRequest.getHours())
                     .price(courseUploadRequest.getPrice())
                     .isCourseFree(courseUploadRequest.getIsCourseFree())
                     .discount(courseUploadRequest.getDiscount())
@@ -87,6 +88,7 @@ public class CourseMapper {
                     .discountEndDate(courseUploadRequest.getDiscountEndDate())
                     .author(UserMapper.entityToPublicUserDto(appUser.get()))
                     .coverImage(coverImage)
+                    .rating(0)
                     .build();
         }
         throw new InternalServerErrorException("internal_server_error");

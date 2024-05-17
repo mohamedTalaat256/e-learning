@@ -17,35 +17,15 @@ export class UserService {
     return this.http.get(baseURL + '/users/getMyProfile');
   }
 
-  updateProfileImage(formData: FormData): Observable<any> { 
- 
-   /*   let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-     */
+  public updateProfile(requestbody: any): Observable<any> {
+    return this.http.put<any>(baseURL + '/users/updateMyProfile', requestbody);
+  }
+
+  updateProfileImage(formData: FormData): Observable<any> {  
     return this.http.post<any>(baseURL + '/users/updateProfileImage', formData, {
-    //  headers,
       reportProgress: true,
       observe: 'events'
     });
-  }
-/*  
- 
-  public save(requestbody: UserSaveRequest): Observable<any> {
-    return this.http.post<any>(baseURL + '/users', requestbody);
-  }
-
-  findById(id: number): Observable<any> {
-    return this.http.get(baseURL + '/users/' + id)
-  }
-
-  searchUser(searchText: string): Observable<any> {
-    return this.http.get(baseURL + '/users/search/' + searchText)
-  }
- 
-  public delete(id: number): Observable<any> {
-    return this.http.post<any>(baseURL + '/persons/delete/' + id, null);
-  }
-  */
+  } 
 
 }

@@ -19,6 +19,8 @@ public class CourseDto {
     private long id;
     private String title;
     private String description;
+    private double hours;
+    private double rating;
     private String coverImage;
     private Boolean isCourseFree;
     private BigDecimal price;

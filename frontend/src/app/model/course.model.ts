@@ -1,11 +1,13 @@
 export interface Course{
+    id: number,
     title: string,
-    describtion: string,
+    description: string,
     price: number,
     discount: number,
-    isFree: boolean,
+    isCourseFree: boolean,
     rating: number,
     enrolledStudents?: number,
-    image: string
+    coverImage: string,
+    hours?: number;
 
 }

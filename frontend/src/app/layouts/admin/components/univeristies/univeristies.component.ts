@@ -35,12 +35,12 @@ export class UniveristiesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getAllFaculties();
+    this.getAllUniveristies();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  getAllFaculties() {
+  getAllUniveristies() {
     this.unversityService.getAll().pipe(take(1)).subscribe({
       next: (response: AppResponse) => {
         this.dataSource = new MatTableDataSource<University>(response.data);

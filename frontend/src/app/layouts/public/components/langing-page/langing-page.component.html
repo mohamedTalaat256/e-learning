@@ -31,91 +31,78 @@
 
     <div fxLayout="row" fxFlexAlign="space-between" class="mt-5">
         <div fxLayout="column" fxFlexAlign="center" fxFlex="20">
-            <span style=" font-weight: bold;">
+            <span class="f-w-bold mat-headline-5">
                 Recent Uploadded
             </span>
         </div>
         <div fxLayout="row" fxFlex="80" fxLayoutAlign="space-around center" fxLayoutGap="40">
 
             <span>
-                <span>+100</span>
+                <span class="f-w-bold">+100</span>
                 <br>
                 <span>lecture</span>
             </span>
 
             <span>
-                <span>+100</span>
+                <span class="f-w-bold">+100</span>
                 <br>
                 <span>lecture</span>
             </span>
 
             <span>
-                <span>+100</span>
+                <span class="f-w-bold">+100</span>
                 <br>
                 <span>lecture</span>
             </span>
 
             <span>
-                <span>+100</span>
+                <span class="f-w-bold">+100</span>
                 <br>
                 <span>lecture</span>
             </span>
         </div>
     </div>
 
-    <div fxLayout="row" fxFlexAlign="space-between" class="mt-5">
+    <div fxLayout="row" fxFlexAlign="space-between" class="my-5">
         <div fxLayout="column" fxFlexAlign="center" fxFlex="100">
-            <span style=" font-weight: bold;">
+            <span class="f-w-bold mat-headline-5">
                 New Cources
             </span>
             <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="10" fxFlex="73%" fxFlex.lg="68%" fxFlex.md="100%" fxFlex.xs="100%" fxLayout.xs="column"
             >
 
-                <mat-card fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%">
-                    <img mat-card-image src="/assets/images/uiux.jpeg" class="course-card-img" >
+                <mat-card *ngFor="let course of recentCources" fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%">
+                    <div style="position: relative;">
+                        <div class="mat-bg-gold p-2 px-3 m-2 rounded-2" style="position: absolute; z-index: 99;">
+                            {{'free'|translate}}
+                        </div>
+                        <img mat-card-image [src]="IMAGES_URL+course.coverImage" class="course-card-img" >
+
+                    </div>
                     <mat-card-content>
-                        <p class="my-3">
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-                            Japan. 
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-raised-button color="dark">read more</button>
+                        <p class="my-1 f-w-bold">{{course.title}}</p>
+                        <span>{{course.description}}</span>
+                    </mat-card-content> 
+                    <mat-card-actions class=" mt-2">
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                            <div  fxLayout="column"  >
+                                <span class="f-w-bold">${{course.price}}</span>
+                                <app-rating-star [rating]="course.rating" ></app-rating-star>
+                            </div>
+                            <div  fxLayout="column">
+                                
+                                <span>
+                                    {{course.hours}} {{'hours'| translate}}
+                                </span>
+                                <button mat-raised-button color="dark">{{'enroll'|translate}}</button>
+                            </div>
+                        </div>
+                        
                     </mat-card-actions>
                 </mat-card>
-
-                <mat-card fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%">
-                    <img mat-card-image src="/assets/images/uiux.jpeg" class="course-card-img" >
-                    <mat-card-content>
-                        <p class="my-3">
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-                            Japan. 
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-raised-button color="dark">read more</button>
-                    </mat-card-actions>
-                </mat-card>
-
-                <mat-card fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%">
-                    <img mat-card-image src="/assets/images/uiux.jpeg" class="course-card-img" >
-                    <mat-card-content>
-                        <p class="my-3">
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-                            Japan. 
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-raised-button color="dark">read more</button>
-                    </mat-card-actions>
-                </mat-card>
-
-              
-
             </div>
         </div>
-
-
     </div>
 
 
@@ -124,3 +111,54 @@
 
 
 </div>
+
+<footer class="footer">
+    <div class="top-section">
+        <span>Stay Updated with Our Latest Courses and Offers</span>
+        <div>
+            <input type="email" placeholder="Enter your email">
+            <button>Sign Up</button>
+        </div>
+    </div>
+    <div class="middle-section">
+        <div class="column">
+            <h3>Platform</h3>
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Press</a>
+        </div>
+        <div class="column">
+            <h3>Support</h3>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="column">
+            <h3>Resources</h3>
+            <a href="#">Tutorials</a>
+            <a href="#">Courses</a>
+            <a href="#">Certifications</a>
+            <a href="#">Partnerships</a>
+        </div>
+        <div class="column">
+            <h3>Connect</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <a href="#">Community Forum</a>
+            <a href="#">Events</a>
+        </div>
+    </div>
+    <div class="bottom-section">
+        <span>© 2024 E-Learn Platform. All Rights Reserved.</span>
+        <div>
+            <a href="#">Site Map</a>
+            <a href="#">Accessibility</a>
+        </div>
+    </div>
+</footer>

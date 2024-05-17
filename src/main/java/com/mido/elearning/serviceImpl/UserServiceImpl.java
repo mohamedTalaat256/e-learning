@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 @Service
 @RequiredArgsConstructor
@@ -33,6 +34,30 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public UserDto updatePassword(String newPassword)  {
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        if (user instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Optional<AppUser> appUser =	userRepository.findByUsername(username);
+            if (!appUser.isPresent()) {
+                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
+            }
+            AppUser currentUser = appUser.get();
+
+            if(Objects.equals(currentUser.getPassword(), passwordEncoder.encode( newPassword))){
+                currentUser.setPassword(newPassword);
+                userRepository.save(currentUser);
+            }else {
+                throw new InternalServerErrorException("password does not match old password");
+            }
+        }
+        throw new InternalServerErrorException("fail");
+
+    }
 
     @Override
     public List<UserDto> findAll() {
@@ -91,7 +116,29 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Override
     public UserDto updateProfile(UserDto newData) {
-        return null;
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        if (user instanceof UserDetails userDetails) {
+            String username = userDetails.getUsername();
+
+            Optional<AppUser> appUser =	userRepository.findByUsername(username);
+            if (appUser.isPresent()) {
+
+                AppUser currentUser = appUser.get();
+
+                currentUser.setFirstName(newData.getFirstName());
+                currentUser.setLastName(newData.getLastName());
+                currentUser.setDateOfBirth(newData.getDateOfBirth());
+               // currentUser.setNationality(newData.getNationality());
+
+                userRepository.save(currentUser);
+
+            }else{
+                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
+            }
+
+        }
+        throw new InternalServerErrorException("Internal Server Error!!");
     }
 
     @Override

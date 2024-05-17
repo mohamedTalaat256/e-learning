@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
-import { FriendsComponent } from './pages/friends/friends.component';
-import { TableComponent } from './pages/table/table.component';
-import { ComponentsComponent } from './pages/components/components.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { CoursesComponent } from '../admin/components/courses/courses.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { userGuardService } from 'src/app/guards/usrer-guard.guard';
 
 const routes: Routes = [
   {
     path:'user',
     component: UserComponent,
     children: [
-      {path:'friends', component: FriendsComponent},
-      {path:'table', component: TableComponent},
-      {path:'components', component: ComponentsComponent},
-    ]
+      {path:'', component: UserDashboardComponent},
+      {path:'edit-profile', component: ProfileEditComponent},
+      {path:'dashboard', component: UserDashboardComponent},
+      {path:'my-courses', component: CoursesComponent}
+    ],
+    canActivate: [userGuardService]
   },
 ];
 

@@ -35,6 +35,8 @@
                         </mat-error>
                     </mat-form-field>
 
+                   
+
                     <mat-form-field fxFlex="50">
                         <mat-label>{{'date_of_birth'|translate}}</mat-label>
                         <input matInput [matDatepicker]="dateOfBirthPicker" formControlName="dateOfBirth">
@@ -48,7 +50,7 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <mat-form-field fxFlex="50">
+                    <!-- <mat-form-field fxFlex="50">
                         <mat-label>{{'nationality'|translate}} </mat-label>
                         <mat-select formControlName="nationality">
                             <mat-option *ngFor="let nationality of countries"
@@ -59,8 +61,31 @@
                             <app-validation-msg [control]="profileForm.get('nationality')"
                                 [fieldName]="'nationality'"></app-validation-msg>
                         </mat-error>
-                    </mat-form-field>
+                    </mat-form-field> -->
 
+
+                    <div fxLayout="row" fxFlex="100" fxLayoutGap="20">
+                        <mat-form-field fxFlex="33.3">
+                            <mat-label>{{'password'|translate}} </mat-label>
+                            <input matInput formControlName="password" [placeholder]="'password'|translate" type="password">
+                            <mat-error>
+                                <app-validation-msg [control]="profileForm.get('password')"
+                                    [fieldName]="'password'|translate"></app-validation-msg>
+                            </mat-error>
+                        </mat-form-field>
+    
+                        <mat-form-field fxFlex="33.3">
+                            <mat-label>{{'password_confirm'|translate}} </mat-label>
+                            <input matInput formControlName="passwordConfirm" [placeholder]="'password_confirm'|translate" type="password">
+                            <mat-error>
+                                <app-validation-msg [control]="profileForm.get('passwordConfirm')"
+                                    [fieldName]="'password_confirm'|translate"></app-validation-msg>
+                            </mat-error>
+                        </mat-form-field>
+                        <button fxFlex="33.3" mat-raised-button color="primary">{{'update_password'|translate}}</button>
+
+                    </div>
+ 
                     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10" class="my-5 ">
                         <button type="button" mat-raised-button color="danger">{{'cancel' | translate}}</button>
                         <button type="submit" mat-raised-button color="primary">{{'save' | translate}}</button>

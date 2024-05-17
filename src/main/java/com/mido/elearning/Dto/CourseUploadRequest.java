@@ -19,6 +19,7 @@ public class CourseUploadRequest {
 
     private String title;
     private String description;
+    private double hours;
     private Boolean isCourseFree;
     private BigDecimal price;
     private int discount;

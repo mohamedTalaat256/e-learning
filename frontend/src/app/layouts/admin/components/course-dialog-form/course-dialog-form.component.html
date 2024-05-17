@@ -1,26 +1,42 @@
 <h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+
 <mat-dialog-content class="mat-typography">
-    <form [formGroup]="courseForm">
         <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="100">
-
-
-
             <mat-form-field class="mt-3">
                 <mat-label>{{'course_title'|translate}} </mat-label>
-                <input matInput formControlName="title" [placeholder]="'course_title'|translate" type="text"
-                    [value]="courseData.title">
-                <app-validation-msg [formControl]="$any(courseForm.get('title'))"></app-validation-msg>
+                <input matInput formControlName="title" [placeholder]="'course_title'|translate" >
+                <mat-error>
+                    <app-validation-msg [control]="courseForm.controls['title']"
+                        [fieldName]="'course_title'">
+                    </app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>{{'course_describtion'|translate}} </mat-label>
-                <textarea matInput formControlName="describtion" [placeholder]="'course_describtion'|translate"
-                    type="text" [value]="courseData.describtion"></textarea>
+                <mat-label>{{'course_description'|translate}} </mat-label>
+                <textarea matInput formControlName="description" [placeholder]="'course_description'|translate" ></textarea>
+                <mat-error>
+                    <app-validation-msg [control]="courseForm.controls['description']"
+                        [fieldName]="'course_description'">
+                    </app-validation-msg>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{'hours_length'|translate}} </mat-label>
+                <input matInput formControlName="hours" [placeholder]="'hours_length'|translate" type="number" />
+
+                <mat-error>
+                    <app-validation-msg [control]="courseForm.controls['hours']"
+                        [fieldName]="'hours_length'">
+                    </app-validation-msg>
+                </mat-error>
             </mat-form-field>
 
 
             <section fxLayout="row" fxLayoutAlign="space-between center">
-                <mat-checkbox formControlName="isFree" [checked]="courseData.isFree" (click)="toggleisCourseFree()" color="primary">
+                <mat-checkbox formControlName="isCourseFree" (click)="toggleisCourseFree($event)" color="primary">
                     <span class="mat-text-secondary f-w-500">{{'is_course_free'|translate}}</span>
                 </mat-checkbox>
 
@@ -28,14 +44,24 @@
                 <div *ngIf="!isCourseFree"  fxFlex="70" fxLayout="row" fxLayoutGap="10" fxLayoutAlign="space-between center">
                     <mat-form-field fxFlex="50">
                         <mat-label>{{'price'|translate}} </mat-label>
-                        <input matInput formControlName="price" [placeholder]="'price'|translate" type="text"
-                            [value]="courseData.price">
+                        <input matInput formControlName="price" [placeholder]="'price'|translate" >
+
+                        <mat-error>
+                            <app-validation-msg [control]="courseForm.controls['price']"
+                                [fieldName]="'price'">
+                            </app-validation-msg>
+                        </mat-error>
                     </mat-form-field>
 
                     <mat-form-field fxFlex="50">
                         <mat-label>{{'discount'|translate}} </mat-label>
-                        <input matInput formControlName="discount" [placeholder]="'discount'|translate" type="text"
-                            [value]="courseData.discount">
+                        <input matInput formControlName="discount" [placeholder]="'discount'|translate" >
+
+                        <mat-error>
+                            <app-validation-msg [control]="courseForm.controls['discount']"
+                                [fieldName]="'discount'">
+                            </app-validation-msg>
+                        </mat-error>
                     </mat-form-field>
                 </div>
 
@@ -44,14 +70,34 @@
 
                     <mat-form-field fxFlex="50" >
                         <mat-label>{{'start_date'|translate}}</mat-label>
-                        <input matInput>
-                        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+
+                        <input matInput [matDatepicker]="startDatePicker" formControlName="discountStartDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="startDatePicker">
+                            <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker></mat-datepicker>
+
+                        <mat-error>
+                            <app-validation-msg [control]="courseForm.controls['discountStartDate']"
+                                [fieldName]="'start_date'">
+                            </app-validation-msg>
+                        </mat-error>
                     </mat-form-field>
     
-                    <mat-form-field fxFlex="50">
+                    <mat-form-field fxFlex="50" >
                         <mat-label>{{'end_date'|translate}}</mat-label>
-                        <input matInput>
-                        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+
+                        <input matInput [matDatepicker]="endDatePicker" formControlName="discountEndDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="endDatePicker">
+                            <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+
+                        <mat-error>
+                            <app-validation-msg [control]="courseForm.controls['discountEndDate']"
+                                [fieldName]="'end_date'">
+                            </app-validation-msg>
+                        </mat-error>
                     </mat-form-field>
     
                 </div>
@@ -61,10 +107,8 @@
 
             </section>
 
-           
 
-
-            <div *ngIf="currentFile && progress" class="progress my-3">
+            <div *ngIf="selectedCoverImage && progress" class="progress my-3">
                 <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
                     aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
                     {{ progress }}%
@@ -80,9 +124,11 @@
             </label>
 
         </div>
-    </form>
+  
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutAlign="center ">
     <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>
     <button type="submit" mat-raised-button color="primary">{{'save' | translate}}</button>
 </mat-dialog-actions>
+
+  </form>

@@ -54,7 +54,12 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('refreshToken', response.data.refreshToken);
           localStorage.setItem('AUTH_USER', JSON.stringify(response.data.authUser) );
-          this.router.navigate(['/admin']);
+
+          if(response.data.authUser.roles[0].name==='ADMIN'){
+            this.router.navigate(['/admin']);
+          }else{
+            this.router.navigate(['/user']);
+          }
         },
         error:(error: AppResponse)=>{ 
           Swal.fire({ 

@@ -1,8 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormMode, imagePlaceholder } from '../../../../constants/constants';
+import { FormMode, imagePlaceholder, imagesUrls } from '../../../../constants/constants';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course } from 'src/app/model/course.model';
+import { CourseFormControls } from '../../form-controls/course-form';
+import { CourseService } from 'src/app/service/courses.service';
+import { AppResponse } from 'src/app/model/app_response.model';
+import Swal from 'sweetalert2';
 
  
 @Component({
@@ -14,7 +18,7 @@ import { Course } from 'src/app/model/course.model';
 
 export class CourseDialogFormComponent implements OnInit {
   selectedFiles?: FileList;
-  currentFile?: File;
+  selectedCoverImage?: File;
 
   progress = 0;
   message = '';
@@ -26,9 +30,10 @@ export class CourseDialogFormComponent implements OnInit {
   title: string;
   courseData: Course ;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private fb:FormBuilder
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private courseFomrControle: CourseFormControls,
+  private courseService: CourseService
+) {
+    this.courseForm = this.courseFomrControle.createCourseForm();
 
     console.log(data);
     this.formMode = data.formMode;
@@ -38,21 +43,9 @@ export class CourseDialogFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.formMode === FormMode.CREATE) {
-      this.courseData = {
-        title: '',
-        describtion: '',
-        discount: 0,
-        price: 0,
-        isFree: false,
-        rating: 0,
-        image: this.preview
-      };
-      this.courseForm = this.createCourseForm();
-    }else{
-      this.courseForm = this.setCourseForm(this.courseData);
-      this.preview = this.courseData.image;
-      this.isCourseFree = this.courseData.isFree;
+    if (this.formMode === FormMode.EDIT) { 
+      this.courseForm = this.courseFomrControle.setCourseForm(this.courseData);
+      this.preview = imagesUrls+ this.courseData.coverImage; 
     }
   }
  
@@ -68,7 +61,7 @@ export class CourseDialogFormComponent implements OnInit {
 
       if (file) {
         this.preview = '';
-        this.currentFile = file;
+        this.selectedCoverImage = file;
 
         const reader = new FileReader();
 
@@ -77,45 +70,42 @@ export class CourseDialogFormComponent implements OnInit {
           this.preview = e.target.result;
         };
 
-        reader.readAsDataURL(this.currentFile);
+        reader.readAsDataURL(this.selectedCoverImage);
       }
     }
   }
 
 
-  createCourseForm(){
-    let form = this.fb.group(
-      {
-        //id:           [null],
-        title:        [null,[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
-        describtion:  [null, Validators.required, Validators.maxLength(200)],
-        price:        [0, Validators.required],
-        discount:     [0, ],
-        isfree:       [false,  ], 
-      }
-    );
 
-    return form;
+
+  toggleisCourseFree($event){
+    this.courseForm = $event.checked;
   }
 
 
-  setCourseForm(course: Course){
-    let form = this.fb.group(
-      {
-       // id:         [course.id],
-        title:       [course.title, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-        describtion: [course.describtion, [Validators.required, Validators.maxLength(200)]],
-        price:       [course.price, [Validators.required]],
-        discount:    [course.discount, ],
-        isfree:      [course.isFree,  ], 
+  onSubmit(){
+
+    this.courseService.save(this.courseForm.value, this.selectedCoverImage).subscribe({
+      next:(response: AppResponse)=>{  
+        if(response.ok){
+          Swal.fire({
+            icon: "success",
+            title: response.message,
+            showConfirmButton: true,
+            timer: 1500
+          });
+        }
+      },
+      error:(error: Error)=>{
+        Swal.fire({
+          icon: "error",
+          title: error.message,
+          showConfirmButton: true
+        });
       }
-    );
 
-    return form;
-  }
+    });
 
-  toggleisCourseFree(){
-    this.isCourseFree = !this.isCourseFree;
   }
 
 }

@@ -254,15 +254,9 @@ public enum Country {
             this.code = code;
         }
 
-        /*public String getName() {
-            return name masters in various fields, and cultural richness.From a place like Vietnam, with its stunning
-            natural landscapes and rich history, to Israel, with its tech innovation and historical significance, and
-            to Greece, with its ancient history and beautiful architecture.You could share stories about your
-            travels, your observations, and your cultural experiences in these diverse lands.It sounds like you
-            've lived a truly global life!
+        public String getCode(String cName) {
+            return Country.valueOf(cName).toString();
 
-            What sort of themes would you like to explore or hear more about regarding these places?
-
-        }*/
+        }
 
     }

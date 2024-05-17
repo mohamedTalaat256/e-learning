@@ -4,36 +4,17 @@
         <div matListItemTitle><span class="mat-headline-3 m-2 mat-text-primary">LOGO</span></div>
     </mat-list-item>
 
-    <mat-list-item [routerLink]="['/admin/dashboard']" routerLinkActive="active" class="sid-nav-item mt-5">
+    <mat-list-item [routerLink]="['/user/dashboard']" routerLinkActive="active" class="sid-nav-item mt-5">
         <mat-icon matListItemIcon color="primary">dashboard</mat-icon>
         <div matListItemTitle class="sid-nav-item">{{'dashboard' | translate}}</div>
     </mat-list-item>
  
 
-    <mat-list-item [routerLink]="['/admin/courses']" routerLinkActive="active">
+    <mat-list-item [routerLink]="['/user/my-courses']" routerLinkActive="active">
         <mat-icon matListItemIcon color="primary">book</mat-icon>
-        <div matListItemTitle class="sid-nav-item">{{'courses' | translate}}</div>
-    </mat-list-item>
-
-    <mat-list-item [routerLink]="['/admin/users']" routerLinkActive="active">
-        <mat-icon matListItemIcon color="primary">group</mat-icon>
-        <div matListItemTitle class="sid-nav-item">Users</div>
-    </mat-list-item>
-
-    <mat-list-item [routerLink]="['/admin/faculties']" routerLinkActive="active">
-        <mat-icon matListItemIcon color="dark" >school</mat-icon>
-        <div matListItemTitle class="sid-nav-item">{{'faculties'|translate}}</div>
-    </mat-list-item>
-
-    <mat-list-item [routerLink]="['/admin/academic-specializations']" routerLinkActive="active">
-        <mat-icon matListItemIcon color="success">my_library_books</mat-icon>
-        <div matListItemTitle class="sid-nav-item">{{'specializations'|translate}}</div>
-    </mat-list-item>
+        <div matListItemTitle class="sid-nav-item">{{'my_courses' | translate}}</div>
+    </mat-list-item> 
     
-    <mat-list-item [routerLink]="['/admin/univeristies']" routerLinkActive="active">
-        <mat-icon matListItemIcon color="primary">location_city</mat-icon>
-        <div matListItemTitle class="sid-nav-item">{{'univeristies'|translate}}</div>
-    </mat-list-item>
 
     <mat-list-item>
         <mat-icon matListItemIcon color="primary" >equalizer</mat-icon>
