@@ -1,5 +1,8 @@
 package com.mido.elearning.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Course {
 
     @Id
@@ -40,8 +44,13 @@ public class Course {
     @JoinColumn(name = "auther_id", referencedColumnName = "id")
     private AppUser author;
 
-    @ManyToMany( cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "students_enrolled_courses",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @JsonIgnore
     private Set<AppUser> enrolledStudents = new HashSet<>();
+
 
     @Column(name = "cover_image")
     private String coverImage;

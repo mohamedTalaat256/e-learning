@@ -28,6 +28,6 @@ public class CourseDto {
     private Date discountStartDate;
     private Date discountEndDate;
     private PublicUserDto author;
-    private Set<UserDto> enrolledStudents = new HashSet<>();
+    private Set<PublicUserDto> enrolledStudents = new HashSet<>();
 
 }

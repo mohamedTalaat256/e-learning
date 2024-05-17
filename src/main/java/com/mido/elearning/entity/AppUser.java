@@ -1,6 +1,8 @@
 package com.mido.elearning.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mido.elearning.enums.Country;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,9 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class AppUser {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -57,7 +58,13 @@ public class AppUser {
 
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Course> uploadedCourses;
+
+
+    @ManyToMany(mappedBy = "enrolledStudents")
+    @JsonIgnore
+    private Set<Course> enrolledCourses = new HashSet<>();
 
     private boolean isEnabled;
 

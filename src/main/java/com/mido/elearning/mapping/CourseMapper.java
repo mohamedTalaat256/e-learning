@@ -2,6 +2,7 @@ package com.mido.elearning.mapping;
 
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
+import com.mido.elearning.Dto.PublicUserDto;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
@@ -24,9 +25,9 @@ public class CourseMapper {
 
     public static CourseDto entityToDto(Course entity){
 
-        Set<UserDto> enrolledStudents = new HashSet<>();
+        Set<PublicUserDto> enrolledStudents = new HashSet<>();
 
-        entity.getEnrolledStudents().forEach(e-> enrolledStudents.add(UserMapper.entityToDto(e)));
+        entity.getEnrolledStudents().forEach(e-> enrolledStudents.add(UserMapper.entityToPublicUserDto(e)));
 
         return CourseDto.builder().id(entity.getId())
                 .title(entity.getTitle())
