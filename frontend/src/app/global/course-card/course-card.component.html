@@ -1,0 +1,30 @@
+<mat-card  >
+    <div style="position: relative;">
+        <div class="mat-bg-gold p-2 px-3 m-2 rounded-2" style="position: absolute; z-index: 99;">
+            {{'free'|translate}}
+        </div>
+        <img mat-card-image [src]="IMAGES_URL+course.coverImage" class="course-card-img" >
+
+    </div>
+    <mat-card-content>
+        <p class="my-1 f-w-bold">{{course.title}}</p>
+        <span>{{course.description}}</span>
+    </mat-card-content> 
+    <mat-card-actions class=" mt-2">
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div  fxLayout="column"  >
+                <span class="f-w-bold">${{course.price}}</span>
+                <app-rating-star [rating]="course.rating" ></app-rating-star>
+            </div>
+            <div  fxLayout="column">
+                
+                <span>
+                    {{course.hours}} {{'hours'| translate}}
+                </span>
+                <button mat-raised-button color="dark" [routerLink]="['/user/enroll-to-course']">{{'enroll'|translate}}</button>
+            </div>
+        </div>
+        
+    </mat-card-actions>
+</mat-card>

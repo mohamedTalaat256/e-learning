@@ -40,7 +40,7 @@ public class CourseMapper {
                 .discountEndDate(entity.getDiscountEndDate())
                 .author(UserMapper.entityToPublicUserDto(entity.getAuthor()))
                 .coverImage(entity.getCoverImage())
-                .enrolledStudents(enrolledStudents)
+                .enrolledStudents(null)
                 .rating(entity.getRating())
                 .build();
 

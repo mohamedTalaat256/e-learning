@@ -14,7 +14,8 @@ const routes: Routes = [
       {path:'', component: UserDashboardComponent},
       {path:'edit-profile', component: ProfileEditComponent},
       {path:'dashboard', component: UserDashboardComponent},
-      {path:'my-courses', component: CoursesComponent}
+      {path:'my-courses', component: CoursesComponent},
+      {path:'enroll-to-course', component: UserDashboardComponent}
     ],
     canActivate: [userGuardService]
   },
