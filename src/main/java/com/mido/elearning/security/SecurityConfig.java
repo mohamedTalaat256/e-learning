@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     String [] PUBLIC_END_POINTS = {
            "api/home",
-            "/media/**",
+            "/media/images/**",
             "/api/auth/login",
             "/api/auth/register",
             "/api/auth/refresh-token",

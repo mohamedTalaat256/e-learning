@@ -1,90 +1,93 @@
 <div fxLayout="row">
-    <div class="shadow-sm w-100 mt-5 rounded-2">
-        <table mat-table [dataSource]="dataSource">
-      
-         
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> id </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container> 
-          <ng-container matColumnDef="name">
+  <div class="shadow-sm w-100 mt-5 rounded-2">
+    <table mat-table [dataSource]="dataSource">
 
-            <th mat-header-cell *matHeaderCellDef> name </th>
-            <td mat-cell *matCellDef="let element"> 
-            <div  fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
-              <img mat-card-image  [src]="element.profileImage ? profileImageUrls+ element.profileImage: defaultImage" class="circle-avatar-md m-3">
-              <div fxLayout="column">
-                <mat-card-title class="f-w-500"> {{element.firstName +' '+ element.lastName}}  </mat-card-title>
-                <mat-card-subtitle> @{{element.username}}</mat-card-subtitle>
 
-              </div>
-              </div>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
 
-            </td> 
-          </ng-container>
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> {{'email' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.email }} </td>
-          </ng-container>
+        <th mat-header-cell *matHeaderCellDef> name </th>
+        <td mat-cell *matCellDef="let element">
+          <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+            <img mat-card-image [src]="element.profileImage ? profileImageUrls+ element.profileImage: defaultImage"
+              class="circle-avatar-md m-3">
+            <div fxLayout="column">
+              <mat-card-title class="f-w-500"> {{element.firstName +' '+ element.lastName}} </mat-card-title>
+              <mat-card-subtitle> @{{element.username}}</mat-card-subtitle>
 
-          <ng-container matColumnDef="roles">
-            <th mat-header-cell *matHeaderCellDef> {{'roles' | translate}} </th>
-            <td mat-cell *matCellDef="let element">
-              <mat-chip-row *ngFor="let role of element.roles" class="mx-1 mat-bg-light-success">
-                {{role.name}}
-              </mat-chip-row> 
-             </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="enabled">
-            <th mat-header-cell *matHeaderCellDef> {{'enabled' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> 
-            
-              <mat-chip-row *ngIf="element.enabled" color="success" >
-                {{'active'|translate}}
-              </mat-chip-row> 
-              <mat-chip-row *ngIf="!element.enabled" color="danger">
-                {{'blocked'|translate}}
-              </mat-chip-row> 
-            </td>
-          </ng-container>
-      
-         
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Action</th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button [matMenuTriggerFor]="actionsMenu"><mat-icon>more_vert</mat-icon> </button>
+            </div>
+          </div>
 
-                <mat-menu #actionsMenu [overlapTrigger]="false" yPosition="below" style="width:70px" >
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> {{'email' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.email }} </td>
+      </ng-container>
 
-                    <button mat-menu-item [routerLink]="['/cources/1']">
-                        <mat-icon color="warn">remove_red_eye</mat-icon><span>view</span>
-                    </button>
-                    <button mat-menu-item>
-                      <mat-icon color="success">class</mat-icon><span>lecture</span>
-                  </button>
-                    <button mat-menu-item  >
-                        <mat-icon color="primary">mode_edit</mat-icon><span>edit</span>
-                    </button>
-                    <button mat-menu-item routerLink="#">
-                        <mat-icon color="danger">delete</mat-icon><span>delete</span>
-                    </button> 
+      <ng-container matColumnDef="roles">
+        <th mat-header-cell *matHeaderCellDef> {{'roles' | translate}} </th>
+        <td mat-cell *matCellDef="let element">
 
-                     
-                </mat-menu> 
-            </td>
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                       showFirstLastButtons
-                       aria-label="Select page of periodic elements">
-        </mat-paginator>
-      </div>
-    
-     
+          <span *ngFor="let role of element.roles">
+            <mat-chip-row *ngIf="role.name === 'ADMIN'" color="primary" class="mx-1">{{role.name}}</mat-chip-row>
+            <mat-chip-row *ngIf="role.name === 'STUDENT'" color="light-warn" class="mx-1">{{role.name}}</mat-chip-row>
+            <mat-chip-row *ngIf="role.name === 'TEACHER'" color="accent" class="mx-1">{{role.name}}</mat-chip-row>
+          </span>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="enabled">
+        <th mat-header-cell *matHeaderCellDef> {{'enabled' | translate}} </th>
+        <td mat-cell *matCellDef="let element">
+
+          <mat-chip-row *ngIf="element.enabled" color="success">
+            {{'active'|translate}}
+          </mat-chip-row>
+          <mat-chip-row *ngIf="!element.enabled" color="danger">
+            {{'blocked'|translate}}
+          </mat-chip-row>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="actionsMenu"><mat-icon>more_vert</mat-icon> </button>
+
+          <mat-menu #actionsMenu [overlapTrigger]="false" yPosition="below" style="width:70px">
+
+            <button mat-menu-item [routerLink]="['/cources/1']">
+              <mat-icon color="warn">remove_red_eye</mat-icon><span>view</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon color="success">class</mat-icon><span>lecture</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon color="primary">mode_edit</mat-icon><span>edit</span>
+            </button>
+            <button mat-menu-item routerLink="#">
+              <mat-icon color="danger">delete</mat-icon><span>delete</span>
+            </button>
+
+
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+
 
 </div>

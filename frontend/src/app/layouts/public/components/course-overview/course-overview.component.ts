@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { VIDEOS_URL } from 'src/app/constants/constants';
+import { CourseService } from 'src/app/service/courses.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-course-overview',
   templateUrl: './course-overview.component.html',
   styleUrls: ['./course-overview.component.scss']
 })
-export class CourseOverviewComponent {
+export class CourseOverviewComponent implements OnInit {
+
+  VIDEOS_URL = VIDEOS_URL;
 
   course: any = {
     title: 'JAVA for beginners',
@@ -64,4 +69,27 @@ export class CourseOverviewComponent {
       image: 'assets/images/uiux.jpeg'
     },
   ];
+
+  constructor(private courseService: CourseService){}
+
+  ngOnInit(): void {
+
+    /* this.courseService.getVideo().subscribe({
+      next: (response: any) => {
+
+        console.log(response);
+      },
+      error: (error: Error) => {
+        console.log(error);
+
+        Swal.fire({ 
+          icon: "error",
+          title: error.message,
+          showConfirmButton: true,
+         
+        });
+      }
+    }); */
+    
+  }
 }

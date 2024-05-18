@@ -18,6 +18,7 @@ const routes: Routes = [
     path:'admin',
     component: AdminComponent,
     children: [
+      {path:'', component: AdminDashboardComponent},
       {path:'dashboard', component: AdminDashboardComponent},
       {path:'my-comunity', component: MyCommunityComponent},
       {path:'courses', component: CoursesComponent},

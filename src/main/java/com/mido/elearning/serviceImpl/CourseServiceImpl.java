@@ -4,6 +4,7 @@ import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
+import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.repository.CourseRepository;
 import com.mido.elearning.repository.UserRepository;
@@ -41,14 +42,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDto> findAll() {
-        List<CourseDto> data = new ArrayList<>();
-        courseRepository.findAll().forEach( e-> data.add(CourseMapper.entityToDto(e)));
-        return data;
+        return courseRepository.findAll().stream()
+                .map(CourseMapper::entityToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public CourseDto findById(Long id) {
-        return null;
+        Course course = courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("course not found"));
+        return CourseMapper.entityToDto(course);
     }
 
     @Override

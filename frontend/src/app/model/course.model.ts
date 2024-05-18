@@ -10,5 +10,6 @@ export interface Course{
     enrolledStudentsCount?: number,
     coverImage: string,
     hours?: number;
+    author?:any
 
 }

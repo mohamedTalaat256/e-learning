@@ -1,0 +1,94 @@
+<div fxLayout="row" fxLayoutGap="30" class="my-5" style="padding-inline-end: 50px;">
+
+    <img [src]="IMAGES_URL+course.coverImage" alt="" class="cover-imag">
+    <div fxLayout="column">
+        <p class="mat-heading-3 f-w-bold">{{course.title}}</p>
+        <p>{{course.description}}</p>
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxLayout="column">
+                <app-rating-star [rating]="course.rating"></app-rating-star>
+
+                <p class=" f-w-bold mt-5"> {{'auther'}}</p>
+                <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                    <img mat-card-image [src]="course.author.profileImage ? PROFILE_IMAGES_URL+ course.author.profileImage: DEFAULT_USER_IMAGE"
+                      class="circle-avatar-md my-3" style="margin-inline-end: 8px;" >
+                    <div fxLayout="column">
+                      <mat-card-title class="f-w-500"> {{course.author.firstName +' '+ course.author.lastName}} </mat-card-title>
+                      <mat-card-subtitle> @{{course.author.username}}</mat-card-subtitle>
+        
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" >
+                
+                
+            </div>
+
+        </div>
+        
+
+
+
+        <table class="mt-5">
+            <tr>
+                <td width="130">{{'price' | translate}}</td>
+                <td>${{course.price}}</td>
+            </tr>
+
+            <tr>
+                <td>{{'hours' | translate}}</td>
+                <td>{{course.hours}} {{'h'|translate}}</td>
+            </tr>
+
+            <tr>
+                <td>{{'enrolled_students' | translate}}</td>
+                <td>{{course.enrolledStudentsCount}} {{'student'|translate}}</td>
+            </tr>
+        </table>
+
+       
+
+    </div>
+</div>
+
+<div>
+    <mat-tab-group>
+        
+        <mat-tab>
+            <ng-template mat-tab-label>
+             {{'reviews' | translate}}
+            </ng-template>
+            <div class="mt-3" style="width: 50%;">
+
+                <p class="f-w-bold">{{'leave_review'|translate}}</p>
+
+                <form action="">
+
+                    <div fxLayout="column" fxLayoutGap="20" >
+                        <mat-form-field>
+                            <mat-label>{{'leave_review'|translate}}</mat-label>
+                            <textarea matInput [placeholder]="'leave_review'|translate"></textarea>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary">{{'save'|translate}}</button>
+                    </div>
+
+                   
+                </form>
+            </div>
+           
+           
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>thumb_up</mat-icon>
+                Third
+            </ng-template>
+
+            Content 3
+        </mat-tab>
+    </mat-tab-group>
+</div>

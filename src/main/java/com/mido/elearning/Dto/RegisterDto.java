@@ -17,7 +17,6 @@ import java.util.Set;
 @ToString
 public class RegisterDto {
 
-    private Long id;
     private String username;
     private String firstName;
     private String lastName;

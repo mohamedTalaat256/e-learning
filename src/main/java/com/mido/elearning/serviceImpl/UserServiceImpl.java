@@ -103,6 +103,8 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
         AppUser currentUser = getCurrentAuthUser();
         String fileName = FileUtils.SaveFileAndGetName(file, currentUser.getUsername());
         currentUser.setProfileImage(fileName);
+
+        userRepository.save(currentUser);
     }
 
     @Override

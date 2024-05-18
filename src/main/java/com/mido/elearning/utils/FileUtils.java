@@ -14,7 +14,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class FileUtils {
 
    // @Value("${directory.upload}")
-    private static final String UPLOAD_DIRECTORY = "src/main/media";
+    private static final String UPLOAD_DIRECTORY = "src/main/media/images";
 
 
     public static String SaveFileAndGetName(MultipartFile profileImage, String fileName ) throws IOException {

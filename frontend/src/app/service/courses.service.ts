@@ -11,6 +11,10 @@ export class CourseService {
     return this.http.get(baseURL + '/courses');
   }
 
+  findById(courseId:number): Observable<any> {
+    return this.http.get(baseURL + `/courses/${courseId}`);
+  }
+
   myEnrolledCourses(): Observable<any> {
     return this.http.get(baseURL + '/courses/myEnrolledCourses');
   }
@@ -32,6 +36,14 @@ export class CourseService {
   public update(requestbody: any): Observable<any> {
     return this.http.put<any>(baseURL + '/courses/update', requestbody);
   }
+
+  getVideo(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'video/mp4'
+    });
+    return this.http.get('http://localhost:8090/media/videos/video.mp4',{ headers: headers });
+  }
+
 /*  
   
 

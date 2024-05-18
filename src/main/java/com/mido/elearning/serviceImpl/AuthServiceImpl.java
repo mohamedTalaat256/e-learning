@@ -96,7 +96,8 @@ public class AuthServiceImpl implements AuthService {
         Set<Role> roles = new HashSet<>();
         roles.add(role.get());
 
-        AppUser newUser = AppUser.builder().firstName(registerDto.getFirstName())
+        AppUser newUser = AppUser.builder()
+                .firstName(registerDto.getFirstName())
                 .lastName(registerDto.getLastName())
                 .username(registerDto.getUsername())
                 .email(registerDto.getEmail())
@@ -106,9 +107,12 @@ public class AuthServiceImpl implements AuthService {
                 .isAccountNonLocked(true)
                 .isAccountNonExpired(true)
                 .isAccountNonExpired(true)
+                .isCredentialsNonExpired(true)
                 .build();
 
-        return UserMapper.entityToDto(userRepository.save(newUser));
+        userRepository.save(newUser);
+
+        return UserMapper.entityToDto(newUser);
     }
 
     @Override

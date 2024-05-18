@@ -24,19 +24,19 @@ public class CourseController {
         return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findAll(),true);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
+        return AppResponse.generateResponse("course_data", HttpStatus.OK, courseService.findById(id),true);
+    }
+
     @GetMapping("/myEnrolledCourses")
     public ResponseEntity<Object> getMyEnrolledCourses(){
         return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findMyEnrolledCourses(),true);
     }
 
-
     @GetMapping("/authors/{authorId}")
     public ResponseEntity<Object> findByAuthorId(@PathVariable Long authorId){
         return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findByAuthorId(authorId),true);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> findById(@PathVariable("id") Long id){
-        return AppResponse.generateResponse("course_data", HttpStatus.OK, courseService.findById(id),true);
     }
 
     @PostMapping("/save")
@@ -56,7 +56,10 @@ public class CourseController {
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK,  courseService.enRollToCourse(courseId)  ,true);
     }
 
-
+    @GetMapping("/video")
+    public ResponseEntity<Object> getVideo(){
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findMyEnrolledCourses(),true);
+    }
     /*
 
 
