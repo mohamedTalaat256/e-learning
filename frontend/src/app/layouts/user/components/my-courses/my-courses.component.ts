@@ -29,7 +29,7 @@ export class MyCoursesComponent implements OnInit {
 
   ) { }
 
-  displayedColumns: string[] = ['title', 'description', 'price', 'isFree', 'rating', 'enrolledStudents', 'coverImage', 'actions'];
+  displayedColumns: string[] = ['title', 'description', 'coverImage', 'actions'];
   dataSource = new MatTableDataSource<Course>(null);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

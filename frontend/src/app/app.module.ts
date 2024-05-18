@@ -26,7 +26,7 @@ import { MyCommunityComponent } from './layouts/admin/components/my-community/my
 import { NgApexchartsModule } from "ng-apexcharts";
 import { CourseDialogFormComponent  } from './layouts/admin/components/course-dialog-form/course-dialog-form.component';
 import { RatingStarComponent } from './global/rating-star/rating-star.component';
-import { CourseOverviewComponent } from './layouts/public/course-overview/course-overview.component';
+import { CourseOverviewComponent } from './layouts/public/components/course-overview/course-overview.component';
 import { MinToLength } from './pip/minToLength';
 import { UsersComponent } from './layouts/admin/components/users/users.component';
 import { ValidationMsgComponent } from './global/validation-msg/validation-msg.component';
@@ -50,6 +50,7 @@ import { CourseCardComponent } from './global/course-card/course-card.component'
 import { FooterComponent } from './layouts/public/components/footer/footer.component';
 import { Page404Component } from './global/page404/page404.component';
 import { MyCoursesComponent } from './layouts/user/components/my-courses/my-courses.component';
+import { MyCourseCardComponent } from './global/my-course-card/my-course-card.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -92,7 +93,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CourseCardComponent,
     MyCoursesComponent,
     FooterComponent,
-    Page404Component
+    Page404Component,
+    MyCourseCardComponent
   ],
   imports: [
     MatSidenavModule,

@@ -41,6 +41,7 @@ public class CourseMapper {
                 .author(UserMapper.entityToPublicUserDto(entity.getAuthor()))
                 .coverImage(entity.getCoverImage())
                 .enrolledStudents(null)
+                .enrolledStudentsCount(enrolledStudents.size())
                 .rating(entity.getRating())
                 .build();
 

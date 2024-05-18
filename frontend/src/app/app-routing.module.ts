@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CourseOverviewComponent } from './layouts/public/course-overview/course-overview.component';
+import { CourseOverviewComponent } from './layouts/public/components/course-overview/course-overview.component';
 import { LangingPageComponent } from './layouts/public/components/langing-page/langing-page.component';
 import { Page404Component } from './global/page404/page404.component';
 

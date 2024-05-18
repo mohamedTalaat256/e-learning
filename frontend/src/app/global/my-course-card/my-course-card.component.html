@@ -1,0 +1,40 @@
+<mat-card class="rounded-1 m-2 border-0 shadow-xs  my-card-md" style="background-image: url('{{IMAGES_URL+course.coverImage}}'); object-fit: contain;" >
+    <mat-card-header>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+            <div class="c100 p50 ">
+                <span>50%</span>
+                <div class="slice small">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+
+            <button mat-icon-button> <mat-icon>more_vert</mat-icon></button>
+        </div> 
+
+    </mat-card-header>
+    <mat-card-content>
+        <span class="mat-headline-5 mat-text-light-dark">{{course.title}}</span>
+        <br>
+        <span class=" my-5 mat-text-light-dark">{{course.description}}</span>
+    </mat-card-content>
+    <mat-card-footer class="m-3 p-3 mat-bg-light rounded-2 opacity-8">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <img src="/assets/images/icons/book.png" class="img-radius-sx mx-2" > 
+                <span class="f-w-500"> | </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="icon-sm mx-2" color="dark">calendar_today</mat-icon>
+                <span class="f-w-500"> | </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="icon-sm mx-2" color="dark">supervisor_account</mat-icon>
+                <span class="f-w-500"> | {{course.enrolledStudentsCount}}</span>
+            </div>
+
+
+        </div>
+    </mat-card-footer>
+</mat-card>
