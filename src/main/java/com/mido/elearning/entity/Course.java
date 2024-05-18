@@ -41,7 +41,7 @@ public class Course {
     private Date discountEndDate;
 
     @ManyToOne()
-    @JoinColumn(name = "auther_id", referencedColumnName = "id")
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private AppUser author;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -54,4 +54,8 @@ public class Course {
 
     @Column(name = "cover_image")
     private String coverImage;
+
+    public Course(long id) {
+        this.id = id;
+    }
 }
