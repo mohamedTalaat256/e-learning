@@ -10,7 +10,7 @@
             <div fxLayout="column">
                 <app-rating-star [rating]="course.rating"></app-rating-star>
 
-                <p class=" f-w-bold mt-5"> {{'auther'}}</p>
+                <p class=" f-w-bold mt-5"> {{'instractor'}}</p>
                 <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
                     <img mat-card-image [src]="course.author.profileImage ? PROFILE_IMAGES_URL+ course.author.profileImage: DEFAULT_USER_IMAGE"
                       class="circle-avatar-md my-3" style="margin-inline-end: 8px;" >
