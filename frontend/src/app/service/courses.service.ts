@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { baseURL } from "../constants/constants"; 
-import { User } from "../model/user,model";
+import { baseURL } from "../constants/constants";
 
 @Injectable({ providedIn: 'root' })
 export class CourseService {
@@ -11,6 +10,12 @@ export class CourseService {
   getAll(): Observable<any> {
     return this.http.get(baseURL + '/courses');
   }
+
+  myEnrolledCourses(): Observable<any> {
+    return this.http.get(baseURL + '/courses/myEnrolledCourses');
+  }
+
+
   public save(courseUploadRequest: any, coverImageFile: File): Observable<any> {
 
     const formData: FormData = new FormData();

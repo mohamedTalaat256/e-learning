@@ -2,7 +2,6 @@ package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
-import com.mido.elearning.Dto.EnrollRequest;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
 import com.mido.elearning.mapping.CourseMapper;
@@ -17,17 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Log4j2
 public class CourseServiceImpl implements CourseService {
 
-
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
+    private final UserServiceImpl userService;
 
     private final CourseMapper courseMapper;
     @Override
@@ -43,7 +42,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDto> findAll() {
         List<CourseDto> data = new ArrayList<>();
-
         courseRepository.findAll().forEach( e-> data.add(CourseMapper.entityToDto(e)));
         return data;
     }
@@ -56,26 +54,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDto> findByAuthorId(Long authorId) {
 
-        List<CourseDto> data = new ArrayList<>();
-        courseRepository.findAllByAuthorId(authorId).forEach( e->  data.add(CourseMapper.entityToDto(e)));
-        return data;
+        return courseRepository.findAllByAuthorId(authorId).stream()
+                .map(CourseMapper::entityToDto)
+                .collect(Collectors.toList());
     }
 
-
     @Transactional
-    public Object enRollToCourse( EnrollRequest enrollRequest){
-        AppUser student = userRepository.findById(enrollRequest.getStudentId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public Object enRollToCourse(Long courseId){
+        AppUser student =  userService.getCurrentAuthUser();
 
-        Course course = courseRepository.findById(enrollRequest.getCourseId())
+        Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
-        if (!student.getEnrolledCourses().contains(course)) {
-            student.getEnrolledCourses().add(course);
-        }
-        if (!course.getEnrolledStudents().contains(student)) {
-            course.getEnrolledStudents().add(student);
-        }
+        student.getEnrolledCourses().add(course);
+        course.getEnrolledStudents().add(student);
 
         userRepository.save(student);
         courseRepository.save(course);
@@ -89,5 +81,13 @@ public class CourseServiceImpl implements CourseService {
 
             currentUser.setProfileImage(fileName);
             userRepository.save(currentUser);*/
+    }
+
+    @Override
+    public Set<CourseDto> findMyEnrolledCourses() {
+
+        return  userService.getCurrentAuthUser().getEnrolledCourses().stream()
+                .map(CourseMapper::entityToDto)
+                .collect(Collectors.toSet());
     }
 }

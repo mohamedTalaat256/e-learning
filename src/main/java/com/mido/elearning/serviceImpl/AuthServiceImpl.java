@@ -1,7 +1,6 @@
 package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.AccessTokenDto;
-import com.mido.elearning.Dto.JWTResponseDto;
 import com.mido.elearning.Dto.RegisterDto;
 import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
@@ -21,7 +20,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
-import com.mido.elearning.service.UserService;
 import com.mido.elearning.utils.AppResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +41,9 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+
     private final AuthenticationManager authManager;
     private final UserRepository userRepository;
-    //private final UserServiceImpl userServiceImpl;
     private final PasswordEncoder passwordEncoder;
     private final HttpServletRequest httpRequest;
     private final TokenInfoService tokenInfoService;
@@ -89,8 +87,6 @@ public class AuthServiceImpl implements AuthService {
             throw new DuplicateRecordException("This User is already registered  : " + registerDto.getUsername());
         }
         registerDto.setPassword(passwordEncoder.encode(registerDto.getPassword()));
-
-
 
 
         Optional<Role> role = roleRepository.findRoleByName(registerDto.getRole());

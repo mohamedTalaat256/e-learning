@@ -16,7 +16,7 @@ createCourseForm(){
     let form = this.fb.group(
       {
         id:                [null],
-        title:             [null,[Validators.required, Validators.maxLength(20), Validators.minLength(5)]],
+        title:             [null,[Validators.required, Validators.maxLength(200), Validators.minLength(5)]],
         description:       [null, Validators.required, Validators.maxLength(200)],
         hours:             [null, Validators.required, Validators.min(20)],
         isCourseFree:      [false,  ], 

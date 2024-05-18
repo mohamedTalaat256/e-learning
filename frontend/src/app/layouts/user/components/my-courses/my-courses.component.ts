@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CourseDialogFormComponent } from '../course-dialog-form/course-dialog-form.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentUtilsService } from 'src/app/utils/components.utl.service';
 import { Course } from 'src/app/model/course.model';
@@ -14,11 +13,11 @@ import { AppResponse } from 'src/app/model/app_response.model';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  selector: 'app-my-courses',
+  templateUrl: './my-courses.component.html',
+  styleUrls: ['./my-courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class MyCoursesComponent implements OnInit {
   ADD_COURSE_URL: string = adminUrls.addCourse;
   IMAGES_URL= imagesUrls;
   coursesList: Course[];
@@ -38,13 +37,13 @@ export class CoursesComponent implements OnInit {
  
 
   ngOnInit(): void {
-    this.getAllCources();
+    this.myEnrolledCourses();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  getAllCources() {
-    this.courseService.getAll().pipe(take(1)).subscribe({
+  myEnrolledCourses() {
+    this.courseService.myEnrolledCourses().pipe(take(1)).subscribe({
       next: (response: AppResponse) => {
         this.coursesList = response.data;
         this.dataSource = new MatTableDataSource<Course>(this.coursesList);
@@ -59,47 +58,5 @@ export class CoursesComponent implements OnInit {
       }
     }
     );
-  }
-
-
-  openCreateDialog() { 
-
-    const data = {
-      title: this.translate.instant('add_new_course'),
-      formMode: FormMode.CREATE
-    };
-    const dialogRef = this.dialog.open(CourseDialogFormComponent, {
-      width: dialog_w_md,
-      height: 'auto',
-      data: data
-    }); 
-
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-      if(result){
-        this.coursesList.push(result);
-        this.dataSource = new MatTableDataSource<Course>(this.coursesList);
-      }
-    });
-  }
-
- 
-
-
-
-  openEditDialog(courseData: any) {
-    const data = {
-      title: this.translate.instant('edit_course'),
-      formMode: FormMode.EDIT,
-      courseData: courseData
-    };
-    const dialogRef = this.dialog.open(CourseDialogFormComponent, {
-      width: dialog_w_md,
-      height: 'auto',
-      data: data
-    });
- 
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  } 
 }

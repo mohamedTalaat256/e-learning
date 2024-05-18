@@ -49,6 +49,7 @@ import { UserSideNavListComponent } from './layouts/user/components/user-side-na
 import { CourseCardComponent } from './global/course-card/course-card.component';
 import { FooterComponent } from './layouts/public/components/footer/footer.component';
 import { Page404Component } from './global/page404/page404.component';
+import { MyCoursesComponent } from './layouts/user/components/my-courses/my-courses.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -89,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ProfileEditComponent,
     UserSideNavListComponent,
     CourseCardComponent,
+    MyCoursesComponent,
     FooterComponent,
     Page404Component
   ],

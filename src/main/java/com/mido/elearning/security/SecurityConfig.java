@@ -23,8 +23,6 @@ import java.util.List;
 
 public class SecurityConfig {
 
-
-
     String [] PUBLIC_END_POINTS = {
            "api/home",
             "/media/**",
@@ -35,8 +33,6 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/api-docs/**"
     };
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -84,10 +80,6 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-
-
-
 
     @Bean
     public AuthFilter authFilter() {

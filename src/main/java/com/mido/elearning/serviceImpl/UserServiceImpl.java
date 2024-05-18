@@ -9,7 +9,6 @@ import com.mido.elearning.exception.InternalServerErrorException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.UserMapper;
 import com.mido.elearning.repository.CourseRepository;
-import com.mido.elearning.repository.RoleRepository;
 import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.security.AppUserDetail;
 import com.mido.elearning.service.UserService;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService  {
@@ -37,26 +37,13 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Override
     public UserDto updatePassword(String newPassword)  {
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        if (user instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
-
-            Optional<AppUser> appUser =	userRepository.findByUsername(username);
-            if (!appUser.isPresent()) {
-                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
-            }
-            AppUser currentUser = appUser.get();
+            AppUser currentUser = getCurrentAuthUser();
 
             if(Objects.equals(currentUser.getPassword(), passwordEncoder.encode( newPassword))){
                 currentUser.setPassword(newPassword);
-                userRepository.save(currentUser);
-            }else {
-                throw new InternalServerErrorException("password does not match old password");
+              return  UserMapper.entityToDto(userRepository.save(currentUser));
             }
-        }
-        throw new InternalServerErrorException("fail");
-
+        throw new InternalServerErrorException("password does not match old password");
     }
 
     @Override
@@ -68,14 +55,9 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Override
     public PublicUserDto findById(Long authorId) {
-        Optional<AppUser> appUser =	userRepository.findById(authorId);
-        if (!appUser.isPresent()) {
-            throw new UsernameNotFoundException("This User Not found with selected id :- " + authorId);
-        }
+        AppUser appUser = getCurrentAuthUser();
 
         List<CourseDto> uploadedCourses = new ArrayList<>();
-        //courseRepository.findAllByAuthorId(authorId).forEach( e-> uploadedCourses.add(CourseMapper.entityToDto(e)));
-
         courseRepository.findAllByAuthorId(authorId).forEach(e ->
                 {
                     e.setAuthor(null);
@@ -83,84 +65,44 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
                 }
         );
 
-        return PublicUserDto.builder().id(appUser.get().getId())
-                .email(appUser.get().getEmail())
-                .username(appUser.get().getUsername())
-                .firstName(appUser.get().getFirstName())
-                .lastName(appUser.get().getLastName())
-                .profileImage(appUser.get().getProfileImage())
-                .dateOfBirth(appUser.get().getDateOfBirth())
-                .organization(appUser.get().getOrganization())
-                .nationality(appUser.get().getNationality())
-                .isEnabled(appUser.get().isEnabled())
+        return PublicUserDto.builder().id(appUser.getId())
+                .email(appUser.getEmail())
+                .username(appUser.getUsername())
+                .firstName(appUser.getFirstName())
+                .lastName(appUser.getLastName())
+                .profileImage(appUser.getProfileImage())
+                .dateOfBirth(appUser.getDateOfBirth())
+                .organization(appUser.getOrganization())
+                .nationality(appUser.getNationality())
+                .isEnabled(appUser.isEnabled())
                 .uploadedCourses(uploadedCourses)
                 .build();
     }
 
     @Override
     public UserDto getMyProfile() {
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        if (user instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
-
-            Optional<AppUser> appUser =	userRepository.findByUsername(username);
-            if (!appUser.isPresent()) {
-                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
-            }
-            return UserMapper.entityToDto(appUser.get());
-        }
-
-        throw new InternalServerErrorException("fail");
+        return UserMapper.entityToDto(getCurrentAuthUser());
     }
 
     @Override
     public UserDto updateProfile(UserDto newData) {
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        if (user instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
 
-            Optional<AppUser> appUser =	userRepository.findByUsername(username);
-            if (appUser.isPresent()) {
+        AppUser currentUser = getCurrentAuthUser();
 
-                AppUser currentUser = appUser.get();
+        currentUser.setFirstName(newData.getFirstName());
+        currentUser.setLastName(newData.getLastName());
+        currentUser.setDateOfBirth(newData.getDateOfBirth());
+        // currentUser.setNationality(newData.getNationality());
 
-                currentUser.setFirstName(newData.getFirstName());
-                currentUser.setLastName(newData.getLastName());
-                currentUser.setDateOfBirth(newData.getDateOfBirth());
-               // currentUser.setNationality(newData.getNationality());
-
-                userRepository.save(currentUser);
-
-            }else{
-                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
-            }
-
-        }
-        throw new InternalServerErrorException("Internal Server Error!!");
+        return UserMapper.entityToDto(userRepository.save(currentUser));
     }
 
     @Override
     public void updateProfileImage(MultipartFile file) throws IOException {
 
-
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        if (user instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
-
-            Optional<AppUser> appUser =	userRepository.findByUsername(username);
-            if (!appUser.isPresent()) {
-                throw new UsernameNotFoundException("This User Not found with selected user name :- " + username);
-            }
-            AppUser currentUser = appUser.get();
-            String fileName = FileUtils.SaveFileAndGetName(file, currentUser.getUsername());
-
-            currentUser.setProfileImage(fileName);
-            userRepository.save(currentUser);
-        }
-
+        AppUser currentUser = getCurrentAuthUser();
+        String fileName = FileUtils.SaveFileAndGetName(file, currentUser.getUsername());
+        currentUser.setProfileImage(fileName);
     }
 
     @Override
@@ -170,6 +112,12 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
             throw new UsernameNotFoundException("This User Not found with selected user name :- " + userName);
         }
         return new AppUserDetail(appUser.get());
+    }
+
+    public AppUser getCurrentAuthUser() {
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername( user.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("This User Not found with selected user name :- " + user.getUsername()));
     }
 
     public AppUser save(UserDto registerRequest) {

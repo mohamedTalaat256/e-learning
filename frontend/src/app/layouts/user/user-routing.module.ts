@@ -6,6 +6,7 @@ import { CoursesComponent } from '../admin/components/courses/courses.component'
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { userGuardService } from 'src/app/guards/usrer-guard.guard';
 import { Page404Component } from 'src/app/global/page404/page404.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
       {path:'', component: UserDashboardComponent},
       {path:'edit-profile', component: ProfileEditComponent},
       {path:'dashboard', component: UserDashboardComponent},
-      {path:'my-courses', component: CoursesComponent},
+      {path:'my-courses', component: MyCoursesComponent},
       {path:'enroll-to-course', component: UserDashboardComponent},
       { path: '**', pathMatch :'full' , component: Page404Component},
     ],

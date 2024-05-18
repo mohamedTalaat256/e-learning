@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormMode, imagePlaceholder, imagesUrls } from '../../../../constants/constants';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course } from 'src/app/model/course.model';
 import { CourseFormControls } from '../../form-controls/course-form';
@@ -31,7 +31,7 @@ export class CourseDialogFormComponent implements OnInit {
   courseData: Course ;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private courseFomrControle: CourseFormControls,
-  private courseService: CourseService
+  private courseService: CourseService, private dialogRef: MatDialogRef<CourseDialogFormComponent>
 ) {
     this.courseForm = this.courseFomrControle.createCourseForm();
 
@@ -94,6 +94,7 @@ export class CourseDialogFormComponent implements OnInit {
             showConfirmButton: true,
             timer: 1500
           });
+          this.dialogRef.close(response.data);
         }
       },
       error:(error: Error)=>{
