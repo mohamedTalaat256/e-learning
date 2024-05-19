@@ -1,0 +1,70 @@
+.footer {
+    background-color: #ff8383;
+    color: #F5F5F5;
+    padding: 40px 20px;
+}
+.footer .top-section { 
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.footer .top-section input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    flex-grow: 1;
+}
+.footer .top-section button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00BFA6;
+    color: white;
+    cursor: pointer;
+}
+.footer .middle-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.footer .middle-section .column {
+    flex: 1;
+    margin: 0 10px;
+}
+.footer .middle-section .column h3 {
+    margin-bottom: 10px;
+}
+.footer .middle-section .column a {
+    display: block;
+    color: #F5F5F5;
+    text-decoration: none;
+    margin: 5px 0;
+}
+.footer .middle-section .column a:hover {
+    color: #00BFA6;
+}
+.footer .bottom-section {
+    padding: 10px;
+    text-align: center;
+}
+.footer .bottom-section a {
+    color: #F5F5F5;
+    text-decoration: none;
+    margin: 0 5px;
+}
+.footer .bottom-section a:hover {
+    color: #00BFA6;
+}
+.footer .social-icons a {
+    margin-right: 10px;
+}
+.footer .social-icons i {
+    color: #F5F5F5;
+    font-size: 20px;
+}
+.footer .social-icons i:hover {
+    color: #00BFA6;
+}
