@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { imagesUrls } from 'src/app/constants/constants';
+import { imagePlaceholder, imagesUrls, profileImagesUrls } from 'src/app/constants/constants';
 import { Course } from 'src/app/model/course.model';
 
 @Component({
@@ -10,6 +10,8 @@ import { Course } from 'src/app/model/course.model';
 export class CourseCardComponent {
 
   IMAGES_URL= imagesUrls;
+  PROFILE_IMAGES_URL= profileImagesUrls;
+  DEFAULT_USER_IMAGE = imagePlaceholder;
 
   @Input() course: Course;
 

@@ -1,30 +1,58 @@
-<mat-card  >
+<div class="shadow-dark-sm mat-bg-light rounded-1 p-3 mt-4"  >
     <div style="position: relative;">
-        <div class="mat-bg-gold p-2 px-3 m-2 rounded-2" style="position: absolute; z-index: 99;">
-            {{'free'|translate}}
+        <div class="free-bage mat-bg-light p-2 px-3 m-3 rounded-1 " >
+            <span *ngIf="course.isCourseFree" class="mat-text-success">  {{'free'|translate}}</span>
+            <span *ngIf="!course.isCourseFree" class="mat-text-danger">  ${{course.price}}</span>
+          
         </div>
-        <img mat-card-image [src]="IMAGES_URL+course.coverImage" class="course-card-img" style="object-fit: cover;" >
+        <img mat-card-image [src]="IMAGES_URL+course.coverImage" class="course-card-img rounded-1" style="object-fit: cover;" >
 
     </div>
     <mat-card-content>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                <img mat-card-image [src]="course.author.profileImage ? PROFILE_IMAGES_URL+ course.author.profileImage: DEFAULT_USER_IMAGE"
+                  class="circle-avatar-md my-3" style="margin-inline-end: 8px;" >
+                <div fxLayout="column">
+                  <mat-card-title class="f-w-500"> {{course.author.firstName +' '+ course.author.lastName}} </mat-card-title>
+                  <mat-card-subtitle class="mat-text-secondary"> @{{course.author.username}}</mat-card-subtitle>
+    
+                </div>
+            </div>
+            <mat-icon color="accent">favorite_border</mat-icon>
+        </div>
+
         <p class="my-1 f-w-bold">{{course.title}}</p>
-        <span>{{course.description}}</span>
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+
+            <div fxLayout="row"  fxLayoutAlign="center start " fxLayoutGap="10">
+                <img src="/assets/images/icons/book.png" class=" icon-xs img-color-red"  > 
+                <p class="mat-text-secondary">12 {{'lecture'| translate}}</p>
+            </div>
+            
+            <div fxLayout="row"  fxLayoutAlign="center start" fxLayoutGap="10">
+                <mat-icon color="primary">timer</mat-icon>
+                <p class="mat-text-secondary"> {{ course.hours | minToLength }}</p>
+            </div>
+
+        </div>
+
+        <mat-divider></mat-divider> 
+
     </mat-card-content> 
-    <mat-card-actions class=" mt-2 p-3">
+    <mat-card-actions class="p-2">
 
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between">
-            <div  fxLayout="column"  >
-                <span class="f-w-bold">${{course.price}}</span>
-                <app-rating-star [rating]="course.rating" ></app-rating-star>
-            </div>
-            <div  fxLayout="column">
-                
-                <p class="my-2">
-                    {{course.hours}} {{'hours'| translate}}
-                </p>
-                <button mat-raised-button color="dark" [routerLink]="['/user/buy-course',course.id]">{{'enroll'|translate}}</button>
-            </div>
+            <app-rating-star [rating]="course.rating" ></app-rating-star>
+            <button mat-stroked-button color="primary" class="rounded-2" [routerLink]="['/user/buy-course',course.id]">
+                <span class="mat-text-secondary">
+                    {{'enroll'|translate}}
+                </span>
+            </button>
         </div>
         
     </mat-card-actions>
-</mat-card>
+</div>

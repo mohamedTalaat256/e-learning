@@ -1,88 +1,121 @@
+<div class="bg-gradeint">
+    <div class="container">
+        <mat-toolbar class="bg-transparent">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>E Learning</span>
+            <span class="example-spacer"></span>
 
-<div class="container">
-    <mat-toolbar class="bg-transparent">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span>E Learning</span>
-        <span class="example-spacer"></span>
-
-        <div fxLayout="row" fxLayoutGap="30">
-            <span>Home</span>
-            <span>About Us</span>
-            <span>Services</span>
-            <span>Comunity</span>
-        </div>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-            <mat-icon>favorite</mat-icon>
-        </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-            <mat-icon>share</mat-icon>
-        </button>
-    </mat-toolbar>
+            <div fxLayout="row" fxLayoutGap="30">
+                <span>Home</span>
+                <span>About Us</span>
+                <span>Services</span>
+                <span>Comunity</span>
+            </div>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <mat-icon>share</mat-icon>
+            </button>
+        </mat-toolbar>
 
 
-    <div fxLayout="row" fxFlexAlign="space-between">
-        <div fxLayout="column" fxFlexAlign="center" fxFlex="50">
-            <span style="font-size: 2.1rem; font-weight: bold;">
-                improve yous skills
-            </span>
+        <div fxLayout="row" fxFlexAlign="space-between">
+            <div fxLayout="column" fxFlexAlign="center" fxFlex="50">
+                <span style="font-size: 2.1rem; font-weight: bold;">
+                    improve yous skills
+                </span>
+            </div>
+            <img fxFlex="50" src="/assets/images/student_girl.png">
         </div>
-        <img fxFlex="50" src="/assets/images/student_girl.png">
-    </div>
-    
-    <div fxLayout="row" fxFlexAlign="space-between" class="mt-5">
-        <div fxLayout="column" fxFlexAlign="center" fxFlex="20">
-            <span class="f-w-bold mat-headline-5">
-                Recent Uploadded
-            </span>
-        </div>
-        <div fxLayout="row" fxFlex="80" fxLayoutAlign="space-around center" fxLayoutGap="40">
-    
-            <span>
-                <span class="f-w-bold">+100</span>
-                <br>
-                <span>lecture</span>
-            </span>
-    
-            <span>
-                <span class="f-w-bold">+100</span>
-                <br>
-                <span>lecture</span>
-            </span>
-    
-            <span>
-                <span class="f-w-bold">+100</span>
-                <br>
-                <span>lecture</span>
-            </span>
-    
-            <span>
-                <span class="f-w-bold">+100</span>
-                <br>
-                <span>lecture</span>
-            </span>
-        </div>
-    </div>
-    
-    <div fxLayout="row" fxFlexAlign="space-between" class="my-5">
-        <div fxLayout="column" fxFlexAlign="center" fxFlex="100">
-            <span class="f-w-bold mat-headline-5">
+
+        <div fxLayout="column" fxFlexAlign="center" >
+            <span class="section-title">
                 New Cources
             </span>
-            <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="10" fxFlex="73%" fxFlex.lg="68%" fxFlex.md="100%" fxFlex.xs="100%" fxLayout.xs="column">
-    
-                <app-course-card fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%" *ngFor="let course of recentCources" [course]="course">
-    
-                </app-course-card> 
+            <div class="mt-5" fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center" fxLayoutGap="40">
+
+                <div class="counter-card">
+                    <div fxLayout="row" fxLayoutAlign="start center"  >
+                        <div class="mat-bg-accent rounded-1 p-2 m-2" >
+                            <mat-icon color="light" class="icon-md" >collections_bookmark</mat-icon>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-card-title class="f-w-500"> +10k </mat-card-title>
+                          <mat-card-subtitle class="mat-text-secondary"> {{'online_course' | translate }} </mat-card-subtitle>
+            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="counter-card">
+                    <div fxLayout="row" fxLayoutAlign="start center"  >
+                        <div class="mat-bg-accent rounded-1 p-2 m-2" >
+                            <mat-icon color="light" class="icon-md" >collections_bookmark</mat-icon>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-card-title class="f-w-500"> +10k </mat-card-title>
+                          <mat-card-subtitle class="mat-text-secondary"> {{'online_course' | translate }} </mat-card-subtitle>
+            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="counter-card">
+                    <div fxLayout="row" fxLayoutAlign="start center"  >
+                        <div class="mat-bg-accent rounded-1 p-2 m-2" >
+                            <mat-icon color="light" class="icon-md" >collections_bookmark</mat-icon>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-card-title class="f-w-500"> +10k </mat-card-title>
+                          <mat-card-subtitle class="mat-text-secondary"> {{'online_course' | translate }} </mat-card-subtitle>
+            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="counter-card">
+                    <div fxLayout="row" fxLayoutAlign="start center"  >
+                        <div class="mat-bg-accent rounded-1 p-2 m-2" >
+                            <mat-icon color="light" class="icon-md" >collections_bookmark</mat-icon>
+                        </div>
+                        <div fxLayout="column">
+                          <mat-card-title class="f-w-500"> +10k </mat-card-title>
+                          <mat-card-subtitle class="mat-text-secondary"> {{'online_course' | translate }} </mat-card-subtitle>
+            
+                        </div>
+                    </div>
+                </div>
+               
+                
             </div>
         </div>
+
+        <div fxLayout="row" fxFlexAlign="space-between" class="mt-5 py-5 ">
+            <div fxLayout="column" fxFlexAlign="center" fxFlex="100">
+                <span class="section-title">
+                    New Cources
+                </span>
+                <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="10" fxFlex="73%"
+                    fxFlex.lg="68%" fxFlex.md="100%" fxFlex.xs="100%" fxLayout.xs="column">
+
+                    <app-course-card fxFlex.xl="31.7%" fxFlex.lg="47%" fxFlex.md="47%" fxFlex.sm="100%" fxFlex.xs="100%"
+                        *ngFor="let course of recentCources" [course]="course">
+
+                    </app-course-card>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
-    
-    
-
-
 </div>
+
+
 
 
 

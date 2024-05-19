@@ -54,6 +54,14 @@ body {
     width: 20px;
 }
 
+.section-title{
+  font-weight: bolder;
+  font-size: 2.7rem;
+  color: #223253;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
 
 .bg-hidden {
     background-color: transparent;
@@ -83,6 +91,11 @@ body {
 
 .icon-lg {
     transform: scale(2);
+}
+.icon-md {
+  height: 36px !important;
+  width: 36px !important;
+  font-size: 36px !important; 
 }
 
 .icon-sm {
@@ -155,6 +168,9 @@ body {
  .shadow-sm{
     box-shadow: 3px 2px 10px 1px #f0f0f0 !important;
  }
+ .shadow-dark-sm{
+  box-shadow: 3px 2px 10px 1px #00000025 !important;
+}
 
  .full-screen-img{
     height: 100%;
@@ -293,13 +309,23 @@ body {
 
 .course-card-img{
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: scale-down;
 }
 
 .mat-bg-gold{
   background-color: #FFD700;
 }
+
+.img-color-red{
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 0, 0));
+}
+.icon-xs{
+  height: 16px !important;
+ 
+}
+
+
 
   .container {
     padding-right: 15px;
