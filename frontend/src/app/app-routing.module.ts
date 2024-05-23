@@ -8,9 +8,10 @@ const routes: Routes = [
   { path: 'login', redirectTo: '/login', pathMatch: 'full' },
   
   { path: 'cources/:courseId', component: CourseOverviewComponent },
+/*   { path: 'user', redirectTo: '/user', pathMatch: 'full' },
+  { path: 'admin', redirectTo: '/admin', pathMatch: 'full' },
 
-  
-  //{ path: '**', pathMatch   : 'full', component: Page404Component}
+  { path: '**' , pathMatch   : 'full', component: Page404Component} */
 
 ];
 @NgModule({

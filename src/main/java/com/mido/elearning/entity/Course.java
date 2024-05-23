@@ -55,6 +55,11 @@ public class Course {
     @Column(name = "cover_image")
     private String coverImage;
 
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Lecture> lectures;
+
     public Course(long id) {
         this.id = id;
     }
