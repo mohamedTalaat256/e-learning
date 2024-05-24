@@ -6,7 +6,6 @@ import com.mido.elearning.Dto.MyVideo;
 import com.mido.elearning.entity.Course;
 import com.mido.elearning.entity.Lecture;
 import com.mido.elearning.exception.RecordNotFoundException;
-import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.LectureMapper;
 import com.mido.elearning.repository.LectureRepository;
 import com.mido.elearning.service.LectureService;
