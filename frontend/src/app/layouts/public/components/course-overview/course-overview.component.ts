@@ -82,7 +82,12 @@ export class CourseOverviewComponent implements OnInit {
     localStorage.setItem(constant.CURRENT_LECTURE_INDEX, this.currentLecture.lectureOrder.toString());
     this.videoPlayer = this.videoPlayerRef.nativeElement;
     this.videoPlayer.src = VIDEOS_URL+ this.currentLecture.video;
-    this.videoPlayer.load(); 
+    this.videoPlayer.load();
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
 }

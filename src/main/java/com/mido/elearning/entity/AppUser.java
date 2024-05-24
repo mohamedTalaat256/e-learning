@@ -62,9 +62,9 @@ public class AppUser {
     private Set<Course> uploadedCourses;
 
 
-    @ManyToMany(mappedBy = "enrolledStudents")
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
-    private Set<Course> enrolledCourses = new HashSet<>();
+    private Set<StudentsEnrolledCourse> studentsEnrolledCourse = new HashSet<>();
 
     private boolean isEnabled;
 

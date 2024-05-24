@@ -44,12 +44,9 @@ public class Course {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private AppUser author;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "students_enrolled_courses",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @OneToMany( mappedBy = "course")
     @JsonIgnore
-    private Set<AppUser> enrolledStudents = new HashSet<>();
+    private Set<StudentsEnrolledCourse> studentsEnrolledCourse = new HashSet<>();
 
 
     @Column(name = "cover_image")

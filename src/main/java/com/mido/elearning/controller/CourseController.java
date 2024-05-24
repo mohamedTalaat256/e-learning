@@ -2,6 +2,7 @@ package com.mido.elearning.controller;
 
 
 import com.mido.elearning.Dto.CourseUploadRequest;
+import com.mido.elearning.repository.StudentsEnrolledCourcesRepository;
 import com.mido.elearning.serviceImpl.CourseServiceImpl;
 import com.mido.elearning.utils.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class CourseController {
 
     @Autowired
     CourseServiceImpl courseService;
-
+    @Autowired
+    StudentsEnrolledCourcesRepository studentsEnrolledCourcesRepository;
     @GetMapping("")
     public ResponseEntity<Object> findAll(){
         return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findAll(),true);
@@ -31,7 +33,7 @@ public class CourseController {
 
     @GetMapping("/myEnrolledCourses")
     public ResponseEntity<Object> getMyEnrolledCourses(){
-        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findMyEnrolledCourses(),true);
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, studentsEnrolledCourcesRepository.findAll()/*courseService.findMyEnrolledCourses()*/,true);
     }
 
     @GetMapping("/authors/{authorId}")
@@ -51,14 +53,14 @@ public class CourseController {
     }
 
     @PostMapping("/enrollToCourse")
-    public ResponseEntity<Object>  enrollToCourse(@RequestParam Long courseId) throws IOException {
+    public ResponseEntity<Object>  enrollToCourse(@RequestParam("courseId") Long courseId) throws IOException {
 
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK,  courseService.enRollToCourse(courseId)  ,true);
     }
 
     @GetMapping("/video")
     public ResponseEntity<Object> getVideo(){
-        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findMyEnrolledCourses(),true);
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, studentsEnrolledCourcesRepository.findAll()/*courseService.findMyEnrolledCourses()*/,true);
     }
     /*
 

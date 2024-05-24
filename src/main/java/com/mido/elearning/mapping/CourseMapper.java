@@ -27,7 +27,7 @@ public class CourseMapper {
 
         Set<PublicUserDto> enrolledStudents = new HashSet<>();
 
-        entity.getEnrolledStudents().forEach(e-> enrolledStudents.add(UserMapper.entityToPublicUserDto(e)));
+        //entity.getEnrolledStudents().forEach(e-> enrolledStudents.add(UserMapper.entityToPublicUserDto(e)));
 
         return CourseDto.builder().id(entity.getId())
                 .title(entity.getTitle())
@@ -62,7 +62,7 @@ public class CourseMapper {
                 .discountEndDate(dto.getDiscountEndDate())
                 .author( new AppUser(dto.getAuthor().getId()))
                 .coverImage(dto.getCoverImage())
-                .enrolledStudents(enrolledStudents)
+                //.studentsEnrolledCourse(enrolledStudents)
                 .rating(dto.getRating())
                 .build();
     }

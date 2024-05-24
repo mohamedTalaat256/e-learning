@@ -4,9 +4,11 @@ import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
+import com.mido.elearning.entity.StudentsEnrolledCourse;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.repository.CourseRepository;
+import com.mido.elearning.repository.StudentsEnrolledCourcesRepository;
 import com.mido.elearning.repository.UserRepository;
 import com.mido.elearning.service.CourseService;
 import com.mido.elearning.utils.FileUtils;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,6 +29,8 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+    private final StudentsEnrolledCourcesRepository studentsEnrolledCourcesRepository;
+
     private final UserRepository userRepository;
     private final UserServiceImpl userService;
 
@@ -68,11 +73,15 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
-        student.getEnrolledCourses().add(course);
-        course.getEnrolledStudents().add(student);
 
-        userRepository.save(student);
-        courseRepository.save(course);
+        StudentsEnrolledCourse data = StudentsEnrolledCourse.builder()
+                .student(student)
+                        .course(course)
+                            .enrolledAt(LocalDateTime.now())
+                                .progress(0)
+                                        .build();
+
+        studentsEnrolledCourcesRepository.save(data);
         return course;
 
     }
@@ -88,8 +97,12 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Set<CourseDto> findMyEnrolledCourses() {
 
-        return  userService.getCurrentAuthUser().getEnrolledCourses().stream()
+        return null;
+
+        //return studentsEnrolledCourcesRepository.findAll();
+
+       /* return  userService.getCurrentAuthUser().getEnrolledCourses().stream()
                 .map(CourseMapper::entityToDto)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
     }
 }
