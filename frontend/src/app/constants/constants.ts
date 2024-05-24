@@ -1,9 +1,12 @@
+import { Course } from "../model/course.model";
+import { Lecture } from "../model/lecture.model";
 
 export const baseURL = 'http://localhost:8090/api'
 export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
 export const profileImagesUrls='http://localhost:8090/media/images/'; 
 export const imagesUrls='http://localhost:8090/media/images/'; 
-export const VIDEOS_URL='http://localhost:8090/media/videos/'; 
+export const VIDEOS_URL='http://localhost:8090/media/videos/';
+
 export enum adminUrls {
     dasboard = "/admin/dasboard",
     addCourse = "/admin/add-course",
@@ -37,4 +40,34 @@ export const EMPTY_PROFILE = {
     accountNonExpired: false,
     credentialsNonExpired: false,
     accountNonLocked: false
+};
+
+export const EMPTY_COURSE:Course = {
+    id: 0,
+    title: '',
+    description: '',
+    price: 0,
+    discount: 0,
+    isCourseFree: false,
+    rating: 0,
+    enrolledStudents: 0,
+    enrolledStudentsCount: 0,
+    coverImage: '',
+    hours: 0,
+    author:EMPTY_PROFILE
+}
+
+export const EMPTY_LECTUER:Lecture = {
+    id:0,
+    title: '',
+    description: '',
+    length: 0,
+    coverImage: '',
+    video: 0,
+    course: EMPTY_COURSE
+}
+
+export enum constant {
+    CURRENT_LECTURE_INDEX = 'CURRENT_LECTURE_INDEX',
+
 }

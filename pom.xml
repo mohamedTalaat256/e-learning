@@ -70,6 +70,12 @@
 			<version>2.0.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mp4parser</groupId>
+			<artifactId>isoparser</artifactId>
+			<version>1.9.56</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

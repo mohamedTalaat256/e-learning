@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { VIDEOS_URL } from 'src/app/constants/constants';
-import { CourseService } from 'src/app/service/courses.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { take } from 'rxjs';
+import { EMPTY_LECTUER, VIDEOS_URL, constant, imagesUrls } from 'src/app/constants/constants';
+import { AppResponse } from 'src/app/model/app_response.model';
+import { Lecture } from 'src/app/model/lecture.model';
+import { LectureService } from 'src/app/service/lecture.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,84 +17,63 @@ export class CourseOverviewComponent implements OnInit {
 
   VIDEOS_URL = VIDEOS_URL;
 
-  course: any = {
-    title: 'JAVA for beginners',
-    description: 'Hydrogen',
-    price: 199.9,
-    isFree: 0,
-    rating: 4,
-    enrolledStudents: 127,
-    image: 'assets/images/uiux.jpeg'
-  };
+  LECTURES_IMAGES_URL= imagesUrls;
 
-  currentLecture: any = {
-    id: 1,
-      title: 'lecture 1 - introduction to programming',
-      likes: 2600,
-      rating: 3,
-      length: 80,
-      image: 'assets/images/uiux.jpeg',
-      description: 'Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day. The writer has no idea what topic the random paragraph will be about when it appears. This forces the writer to use creativity to complete one of three common writing challenges. The writer can use the paragraph as the first one of a short story and build upon it. A second option is to use the random paragraph somewhere in a short story they create. The third option is to have the random paragraph be the ending paragraph in a short story. No matter which of these challenges is undertaken, the writer is forced to use creativity to incorporate the paragraph into their writing.'
-  };
+  @ViewChild("videoPlayer") videoPlayerRef!: ElementRef;
 
-  lectures: any[] = [
-    {
-      id: 1,
-      title: 'lecture 1 -introduction to the Course',
-      likes: 2600,
-      length: 60,
-      image: 'assets/images/uiux.jpeg'
-    },
-    {
-      id: 1,
-      title: 'lecture 2 -setup the envirenment',
-      likes: 2600,
-      length: 90,
-      image: 'assets/images/uiux.jpeg'
-    },
-    {
-      id: 1,
-      title: 'lecture 3 -Create first Program in JAVA',
-      likes: 2600,
-      length: 45,
-      image: 'assets/images/uiux.jpeg'
-    },
-    {
-      id: 1,
-      title: 'lecture 1 - introduction to programming',
-      likes: 2600,
-      length: 13,
-      image: 'assets/images/uiux.jpeg'
-    },
-    {
-      id: 1,
-      title: 'lecture 1 - introduction to programming',
-      likes: 2600,
-      length: 80,
-      image: 'assets/images/uiux.jpeg'
-    },
-  ];
+  currentLecture: Lecture=EMPTY_LECTUER;
+  
+  lectures: Lecture[] =  [];
+  lecturesIndexes: number[];
 
-  constructor(private courseService: CourseService){}
+  constructor(private lectureService: LectureService,
+    private route: ActivatedRoute,
+    private translate: TranslateService){}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.route.params.subscribe(params => { this.getCourseLectures(params['courseId']); });
+  }
 
-    /* this.courseService.getVideo().subscribe({
-      next: (response: any) => {
-
-        console.log(response);
+  getCourseLectures(courseId: number){
+    this.lectureService.findAllByCourseId(courseId).pipe(take(1)).subscribe({
+      next: (response: AppResponse) => {
+       this.lectures = response.data;
+      
+        this.getCurrentLectureIndex();
+        let videoPlayer = this.videoPlayerRef.nativeElement;
+        videoPlayer.load(); 
       },
       error: (error: Error) => {
-        console.log(error);
 
         Swal.fire({ 
           icon: "error",
           title: error.message,
-          showConfirmButton: true,
-         
+          showConfirmButton: true
         });
       }
-    }); */
-    
+    });
   }
+
+
+  getCurrentLectureIndex(){
+    let index:number =  Number(localStorage.getItem(constant.CURRENT_LECTURE_INDEX));
+    if(index){
+      this.currentLecture = this.lectures.filter(lec => lec.lectureOrder === index)[0];
+    }else{
+      this.currentLecture = this.lectures.filter(lec => lec.lectureOrder === 1)[0];
+      localStorage.setItem(constant.CURRENT_LECTURE_INDEX, this.currentLecture.lectureOrder.toString());
+
+    }
+
+
+
+  }
+
+  changeCurrentLecture(lectureId: number){
+
+    this.currentLecture = this.lectures.filter(lec => lec.id === lectureId)[0];
+    localStorage.setItem(constant.CURRENT_LECTURE_INDEX, this.currentLecture.lectureOrder.toString());
+
+  }
+
 }

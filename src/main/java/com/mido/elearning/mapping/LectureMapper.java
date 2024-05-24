@@ -32,6 +32,7 @@ public class LectureMapper {
                 .course(CourseMapper.entityToDto(entity.getCourse()))
                 .coverImage(entity.getCoverImage())
                 .video(entity.getVideo())
+                .lectureOrder(entity.getLectureOrder())
                 .build();
 
     }
@@ -44,22 +45,20 @@ public class LectureMapper {
                 .title(dto.getTitle())
                 .description(dto.getDescription())
                 .length(dto.getLength())
-                .course(CourseMapper.dtoToEntity(dto.getCourse()))
+                .course( new Course(dto.getCourse().getId()) )
                 .coverImage(dto.getCoverImage())
                 .video(dto.getVideo())
+                .lectureOrder(dto.getLectureOrder())
                 .build();
     }
 
 
-    public static LectureDto uploadRequestToDto(LectureUploadRequest lectureUploadRequest, String coverImage , String video) {
+    public static LectureDto uploadRequestToDto(LectureUploadRequest lectureUploadRequest) {
 
             return LectureDto.builder()
                     .title(lectureUploadRequest.getTitle())
                     .description(lectureUploadRequest.getDescription())
-                    .length(lectureUploadRequest.getLength())
-                    .course(lectureUploadRequest.getCourse())
-                    .coverImage(coverImage)
-                    .video(video)
+                    .course(CourseMapper.entityToDto(new Course(lectureUploadRequest.getCourse().getId())))
                     .build();
     }
 

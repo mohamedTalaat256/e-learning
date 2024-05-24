@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.cglib.core.GeneratorStrategy;
 
 @Entity
-@Table(name = "lecture")
+@Table(name = "lectures")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,6 +30,10 @@ public class Lecture {
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
+
+
+    @Column(name = "lecture_order")
+    private int lectureOrder;
 
 
 

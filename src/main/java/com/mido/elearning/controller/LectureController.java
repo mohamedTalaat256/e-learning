@@ -3,6 +3,7 @@ package com.mido.elearning.controller;
 
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.Dto.LectureUploadRequest;
+import com.mido.elearning.repository.LectureRepository;
 import com.mido.elearning.serviceImpl.CourseServiceImpl;
 import com.mido.elearning.serviceImpl.LectureServiceImpl;
 import com.mido.elearning.utils.AppResponse;
@@ -20,6 +21,14 @@ public class LectureController {
 
     @Autowired
     LectureServiceImpl lectureService;
+
+    @Autowired
+    LectureRepository lectureRepository;
+
+    @GetMapping("/max")
+    public ResponseEntity<Object> max(){
+        return AppResponse.generateResponse("all_Course_lecture", HttpStatus.OK, lectureRepository.findMaxLectureOrder(),true);
+    }
 
     @GetMapping("")
     public ResponseEntity<Object> findAllByCourseId(@RequestParam Long courseId){

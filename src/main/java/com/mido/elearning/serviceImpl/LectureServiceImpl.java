@@ -2,8 +2,11 @@ package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.LectureDto;
 import com.mido.elearning.Dto.LectureUploadRequest;
+import com.mido.elearning.Dto.MyVideo;
+import com.mido.elearning.entity.Course;
 import com.mido.elearning.entity.Lecture;
 import com.mido.elearning.exception.RecordNotFoundException;
+import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.LectureMapper;
 import com.mido.elearning.repository.LectureRepository;
 import com.mido.elearning.service.LectureService;
@@ -25,19 +28,26 @@ public class LectureServiceImpl implements LectureService {
     private final LectureRepository lectureRepository;
     @Override
     public LectureDto save(LectureUploadRequest lectureUploadRequest, MultipartFile coverImageFile, MultipartFile lectureVideo) throws IOException {
+        MyVideo video = FileUtils.SaveVideo(lectureVideo, lectureUploadRequest.getTitle());
 
-        String courseCoverImageName = FileUtils.SaveFileAndGetName(coverImageFile, lectureUploadRequest.getTitle());
-        String video = FileUtils.SaveFileAndGetName(lectureVideo, lectureUploadRequest.getTitle());
+        Lecture lecture = Lecture.builder()
+                .title(lectureUploadRequest.getTitle())
+                .description(lectureUploadRequest.getDescription())
+                .course(new Course(lectureUploadRequest.getCourse().getId()))
+                .coverImage(FileUtils.SaveFileAndGetName(coverImageFile, lectureUploadRequest.getTitle()))
+                .video(video.getFileName())
+                .length((int) video.getDuration())
+                .lectureOrder(lectureRepository.findMaxLectureOrder() +1)
+                .build();
 
-        LectureDto lectureDto = LectureMapper.uploadRequestToDto(lectureUploadRequest, courseCoverImageName, video);
-        Lecture newLecture = lectureRepository.save(LectureMapper.dtoToEntity(lectureDto));
+        Lecture newLecture = lectureRepository.save(lecture);
 
         return LectureMapper.entityToDto(newLecture);
     }
 
     @Override
     public List<LectureDto> findByAllCourseId(Long courseId) {
-        return lectureRepository.findAllByCourseId(courseId).stream()
+        return lectureRepository.findAllByCourseIdOrderByLectureOrderAsc(courseId).stream()
                 .map(LectureMapper::entityToDto)
                 .collect(Collectors.toList());
     }

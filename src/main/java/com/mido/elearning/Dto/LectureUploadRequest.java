@@ -13,7 +13,6 @@ public class LectureUploadRequest {
 
     private String title;
     private String description;
-    private int length;
     private CourseDto course;
 
 }

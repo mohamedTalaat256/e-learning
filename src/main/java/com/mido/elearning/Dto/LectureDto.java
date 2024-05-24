@@ -18,5 +18,6 @@ public class LectureDto {
     private String coverImage;
     private String video;
     private CourseDto course;
+    private int lectureOrder;
 
 }

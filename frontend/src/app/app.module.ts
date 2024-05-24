@@ -52,6 +52,8 @@ import { Page404Component } from './global/page404/page404.component';
 import { MyCoursesComponent } from './layouts/user/components/my-courses/my-courses.component';
 import { MyCourseCardComponent } from './global/my-course-card/my-course-card.component';
 import { BuyCourseComponent } from './layouts/user/components/buy-course/buy-course.component';
+import { LectureCardComponent } from './global/lecture-card/lecture-card.component';
+import { toShortText } from './pip/toShortText';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -79,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RatingStarComponent,
     CourseOverviewComponent,
     MinToLength,
+    toShortText,
     ValidationMsgComponent,
     UsersComponent,
     FacultiesComponent,
@@ -96,7 +99,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FooterComponent,
     Page404Component,
     MyCourseCardComponent,
-    BuyCourseComponent
+    BuyCourseComponent,
+    LectureCardComponent
   ],
   imports: [
     MatSidenavModule,

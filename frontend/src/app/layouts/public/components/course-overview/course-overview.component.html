@@ -1,29 +1,28 @@
-<div fxFlex="100" fxLayout="row" style="height: 100vh">
-     
+<div fxFlex="100" >
     <div  fxLayout="column" >
         <admin-toolbar-list></admin-toolbar-list>
         <div class="m-3" fxFlex="100" fxLayout="row">
-            <div fxFlex.xl="70" fxFlex.lg="70" fxFlex.sx="95" fxLayout="column">
+            <div fxFlex.xl="75" fxFlex.lg="75" fxFlex.sx="95" fxLayout="column">
 
                 <div class="" fxFlex="100">
-                    <h2>Course Name > Lecture 1</h2>
+                    <h2>{{currentLecture.course.title }} > {{currentLecture.title}}</h2>
                     <div class="mr-4">
-                        <video poster="assets/images/uiux.jpeg" class="playing-video" width="320" height="240" controls>
-                            <source src="assets/videos/lecture.mp4" type="video/mp4">
+                        <video id="videoPlayer" [poster]="LECTURES_IMAGES_URL+ currentLecture.coverImage" class="playing-video" width="320" height="240" controls #videoPlayer>
+                            <source [src]="VIDEOS_URL+currentLecture.video" type="video/mp4">
                         </video>
                     </div>
 
                     <h2>{{currentLecture.title}}</h2>
 
                     <div>
-                        <span>rating </span><app-rating-star [rating]="currentLecture.rating"></app-rating-star>
+                      <!--   <span>rating </span><app-rating-star [rating]="currentLecture.rating"></app-rating-star> -->
                     </div>
                     
 
                     <mat-tab-group>
                         <mat-tab>
                             <ng-template mat-tab-label>
-                              description
+                              {{'description' |translate}}
                             </ng-template>
                            {{currentLecture.description}}
                         </mat-tab>
@@ -46,34 +45,33 @@
                     </mat-tab-group>
                 </div>
 
-                <!-- video -->
-                
-
-
-
             </div>
-            <div fxFlex.xl="30" fxFlex.lg="30" fxFlex.sx="5" fxHide.xs class="">
-                <h2 class="mt-5">lectures</h2>
-                <mat-card *ngFor="let lecture of lectures" class="mat-bg-light my-2">
+            <div fxFlex.xl="25" fxFlex.lg="25" fxFlex.sx="5" fxHide.xs class="">
+                <h2 class="mt-5 f-w-bold" >{{'lectures' | translate}} {{currentLecture.lectureOrder +' \\ '+ lectures.length}}</h2>
+
+               
+                <mat-card  *ngFor="let lecture of lectures" class="shadow-dark-sm mat-bg-light rounded-1 mt-4"
+                [ngClass]="{
+                    'mat-bg-light-primary': currentLecture.lectureOrder === lecture.lectureOrder
+                }"
+                >
                     <mat-card-header class="p-0">
-                        <img   src="{{lecture.image}}" class="lecture-img">
-                        <mat-card-title-group class="px-2">
-
+                        <img [src]="LECTURES_IMAGES_URL+lecture.coverImage" class="lecture-img rounded-1">
+                        <div fxLayout="column" fxLayoutAlign="space-between start" class="px-3">
+                
+                            <div>
+                                <mat-card-title class="lecture-title" (click)="changeCurrentLecture(lecture.id)" >{{lecture.title}}</mat-card-title>
+                                <mat-card-subtitle>{{lecture.description | toShortText}}</mat-card-subtitle>
+                            </div>
                             
-                            <mat-card-title style="font-size: 16px;">{{lecture.title}}</mat-card-title>
                             <mat-card-subtitle>
-                                <mat-card-actions>
-                                    <mat-icon>access_time</mat-icon> {{ lecture.length | minToLength }}    
-                                    <div class="h-divider" ></div>
-                                    <mat-icon>thumb_up</mat-icon>{{lecture.likes}}
+                                <mat-card-actions class="mat-text-dark">
+                                    <mat-icon class="mr-3" color="primary" >access_time</mat-icon> {{ lecture.length | minToLength }}    
                                 </mat-card-actions>
-                                
-                              <!--   <mat-icon>access_time</mat-icon> {{lecture.length}} min  |  
-                                <mat-icon>thumb_up</mat-icon> {{lecture.length}} -->
                             </mat-card-subtitle>
-
-                        </mat-card-title-group>
-                    </mat-card-header> 
+                
+                        </div>
+                    </mat-card-header>  
                 </mat-card>
             </div>
 
