@@ -54,6 +54,7 @@ import { MyCourseCardComponent } from './global/my-course-card/my-course-card.co
 import { BuyCourseComponent } from './layouts/user/components/buy-course/buy-course.component';
 import { LectureCardComponent } from './global/lecture-card/lecture-card.component';
 import { toShortText } from './pip/toShortText';
+import { LectureDialogFormComponent } from './layouts/admin/components/lecture-dialog-form/lecture-dialog-form.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -100,7 +101,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     Page404Component,
     MyCourseCardComponent,
     BuyCourseComponent,
-    LectureCardComponent
+    LectureCardComponent,
+    LectureDialogFormComponent
   ],
   imports: [
     MatSidenavModule,

@@ -21,6 +21,8 @@ export class CourseOverviewComponent implements OnInit {
 
   @ViewChild("videoPlayer") videoPlayerRef!: ElementRef;
 
+  videoPlayer:any;
+
   currentLecture: Lecture=EMPTY_LECTUER;
   
   lectures: Lecture[] =  [];
@@ -40,8 +42,8 @@ export class CourseOverviewComponent implements OnInit {
        this.lectures = response.data;
       
         this.getCurrentLectureIndex();
-        let videoPlayer = this.videoPlayerRef.nativeElement;
-        videoPlayer.load(); 
+        this.videoPlayer = this.videoPlayerRef.nativeElement;
+        this.videoPlayer.load(); 
       },
       error: (error: Error) => {
 
@@ -73,7 +75,9 @@ export class CourseOverviewComponent implements OnInit {
 
     this.currentLecture = this.lectures.filter(lec => lec.id === lectureId)[0];
     localStorage.setItem(constant.CURRENT_LECTURE_INDEX, this.currentLecture.lectureOrder.toString());
-
+    this.videoPlayer = this.videoPlayerRef.nativeElement;
+    this.videoPlayer.src = VIDEOS_URL+ this.currentLecture.video;
+    this.videoPlayer.load(); 
   }
 
 }

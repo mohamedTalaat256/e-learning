@@ -68,8 +68,8 @@
                         <button mat-menu-item [routerLink]="['/cources/', course.id]">
                             <mat-icon color="warn">remove_red_eye</mat-icon><span>view</span>
                         </button>
-                        <button mat-menu-item>
-                          <mat-icon color="success">class</mat-icon><span>lecture</span>
+                        <button mat-menu-item (click)="openAddNewLectureDialog(course)">
+                          <mat-icon color="success">class</mat-icon><span>{{'add_lecture'| translate}}</span>
                       </button>
                         <button mat-menu-item (click)="openEditDialog(course)">
                             <mat-icon color="primary">mode_edit</mat-icon><span>edit</span>

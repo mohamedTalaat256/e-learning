@@ -12,6 +12,7 @@ import { CourseService } from 'src/app/service/courses.service';
 import { take } from 'rxjs';
 import { AppResponse } from 'src/app/model/app_response.model';
 import Swal from 'sweetalert2';
+import { LectureDialogFormComponent } from '../lecture-dialog-form/lecture-dialog-form.component';
 
 @Component({
   selector: 'app-courses',
@@ -93,6 +94,24 @@ export class CoursesComponent implements OnInit {
       courseData: courseData
     };
     const dialogRef = this.dialog.open(CourseDialogFormComponent, {
+      width: dialog_w_md,
+      height: 'auto',
+      data: data
+    });
+ 
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
+  openAddNewLectureDialog(courseId: any) {
+    const data = {
+      title: this.translate.instant('add_lecture'),
+      formMode: FormMode.EDIT,
+      courseId: courseId
+    };
+    const dialogRef = this.dialog.open(LectureDialogFormComponent, {
       width: dialog_w_md,
       height: 'auto',
       data: data

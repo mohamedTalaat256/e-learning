@@ -30,6 +30,15 @@
     "start_date": "start date",
     "end_date": "end date",
 
+    "lecture":"lecture",
+    "lectures": "Lectures",
+    "course_lectures": "Course lectures",
+
+    "add_lecture":"Add lecture",
+    "lecture_title": "Lecture title",
+    "lecture_description":"Lecture Description",
+    
+
     "faculty":"faculty",
     "all_faculties":"all faculties",
     "faculties":"faculties",

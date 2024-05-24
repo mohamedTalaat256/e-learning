@@ -1,0 +1,53 @@
+<h2 mat-dialog-title class="text-capitalize">{{title}}</h2>
+<form [formGroup]="lectureForm" (ngSubmit)="onSubmit()">
+
+<mat-dialog-content class="mat-typography">
+        <div fxLayout="column" fxLayoutAlign="center " fxFlex.xs="100" fxFlex="100">
+            <mat-form-field class="mt-3">
+                <mat-label>{{'lecture_title'|translate}} </mat-label>
+                <input matInput formControlName="title" [placeholder]="'lecture_title'|translate" >
+                <mat-error>
+                    <app-validation-msg [control]="lectureForm.controls['title']"
+                        [fieldName]="'lecture_title'">
+                    </app-validation-msg>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>{{'lecture_description'|translate}} </mat-label>
+                <textarea matInput formControlName="description" [placeholder]="'lecture_description'|translate" ></textarea>
+                <mat-error>
+                    <app-validation-msg [control]="lectureForm.controls['description']"
+                        [fieldName]="'lecture_description'">
+                    </app-validation-msg>
+                </mat-error>
+            </mat-form-field>
+
+           
+
+        
+
+            <div *ngIf="selectedCoverImage && progress" class="progress my-3">
+                <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
+                    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                    {{ progress }}%
+                </div>
+            </div>
+
+            <label for="file-input">
+
+                <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
+                <img [src]="preview!=='' ? preview : defaultPreview" class="upload-course-img" />
+                <input type="file" id="file-input" accept="image/*" (change)="selectFile($event)"
+                    style="visibility: hidden; position: absolute;" />
+            </label>
+
+        </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="center ">
+    <button mat-button mat-dialog-close>{{'cancel' | translate}}</button>
+    <button type="submit" mat-raised-button color="primary">{{'save' | translate}}</button>
+</mat-dialog-actions>
+
+  </form>
