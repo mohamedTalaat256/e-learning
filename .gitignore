@@ -77,3 +77,4 @@ frontend/Thumbs.db
 
 #videos
 frontend/src/assets/videos/*
+src/main/media/videos/*
