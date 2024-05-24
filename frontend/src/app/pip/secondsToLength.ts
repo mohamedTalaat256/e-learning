@@ -34,10 +34,10 @@ export class secondsToLength implements PipeTransform {
 
     let result = '';
     if (hours) {
-      result += `${hours} hour`;
+      result += `${hours} hour `;
     }
     if (minutes) {
-      result += `${minutes} min`;
+      result += `${minutes} min `;
     }
     if (seconds) {
       result += `${seconds} sec`;
