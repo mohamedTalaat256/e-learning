@@ -27,6 +27,7 @@ export class CourseOverviewComponent implements OnInit {
   
   lectures: Lecture[] =  [];
   lecturesIndexes: number[];
+  currentTime:any = 0;
 
   constructor(private lectureService: LectureService,
     private route: ActivatedRoute,
@@ -43,7 +44,11 @@ export class CourseOverviewComponent implements OnInit {
       
         this.getCurrentLectureIndex();
         this.videoPlayer = this.videoPlayerRef.nativeElement;
-        this.videoPlayer.load(); 
+        this.videoPlayer.load();
+
+       /*  setInterval(()=>{
+          this.currentTime = this.videoPlayer.currentTime;
+        },10000); */
       },
       error: (error: Error) => {
 

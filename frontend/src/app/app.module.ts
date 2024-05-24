@@ -27,7 +27,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { CourseDialogFormComponent  } from './layouts/admin/components/course-dialog-form/course-dialog-form.component';
 import { RatingStarComponent } from './global/rating-star/rating-star.component';
 import { CourseOverviewComponent } from './layouts/public/components/course-overview/course-overview.component';
-import { MinToLength } from './pip/minToLength';
 import { UsersComponent } from './layouts/admin/components/users/users.component';
 import { ValidationMsgComponent } from './global/validation-msg/validation-msg.component';
 import { AdminDashboardComponent } from './layouts/admin/components/dashboard/admin-dashboard.component';
@@ -55,6 +54,7 @@ import { BuyCourseComponent } from './layouts/user/components/buy-course/buy-cou
 import { LectureCardComponent } from './global/lecture-card/lecture-card.component';
 import { toShortText } from './pip/toShortText';
 import { LectureDialogFormComponent } from './layouts/admin/components/lecture-dialog-form/lecture-dialog-form.component';
+import { secondsToLength } from './pip/secondsToLength';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -81,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CoursesComponent,
     RatingStarComponent,
     CourseOverviewComponent,
-    MinToLength,
+    secondsToLength,
     toShortText,
     ValidationMsgComponent,
     UsersComponent,

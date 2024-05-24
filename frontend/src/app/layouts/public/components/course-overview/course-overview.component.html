@@ -12,6 +12,7 @@
                         </video>
                     </div>
 
+                    <h1>{{videoPlayer.currentTime}}</h1>
                     <h2>{{currentLecture.title}}</h2>
 
                     <div>
@@ -46,8 +47,13 @@
                 </div>
 
             </div>
-            <div fxFlex.xl="25" fxFlex.lg="25" fxFlex.sx="5" fxHide.xs class="">
-                <h2 class="mt-5 f-w-bold" >{{'lectures' | translate}} {{currentLecture.lectureOrder +' \\ '+ lectures.length}}</h2>
+            <div fxFlex.xl="25" fxFlex.lg="25" fxFlex.sx="5"   >
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <span class="mt-5 f-w-bold" >{{'lectures' | translate}} {{currentLecture.lectureOrder +' \\ '+ lectures.length}}</span>
+                    <mat-slide-toggle checked color="primary" >{{'auto_play_next' | translate}}</mat-slide-toggle>
+                </div>
+               
 
                
                 <mat-card  *ngFor="let lecture of lectures" class="shadow-dark-sm mat-bg-light rounded-1 mt-4"
@@ -66,7 +72,7 @@
                             
                             <mat-card-subtitle>
                                 <mat-card-actions class="mat-text-dark">
-                                    <mat-icon class="mr-3" color="primary" >access_time</mat-icon> {{ lecture.length | minToLength }}    
+                                    <mat-icon class="mr-3" color="primary" >access_time</mat-icon> {{ lecture.length | secondsToLength }}    
                                 </mat-card-actions>
                             </mat-card-subtitle>
                 

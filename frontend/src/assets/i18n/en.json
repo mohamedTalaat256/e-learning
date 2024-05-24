@@ -33,6 +33,7 @@
     "lecture":"lecture",
     "lectures": "Lectures",
     "course_lectures": "Course lectures",
+    "auto_play_next": "Auto play next",
 
     "add_lecture":"Add lecture",
     "lecture_title": "Lecture title",
