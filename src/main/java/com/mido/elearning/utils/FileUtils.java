@@ -2,6 +2,7 @@ package com.mido.elearning.utils;
 
 import com.mido.elearning.Dto.MyVideo;
 import org.mp4parser.IsoFile;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +16,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class FileUtils {
 
-   // @Value("${directory.upload}")
-   private static final String UPLOAD_DIRECTORY = "src/main/media/images";
-    private static final String VIDEOS_UPLOAD_DIRECTORY = "src/main/media/videos";
+    @Value("${uploads.images.path}")
+    private static String UPLOAD_DIRECTORY;
+
+    @Value("${uploads.videos.path}")
+    private static String VIDEOS_UPLOAD_DIRECTORY;
 
 
     public static String SaveFileAndGetName(MultipartFile profileImage, String fileName ) throws IOException {

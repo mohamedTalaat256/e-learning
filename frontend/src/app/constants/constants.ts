@@ -6,6 +6,7 @@ export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
 export const profileImagesUrls='http://localhost:8090/media/images/'; 
 export const imagesUrls='http://localhost:8090/media/images/'; 
 export const VIDEOS_URL='http://localhost:8090/media/videos/';
+export const LECTURE_STREAM_URL= baseURL+'/lectures/stream/';
 
 export enum adminUrls {
     dasboard = "/admin/dasboard",

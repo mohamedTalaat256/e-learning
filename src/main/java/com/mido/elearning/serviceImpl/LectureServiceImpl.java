@@ -12,8 +12,12 @@ import com.mido.elearning.service.LectureService;
 import com.mido.elearning.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +29,10 @@ import java.util.stream.Collectors;
 public class LectureServiceImpl implements LectureService {
 
     private final LectureRepository lectureRepository;
+
+    @Value("${uploads.videos.path}")
+    private String VIDEO_PATH;
+
     @Override
     public LectureDto save(LectureUploadRequest lectureUploadRequest, MultipartFile coverImageFile, MultipartFile lectureVideo) throws IOException {
         MyVideo video = FileUtils.SaveVideo(lectureVideo, lectureUploadRequest.getTitle());
@@ -65,5 +73,11 @@ public class LectureServiceImpl implements LectureService {
             currentUser.setProfileImage(fileName);
             userRepository.save(currentUser);*/
     }
+
+    @Override
+    public Mono<Resource> retrieveContent(String fileName){
+        return Mono.fromSupplier(()-> new FileSystemResource(VIDEO_PATH+"/"+fileName));
+    }
+
 
 }

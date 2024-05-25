@@ -27,13 +27,6 @@ export class LectureService {
     return this.http.post<any>(baseURL + '/lectures/save',  formData, { headers: headers });
   }
  
-  getVideo(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'video/mp4'
-    });
-    return this.http.get('http://localhost:8090/media/videos/video.mp4',{ headers: headers });
-  }
-
 /*  
   
 

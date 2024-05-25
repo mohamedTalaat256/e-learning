@@ -8,7 +8,7 @@
                     <h2>{{currentLecture.course.title }} > {{currentLecture.title}}</h2>
                     <div class="mr-4">
                         <video id="videoPlayer" [poster]="LECTURES_IMAGES_URL+ currentLecture.coverImage" class="playing-video" width="320" height="240" autoplay controls #videoPlayer>
-                            <source [src]="VIDEOS_URL+currentLecture.video" type="video/mp4">
+                            <source [src]="LECTURE_STREAM_URL+currentLecture.video"  type="video/mp4">
                         </video>
                     </div>
 

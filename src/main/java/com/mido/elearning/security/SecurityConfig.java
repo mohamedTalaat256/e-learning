@@ -32,7 +32,8 @@ public class SecurityConfig {
             "/api/auth/refresh-token",
             "/api/auth/logout",
             "/swagger-ui/**",
-            "/api-docs/**"
+            "/api-docs/**",
+            "/api/lectures/stream"
     };
 
     @Autowired
