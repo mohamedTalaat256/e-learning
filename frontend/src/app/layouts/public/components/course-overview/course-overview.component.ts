@@ -7,7 +7,9 @@ import {
   LECTURE_STREAM_URL,
   VIDEOS_URL,
   constant,
+  imagePlaceholder,
   imagesUrls,
+  profileImagesUrls,
 } from 'src/app/constants/constants';
 import { AppResponse } from 'src/app/model/app_response.model';
 import { Lecture } from 'src/app/model/lecture.model';
@@ -24,6 +26,8 @@ export class CourseOverviewComponent implements OnInit {
 
   LECTURES_IMAGES_URL = imagesUrls;
   LECTURE_STREAM_URL = LECTURE_STREAM_URL;
+  PROFILE_IMAGES_URL = profileImagesUrls;
+  DEFAULT_USER_IMAGE = imagePlaceholder;
 
   @ViewChild('videoPlayer') videoPlayerRef!: ElementRef;
 

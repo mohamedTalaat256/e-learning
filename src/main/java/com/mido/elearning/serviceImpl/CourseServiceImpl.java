@@ -2,11 +2,14 @@ package com.mido.elearning.serviceImpl;
 
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
+import com.mido.elearning.Dto.PublicUserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
 import com.mido.elearning.entity.StudentsEnrolledCourse;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
+import com.mido.elearning.mapping.CourseReviewMapper;
+import com.mido.elearning.mapping.UserMapper;
 import com.mido.elearning.repository.CourseRepository;
 import com.mido.elearning.repository.StudentsEnrolledCourcesRepository;
 import com.mido.elearning.repository.UserRepository;
@@ -54,8 +57,23 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseDto findById(Long id) {
+
+        Set<PublicUserDto> enrolledStudents = new HashSet<>();
+
+
         Course course = courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("course not found"));
-        return CourseMapper.entityToDto(course);
+        course.getStudentsEnrolledCourse().forEach( e-> enrolledStudents.add( UserMapper.entityToPublicUserDto(e.getStudent())));
+
+
+        CourseDto courseDto = CourseMapper.entityToDto(course);
+        courseDto.setEnrolledStudents(enrolledStudents);
+        courseDto.setEnrolledStudentsCount(enrolledStudents.size());
+        courseDto.setReviews(
+                course.getReviews().stream()
+                .map(CourseReviewMapper::entityToDto)
+                .collect(Collectors.toList()));
+
+        return  courseDto;
     }
 
     @Override

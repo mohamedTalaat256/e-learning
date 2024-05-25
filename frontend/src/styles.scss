@@ -321,7 +321,9 @@ body {
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 0, 0));
 }
 .icon-xs{
-  height: 16px !important;
+  height: 14px !important;
+  width: auto !important;
+  font-size: 17px;
  
 }
 

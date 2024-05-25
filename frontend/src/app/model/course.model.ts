@@ -1,3 +1,5 @@
+import { CourseReview } from "./courseReview.model";
+
 export interface Course{
     id: number,
     title: string,
@@ -10,6 +12,8 @@ export interface Course{
     enrolledStudentsCount?: number,
     coverImage: string,
     hours?: number;
-    author?:any
+    author?:any,
+    lecturesCount?: number,
+    reviews?: CourseReview[]
 
 }

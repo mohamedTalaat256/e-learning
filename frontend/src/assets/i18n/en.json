@@ -29,6 +29,8 @@
     "discount": "discount",
     "start_date": "start date",
     "end_date": "end date",
+    "enrolled_students":"Enrolled students",
+
 
     "lecture":"lecture",
     "lectures": "Lectures",
@@ -47,6 +49,12 @@
     "edit_faculty":"edit faculty",
     "academic_specialization":"academic specialization",
     "university":"university",
+    
+    "review": "Review",
+    "reviews": "Reviews",
+    "leave_review": "Leave review",
+    "review_added_success":"Review added success",
+    "reveiw_content":"Reveiw content",
  
     "max_length_is": "max length is",
     "min_length_is": "min length is",

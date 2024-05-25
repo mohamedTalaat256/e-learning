@@ -9,6 +9,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,6 +57,11 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Lecture> lectures;
+
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<CourseReview> reviews;
 
     public Course(long id) {
         this.id = id;

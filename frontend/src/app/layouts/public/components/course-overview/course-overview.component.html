@@ -1,83 +1,89 @@
-<div fxFlex="100" >
-    <div  fxLayout="column" >
+<div fxFlex="100">
+    <div fxLayout="column">
         <admin-toolbar-list></admin-toolbar-list>
         <div class="m-3" fxFlex="100" fxLayout="row">
             <div fxFlex.xl="75" fxFlex.lg="75" fxFlex.sx="95" fxLayout="column">
 
-                <div class="" fxFlex="100">
-                    <h2>{{currentLecture.course.title }} > {{currentLecture.title}}</h2>
-                    <div class="mr-4">
-                        <video id="videoPlayer" [poster]="LECTURES_IMAGES_URL+ currentLecture.coverImage" class="playing-video" width="320" height="240" autoplay controls #videoPlayer>
-                            <source [src]="LECTURE_STREAM_URL+currentLecture.video"  type="video/mp4">
-                        </video>
+                <div class="mr-4" fxFlex="100">
+
+                    <div class="mat-bg-light-primary my-3 mat-text-secondary p-3 lecture-video-title">
+                        <span>{{currentLecture.course.title }} > {{currentLecture.title}}</span>
                     </div>
 
-                    <h1>{{videoPlayer.currentTime}}</h1>
+
+                    <video id="videoPlayer" [poster]="LECTURES_IMAGES_URL+ currentLecture.coverImage"
+                        class="playing-video" width="320" height="240" autoplay controls #videoPlayer>
+                        <source [src]="LECTURE_STREAM_URL+currentLecture.video" type="video/mp4">
+                    </video>
+
+
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                            <img mat-card-image
+                                [src]="currentLecture.course.author.profileImage ? PROFILE_IMAGES_URL+ currentLecture.course.author.profileImage: DEFAULT_USER_IMAGE"
+                                class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
+                            <div fxLayout="column">
+                                <mat-card-title class="f-w-500"> {{currentLecture.course.author.firstName +' '+
+                                    currentLecture.course.author.lastName}} </mat-card-title>
+                                <mat-card-subtitle class="mat-text-secondary">
+                                    @{{currentLecture.course.author.username}}</mat-card-subtitle>
+
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20">
+                            <mat-chip-row color="light-primary">{{ 'views'| translate}}
+                                <mat-icon color="secondary" class="icon-xs">remove_red_eye</mat-icon>
+                            </mat-chip-row>
+                            <mat-chip-row color="light-primary">{{ 'comments'| translate}}
+                                <mat-icon color="secondary" class="icon-xs">comment</mat-icon>
+                            </mat-chip-row>
+                            <mat-chip-row color="light-primary">{{'likes'|translate}}
+                                <mat-icon color="secondary" class="icon-xs">thumb_up</mat-icon>
+                            </mat-chip-row>
+                        </div>
+                    </div>
                     <h2>{{currentLecture.title}}</h2>
 
-                    <div>
-                      <!--   <span>rating </span><app-rating-star [rating]="currentLecture.rating"></app-rating-star> -->
+                    <div class="mat-bg-light-secondary p-3 rounded-1">
+                        {{currentLecture.description}}
+
                     </div>
-                    
 
-                    <mat-tab-group>
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                              {{'description' |translate}}
-                            </ng-template>
-                           {{currentLecture.description}}
-                        </mat-tab>
-
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                             rewords
-                            </ng-template>
-                            Content 2
-                        </mat-tab>
-
-                        <mat-tab>
-                            <ng-template mat-tab-label>
-                                <mat-icon>thumb_up</mat-icon>
-                                Third
-                            </ng-template>
-
-                            Content 3
-                        </mat-tab>
-                    </mat-tab-group>
                 </div>
 
             </div>
-            <div fxFlex.xl="25" fxFlex.lg="25" fxFlex.sx="5"   >
+            <div fxFlex.xl="25" fxFlex.lg="25" fxFlex.sx="5">
 
                 <div fxLayout="row" fxLayoutAlign="space-between center">
-                    <span class="mt-5 f-w-bold" >{{'lectures' | translate}} {{currentLecture.lectureOrder +' \\ '+ lectures.length}}</span>
-                    <mat-slide-toggle checked color="primary" >{{'auto_play_next' | translate}}</mat-slide-toggle>
+                    <span class="mt-5 f-w-bold">{{'lectures' | translate}} {{currentLecture.lectureOrder +' \\ '+
+                        lectures.length}}</span>
+                    <mat-slide-toggle checked color="primary">{{'auto_play_next' | translate}}</mat-slide-toggle>
                 </div>
-               
 
-               
-                <mat-card  *ngFor="let lecture of lectures" class="shadow-dark-sm mat-bg-light rounded-1 mt-4"
-                [ngClass]="{
+
+
+                <mat-card *ngFor="let lecture of lectures" class="shadow-dark-sm mat-bg-light rounded-1 mt-4" [ngClass]="{
                     'mat-bg-light-primary': currentLecture.lectureOrder === lecture.lectureOrder
-                }"
-                >
+                }">
                     <mat-card-header class="p-0">
                         <img [src]="LECTURES_IMAGES_URL+lecture.coverImage" class="lecture-img rounded-1">
                         <div fxLayout="column" fxLayoutAlign="space-between start" class="px-3">
-                
+
                             <div>
-                                <mat-card-title class="lecture-title" (click)="changeCurrentLecture(lecture.id)" >{{lecture.title}}</mat-card-title>
+                                <mat-card-title class="lecture-title"
+                                    (click)="changeCurrentLecture(lecture.id)">{{lecture.title}}</mat-card-title>
                                 <mat-card-subtitle>{{lecture.description | toShortText}}</mat-card-subtitle>
                             </div>
-                            
+
                             <mat-card-subtitle>
                                 <mat-card-actions class="mat-text-dark">
-                                    <mat-icon class="mr-3" color="primary" >access_time</mat-icon> {{ lecture.length | secondsToLength }}    
+                                    <mat-icon class="mr-3" color="primary">access_time</mat-icon> {{ lecture.length |
+                                    secondsToLength }}
                                 </mat-card-actions>
                             </mat-card-subtitle>
-                
+
                         </div>
-                    </mat-card-header>  
+                    </mat-card-header>
                 </mat-card>
             </div>
 

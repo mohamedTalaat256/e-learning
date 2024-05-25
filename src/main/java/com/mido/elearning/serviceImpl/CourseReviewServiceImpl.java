@@ -5,6 +5,7 @@ import com.mido.elearning.Dto.CourseReviewDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
+import com.mido.elearning.entity.CourseReview;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.CourseReviewMapper;
@@ -45,6 +46,11 @@ public class CourseReviewServiceImpl implements CourseReviewService {
     @Override
     public CourseReviewDto save(CourseReviewDto courseReviewDto) {
         courseReviewDto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
-        return CourseReviewMapper.entityToDto(courseReviewRepository.save(CourseReviewMapper.dtoToEntity(courseReviewDto)));
+        CourseReview courseReview = courseReviewRepository.save(CourseReviewMapper.dtoToEntity(courseReviewDto));
+
+        CourseReviewDto reviewDto = CourseReviewMapper.entityToDto(courseReview);
+        reviewDto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
+
+        return reviewDto;
     }
 }

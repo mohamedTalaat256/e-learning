@@ -55,6 +55,8 @@ import { LectureCardComponent } from './global/lecture-card/lecture-card.compone
 import { toShortText } from './pip/toShortText';
 import { LectureDialogFormComponent } from './layouts/admin/components/lecture-dialog-form/lecture-dialog-form.component';
 import { secondsToLength } from './pip/secondsToLength';
+import { InputStarRatingComponent } from './global/input-star-rating/input-star-rating.component';
+import { CourseReviewDialogFormComponent } from './layouts/user/components/course-review-dialog-form/course-review-dialog-form.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -102,7 +104,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MyCourseCardComponent,
     BuyCourseComponent,
     LectureCardComponent,
-    LectureDialogFormComponent
+    LectureDialogFormComponent,
+    InputStarRatingComponent,
+    CourseReviewDialogFormComponent
   ],
   imports: [
     MatSidenavModule,

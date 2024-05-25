@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +26,7 @@ public class CourseMapper {
 
     public static CourseDto entityToDto(Course entity){
 
-        Set<PublicUserDto> enrolledStudents = new HashSet<>();
 
-        //entity.getEnrolledStudents().forEach(e-> enrolledStudents.add(UserMapper.entityToPublicUserDto(e)));
 
         return CourseDto.builder().id(entity.getId())
                 .title(entity.getTitle())
@@ -40,8 +39,7 @@ public class CourseMapper {
                 .discountEndDate(entity.getDiscountEndDate())
                 .author(UserMapper.entityToPublicUserDto(entity.getAuthor()))
                 .coverImage(entity.getCoverImage())
-                .enrolledStudents(null)
-                .enrolledStudentsCount(enrolledStudents.size())
+                .lecturesCount(entity.getLectures().size())
                 .rating(entity.getRating())
                 .build();
 

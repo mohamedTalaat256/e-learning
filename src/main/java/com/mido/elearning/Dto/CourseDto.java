@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -30,5 +28,8 @@ public class CourseDto {
     private PublicUserDto author;
     private Set<PublicUserDto> enrolledStudents = new HashSet<>();
     private int enrolledStudentsCount;
+    private int lecturesCount;
+
+    private List<CourseReviewDto> reviews = new ArrayList<>();
 
 }

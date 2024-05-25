@@ -25,12 +25,12 @@ createLectureForm(){
   }
 
 
-  setLectureForm(course: Lecture){
+  setLectureForm(lecture: Lecture){
     let form = this.fb.group(
       {
-        id:                [course.id],
-        title:             [course.title, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-        description:       [course.description, [Validators.required, Validators.maxLength(1000)]]
+        id:                [lecture.id],
+        title:             [lecture.title, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
+        description:       [lecture.description, [Validators.required, Validators.maxLength(1000)]]
       }
     );
 

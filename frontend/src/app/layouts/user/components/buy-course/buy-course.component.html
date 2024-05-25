@@ -1,94 +1,108 @@
-<div fxLayout="row" fxLayoutGap="30" class="my-5" style="padding-inline-end: 50px;">
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutGap="30" class="my-5" style="padding-inline-end: 50px;">
 
-    <img [src]="IMAGES_URL+course.coverImage" alt="" class="cover-imag">
-    <div fxLayout="column">
-        <p class="mat-heading-3 f-w-bold">{{course.title}}</p>
-        <p>{{course.description}}</p>
+        <img [src]="IMAGES_URL+course.coverImage" alt="" class="cover-imag">
+        <div fxLayout="column">
+            <p class="mat-heading-3 f-w-bold">{{course.title}}</p>
+            <p>{{course.description}}</p>
 
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="column">
+                    <app-rating-star [rating]="course.rating"></app-rating-star>
 
-        <div fxLayout="row" fxLayoutAlign="space-between">
-            <div fxLayout="column">
-                <app-rating-star [rating]="course.rating"></app-rating-star>
+                    <p class=" f-w-bold mt-5"> {{'instractor'}}</p>
+                    <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                        <img mat-card-image
+                            [src]="course.author.profileImage ? PROFILE_IMAGES_URL+ course.author.profileImage: DEFAULT_USER_IMAGE"
+                            class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
+                        <div fxLayout="column">
+                            <mat-card-title class="f-w-500"> {{course.author.firstName +' '+ course.author.lastName}}
+                            </mat-card-title>
+                            <mat-card-subtitle> @{{course.author.username}}</mat-card-subtitle>
 
-                <p class=" f-w-bold mt-5"> {{'instractor'}}</p>
-                <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
-                    <img mat-card-image [src]="course.author.profileImage ? PROFILE_IMAGES_URL+ course.author.profileImage: DEFAULT_USER_IMAGE"
-                      class="circle-avatar-md my-3" style="margin-inline-end: 8px;" >
-                    <div fxLayout="column">
-                      <mat-card-title class="f-w-500"> {{course.author.firstName +' '+ course.author.lastName}} </mat-card-title>
-                      <mat-card-subtitle> @{{course.author.username}}</mat-card-subtitle>
-        
+                        </div>
                     </div>
                 </div>
+                <table class="mt-5">
+                    <tr>
+                        <td width="130">{{'price' | translate}}</td>
+                        <td>${{course.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{'hours' | translate}}</td>
+                        <td>{{course.hours}} {{'h'|translate}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{'enrolled_students' | translate}}</td>
+                        <td>{{course.enrolledStudentsCount}} {{'student'|translate}}</td>
+                    </tr>
+                </table>
+
             </div>
-            <div fxLayout="column" >
-                
-                
-            </div>
+
 
         </div>
-        
-
-
-
-        <table class="mt-5">
-            <tr>
-                <td width="130">{{'price' | translate}}</td>
-                <td>${{course.price}}</td>
-            </tr>
-
-            <tr>
-                <td>{{'hours' | translate}}</td>
-                <td>{{course.hours}} {{'h'|translate}}</td>
-            </tr>
-
-            <tr>
-                <td>{{'enrolled_students' | translate}}</td>
-                <td>{{course.enrolledStudentsCount}} {{'student'|translate}}</td>
-            </tr>
-        </table>
-
-       
-
     </div>
-</div>
 
-<div>
-    <mat-tab-group>
-        
-        <mat-tab>
-            <ng-template mat-tab-label>
-             {{'reviews' | translate}}
-            </ng-template>
-            <div class="mt-3" style="width: 50%;">
+    <div fxFlex="100">
+        <mat-tab-group fxFlex="100">
 
-                <p class="f-w-bold">{{'leave_review'|translate}}</p>
+            <mat-tab fxFlex="100">
+                <ng-template mat-tab-label>
+                    <mat-icon class="mx-2">comment</mat-icon>
+                    {{'reviews' | translate}}
+                </ng-template>
+                <div class="mt-3" style="width: 50%; min-height: max-content;">
 
-                <form action="">
+                    <button mat-raised-button (click)="openAddReviewDialog()" color="primary">{{'leave_review' | translate}}</button>
 
-                    <div fxLayout="column" fxLayoutGap="20" >
-                        <mat-form-field>
-                            <mat-label>{{'leave_review'|translate}}</mat-label>
-                            <textarea matInput [placeholder]="'leave_review'|translate"></textarea>
-                        </mat-form-field>
 
-                        <button mat-raised-button color="primary">{{'save'|translate}}</button>
+                    <div  fxLayout="column" *ngFor="let review of course.reviews">
+
+                        <div  fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                            <img mat-card-image
+                                [src]="review.author.profileImage ? PROFILE_IMAGES_URL+ review.author.profileImage: DEFAULT_USER_IMAGE"
+                                class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
+                            <div fxLayout="column" fxFlex="100">
+    
+                                <div fxLayout="row" fxLayoutGap="space-between center" fxFlex="100" fxLayoutGap="20">
+                                    <div fxLayout="column" >
+                                        <mat-card-title class="f-w-500"> {{review.author.firstName +' '+ review.author.lastName}}
+                                        </mat-card-title>
+                                        <mat-card-subtitle> @{{review.author.username}}</mat-card-subtitle>
+                                    </div>
+                                    <app-rating-star [rating]="review.ratingValue"></app-rating-star>
+                                </div>
+                                
+                               
+    
+                            </div>
+                        </div>
+
+                        <div class="mat-bg-light-secondary rounded-1 p-2" style="margin-inline-start: 50px;">
+                            {{review.contentText}}
+                          
+
+                        </div>
+    
                     </div>
+                    
 
-                   
-                </form>
-            </div>
-           
-           
-        </mat-tab>
+                </div>
 
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <mat-icon>thumb_up</mat-icon>
-                Third
-            </ng-template>
 
-            Content 3
-        </mat-tab>
-    </mat-tab-group>
+            </mat-tab>
+
+            <mat-tab fxFlex="100">
+                <ng-template mat-tab-label>
+                    <mat-icon class="mx-2">people</mat-icon>
+                    {{'enrolled_students' | translate}}
+                </ng-template>
+
+                Content 3
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
 </div>
