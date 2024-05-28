@@ -13,4 +13,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
 
     @Query("SELECT MAX(l.lectureOrder) FROM Lecture l")
     int findMaxLectureOrder();
+
+    int countByCourseId(Long id);
+
 }

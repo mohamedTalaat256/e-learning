@@ -29,6 +29,7 @@ public class CourseDto {
     private Set<PublicUserDto> enrolledStudents = new HashSet<>();
     private int enrolledStudentsCount;
     private int lecturesCount;
+    private int reviewsCount;
 
     private List<CourseReviewDto> reviews = new ArrayList<>();
 

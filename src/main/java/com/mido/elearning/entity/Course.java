@@ -49,19 +49,25 @@ public class Course {
     @JsonIgnore
     private Set<StudentsEnrolledCourse> studentsEnrolledCourse = new HashSet<>();
 
+    @Column(name ="enrolled_students_count")
+    private int enrolledStudentsCount;
 
     @Column(name = "cover_image")
     private String coverImage;
-
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Lecture> lectures;
 
+    @Column(name ="lectures_count")
+    private int lecturesCount;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CourseReview> reviews;
+
+    @Column(name ="reviews_count")
+    private int reviewsCount;
 
     public Course(long id) {
         this.id = id;

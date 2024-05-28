@@ -20,7 +20,8 @@ export class BuyCourseComponent implements OnInit {
   IMAGES_URL = imagesUrls;
   PROFILE_IMAGES_URL = profileImagesUrls;
   DEFAULT_USER_IMAGE = imagePlaceholder;
-  course:Course= EMPTY_COURSE; 
+  course:Course= EMPTY_COURSE;
+
 
   constructor(private route: ActivatedRoute,
     private translate: TranslateService,
@@ -40,6 +41,7 @@ export class BuyCourseComponent implements OnInit {
     this.courseService.findById(courseId).subscribe({
       next: (response: AppResponse) => {
         this.course = response.data;
+        this.course.rating = Math.ceil(this.course.rating);
       },
       error: (error: Error) => {
         Swal.fire({ 

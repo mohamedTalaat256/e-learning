@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface StudentsEnrolledCourcesRepository extends JpaRepository<StudentsEnrolledCourse, Long> {
 
+    int countByCourseId(Long id);
 }

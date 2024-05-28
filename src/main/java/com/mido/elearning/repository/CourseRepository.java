@@ -10,6 +10,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     List<Course> findAllByAuthorId(Long authorId);
 
-/*    @Query("SELECT COUNT ")
-    int countEnrolledStudents(Long CourseId);*/
+
+
 }

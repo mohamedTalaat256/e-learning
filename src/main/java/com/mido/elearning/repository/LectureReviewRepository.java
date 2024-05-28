@@ -8,4 +8,5 @@ import java.util.List;
 public interface LectureReviewRepository extends JpaRepository<LectureReview, Long> {
 
     List<LectureReview> findByLectureId(Long id);
+
 }

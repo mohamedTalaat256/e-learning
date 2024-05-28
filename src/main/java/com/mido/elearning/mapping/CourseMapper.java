@@ -2,8 +2,6 @@ package com.mido.elearning.mapping;
 
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
-import com.mido.elearning.Dto.PublicUserDto;
-import com.mido.elearning.Dto.UserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
 import com.mido.elearning.exception.InternalServerErrorException;
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,8 +36,10 @@ public class CourseMapper {
                 .discountEndDate(entity.getDiscountEndDate())
                 .author(UserMapper.entityToPublicUserDto(entity.getAuthor()))
                 .coverImage(entity.getCoverImage())
-                .lecturesCount(entity.getLectures().size())
+                .lecturesCount(entity.getLecturesCount())
                 .rating(entity.getRating())
+                .enrolledStudentsCount(entity.getEnrolledStudentsCount())
+                .reviewsCount(entity.getReviewsCount())
                 .build();
 
     }
@@ -62,6 +61,9 @@ public class CourseMapper {
                 .coverImage(dto.getCoverImage())
                 //.studentsEnrolledCourse(enrolledStudents)
                 .rating(dto.getRating())
+                .enrolledStudentsCount(dto.getEnrolledStudentsCount())
+                .lecturesCount(dto.getLecturesCount())
+                .reviewsCount(dto.getReviewsCount())
                 .build();
     }
 
@@ -89,6 +91,9 @@ public class CourseMapper {
                     .author(UserMapper.entityToPublicUserDto(appUser.get()))
                     .coverImage(coverImage)
                     .rating(0)
+                    .reviewsCount(0)
+                    .lecturesCount(0)
+                    .enrolledStudentsCount(0)
                     .build();
         }
         throw new InternalServerErrorException("internal_server_error");

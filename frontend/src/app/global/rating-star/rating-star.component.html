@@ -1,4 +1,4 @@
-<span *ngIf="rating===0">
+<span *ngIf="(rating | toCeil) ===0 ">
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
@@ -6,7 +6,7 @@
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
 </span>
 
-<span *ngIf="rating===1">
+<span *ngIf="(rating | toCeil)===1">
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
@@ -14,11 +14,8 @@
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
 </span>
 
-<span *ngIf="rating===1.5">
-    <mat-icon class="text-gold">star_rate</mat-icon>
-</span>
 
-<span *ngIf="rating===2">
+<span *ngIf="(rating | toCeil)===2">
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
@@ -26,7 +23,7 @@
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
 
 </span>
-<span *ngIf="rating===3">
+<span *ngIf="(rating | toCeil)===3">
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
@@ -34,13 +31,8 @@
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
 
 </span>
-<span *ngIf="rating===3.5">
-    <mat-icon class="text-gold">star_rate</mat-icon>
-    <mat-icon class="text-gold">star_rate</mat-icon>
-    <mat-icon class="text-gold">star_rate</mat-icon>
-   <!--  <mat-icon class="half-colored">star_rate</mat-icon> -->
-</span>
-<span *ngIf="rating===4">
+
+<span *ngIf="(rating | toCeil)===4">
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
@@ -48,7 +40,7 @@
     <mat-icon class="mat-text-light-dark">star_rate</mat-icon>
 
 </span>
-<span *ngIf="rating===5">
+<span *ngIf="(rating | toCeil)===5">
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>
     <mat-icon class="text-gold">star_rate</mat-icon>

@@ -5,14 +5,13 @@ import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.Dto.PublicUserDto;
 import com.mido.elearning.entity.AppUser;
 import com.mido.elearning.entity.Course;
+import com.mido.elearning.entity.CourseReview;
 import com.mido.elearning.entity.StudentsEnrolledCourse;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.CourseReviewMapper;
 import com.mido.elearning.mapping.UserMapper;
-import com.mido.elearning.repository.CourseRepository;
-import com.mido.elearning.repository.StudentsEnrolledCourcesRepository;
-import com.mido.elearning.repository.UserRepository;
+import com.mido.elearning.repository.*;
 import com.mido.elearning.service.CourseService;
 import com.mido.elearning.utils.FileUtils;
 import jakarta.transaction.Transactional;
@@ -33,16 +32,17 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
     private final StudentsEnrolledCourcesRepository studentsEnrolledCourcesRepository;
-
-    private final UserRepository userRepository;
     private final UserServiceImpl userService;
-
     private final CourseMapper courseMapper;
+
     @Override
     public CourseDto save(CourseUploadRequest courseUploadRequest, MultipartFile coverImageFile) throws IOException {
 
         String courseCoverImageName = FileUtils.SaveFileAndGetName(coverImageFile, courseUploadRequest.getTitle());
         CourseDto courseDto = courseMapper.uploadRequestToDto(courseUploadRequest, courseCoverImageName);
+        courseDto.setLecturesCount(0);
+        courseDto.setEnrolledStudentsCount(0);
+        courseDto.setReviewsCount(0);
         Course newCourse = courseRepository.save(CourseMapper.dtoToEntity(courseDto));
 
         return CourseMapper.entityToDto(newCourse);
@@ -60,10 +60,8 @@ public class CourseServiceImpl implements CourseService {
 
         Set<PublicUserDto> enrolledStudents = new HashSet<>();
 
-
         Course course = courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("course not found"));
         course.getStudentsEnrolledCourse().forEach( e-> enrolledStudents.add( UserMapper.entityToPublicUserDto(e.getStudent())));
-
 
         CourseDto courseDto = CourseMapper.entityToDto(course);
         courseDto.setEnrolledStudents(enrolledStudents);
@@ -99,28 +97,50 @@ public class CourseServiceImpl implements CourseService {
                                 .progress(0)
                                         .build();
 
+        incrementCourseStudentEnrolledCountByOne(course.getId());
         studentsEnrolledCourcesRepository.save(data);
-        return course;
 
+        return course;
     }
 
     @Override
     public void updateCoverImage(MultipartFile file) throws IOException {
-            /*String fileName = FileUtils.SaveFileAndGetName(file);
-
-            currentUser.setProfileImage(fileName);
-            userRepository.save(currentUser);*/
     }
 
     @Override
     public Set<CourseDto> findMyEnrolledCourses() {
-
         return null;
+    }
 
-        //return studentsEnrolledCourcesRepository.findAll();
 
-       /* return  userService.getCurrentAuthUser().getEnrolledCourses().stream()
-                .map(CourseMapper::entityToDto)
-                .collect(Collectors.toSet());*/
+    public void incrementCourseLectureNumbersByOne(Long courseId){
+        Course currentCourse = courseRepository.findById(courseId).orElseThrow(() -> new RecordNotFoundException("Course not found"));
+        currentCourse.setLecturesCount(currentCourse.getLecturesCount()+1);
+        courseRepository.save(currentCourse);
+    }
+
+    public void incrementCourseStudentEnrolledCountByOne(Long courseId){
+        Course currentCourse = courseRepository.findById(courseId).orElseThrow(() -> new RecordNotFoundException("Course not found"));
+        currentCourse.setEnrolledStudentsCount(currentCourse.getEnrolledStudentsCount() +1);
+        courseRepository.save(currentCourse);
+    }
+
+    public void updateCourseReview(Long courseId){
+        Course currentCourse = courseRepository.findById(courseId).orElseThrow(() -> new RecordNotFoundException("Course not found"));
+        currentCourse.setReviewsCount(currentCourse.getReviewsCount() + 1);
+        courseRepository.save(currentCourse);
+
+        double sum = 0.0;
+        int count = 0;
+        for (CourseReview review : currentCourse.getReviews()) {
+            sum += review.getRatingValue();
+            count++;
+        }
+        if (count > 0) {
+            currentCourse.setRating(sum / count);
+        } else {
+            currentCourse.setRating(0); // Set to null if no reviews
+        }
+        courseRepository.save(currentCourse); // Update course entity
     }
 }
