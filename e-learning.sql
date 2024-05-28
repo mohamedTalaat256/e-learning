@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 09:01 PM
+-- Generation Time: May 28, 2024 at 08:26 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -101,9 +101,19 @@ CREATE TABLE `course_reviews` (
 
 INSERT INTO `course_reviews` (`id`, `content_text`, `rating_value`, `author_id`, `course_id`) VALUES
 (1, 'great course', 3, 10, 1),
-(2, 'nice', 3, 3, 1),
+(2, 'nice', 3, 2, 1),
 (3, 'very good', 5, 3, 1),
-(4, 'nice course', 4, 3, 1);
+(4, 'nice course', 4, 3, 1),
+(5, 'nice course', 0, 3, 1),
+(6, 'great course', 0, 1, 1),
+(7, 'niceee', 0, 1, 1),
+(8, 'very good java course', 4, 1, 1),
+(9, 'sdfsdf', 3, 1, 1),
+(10, 'sdfsdf', 3, 1, 1),
+(11, 'sdfsdf', 3, 1, 1),
+(12, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 5, 1, 1),
+(13, 'vey nice', 4, 1, 5),
+(14, 'amazing ui ux course', 5, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -131,6 +141,51 @@ INSERT INTO `faculties` (`id`, `university_id`, `academic_specialization_id`) VA
 (1702, 7, 52),
 (1703, 6, 52),
 (1752, 11, 52);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lectures`
+--
+
+CREATE TABLE `lectures` (
+  `id` bigint(20) NOT NULL,
+  `cover_image` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `length` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `course_id` bigint(20) DEFAULT NULL,
+  `lecture_order` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lectures`
+--
+
+INSERT INTO `lectures` (`id`, `cover_image`, `description`, `length`, `title`, `video`, `course_id`, `lecture_order`) VALUES
+(1, 'lecture 1- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 98788, 'lecture 1- introduction', 'lecture_1_introduction.mp4', 1, 1),
+(2, 'lecture 2- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 2- introduction', 'lecture_2_introduction.mp4', 1, 2),
+(3, 'lecture 3- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 3- introduction', 'lecture 3- introduction.mp4', 1, 3),
+(4, 'lecture 4- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 4- introduction', 'lecture 4- introduction.mp4', 1, 4),
+(5, 'lecture 5- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 5- introduction', 'lecture 5- introduction.mp4', 1, 5),
+(6, 'lecture 6- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 6- introduction', 'lecture 6- introduction.mp4', 1, 6),
+(7, 'lecture 7- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 7- introduction', 'lecture 7- introduction.mp4', 1, 7),
+(13, 'lecture 8- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 4, 'lecture 8- introduction', 'lecture 8- introduction.mp4', 1, 8),
+(14, 'lecture 8- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 2301, 'lecture 9- introduction', 'lecture 9- introduction.mp4', 1, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture_reviews`
+--
+
+CREATE TABLE `lecture_reviews` (
+  `id` bigint(20) NOT NULL,
+  `content_text` varchar(255) DEFAULT NULL,
+  `author_id` bigint(20) DEFAULT NULL,
+  `lecture_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -168,21 +223,23 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `students_enrolled_courses`
+-- Table structure for table `students_enrolled_cources`
 --
 
-CREATE TABLE `students_enrolled_courses` (
-  `course_id` bigint(20) NOT NULL,
-  `student_id` bigint(20) NOT NULL
+CREATE TABLE `students_enrolled_cources` (
+  `id` bigint(20) NOT NULL,
+  `course_id` bigint(20) DEFAULT NULL,
+  `student_id` bigint(20) DEFAULT NULL,
+  `enrolled_at` datetime(6) DEFAULT NULL,
+  `progress` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `students_enrolled_courses`
+-- Dumping data for table `students_enrolled_cources`
 --
 
-INSERT INTO `students_enrolled_courses` (`course_id`, `student_id`) VALUES
-(1, 52),
-(1, 252);
+INSERT INTO `students_enrolled_cources` (`id`, `course_id`, `student_id`, `enrolled_at`, `progress`) VALUES
+(1, 1, 6, '2024-05-25 00:31:44.000000', 0);
 
 -- --------------------------------------------------------
 
@@ -220,7 +277,14 @@ INSERT INTO `token_info` (`id`, `access_token`, `local_ip_address`, `refresh_tok
 (58, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyMGQyYjhlNS1kYzk1LTQ4MmQtYjIyMi1lNjZkZDZhMmNjYTgiLCJzdWIiOiJvc2FtYSIsImlhdCI6MTcxNjA1OTM3NCwiZXhwIjoxODk2MDU5Mzc0fQ.NZ7CdRvYnDG6QctUlXlxI9ymYDHBzNl3jFJ7PJHIHromZbQ_-qfmbcK3Ec4vq86K9ALP7t95BnH_EL6BDPELaA', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI0Y2EwMzAxMy1mYzAyLTRjNDEtYWMxNS05NGMwYjE4MjBhMjEiLCJzdWIiOiJvc2FtYSIsImlhdCI6MTcxNjA1OTM3NCwiZXhwIjoxNzM0MDU5Mzc0fQ.QvsV6KhH-Jn7Dk-6vm_0E_z9ImlrM7uogl8kRblUk-FCJQ1ZxbLhm2MfTHg9-q_PRMlCYp_6c-p7rQdiaQiOuQ', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 7),
 (67, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3Y2UzYjJhNi1kYWVjLTQzZTUtYTEwNS1iOWE3MzUyNDlhZWEiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjExODMwNCwiZXhwIjoxODk2MTE4MzA0fQ.7fQmJhbsxP6HyftKcN6cfH-o-L_52MR0XJrh71ZO4knEBwp8OW987orG7x0r3nKfCzCuf9R92OI6y1mJC-DSQQ', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkNDE5NzIxOC1mYWNkLTQ3MjAtOTRjZi1jM2IxYWJkYzZjYjMiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjExODMwNCwiZXhwIjoxNzM0MTE4MzA0fQ.h3oSKKujhHi8IKG5Bnuv99V7OOQcnXAgbnyZjy4rVDB4-qZlHZlrVA9eFSX7uPc_l9n_wFrCGMrdAm0awndHPQ', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
 (68, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI1Y2M0MDA1Yi1hZTAyLTQxOGItYWQxMC05NGQ0NmE1ZjJmZjciLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjExOTkzNCwiZXhwIjoxODk2MTE5OTM0fQ.z_kiggV7uiktTp2PF9d-rvEKGDfKUwAsUgS18rlO_k5U8u9yb_K1J4Fv23Da-PJiL4sL3byMsAt6z6gTtnp2ag', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxY2RjZWMzNS02YjNlLTRhYjItOGQyYS0xNDNlODYyMWE2YTQiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjExOTkzNCwiZXhwIjoxNzM0MTE5OTM0fQ.ahtWFXrpA3F8xQKECmmHPL0IfYfs5vjIqyIr7dQ-oCq-I498xy4Nm8VVqRDa4uDLHKTEa1VeP3cc4xZGDcfGjQ', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 3),
-(69, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhYWE2ZjQzNi03NWZmLTRiODktODRlMi1iNjdhNGE0YmZjZjkiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjEyMDAzMSwiZXhwIjoxODk2MTIwMDMxfQ.wJi5sbv4At3orwSWi9FpBbkaR3kaKCfHaui-4aRMpE-dadOt9GzZhxMeaBcSsT2wpvB73UdDPUSihtzNw7iXHg', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwMDJjZDg2NS1hYmZiLTQ5NTItYjRkNS1iOWEzNDIwZDViYzMiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjEyMDAzMSwiZXhwIjoxNzM0MTIwMDMxfQ.yHteMEkhCzlszFfKr0DFxFp89LrlvS4t_SHjt_dRCn5LKhuYcAw59aEYdjyK0q4PjA_hc2TVwCKfRPX_9_G8Yg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6);
+(69, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhYWE2ZjQzNi03NWZmLTRiODktODRlMi1iNjdhNGE0YmZjZjkiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjEyMDAzMSwiZXhwIjoxODk2MTIwMDMxfQ.wJi5sbv4At3orwSWi9FpBbkaR3kaKCfHaui-4aRMpE-dadOt9GzZhxMeaBcSsT2wpvB73UdDPUSihtzNw7iXHg', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwMDJjZDg2NS1hYmZiLTQ5NTItYjRkNS1iOWEzNDIwZDViYzMiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjEyMDAzMSwiZXhwIjoxNzM0MTIwMDMxfQ.yHteMEkhCzlszFfKr0DFxFp89LrlvS4t_SHjt_dRCn5LKhuYcAw59aEYdjyK0q4PjA_hc2TVwCKfRPX_9_G8Yg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
+(71, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjYmY3Njk0NC1mNGVlLTQ2MmUtYmQzMS01NzMwNmY3ZjIzZWUiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjE4ODU2NywiZXhwIjoxODk2MTg4NTY3fQ.EKm4UzXnnABOqcClrq020gaiRxBaDV9PC3vut2i8ZCJN8WtKWdyoFSbaYSkqgX-qKmURel6ZyK1qRlFBjC-hqg', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJmNTg5Y2YyNi0xY2ZkLTQwNTEtYTVmZi0zMmEzODcwZjE0Y2QiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjE4ODU2NywiZXhwIjoxNzM0MTg4NTY3fQ.RmsRtIkbazHXsGhwMsFeVsYr59hWp6f303TKGtLS9Ndnd3TwHx5QlHv7VXZzXPBJEMNfni9iIrXpNknsVoyQmw', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 6),
+(72, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxYzQ4YmRkYS1lMWNmLTQwYTgtYWZmYy0yNDkxMzM0MjlhNjkiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjU1MTYzNCwiZXhwIjoxODk2NTUxNjM0fQ.Q3mVdEY4YvJl-8aDn3drvkKdfLmVgEGuRGZcBYn_4ciFbwj-nblozIecFcqd9maVn3esZqsvd19diM54Zyck-A', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI2MWI3MTZkYy02ODBmLTRkNTMtOWYwMS1hMDQxMzFlZjA3MmUiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjU1MTYzNCwiZXhwIjoxNzM0NTUxNjM0fQ.59DFSTs164vN0JnIaW59NkdNSj9HxvGe_ZIStXkCud2Pi-fe83QJX5UuT7RrucnivPa0c34JlM00sQ38HI6Cwg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
+(74, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwMTU2NWE4OC1kYWNhLTQ1MTUtOTQ2Yy1lYTVmYjU1MmJjMWQiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY0MTI4MSwiZXhwIjoxODk2NjQxMjgxfQ.b5tgnXnBrlvHtTM9NTjzDluZ7AnMogL8ynjm44WDUJEiT3Q1_s4zPzCi7kTDoUIGa7uyhlnXZFWR0cQM1TD-kw', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyMDZhZDFiZS04NDgxLTQwNTktYTdjYy1mZjVjODVjMDI3NDAiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY0MTI4MSwiZXhwIjoxNzM0NjQxMjgxfQ.ofTQlW6ZOhCqzhRyP_WWpm6Tkyvmdq-fe1P4qG6lO-_xjeLL_RfuAD7qeBN4wXBc4EhuV8t7rslbajgn16Gg2g', '0:0:0:0:0:0:0:1', 'PostmanRuntime/7.37.3', 6),
+(76, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkYjg1MjU1OS1mNDU3LTQ0MDktYTBlYi03MWVmMGI0YjQ3OGYiLCJzdWIiOiJyZWRhIiwiaWF0IjoxNzE2NjcwNTM2LCJleHAiOjE4OTY2NzA1MzZ9.Wp-8_Ldzu4Uy-8Orh2OnRWNSjv8TJhi91i7-E4VzYvT0AiSDCNX9BJdRFhmmlO_hGclJUCqiI5RDrkc4pBN2lw', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5ZTViMmJkOC00ZTM4LTQ5ZTgtYTVkYy04M2U0MGRmZjhkNmEiLCJzdWIiOiJyZWRhIiwiaWF0IjoxNzE2NjcwNTM2LCJleHAiOjE3MzQ2NzA1MzZ9.ptgL7VlD3cKSsLPP0-vkAwHvHidb65mtYb6XZMuw_4K90lGfhwnmwoeuqXUuzIjEwjfFvv8jj0ht3sO6s483iQ', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 1),
+(79, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwY2QwZjExNC05NTlhLTQ3MWYtOTRjYS03YmJhZTNkZGJlNWEiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY3MjMyMiwiZXhwIjoxODk2NjcyMzIyfQ.dtwlb6rjngaTDrjsXS33fwMW-c-0pKdp9kQz_ro9eh1F7pbipiuZYDIECp7PQ4xk8AtkBgHNlvGbnvUDh_UdGw', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwMzkzOTE4Mi1hMDllLTQ0OTktYWEwOS03YWRkNmFmMzYzNjIiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY3MjMyMiwiZXhwIjoxNzM0NjcyMzIyfQ.dhcwmj140NsACJ7cnthqgAd--8YbCM59o20HxOw5HV0LeqIH-GU3pTJZgrCl7bDy1Euy_OPaqiRl4dFaMDgWxg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
+(80, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI1NzQ4NWU4Ny1iYWY5LTRjN2MtODUzNC1hZDIyZWNhODc5OWMiLCJzdWIiOiJsYXlsYSIsImlhdCI6MTcxNjY3MjUzNCwiZXhwIjoxODk2NjcyNTM0fQ.WrOpxSdQhI6hsHiFLU7Ff6Fl7ovHUhvh5WhhpuDLT6d22059MSTUXRURf_XfuEa7oG507LlfZV-ZQf_WgtTdtA', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3NGIyYWY0Zi04Yzg3LTRhZmItYjY0ZS04YmI1ZjUzNjRjMjIiLCJzdWIiOiJsYXlsYSIsImlhdCI6MTcxNjY3MjUzNCwiZXhwIjoxNzM0NjcyNTM0fQ.wbvciE0dXZxjuXQrtbUG2gSp49yPAuEIqCtJo_b2VrltqN3c_ArpUBkpOiTDdjRaArkPRuc4oRFz3oBeC7xyhw', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 2),
+(81, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YTk3MmQ4MS02NzBmLTRmMmQtYjMwOC0zMjBkN2I2YTViOTYiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxODk2ODE2NjI1fQ.OJw6ejCv_jUtNOxGhS7QX8yyfCSYmTnjwLVTD-TYjpyGnbQrHXqRXADMbPMCODk6s2ADIJYmPP-159RNX8solA', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YzAzNWEzNy1jODAyLTQzYTgtYTk1MS0xNDVhOGE4Y2FkMTIiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxNzM0ODE2NjI1fQ.EPkmJEQS1XDmd1lsJGoR0oVEQW1Y2s4b3dXzPOUVdDPHXEIkXgDIxBEiRlnyss-sZvR6Vw9jvGLAl0wtxuVbNg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 3);
 
 -- --------------------------------------------------------
 
@@ -332,7 +396,8 @@ ALTER TABLE `acadimic_sepicailizations`
 --
 ALTER TABLE `cources`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FKox3phon2ysc3aomyfquj105h9` (`author_id`);
+  ADD KEY `FKox3phon2ysc3aomyfquj105h9` (`author_id`),
+  ADD KEY `FKs3wh6d7dlkdbrupc5vng1tmjl` (`auther_id`);
 
 --
 -- Indexes for table `course_reviews`
@@ -351,6 +416,21 @@ ALTER TABLE `faculties`
   ADD KEY `UK_t72p5cas9r8nubffbd0q37qgx` (`academic_specialization_id`) USING BTREE;
 
 --
+-- Indexes for table `lectures`
+--
+ALTER TABLE `lectures`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK7ebof2n0n8of76vk0g552omsi` (`course_id`);
+
+--
+-- Indexes for table `lecture_reviews`
+--
+ALTER TABLE `lecture_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK2ovu15irh4unh31rumedirq61` (`author_id`),
+  ADD KEY `FKato028bk4srdavtpxgbxdxmfy` (`lecture_id`);
+
+--
 -- Indexes for table `organizations`
 --
 ALTER TABLE `organizations`
@@ -364,11 +444,12 @@ ALTER TABLE `roles`
   ADD UNIQUE KEY `UK_nb4h0p6txrmfc0xbrd1kglp9t` (`name`);
 
 --
--- Indexes for table `students_enrolled_courses`
+-- Indexes for table `students_enrolled_cources`
 --
-ALTER TABLE `students_enrolled_courses`
-  ADD PRIMARY KEY (`course_id`,`student_id`),
-  ADD KEY `FKb0qswoxj3yrt77btto422hoq3` (`student_id`);
+ALTER TABLE `students_enrolled_cources`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKciid9fpk9pc84qwjqe3tps73q` (`course_id`),
+  ADD KEY `FKdr38hhvdwlea8hclfhmmrked0` (`student_id`);
 
 --
 -- Indexes for table `token_info`
@@ -411,13 +492,31 @@ ALTER TABLE `cources`
 -- AUTO_INCREMENT for table `course_reviews`
 --
 ALTER TABLE `course_reviews`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `lectures`
+--
+ALTER TABLE `lectures`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `lecture_reviews`
+--
+ALTER TABLE `lecture_reviews`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `students_enrolled_cources`
+--
+ALTER TABLE `students_enrolled_cources`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `token_info`
 --
 ALTER TABLE `token_info`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -451,11 +550,24 @@ ALTER TABLE `faculties`
   ADD CONSTRAINT `FKgmveir7kkrrjdj3t0b7r1m0if` FOREIGN KEY (`university_id`) REFERENCES `universities` (`id`);
 
 --
--- Constraints for table `students_enrolled_courses`
+-- Constraints for table `lectures`
 --
-ALTER TABLE `students_enrolled_courses`
-  ADD CONSTRAINT `FK9td64uvceytfco2v95pbx1b9q` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`),
-  ADD CONSTRAINT `FKb0qswoxj3yrt77btto422hoq3` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`);
+ALTER TABLE `lectures`
+  ADD CONSTRAINT `FK7ebof2n0n8of76vk0g552omsi` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`);
+
+--
+-- Constraints for table `lecture_reviews`
+--
+ALTER TABLE `lecture_reviews`
+  ADD CONSTRAINT `FK2ovu15irh4unh31rumedirq61` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `FKato028bk4srdavtpxgbxdxmfy` FOREIGN KEY (`lecture_id`) REFERENCES `lectures` (`id`);
+
+--
+-- Constraints for table `students_enrolled_cources`
+--
+ALTER TABLE `students_enrolled_cources`
+  ADD CONSTRAINT `FKciid9fpk9pc84qwjqe3tps73q` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`),
+  ADD CONSTRAINT `FKdr38hhvdwlea8hclfhmmrked0` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `token_info`
