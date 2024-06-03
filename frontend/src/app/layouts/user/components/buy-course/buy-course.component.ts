@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { EMPTY_COURSE, FormMode, dialog_h_md, dialog_w_md, imagePlaceholder, imagesUrls, profileImagesUrls } from 'src/app/constants/constants';
+import { EMPTY_COURSE, FormMode, ReviewType, dialog_h_md, dialog_w_md, imagePlaceholder, imagesUrls, profileImagesUrls } from 'src/app/constants/constants';
 import { AppResponse } from 'src/app/model/app_response.model';
 import { Course } from 'src/app/model/course.model';
 import { CourseService } from 'src/app/service/courses.service';
 import Swal from 'sweetalert2';
-import { CourseReviewDialogFormComponent } from '../course-review-dialog-form/course-review-dialog-form.component';
+import { ReviewDialogFormComponent } from '../review-dialog-form/review-dialog-form.component';
 import { take } from 'rxjs';
 
 @Component({
@@ -60,9 +60,10 @@ export class BuyCourseComponent implements OnInit {
     const data = {
       title: this.translate.instant('leave_review'),
       formMode: FormMode.CREATE,
-      course: this.course
+      data: this.course,
+      reviewType: ReviewType.COURSE
     };
-    const dialogRef = this.dialog.open(CourseReviewDialogFormComponent, {
+    const dialogRef = this.dialog.open(ReviewDialogFormComponent, {
       width: dialog_w_md,
       height: dialog_h_md,
       data: data

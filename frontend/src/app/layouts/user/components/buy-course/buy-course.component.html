@@ -60,28 +60,28 @@
 
                     <div  fxLayout="column" *ngFor="let review of course.reviews">
 
-                        <div  fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
-                            <img mat-card-image
+                        <div fxLayout="row" fxLayoutAlign="space-between center" >
+                            <div  fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                                <img mat-card-image
                                 [src]="review.author.profileImage ? PROFILE_IMAGES_URL+ review.author.profileImage: DEFAULT_USER_IMAGE"
                                 class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
-                            <div fxLayout="column" fxFlex="100">
-    
-                                <div fxLayout="row" fxLayoutGap="space-between center" fxFlex="100" fxLayoutGap="20">
+                          
                                     <div fxLayout="column" >
                                         <mat-card-title class="f-w-500"> {{review.author.firstName +' '+ review.author.lastName}}
                                         </mat-card-title>
                                         <mat-card-subtitle> @{{review.author.username}}</mat-card-subtitle>
-                                    </div>
-                                    <app-rating-star [rating]="review.ratingValue"></app-rating-star>
-                                </div>
-                                
-                               
-    
+                                    </div> 
                             </div>
+                           
+                                    <app-rating-star [rating]="review.ratingValue"></app-rating-star>
                         </div>
 
-                        <div class="mat-bg-light-secondary rounded-1 p-2" style="margin-inline-start: 50px;">
+                        <div  fxLayout="row" fxLayoutAlign="space-between center" class="mat-bg-light-secondary rounded-1 p-2" style="margin-inline-start: 50px;">
                             {{review.contentText}}
+
+
+                            <span class="f-w-thin f-s-italic mat-text-secondary">{{review.createdAt | dateConverter}}</span>
+                            
                           
 
                         </div>

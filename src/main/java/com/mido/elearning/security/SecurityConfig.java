@@ -33,7 +33,7 @@ public class SecurityConfig {
             "/api/auth/logout",
             "/swagger-ui/**",
             "/api-docs/**",
-            "/api/lectures/stream"
+           // "/api/lectures/stream"
     };
 
     @Autowired

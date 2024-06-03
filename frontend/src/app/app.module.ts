@@ -56,8 +56,10 @@ import { toShortText } from './pip/toShortText';
 import { LectureDialogFormComponent } from './layouts/admin/components/lecture-dialog-form/lecture-dialog-form.component';
 import { secondsToLength } from './pip/secondsToLength';
 import { InputStarRatingComponent } from './global/input-star-rating/input-star-rating.component';
-import { CourseReviewDialogFormComponent } from './layouts/user/components/course-review-dialog-form/course-review-dialog-form.component';
+import { ReviewDialogFormComponent } from './layouts/user/components/review-dialog-form/review-dialog-form.component';
 import { toCeil } from './pip/toCeil';
+import { DateConverter } from './pip/dateConverter';
+import { DatePipe } from '@angular/common';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -87,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     secondsToLength,
     toShortText,
     toCeil,
+    DateConverter,
     ValidationMsgComponent,
     UsersComponent,
     FacultiesComponent,
@@ -108,7 +111,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LectureCardComponent,
     LectureDialogFormComponent,
     InputStarRatingComponent,
-    CourseReviewDialogFormComponent
+    ReviewDialogFormComponent
   ],
   imports: [
     MatSidenavModule,
@@ -134,6 +137,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     })
   ],
   providers: [
+    DatePipe,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: appearance

@@ -83,10 +83,6 @@ export class CoursesComponent implements OnInit {
     });
   }
 
- 
-
-
-
   openEditDialog(courseData: any) {
     const data = {
       title: this.translate.instant('edit_course'),
@@ -108,7 +104,7 @@ export class CoursesComponent implements OnInit {
   openAddNewLectureDialog(courseId: any) {
     const data = {
       title: this.translate.instant('add_lecture'),
-      formMode: FormMode.EDIT,
+      formMode: FormMode.CREATE,
       courseId: courseId
     };
     const dialogRef = this.dialog.open(LectureDialogFormComponent, {

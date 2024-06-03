@@ -3,13 +3,11 @@ package com.mido.elearning.serviceImpl;
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.Dto.PublicUserDto;
-import com.mido.elearning.entity.AppUser;
-import com.mido.elearning.entity.Course;
-import com.mido.elearning.entity.CourseReview;
-import com.mido.elearning.entity.StudentsEnrolledCourse;
+import com.mido.elearning.entity.*;
+import com.mido.elearning.enums.ReviewType;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
-import com.mido.elearning.mapping.CourseReviewMapper;
+import com.mido.elearning.mapping.ReviewMapper;
 import com.mido.elearning.mapping.UserMapper;
 import com.mido.elearning.repository.*;
 import com.mido.elearning.service.CourseService;
@@ -31,6 +29,7 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
+    private final LectureRepository lectureRepository;
     private final StudentsEnrolledCourcesRepository studentsEnrolledCourcesRepository;
     private final UserServiceImpl userService;
     private final CourseMapper courseMapper;
@@ -68,7 +67,7 @@ public class CourseServiceImpl implements CourseService {
         courseDto.setEnrolledStudentsCount(enrolledStudents.size());
         courseDto.setReviews(
                 course.getReviews().stream()
-                .map(CourseReviewMapper::entityToDto)
+                .map(ReviewMapper::entityToDto)
                 .collect(Collectors.toList()));
 
         return  courseDto;
@@ -125,22 +124,5 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.save(currentCourse);
     }
 
-    public void updateCourseReview(Long courseId){
-        Course currentCourse = courseRepository.findById(courseId).orElseThrow(() -> new RecordNotFoundException("Course not found"));
-        currentCourse.setReviewsCount(currentCourse.getReviewsCount() + 1);
-        courseRepository.save(currentCourse);
 
-        double sum = 0.0;
-        int count = 0;
-        for (CourseReview review : currentCourse.getReviews()) {
-            sum += review.getRatingValue();
-            count++;
-        }
-        if (count > 0) {
-            currentCourse.setRating(sum / count);
-        } else {
-            currentCourse.setRating(0); // Set to null if no reviews
-        }
-        courseRepository.save(currentCourse); // Update course entity
-    }
 }

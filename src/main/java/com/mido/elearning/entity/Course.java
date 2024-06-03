@@ -45,7 +45,7 @@ public class Course {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private AppUser author;
 
-    @OneToMany( mappedBy = "course")
+    @OneToMany( mappedBy = "course", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<StudentsEnrolledCourse> studentsEnrolledCourse = new HashSet<>();
 
@@ -64,7 +64,7 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<CourseReview> reviews;
+    private List<Review> reviews;
 
     @Column(name ="reviews_count")
     private int reviewsCount;

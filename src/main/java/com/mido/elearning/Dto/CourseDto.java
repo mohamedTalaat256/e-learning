@@ -1,7 +1,5 @@
 package com.mido.elearning.Dto;
 
-import com.mido.elearning.entity.AppUser;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -31,6 +29,6 @@ public class CourseDto {
     private int lecturesCount;
     private int reviewsCount;
 
-    private List<CourseReviewDto> reviews = new ArrayList<>();
+    private List<ReviewDto> reviews = new ArrayList<>();
 
 }

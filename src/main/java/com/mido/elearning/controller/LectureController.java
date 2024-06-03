@@ -39,9 +39,11 @@ public class LectureController {
 
     @PostMapping("/updateLectureImage")
     public ResponseEntity<Object>  updateLectureImage(@RequestParam("lectureImage")MultipartFile lectureImage) throws IOException {
-      //  lectureService.updateProfileImage(lectureImage);
+      //lectureService.updateProfileImage(lectureImage);
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK, null  ,true);
     }
+
+
     @GetMapping(value="/stream/{fileName}" ,produces = "video/mp4")
     public Mono<Resource> streamVideo(@PathVariable String fileName){
         return lectureService.retrieveContent(fileName);

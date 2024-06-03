@@ -18,6 +18,10 @@ export enum FormMode {
     CREATE, EDIT
 }
 
+export enum ReviewType {
+    COURSE, LECTURE
+}
+
 export const dialog_w_md = '600px';
 export const dialog_h_md = '650px';
 

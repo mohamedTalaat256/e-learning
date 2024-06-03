@@ -22,25 +22,26 @@
                     </app-validation-msg>
                 </mat-error>
             </mat-form-field>
+ 
 
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20">
+                <label for="file-input" class="select-image-preview"  >
+
+                    <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
+                    <img [src]="preview!=='' ? preview : defaultPreview" class="upload-course-img" />
+                    <input type="file" id="file-input" accept="image/*" (change)="selectCoverImage($event)"
+                        style="visibility: hidden; position: absolute;" />
+                </label>  
+                <input type="file" class=" custome-file-input" (change)="selectVideo($event)" />   
+            </div>
            
-
-        
-
             <div *ngIf="selectedCoverImage && progress" class="progress my-3">
                 <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ progress }}"
                     aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
                     {{ progress }}%
                 </div>
             </div>
-
-            <label for="file-input">
-
-                <!--    <button mat-icon-button><mat-icon>camera_alt</mat-icon></button> -->
-                <img [src]="preview!=='' ? preview : defaultPreview" class="upload-course-img" />
-                <input type="file" id="file-input" accept="image/*" (change)="selectFile($event)"
-                    style="visibility: hidden; position: absolute;" />
-            </label>
+           
 
         </div>
   

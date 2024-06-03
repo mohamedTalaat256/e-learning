@@ -9,6 +9,8 @@ import { AppResponse } from 'src/app/model/app_response.model';
 import Swal from 'sweetalert2';
 import { LectureFormControls } from '../../form-controls/lecture-form';
 import { Lecture } from 'src/app/model/lecture.model';
+import { resportProgress } from 'src/app/utils/file.utils';
+import { LectureService } from 'src/app/service/lecture.service';
 
 @Component({
   selector: 'app-lecture-dialog-form',
@@ -16,46 +18,53 @@ import { Lecture } from 'src/app/model/lecture.model';
   styleUrls: ['./lecture-dialog-form.component.scss']
 })
 export class LectureDialogFormComponent implements OnInit {
-  selectedFiles?: FileList;
   selectedCoverImage?: File;
+  selectedVideo?: File;
 
   progress = 0;
   message = '';
   preview = '';
+
   defaultPreview = imagePlaceholder;
   lectureForm: FormGroup;
-  formMode: FormMode;
-  isCourseFree: boolean=false;
   title: string;
-  lectureData: Lecture ;
+  lectureData: Lecture;
+
+
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private lectureFormControle: LectureFormControls,
-  private courseService: CourseService, private dialogRef: MatDialogRef<LectureDialogFormComponent>
+  private lectureService: LectureService, private dialogRef: MatDialogRef<LectureDialogFormComponent>
 ) {
-    this.lectureForm = this.lectureFormControle.createLectureForm();
-
-    this.formMode = data.formMode;
-    this.title = data.title;
-    this.lectureData = data.lectureData;
+   
+    this.title = this.data.title; 
      
   }
 
   ngOnInit(): void {
-    if (this.formMode === FormMode.EDIT) { 
+
+    if(this.data.formMode === FormMode.CREATE){
+      this.lectureForm = this.lectureFormControle.createLectureForm();
+      this.lectureForm.patchValue({
+        course: this.data.courseId
+      });
+
+    }else{
+      this.lectureData = this.data.lectureData;
       this.lectureForm = this.lectureFormControle.setLectureForm(this.lectureData);
       this.preview = imagesUrls+ this.lectureData.coverImage; 
-    }
+    } 
   }
  
 
-  selectFile(event: any): void {
+  selectCoverImage(event: any): void {
     this.message = '';
     this.preview = '';
     this.progress = 0;
-    this.selectedFiles = event.target.files;
+    this.selectedCoverImage = event.target.files;
 
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+    if (this.selectedCoverImage) {
+      const file: File | null = this.selectedCoverImage[0];
 
       if (file) {
         this.preview = '';
@@ -73,19 +82,27 @@ export class LectureDialogFormComponent implements OnInit {
     }
   }
 
-
-
-
-  toggleisCourseFree($event){
-    this.lectureForm = $event.checked;
+  selectVideo(event: any): void {
+    
+    this.selectedVideo = (event.target as HTMLInputElement)?.files?.[0];
+    
+    if(this.selectedVideo){
+      const reader = new FileReader; 
+      reader.onload = (e:any)=>{
+        this.defaultPreview = e.target.result;
+      }
+      reader.readAsDataURL(this.selectedVideo);
+    }
+    
   }
-
 
   onSubmit(){
 
-    this.courseService.save(this.lectureForm.value, this.selectedCoverImage).subscribe({
-      next:(response: AppResponse)=>{  
+    this.lectureService.save(this.lectureForm.value, this.selectedCoverImage, this.selectedVideo).subscribe({
+      next:(response: any)=>{  
         if(response.ok){
+
+          resportProgress(response);
           Swal.fire({
             icon: "success",
             title: response.message,

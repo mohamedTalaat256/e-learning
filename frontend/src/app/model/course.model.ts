@@ -1,4 +1,4 @@
-import { CourseReview } from "./courseReview.model";
+import { Review } from "./courseReview.model";
 
 export interface Course{
     id: number,
@@ -14,6 +14,6 @@ export interface Course{
     hours?: number;
     author?:any,
     lecturesCount?: number,
-    reviews?: CourseReview[]
+    reviews?: Review[]
 
 }

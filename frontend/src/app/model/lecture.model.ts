@@ -1,4 +1,5 @@
 import { Course } from "./course.model";
+import { Review } from "./courseReview.model";
 
 export interface Lecture{
     
@@ -9,6 +10,7 @@ export interface Lecture{
     coverImage: string,
     video: number,
     course ?:Course,
-    lectureOrder?: number
+    lectureOrder?: number,
+    reviews? : Review[]
 
 }

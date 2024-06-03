@@ -1,19 +1,26 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs';
 import {
   EMPTY_LECTUER,
+  FormMode,
   LECTURE_STREAM_URL,
+  ReviewType,
   VIDEOS_URL,
   constant,
+  dialog_h_md,
+  dialog_w_md,
   imagePlaceholder,
   imagesUrls,
   profileImagesUrls,
 } from 'src/app/constants/constants';
+import { ReviewDialogFormComponent } from 'src/app/layouts/user/components/review-dialog-form/review-dialog-form.component';
 import { AppResponse } from 'src/app/model/app_response.model';
 import { Lecture } from 'src/app/model/lecture.model';
 import { LectureService } from 'src/app/service/lecture.service';
+import { ReviewService } from 'src/app/service/review.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -41,8 +48,10 @@ export class CourseOverviewComponent implements OnInit {
 
   constructor(
     private lectureService: LectureService,
+    private reviewService: ReviewService,
     private route: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dialog: MatDialog,
   ) {}
  
 
@@ -60,7 +69,8 @@ export class CourseOverviewComponent implements OnInit {
         next: (response: AppResponse) => {
           this.lectures = response.data;
 
-          this.getCurrentLectureIndex();
+          this.getCurrentLectureIndex()
+          this.getCurrentLectureReviews(this.currentLecture.id);;
           this.videoPlayer = this.videoPlayerRef.nativeElement;
           this.videoPlayer.load();
 
@@ -112,6 +122,52 @@ export class CourseOverviewComponent implements OnInit {
       top: 0,
       left: 0,
       behavior: 'smooth',
+    });
+
+
+    //get Reviews
+
+    this.getCurrentLectureReviews(lectureId);
+  }
+
+  getCurrentLectureReviews(lectureId: number){
+    this.reviewService
+    .findReviewsByLectureId(lectureId)
+    .pipe(take(1))
+    .subscribe({
+      next: (response: AppResponse) => {  
+        this.currentLecture.reviews = response.data;
+      },
+      error: (error: Error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.message,
+          showConfirmButton: true,
+        });
+      },
+    });
+  }
+
+
+
+
+
+
+  openAddReviewDialog(){
+    const data = {
+      title: this.translate.instant('leave_review'),
+      formMode: FormMode.CREATE,
+      data: this.currentLecture,
+      reviewType: ReviewType.LECTURE
+    };
+    const dialogRef = this.dialog.open(ReviewDialogFormComponent, {
+      width: dialog_w_md,
+      height: dialog_h_md,
+      data: data
+    });
+ 
+    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
+     this.currentLecture.reviews.push(result);
     });
   }
 }

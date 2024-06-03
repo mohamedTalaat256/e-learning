@@ -3,16 +3,21 @@ package com.mido.elearning.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "course_reviews")
+@Table(name = "reviews")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @ToString
-public class CourseReview {
+@EntityListeners({AuditingEntityListener.class})
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +36,14 @@ public class CourseReview {
     @ManyToOne()
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Course course;
+
+    @ManyToOne()
+    @JoinColumn(name = "lecture_id", referencedColumnName = "id")
+    private Lecture lecture;
+
+
+    @Column(name = "created_at")
+    @CreatedDate
+    private LocalDateTime createdAt;
 
 }

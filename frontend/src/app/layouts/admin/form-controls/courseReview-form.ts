@@ -3,16 +3,16 @@
 
 import { FormBuilder, Validators} from '@angular/forms';
 import { Injectable} from '@angular/core';
-import { CourseReview } from 'src/app/model/courseReview.model';
+import { Review } from 'src/app/model/courseReview.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseReviewFormControls {
+export class ReviewFormControls {
   constructor(public fb: FormBuilder ) {
   } 
 
-createCourseReviewForm(){
+createReviewForm(){
     let form = this.fb.group(
       {
         id:          [null],
@@ -24,7 +24,7 @@ createCourseReviewForm(){
   }
 
 
-  setCourseReviewForm(review : CourseReview){
+  setReviewForm(review : Review){
     let form = this.fb.group(
       {
         id:          [review.id],

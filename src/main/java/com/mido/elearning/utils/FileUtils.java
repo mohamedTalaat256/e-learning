@@ -16,11 +16,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class FileUtils {
 
-    @Value("${uploads.images.path}")
-    private static String UPLOAD_DIRECTORY;
+    //@Value("${uploads.images.path}")
+    private static String UPLOAD_DIRECTORY="src/main/media/images";
 
-    @Value("${uploads.videos.path}")
-    private static String VIDEOS_UPLOAD_DIRECTORY;
+    //@Value("${uploads.videos.path}")
+    private static String VIDEOS_UPLOAD_DIRECTORY="src/main/media/videos";
 
 
     public static String SaveFileAndGetName(MultipartFile profileImage, String fileName ) throws IOException {
