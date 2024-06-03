@@ -55,7 +55,7 @@ export const EMPTY_COURSE:Course = {
     discount: 0,
     isCourseFree: false,
     rating: 0,
-    enrolledStudents: 0,
+    enrolledStudents: [],
     enrolledStudentsCount: 0,
     coverImage: '',
     hours: 0,

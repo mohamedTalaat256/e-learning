@@ -8,7 +8,7 @@ export interface Course{
     discount: number,
     isCourseFree: boolean,
     rating: number,
-    enrolledStudents?: number,
+    enrolledStudents?: any[],
     enrolledStudentsCount?: number,
     coverImage: string,
     hours?: number;

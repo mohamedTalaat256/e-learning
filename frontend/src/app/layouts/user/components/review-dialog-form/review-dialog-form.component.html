@@ -1,0 +1,27 @@
+
+<div class="p-4">
+
+    <p class="f-w-bold">{{title}}</p>
+
+    <form (ngSubmit)="submit()"  [formGroup]="reviewForm" >
+    
+        <div fxLayout="column" fxLayoutGap="10">
+            <app-input-star-rating (onRatingChange)="ratingChange($event)"></app-input-star-rating>
+    
+            <mat-form-field>
+                <mat-label>{{'leave_review'|translate}}</mat-label>
+                <textarea matInput [placeholder]="'leave_review'|translate" formControlName="contentText"></textarea>
+
+                <mat-error>
+                    <app-validation-msg [control]="reviewForm.controls['contentText']"
+                        [fieldName]="'reveiw_content'">
+                    </app-validation-msg>
+                </mat-error>
+            </mat-form-field> 
+    
+            <button mat-raised-button type="submit" [disabled]="!reviewForm.valid" color="primary">{{'save'|translate}}</button>
+        </div>
+    
+    
+    </form>
+</div>
