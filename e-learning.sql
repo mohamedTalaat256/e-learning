@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 08:26 PM
+-- Generation Time: Jun 03, 2024 at 02:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,54 +66,23 @@ CREATE TABLE `cources` (
   `auther_id` bigint(20) DEFAULT NULL,
   `hours` double NOT NULL,
   `rating` double NOT NULL,
-  `author_id` bigint(20) DEFAULT NULL
+  `author_id` bigint(20) DEFAULT NULL,
+  `enrolled_students_count` int(11) DEFAULT NULL,
+  `lectures_count` int(11) DEFAULT NULL,
+  `reviews_count` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cources`
 --
 
-INSERT INTO `cources` (`id`, `cover_image`, `description`, `discount`, `discount_end_date`, `discount_statrt_date`, `is_course_free`, `price`, `title`, `auther_id`, `hours`, `rating`, `author_id`) VALUES
-(1, 'JAVA.jpg', 'advanced java 21 course Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day. The writer has no idea what topic the random paragraph will be about when it appears. This forces the wr', 0, NULL, NULL, b'0', 400.00, 'java 21', NULL, 8, 4, 6),
-(2, 'Data Structure And Algoritm.jpg', 'Advanced Data Structure And Algorithm From zero to hero Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day. The writer has no idea what topic the random paragraph will be about whe', 0, NULL, NULL, b'0', 193.00, 'Data Structure And Algoritm', NULL, 20, 0, 6),
-(3, 'CCNA cisco.jpg', 'CCNA advanced course', 0, NULL, NULL, b'0', 199.00, 'CCNA cisco', NULL, 320, 0, 6),
-(4, 'Python.jpg', 'Python for beginners', 0, NULL, NULL, b'0', 60.00, 'Python', NULL, 120, 0, 6),
-(5, 'UI and UX.jpg', 'UI / UX For Professionals', 0, NULL, NULL, b'0', 180.00, 'UI and UX', NULL, 630, 0, 6),
-(6, 'Docker.png', 'Docker Advanced Course', 0, NULL, NULL, b'0', 630.00, 'Docker', NULL, 320, 0, 6);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `course_reviews`
---
-
-CREATE TABLE `course_reviews` (
-  `id` bigint(20) NOT NULL,
-  `content_text` varchar(255) DEFAULT NULL,
-  `rating_value` double DEFAULT NULL,
-  `author_id` bigint(20) DEFAULT NULL,
-  `course_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `course_reviews`
---
-
-INSERT INTO `course_reviews` (`id`, `content_text`, `rating_value`, `author_id`, `course_id`) VALUES
-(1, 'great course', 3, 10, 1),
-(2, 'nice', 3, 2, 1),
-(3, 'very good', 5, 3, 1),
-(4, 'nice course', 4, 3, 1),
-(5, 'nice course', 0, 3, 1),
-(6, 'great course', 0, 1, 1),
-(7, 'niceee', 0, 1, 1),
-(8, 'very good java course', 4, 1, 1),
-(9, 'sdfsdf', 3, 1, 1),
-(10, 'sdfsdf', 3, 1, 1),
-(11, 'sdfsdf', 3, 1, 1),
-(12, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 5, 1, 1),
-(13, 'vey nice', 4, 1, 5),
-(14, 'amazing ui ux course', 5, 2, 5);
+INSERT INTO `cources` (`id`, `cover_image`, `description`, `discount`, `discount_end_date`, `discount_statrt_date`, `is_course_free`, `price`, `title`, `auther_id`, `hours`, `rating`, `author_id`, `enrolled_students_count`, `lectures_count`, `reviews_count`) VALUES
+(1, 'JAVA.jpg', 'advanced java 21 course Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day. The writer has no idea what topic the random paragraph will be about when it appears. This forces the wr', 0, NULL, NULL, b'0', 400.00, 'java 21', NULL, 8, 3.5, 6, 1, 13, 2),
+(2, 'Data Structure And Algoritm.jpg', 'Advanced Data Structure And Algorithm From zero to hero Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day. The writer has no idea what topic the random paragraph will be about whe', 0, NULL, NULL, b'0', 193.00, 'Data Structure And Algoritm', NULL, 20, 0, 6, 0, 0, 0),
+(3, 'CCNA cisco.jpg', 'CCNA advanced course', 0, NULL, NULL, b'0', 199.00, 'CCNA cisco', NULL, 320, 0, 6, 0, 0, 0),
+(4, 'Python.jpg', 'Python for beginners', 0, NULL, NULL, b'0', 60.00, 'Python', NULL, 120, 0, 6, 0, 0, 0),
+(5, 'UI and UX.jpg', 'UI / UX For Professionals', 0, NULL, NULL, b'0', 180.00, 'UI and UX', NULL, 630, 0, 6, 0, 0, 2),
+(6, 'Docker.png', 'Docker Advanced Course', 0, NULL, NULL, b'0', 630.00, 'Docker', NULL, 320, 0, 6, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -156,36 +125,19 @@ CREATE TABLE `lectures` (
   `title` varchar(255) DEFAULT NULL,
   `video` varchar(255) DEFAULT NULL,
   `course_id` bigint(20) DEFAULT NULL,
-  `lecture_order` int(11) DEFAULT NULL
+  `lecture_order` int(11) DEFAULT NULL,
+  `rating` double NOT NULL,
+  `reviews_count` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lectures`
 --
 
-INSERT INTO `lectures` (`id`, `cover_image`, `description`, `length`, `title`, `video`, `course_id`, `lecture_order`) VALUES
-(1, 'lecture 1- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 98788, 'lecture 1- introduction', 'lecture_1_introduction.mp4', 1, 1),
-(2, 'lecture 2- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 2- introduction', 'lecture_2_introduction.mp4', 1, 2),
-(3, 'lecture 3- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 3- introduction', 'lecture 3- introduction.mp4', 1, 3),
-(4, 'lecture 4- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 4- introduction', 'lecture 4- introduction.mp4', 1, 4),
-(5, 'lecture 5- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 5- introduction', 'lecture 5- introduction.mp4', 1, 5),
-(6, 'lecture 6- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 6- introduction', 'lecture 6- introduction.mp4', 1, 6),
-(7, 'lecture 7- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 7- introduction', 'lecture 7- introduction.mp4', 1, 7),
-(13, 'lecture 8- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 4, 'lecture 8- introduction', 'lecture 8- introduction.mp4', 1, 8),
-(14, 'lecture 8- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 2301, 'lecture 9- introduction', 'lecture 9- introduction.mp4', 1, 9);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lecture_reviews`
---
-
-CREATE TABLE `lecture_reviews` (
-  `id` bigint(20) NOT NULL,
-  `content_text` varchar(255) DEFAULT NULL,
-  `author_id` bigint(20) DEFAULT NULL,
-  `lecture_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `lectures` (`id`, `cover_image`, `description`, `length`, `title`, `video`, `course_id`, `lecture_order`, `rating`, `reviews_count`) VALUES
+(1, 'lecture 1- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 98788, 'lecture 1- introduction', 'lecture_1_introduction.mp4', 1, 1, 4, 1),
+(2, 'lecture 2- introduction.jpg', 'lecture is mohadmdi dkdpej dldje oej e', 34534, 'lecture 2- introduction', 'lecture_2_introduction.mp4', 1, 2, 0, 0),
+(15, 'asdasd.jpg', 'asd', 4, 'asdasd', 'asdasd.mp4', 1, 3, 4.333333333333333, 2);
 
 -- --------------------------------------------------------
 
@@ -199,6 +151,34 @@ CREATE TABLE `organizations` (
   `industry` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` bigint(20) NOT NULL,
+  `content_text` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `rating_value` double DEFAULT NULL,
+  `author_id` bigint(20) DEFAULT NULL,
+  `course_id` bigint(20) DEFAULT NULL,
+  `lecture_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `content_text`, `created_at`, `rating_value`, `author_id`, `course_id`, `lecture_id`) VALUES
+(1, 'asdasdasdasdasd', '2024-06-03 14:00:30.000000', 4, 6, NULL, 15),
+(4, 'mooooooooooooo', '2024-06-03 14:07:56.000000', 4, 3, NULL, 15),
+(5, 'very nice', '2024-06-03 14:08:16.000000', 5, 3, NULL, 15),
+(7, 'dddddddddddddddddddddd', '2024-06-03 14:14:57.000000', 4, 3, 1, NULL),
+(8, 'llllllllll', '2024-06-03 14:15:59.000000', 3, 3, 1, NULL),
+(9, 'werwer', '2024-06-03 14:16:41.000000', 4, 3, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -239,7 +219,10 @@ CREATE TABLE `students_enrolled_cources` (
 --
 
 INSERT INTO `students_enrolled_cources` (`id`, `course_id`, `student_id`, `enrolled_at`, `progress`) VALUES
-(1, 1, 6, '2024-05-25 00:31:44.000000', 0);
+(1, 1, 6, '2024-05-25 00:31:44.000000', 0),
+(2, 1, 10, '2024-06-03 14:23:19.000000', 0),
+(3, 1, 5, '2024-06-03 14:23:38.000000', 0),
+(4, 1, 5, '2024-06-03 14:23:38.000000', 1);
 
 -- --------------------------------------------------------
 
@@ -284,7 +267,10 @@ INSERT INTO `token_info` (`id`, `access_token`, `local_ip_address`, `refresh_tok
 (76, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJkYjg1MjU1OS1mNDU3LTQ0MDktYTBlYi03MWVmMGI0YjQ3OGYiLCJzdWIiOiJyZWRhIiwiaWF0IjoxNzE2NjcwNTM2LCJleHAiOjE4OTY2NzA1MzZ9.Wp-8_Ldzu4Uy-8Orh2OnRWNSjv8TJhi91i7-E4VzYvT0AiSDCNX9BJdRFhmmlO_hGclJUCqiI5RDrkc4pBN2lw', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5ZTViMmJkOC00ZTM4LTQ5ZTgtYTVkYy04M2U0MGRmZjhkNmEiLCJzdWIiOiJyZWRhIiwiaWF0IjoxNzE2NjcwNTM2LCJleHAiOjE3MzQ2NzA1MzZ9.ptgL7VlD3cKSsLPP0-vkAwHvHidb65mtYb6XZMuw_4K90lGfhwnmwoeuqXUuzIjEwjfFvv8jj0ht3sO6s483iQ', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 1),
 (79, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwY2QwZjExNC05NTlhLTQ3MWYtOTRjYS03YmJhZTNkZGJlNWEiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY3MjMyMiwiZXhwIjoxODk2NjcyMzIyfQ.dtwlb6rjngaTDrjsXS33fwMW-c-0pKdp9kQz_ro9eh1F7pbipiuZYDIECp7PQ4xk8AtkBgHNlvGbnvUDh_UdGw', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIwMzkzOTE4Mi1hMDllLTQ0OTktYWEwOS03YWRkNmFmMzYzNjIiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNjY3MjMyMiwiZXhwIjoxNzM0NjcyMzIyfQ.dhcwmj140NsACJ7cnthqgAd--8YbCM59o20HxOw5HV0LeqIH-GU3pTJZgrCl7bDy1Euy_OPaqiRl4dFaMDgWxg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
 (80, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI1NzQ4NWU4Ny1iYWY5LTRjN2MtODUzNC1hZDIyZWNhODc5OWMiLCJzdWIiOiJsYXlsYSIsImlhdCI6MTcxNjY3MjUzNCwiZXhwIjoxODk2NjcyNTM0fQ.WrOpxSdQhI6hsHiFLU7Ff6Fl7ovHUhvh5WhhpuDLT6d22059MSTUXRURf_XfuEa7oG507LlfZV-ZQf_WgtTdtA', '192.168.0.103', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI3NGIyYWY0Zi04Yzg3LTRhZmItYjY0ZS04YmI1ZjUzNjRjMjIiLCJzdWIiOiJsYXlsYSIsImlhdCI6MTcxNjY3MjUzNCwiZXhwIjoxNzM0NjcyNTM0fQ.wbvciE0dXZxjuXQrtbUG2gSp49yPAuEIqCtJo_b2VrltqN3c_ArpUBkpOiTDdjRaArkPRuc4oRFz3oBeC7xyhw', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 2),
-(81, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YTk3MmQ4MS02NzBmLTRmMmQtYjMwOC0zMjBkN2I2YTViOTYiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxODk2ODE2NjI1fQ.OJw6ejCv_jUtNOxGhS7QX8yyfCSYmTnjwLVTD-TYjpyGnbQrHXqRXADMbPMCODk6s2ADIJYmPP-159RNX8solA', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YzAzNWEzNy1jODAyLTQzYTgtYTk1MS0xNDVhOGE4Y2FkMTIiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxNzM0ODE2NjI1fQ.EPkmJEQS1XDmd1lsJGoR0oVEQW1Y2s4b3dXzPOUVdDPHXEIkXgDIxBEiRlnyss-sZvR6Vw9jvGLAl0wtxuVbNg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 3);
+(81, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YTk3MmQ4MS02NzBmLTRmMmQtYjMwOC0zMjBkN2I2YTViOTYiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxODk2ODE2NjI1fQ.OJw6ejCv_jUtNOxGhS7QX8yyfCSYmTnjwLVTD-TYjpyGnbQrHXqRXADMbPMCODk6s2ADIJYmPP-159RNX8solA', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI5YzAzNWEzNy1jODAyLTQzYTgtYTk1MS0xNDVhOGE4Y2FkMTIiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNjgxNjYyNSwiZXhwIjoxNzM0ODE2NjI1fQ.EPkmJEQS1XDmd1lsJGoR0oVEQW1Y2s4b3dXzPOUVdDPHXEIkXgDIxBEiRlnyss-sZvR6Vw9jvGLAl0wtxuVbNg', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 3),
+(82, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjMDIyZWI3Mi05NTk3LTQ1ZjMtOTBmYS1mNDEwMzUzMDFkODIiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzM5ODE3NSwiZXhwIjoxODk3Mzk4MTc1fQ.vXgLMKie4v0KP3PtX9M-YCz8arZI3CtggJSOfe9f3DoJ1jbAkXOCU1WoZcvPL3TjQSK8I1KOXdrIwMxKDEXp1w', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhMWZkMDc2NC1jMDlhLTQ3M2MtODQ0Zi1lYmM5Mjg1M2I3ZDIiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzM5ODE3NSwiZXhwIjoxNzM1Mzk4MTc1fQ.OVt4K8NRuX5pfVPTumcUFSKZ2_8VIBByntM7lsVlwr9MGELsn0VGCKYyTOBDEtYPuRTsaqb-AZHxUxYB_pa3Vw', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
+(84, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxMTY3ZmY3YS05NGY3LTRjZjctYjYyYS01ZWEyNjdmZDlhNmQiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzQwMjY1NiwiZXhwIjoxODk3NDAyNjU2fQ.EG_Ib-AEZLqj4FoHSKYcHC_ptOjDNuxXwZmMEqZWDBuyigVwsE_YdEJQOdK5kFIk-7zBLu699Uc96QSAVmdkFQ', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjMTNkYzdlMy04OGIyLTQyN2YtYjY4Mi00ZWEwMzY4YTVkZDYiLCJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzQwMjY1NiwiZXhwIjoxNzM1NDAyNjU2fQ.aHQUnXz3_RtN54xGjhSucbwL8m1xibelCOzinFtzttxVrR9EkcmG4j9NTqkD_cKryJu1bmiLy-osUDZ2rZdE4Q', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 6),
+(85, 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIzZWU1ZjU3ZC0wZGFhLTQ5ZDYtYWFlYS1jOWM2Yjg0ZDMwYzciLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNzQwMjk1OCwiZXhwIjoxODk3NDAyOTU4fQ.L0rFtA99VYKbKdhymfyyB0CW5oBa89Ru22kmbgMFlEVEXR7TKxeaTCM6X0NSUY2H8eZv8BS4cbU1lNEXLLYUEA', '10.0.1.167', 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyY2YzMTczNy02NTA2LTQ1MWEtODM0Ny0yNDM4NGZjNTg0ZGUiLCJzdWIiOiJuYW5jeSIsImlhdCI6MTcxNzQwMjk1OCwiZXhwIjoxNzM1NDAyOTU4fQ.vjvw0V5x1mVZhAx2mXsWmzW6FtCgoXwbQ87CGuogscXE8LUseUGwfMcfWTgtbiFLeS64Q3MAXU_TDBcYYvgIgA', '0:0:0:0:0:0:0:1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 3);
 
 -- --------------------------------------------------------
 
@@ -400,14 +386,6 @@ ALTER TABLE `cources`
   ADD KEY `FKs3wh6d7dlkdbrupc5vng1tmjl` (`auther_id`);
 
 --
--- Indexes for table `course_reviews`
---
-ALTER TABLE `course_reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK2upbfe3nc5mo0rtrb764rhlh8` (`author_id`),
-  ADD KEY `FKj2ub699nq8d2aomrmpa30h2oc` (`course_id`);
-
---
 -- Indexes for table `faculties`
 --
 ALTER TABLE `faculties`
@@ -423,18 +401,19 @@ ALTER TABLE `lectures`
   ADD KEY `FK7ebof2n0n8of76vk0g552omsi` (`course_id`);
 
 --
--- Indexes for table `lecture_reviews`
---
-ALTER TABLE `lecture_reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK2ovu15irh4unh31rumedirq61` (`author_id`),
-  ADD KEY `FKato028bk4srdavtpxgbxdxmfy` (`lecture_id`);
-
---
 -- Indexes for table `organizations`
 --
 ALTER TABLE `organizations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKse5kx11600wtv0jh9jobvrdpi` (`author_id`),
+  ADD KEY `FKs2viwf94ry1ikfnw4htfjavbe` (`course_id`),
+  ADD KEY `FKqrdtocrmkk8h5nl6e21s2r9j` (`lecture_id`);
 
 --
 -- Indexes for table `roles`
@@ -489,34 +468,28 @@ ALTER TABLE `cources`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `course_reviews`
---
-ALTER TABLE `course_reviews`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
 -- AUTO_INCREMENT for table `lectures`
 --
 ALTER TABLE `lectures`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `lecture_reviews`
+-- AUTO_INCREMENT for table `reviews`
 --
-ALTER TABLE `lecture_reviews`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reviews`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `students_enrolled_cources`
 --
 ALTER TABLE `students_enrolled_cources`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `token_info`
 --
 ALTER TABLE `token_info`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -536,13 +509,6 @@ ALTER TABLE `cources`
   ADD CONSTRAINT `FKs3wh6d7dlkdbrupc5vng1tmjl` FOREIGN KEY (`auther_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `course_reviews`
---
-ALTER TABLE `course_reviews`
-  ADD CONSTRAINT `FK2upbfe3nc5mo0rtrb764rhlh8` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `FKj2ub699nq8d2aomrmpa30h2oc` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`);
-
---
 -- Constraints for table `faculties`
 --
 ALTER TABLE `faculties`
@@ -556,11 +522,12 @@ ALTER TABLE `lectures`
   ADD CONSTRAINT `FK7ebof2n0n8of76vk0g552omsi` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`);
 
 --
--- Constraints for table `lecture_reviews`
+-- Constraints for table `reviews`
 --
-ALTER TABLE `lecture_reviews`
-  ADD CONSTRAINT `FK2ovu15irh4unh31rumedirq61` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `FKato028bk4srdavtpxgbxdxmfy` FOREIGN KEY (`lecture_id`) REFERENCES `lectures` (`id`);
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `FKqrdtocrmkk8h5nl6e21s2r9j` FOREIGN KEY (`lecture_id`) REFERENCES `lectures` (`id`),
+  ADD CONSTRAINT `FKs2viwf94ry1ikfnw4htfjavbe` FOREIGN KEY (`course_id`) REFERENCES `cources` (`id`),
+  ADD CONSTRAINT `FKse5kx11600wtv0jh9jobvrdpi` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `students_enrolled_cources`
