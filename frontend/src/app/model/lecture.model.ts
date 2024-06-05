@@ -11,6 +11,8 @@ export interface Lecture{
     video: number,
     course ?:Course,
     lectureOrder?: number,
-    reviews? : Review[]
+    reviews? : Review[],
+    likesCount?: number,
+    commentsCount?: number
 
 }
