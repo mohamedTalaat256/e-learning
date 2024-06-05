@@ -60,6 +60,7 @@ import { ReviewDialogFormComponent } from './layouts/user/components/review-dial
 import { toCeil } from './pip/toCeil';
 import { DateConverter } from './pip/dateConverter';
 import { DatePipe } from '@angular/common';
+import { PaymentComponent } from './global/payment/payment.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -111,7 +112,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LectureCardComponent,
     LectureDialogFormComponent,
     InputStarRatingComponent,
-    ReviewDialogFormComponent
+    ReviewDialogFormComponent,
+    PaymentComponent
   ],
   imports: [
     MatSidenavModule,

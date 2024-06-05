@@ -76,3 +76,8 @@ export enum constant {
     CURRENT_LECTURE_INDEX = 'CURRENT_LECTURE_INDEX',
 
 }
+
+export enum Currency {
+    EGY,USD
+
+}
