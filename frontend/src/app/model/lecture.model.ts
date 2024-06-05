@@ -2,7 +2,7 @@ import { Course } from "./course.model";
 import { Review } from "./courseReview.model";
 
 export interface Lecture{
-    
+
     id:number,
     title: string,
     description: string,

@@ -16,7 +16,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@ang
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { AuthComponent } from './layouts/auth/auth.component'; 
+import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthRoutingModule } from './layouts/auth/auth-routing.module';
 import { AdminRoutingModule } from './layouts/admin/admin-routing.module';
 import { AdminComponent } from './layouts/admin/admin.component';
@@ -80,7 +80,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AdminDashboardComponent,
     AdminComponent,
     AuthComponent,
-    UserDashboardComponent, 
+    UserDashboardComponent,
     AdminSideNavListComponent,
     MyCommunityComponent,
     CourseDialogFormComponent,
