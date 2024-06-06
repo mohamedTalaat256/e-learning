@@ -7,6 +7,7 @@ import { userGuardService } from 'src/app/guards/usrer-guard.guard';
 import { Page404Component } from 'src/app/global/page404/page404.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { BuyCourseComponent } from './components/buy-course/buy-course.component';
+import { CourseOverviewComponent } from './components/course-overview/course-overview.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path:'edit-profile', component: ProfileEditComponent},
       {path:'dashboard', component: UserDashboardComponent},
       {path:'my-courses', component: MyCoursesComponent},
+      {path:'my-courses/:courseId', component: CourseOverviewComponent},
       { path: 'buy-course/:courseId', component: BuyCourseComponent },
       {path:'enroll-to-course', component: UserDashboardComponent},
       { path: '**', pathMatch :'full' , component: Page404Component},

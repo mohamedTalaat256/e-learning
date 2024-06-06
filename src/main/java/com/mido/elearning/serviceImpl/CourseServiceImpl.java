@@ -3,11 +3,13 @@ package com.mido.elearning.serviceImpl;
 import com.mido.elearning.Dto.CourseDto;
 import com.mido.elearning.Dto.CourseUploadRequest;
 import com.mido.elearning.Dto.PublicUserDto;
+import com.mido.elearning.Dto.StudentEnrolledCourseDto;
 import com.mido.elearning.entity.*;
 import com.mido.elearning.enums.ReviewType;
 import com.mido.elearning.exception.RecordNotFoundException;
 import com.mido.elearning.mapping.CourseMapper;
 import com.mido.elearning.mapping.ReviewMapper;
+import com.mido.elearning.mapping.StudentCourseMapper;
 import com.mido.elearning.mapping.UserMapper;
 import com.mido.elearning.repository.*;
 import com.mido.elearning.service.CourseService;
@@ -52,6 +54,32 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findAll().stream()
                 .map(CourseMapper::entityToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<CourseDto> findAllWithAuthed() {
+
+
+        Set<Long> myCoursesIds = new HashSet<>();
+
+        Set<StudentEnrolledCourseDto> myEnrolledCourses = findMyCourses();
+
+        for(StudentEnrolledCourseDto row : myEnrolledCourses){
+            myCoursesIds.add(row.getCourse().getId());
+        }
+
+        List<CourseDto> allCourses = courseRepository.findAll().stream()
+                .map(CourseMapper::entityToDto)
+                .collect(Collectors.toList());
+
+        for(CourseDto courseDto : allCourses){
+            if (myCoursesIds.contains(courseDto.getId())) {
+                courseDto.setIsEnrolled(true);
+            }
+        }
+
+        return allCourses;
+
+
     }
 
     @Override
@@ -125,10 +153,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
 
-    public Set<CourseDto> findMyCourses(){
+    public Set<StudentEnrolledCourseDto> findMyCourses(){
 
         return studentsEnrolledCourcesRepository.findByStudentId(userService.getCurrentAuthUser().getId()).stream()
-                .map(e -> CourseMapper.entityToDto(e.getCourse()))
+                .map(StudentCourseMapper::entityToDto)
                 .collect(Collectors.toSet());
     }
 

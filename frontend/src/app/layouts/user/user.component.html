@@ -1,11 +1,11 @@
 <div fxFlex="100" fxLayout="row" style="height: 100vh">
     <loading-circular></loading-circular>
-    <div fxFlex.xl ="17" fxFlex.lg="17" fxFlex.sx="5" fxHide.xs class="mat-bg-light">
+    <div fxFlex.xl ="15" fxFlex.lg="15" fxFlex.sm="0" fxFlex.xs="0" class="mat-bg-light">
         <user-side-nav-list fxFlex="100"></user-side-nav-list>
     </div>
-    <div fxFlex.xl="83" fxFlex.lg="83" fxFlex.sx="95" fxLayout="column" > 
-        <admin-toolbar-list  ></admin-toolbar-list>
-        <div class="admin-content m-3" fxFlex="100">
+    <div fxFlex.xl="85" fxFlex.lg="85" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column" > 
+        <app-user-tool-bar  ></app-user-tool-bar>
+        <div class="admin-content" fxFlex="100">
             <router-outlet></router-outlet>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
 
-    <button mat-icon-button color="secondary" matTooltip="calender" >
+    <button mat-icon-button fxHide.xl fxHide.lg fxHide.md color="secondary" [matMenuTriggerFor]="useMobileSideNamv" matTooltip="side nav" >
         <mat-icon>menu</mat-icon>
     </button>
 
@@ -45,11 +45,32 @@
         <button mat-menu-item (click)="logout()">
             <mat-icon color="danger">exit_to_app</mat-icon>Logout
         </button>
-
-
-
     </mat-menu>
+
+
+
+    <mat-menu #useMobileSideNamv [overlapTrigger]="false" yPosition="below">
+        <button mat-menu-item [routerLink]="['/']" routerLinkActive="active" >
+             <span>LOGO</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/user/dashboard']">
+            <mat-icon color="primary">dashboard</mat-icon><span>{{'dashboard' | translate}}</span>
+        </button>
+
+        <button mat-menu-item [routerLink]="['/user/my-courses']">
+            <mat-icon color="success">book</mat-icon><span>{{'my_courses' | translate}}</span>
+        </button>
+         
+    </mat-menu>
+
+
     </div>
+
+
+
+
+
+
 
 
 </div>

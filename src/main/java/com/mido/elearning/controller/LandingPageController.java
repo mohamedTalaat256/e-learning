@@ -34,6 +34,18 @@ public class LandingPageController {
         return AppResponse.generateResponse("all_data", HttpStatus.OK, data,true);
     }
 
+    @GetMapping("/isAuthed")
+    public ResponseEntity<Object> allDataIsAuthed(){
+
+        List<CourseDto> recentCourses = courseServiceImpl.findAllWithAuthed();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("recentCourses", recentCourses);
+
+        return AppResponse.generateResponse("all_data", HttpStatus.OK, data,true);
+    }
+
+
 
 
 }

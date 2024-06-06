@@ -29,6 +29,8 @@ public class CourseDto {
     private int lecturesCount;
     private int reviewsCount;
 
+    private Boolean isEnrolled;
+
     private List<ReviewDto> reviews = new ArrayList<>();
 
 }

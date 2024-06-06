@@ -14,6 +14,7 @@ export interface Course{
     hours?: number;
     author?:any,
     lecturesCount?: number,
-    reviews?: Review[]
+    reviews?: Review[],
+    isEnrolled? :boolean
 
 }

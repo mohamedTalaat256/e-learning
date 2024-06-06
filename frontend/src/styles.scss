@@ -191,9 +191,21 @@ body {
 .text-capitalize{
     text-transform: capitalize;
 }
+.lecture-card{
+  height: 120px;
+}
+.lecture-title{
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.lecture-title:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
 .lecture-img{
-    width: 200px;
-    height: 150px;
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
 }
 
 

@@ -11,6 +11,7 @@ import { CourseService } from 'src/app/service/courses.service';
 import { take } from 'rxjs';
 import { AppResponse } from 'src/app/model/app_response.model';
 import Swal from 'sweetalert2';
+import { StudentCourse } from 'src/app/model/StudentCourse.model';
 
 @Component({
   selector: 'app-my-courses',
@@ -20,17 +21,16 @@ import Swal from 'sweetalert2';
 export class MyCoursesComponent implements OnInit {
   ADD_COURSE_URL: string = adminUrls.addCourse;
   IMAGES_URL= imagesUrls;
-  coursesList: Course[];
+  StudentCoursesList: StudentCourse[];
 
   constructor(public dialog: MatDialog,
     private translate: TranslateService,
-    private componentUtilsService: ComponentUtilsService,
     private courseService: CourseService
 
   ) { }
 
   displayedColumns: string[] = ['title', 'description', 'coverImage', 'actions'];
-  dataSource = new MatTableDataSource<Course>(null);
+  dataSource = new MatTableDataSource<StudentCourse>(null);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -45,8 +45,8 @@ export class MyCoursesComponent implements OnInit {
   myEnrolledCourses() {
     this.courseService.myCourses().pipe(take(1)).subscribe({
       next: (response: AppResponse) => {
-        this.coursesList = response.data;
-        this.dataSource = new MatTableDataSource<Course>(this.coursesList);
+        this.StudentCoursesList = response.data;
+        this.dataSource = new MatTableDataSource<StudentCourse>(this.StudentCoursesList);
       },
       error: (error: Error) => {
         Swal.fire({ 
