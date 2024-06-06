@@ -125,4 +125,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
 
+    public Set<CourseDto> findMyCourses(){
+
+        return studentsEnrolledCourcesRepository.findByStudentId(userService.getCurrentAuthUser().getId()).stream()
+                .map(e -> CourseMapper.entityToDto(e.getCourse()))
+                .collect(Collectors.toSet());
+    }
+
+
 }

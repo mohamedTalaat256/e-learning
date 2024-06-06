@@ -43,7 +43,7 @@ export class MyCoursesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   myEnrolledCourses() {
-    this.courseService.myEnrolledCourses().pipe(take(1)).subscribe({
+    this.courseService.myCourses().pipe(take(1)).subscribe({
       next: (response: AppResponse) => {
         this.coursesList = response.data;
         this.dataSource = new MatTableDataSource<Course>(this.coursesList);

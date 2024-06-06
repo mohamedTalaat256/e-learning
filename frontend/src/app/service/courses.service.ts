@@ -15,8 +15,8 @@ export class CourseService {
     return this.http.get(baseURL + `/courses/${courseId}`);
   }
 
-  myEnrolledCourses(): Observable<any> {
-    return this.http.get(baseURL + '/courses/myEnrolledCourses');
+  myCourses(): Observable<any> {
+    return this.http.get(baseURL + '/courses/myCourses');
   }
 
 
