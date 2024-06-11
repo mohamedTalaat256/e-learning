@@ -16,7 +16,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions } from '@ang
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { AuthComponent } from './layouts/auth/auth.component'; 
+import { AuthComponent } from './layouts/auth/auth.component';
 import { AuthRoutingModule } from './layouts/auth/auth-routing.module';
 import { AdminRoutingModule } from './layouts/admin/admin-routing.module';
 import { AdminComponent } from './layouts/admin/admin.component';
@@ -61,7 +61,6 @@ import { toCeil } from './pip/toCeil';
 import { DateConverter } from './pip/dateConverter';
 import { DatePipe } from '@angular/common';
 import { PaymentComponent } from './global/payment/payment.component';
-import { StripeModule } from 'stripe-angular';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -81,7 +80,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AdminDashboardComponent,
     AdminComponent,
     AuthComponent,
-    UserDashboardComponent, 
+    UserDashboardComponent,
     AdminSideNavListComponent,
     MyCommunityComponent,
     CourseDialogFormComponent,
@@ -137,8 +136,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    }),
-    StripeModule.forRoot("pk_test_51LYUvnBVDibabXHisH0GvAI2H39DwKOoMLKVVVTNvqu4niaeCnMpQdJVkGQlPrOpDqjn6n6JBUpZt6tpr8swrH4u00IWn8PtCa")
+    })
   ],
   providers: [
     DatePipe,

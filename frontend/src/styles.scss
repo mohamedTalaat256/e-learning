@@ -7,7 +7,7 @@
     src: url(assets/fonts/Rubik-VariableFont_wght.ttf);
   }
 html,
-body { 
+body {
     height: 100vh;
     --mdc-outlined-text-field-error-outline-color: #fd2929;
     --mdc-outlined-text-field-error-label-text-color: #fd2929;
@@ -15,7 +15,7 @@ body {
 
 body {
     margin: 0;
-   
+
     overflow: hidden;
     overflow-y: scroll;
 
@@ -95,7 +95,7 @@ body {
 .icon-md {
   height: 36px !important;
   width: 36px !important;
-  font-size: 36px !important; 
+  font-size: 36px !important;
 }
 
 .icon-sm {
@@ -137,7 +137,7 @@ body {
 .img-radius-sx {
     height: 30px !important;
     width: 30px !important;
-    object-fit: scale-down; 
+    object-fit: scale-down;
 }
 .img-radius-sm {
     height: 50px !important;
@@ -151,11 +151,11 @@ body {
     width: 150px !important;
     object-fit: cover;
     border-radius: 50%;
-    
+
 }
 
 .my-card-md{
-    max-height: 260px !important;
+    max-height: 300px !important;
 }
 .line-on-text{
     text-decoration: line-through !important;
@@ -191,27 +191,39 @@ body {
 .text-capitalize{
     text-transform: capitalize;
 }
+.lecture-card{
+  height: 120px;
+}
+.lecture-title{
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.lecture-title:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
 .lecture-img{
-    width: 200px;
-    height: 150px;
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
 }
 
 
 .my-table {
-   
+
     border-collapse: collapse;
     width: 100%;
   }
-  
+
  .my-table td, .my-table th {
     border: 1px solid #ddd;
     padding: 8px;
   }
-  
+
   .my-table tr:nth-child(even){background-color: #f2f2f2;}
-  
+
   .my-table tr:hover {background-color: #ddd;}
-  
+
   .my-table th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -223,7 +235,7 @@ body {
 
 
 
-  .form-array-table{ 
+  .form-array-table{
     border-collapse: collapse;
     width: 100%;
   }
@@ -231,16 +243,16 @@ body {
     border: 1px solid #ddd;
    padding: 14px;
    padding-bottom: 0px;
-   
+
   }
-  
+
   .form-array-table td .mat-mdc-form-field{
     width: 100% !important;
   }
   .form-array-table tr:nth-child(even){background-color: #f2f2f2;}
-  
+
   .form-array-table tr:hover {background-color: #f1f1f1;}
-  
+
   .form-array-table th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -272,8 +284,8 @@ body {
   .cursor-hand{
     cursor: pointer;
   }
- 
-  
+
+
   @media print {
     @page {
       orientation: landscape !important;
@@ -281,7 +293,7 @@ body {
     .printMe {
       visibility: visible;
       direction: rtl;
-    
+
     }
 
 
@@ -298,7 +310,7 @@ body {
 .mat-dialog-container {
   border-radius: 20px !important;
 }
-/* 
+/*
   .mat-mdc-form-field-infix{
     height: 13px !important;
     padding: 5px !important;
@@ -323,8 +335,9 @@ body {
 .icon-xs{
   height: 14px !important;
   width: auto !important;
+  padding: 0px;
   font-size: 17px;
- 
+
 }
 
 

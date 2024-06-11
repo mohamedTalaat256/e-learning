@@ -4,7 +4,7 @@
     "last_name" : "الاسم الأخير",
     "username": "اسم المستخدم",
     "password": "كلمة السر",
-    
+
     "register": "تسجيل",
     "notifications": "الإشعارات",
     "save":"حفظ",
@@ -48,6 +48,7 @@
 
 
 
+    "required": "مطلوب ",
     "max_length_is": "أكبر عدد من الأحر المسموح",
     "min_length_is": "أقل عدد من الأحر المسموح",
     "max_value_is": "أكبر قيمة مسموح بها",

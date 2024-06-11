@@ -162,12 +162,16 @@ export class CourseOverviewComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(ReviewDialogFormComponent, {
       width: dialog_w_md,
-      height: dialog_h_md,
+      height: '300px',
       data: data
     });
  
     dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-     this.currentLecture.reviews.push(result);
+
+      if(result){
+        this.currentLecture.reviews.push(result);
+      }
+    
     });
   }
 }

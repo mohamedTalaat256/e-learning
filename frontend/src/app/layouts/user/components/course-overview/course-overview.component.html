@@ -1,10 +1,10 @@
 <div fxFlex="100">
     <div fxLayout="column">
-        <admin-toolbar-list></admin-toolbar-list>
-        <div class="m-3" fxFlex="100" fxLayout="row">
-            <div fxFlex.xl="75" fxFlex.lg="75" fxFlex.sx="95" fxLayout="column">
+        <div class="m-1" fxFlex="100" fxLayout.xl="row" fxLayout.lg="row" fxLayout.md="column" fxLayout.sm="column"
+            fxLayout.xs="column">
+            <div fxFlex.xl="75" fxFlex.lg="75" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column">
 
-                <div class="mr-4" fxFlex="100">
+                <div class="mx-2" fxFlex="100">
 
                     <div class="mat-bg-light-primary my-3 mat-text-secondary p-3 lecture-video-title">
                         <span>{{currentLecture.course.title }} > {{currentLecture.title}}</span>
@@ -17,7 +17,9 @@
                     </video>
 
 
-                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxLayout.xl="row" fxLayout.lg="row" fxLayout.md="column" fxLayout.sm="column"
+                        fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.sm="center start "
+                        fxLayoutAlign.xs="center start ">
                         <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
                             <img mat-card-image
                                 [src]="currentLecture.course.author.profileImage ? PROFILE_IMAGES_URL+ currentLecture.course.author.profileImage: DEFAULT_USER_IMAGE"
@@ -42,6 +44,9 @@
                             </mat-chip-row>
                         </div>
                     </div>
+
+
+
                     <h2>{{currentLecture.title}}</h2>
 
                     <div class="mat-bg-light-secondary p-3 rounded-1">
@@ -52,41 +57,47 @@
                     <mat-divider class="mt-3"></mat-divider>
 
                     <div fxLayout="row" fxLayoutAlign="space-between center" class="my-3">
-    
+
                         <span class="f-w-bold">{{'reviews' | translate}}</span>
-                        <button mat-raised-button color="primary" (click)="openAddReviewDialog()">{{'leave_review' | translate}}</button>
+                        <button mat-raised-button color="primary" class="rounded-2"
+                            (click)="openAddReviewDialog()">{{'leave_review' | translate}}
+                            <mat-icon>comment</mat-icon>
+                        </button>
                     </div>
 
-                    <div  fxLayout="column" *ngFor="let review of currentLecture.reviews">
+                    <div fxLayout="column" *ngFor="let review of currentLecture.reviews">
 
-                        <div fxLayout="row" fxLayoutAlign="space-between center" >
-                            <div  fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <div fxLayout="row" fxLayoutAlign="start center" class="cursor-hand">
                                 <img mat-card-image
-                                [src]="review.author.profileImage ? PROFILE_IMAGES_URL+ review.author.profileImage: DEFAULT_USER_IMAGE"
-                                class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
-                          
-                                    <div fxLayout="column" >
-                                        <mat-card-title class="f-w-500"> {{review.author.firstName +' '+ review.author.lastName}}
-                                        </mat-card-title>
-                                        <mat-card-subtitle> @{{review.author.username}}</mat-card-subtitle>
-                                    </div> 
+                                    [src]="review.author.profileImage ? PROFILE_IMAGES_URL+ review.author.profileImage: DEFAULT_USER_IMAGE"
+                                    class="circle-avatar-md my-3" style="margin-inline-end: 8px;">
+
+                                <div fxLayout="column">
+                                    <mat-card-title class="f-w-500"> {{review.author.firstName +' '+
+                                        review.author.lastName}}
+                                    </mat-card-title>
+                                    <mat-card-subtitle> @{{review.author.username}}</mat-card-subtitle>
+                                </div>
                             </div>
-                           
-                                    <app-rating-star [rating]="review.ratingValue"></app-rating-star>
+
+                            <app-rating-star [rating]="review.ratingValue"></app-rating-star>
                         </div>
 
-                        <div  fxLayout="row" fxLayoutAlign="space-between center" class="mat-bg-light-secondary rounded-1 p-2" style="margin-inline-start: 50px;">
+                        <div fxLayout="row" fxLayoutAlign="space-between center"
+                            class="mat-bg-light-secondary rounded-1 p-2" style="margin-inline-start: 50px;">
                             {{review.contentText}}
 
-                            <span class="f-w-thin f-s-italic mat-text-secondary">{{review.createdAt | dateConverter}}</span>
-                            
+                            <span class="f-w-thin f-s-italic mat-text-secondary">{{review.createdAt |
+                                dateConverter}}</span>
+
                         </div>
-    
+
                     </div>
 
                 </div>
- 
-               
+
+
 
             </div>
 
@@ -102,29 +113,32 @@
 
 
 
-                <mat-card *ngFor="let lecture of lectures" class="shadow-dark-sm mat-bg-light rounded-1 mt-4" [ngClass]="{
+                <div *ngFor="let lecture of lectures"
+                    class="shadow-dark-sm mat-bg-light rounded-1 mt-4 mx-2 lecture-card" [ngClass]="{
                     'mat-bg-light-primary': currentLecture.lectureOrder === lecture.lectureOrder
                 }">
-                    <mat-card-header class="p-0">
+                    <div fxLayout="row">
                         <img [src]="LECTURES_IMAGES_URL+lecture.coverImage" class="lecture-img rounded-1">
-                        <div fxLayout="column" fxLayoutAlign="space-between start" class="px-3">
 
-                            <div>
-                                <mat-card-title class="lecture-title"
-                                    (click)="changeCurrentLecture(lecture.id)">{{lecture.title}}</mat-card-title>
-                                <mat-card-subtitle>{{lecture.description | toShortText}}</mat-card-subtitle>
+                        <div fxLayout="column" fxLayoutAlign="space-between start" class="p-3">
+
+                            <span class="lecture-title" (click)="changeCurrentLecture(lecture.id)">{{lecture.title}}</span>
+                            <mat-card-subtitle>{{lecture.description | toShortText}}</mat-card-subtitle>
+
+                            <div fxLayout="row"  fxLayoutAlign="space-between center" class="mat-text-dark" style="font-size: smaller;">
+                                <div>
+                                    <mat-icon class="mr-2 icon-xs" color="primary">access_time</mat-icon>
+                                    <span>{{ lecture.length |secondsToLength }}</span>
+                                </div>
+                                |
+                                <div>
+                                    <mat-icon class="mr-2 icon-xs" color="primary">thumb_up</mat-icon>
+                                    <span>{{ lecture.likesCount |secondsToLength }}</span>
+                                </div>
                             </div>
-
-                            <mat-card-subtitle>
-                                <mat-card-actions class="mat-text-dark">
-                                    <mat-icon class="mr-3" color="primary">access_time</mat-icon> {{ lecture.length |
-                                    secondsToLength }}
-                                </mat-card-actions>
-                            </mat-card-subtitle>
-
                         </div>
-                    </mat-card-header>
-                </mat-card>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -134,5 +148,5 @@
 
 <!-- <div fxLayout="column">
     <admin-toolbar-list></admin-toolbar-list>
-    
+
 </div> -->

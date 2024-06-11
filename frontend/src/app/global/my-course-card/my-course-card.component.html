@@ -1,38 +1,36 @@
-<mat-card class="rounded-1 m-2 border-0 shadow-xs  my-card-md" style="background-image: url('{{IMAGES_URL+course.coverImage}}'); object-fit: contain;" >
-    <mat-card-header>
+<mat-card class="rounded-1 m-2 border-0 shadow-xs  my-card-md"  style="position: relative; background: rgb(255,255,255);
+background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.025647759103641476) 8%, rgba(0,0,0,0.9360119047619048) 100%);" >
+    <img class="rounded-1" [src]="IMAGES_URL+studentCourse.course.coverImage" alt="" style="position: absolute; width: 100%; height: 100%; object-fit: cover; ">
+    <mat-card-header style="z-index: 2;">
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
-            <div class="c100 p50 ">
-                <span>50%</span>
+            <div class="c100 p50 mat-bg-light opacity-8 p-3" style="border-radius: 50%; height: 25px ; width: 25px;">
+                <span>{{studentCourse.progress}}%</span>
                 <div class="slice small">
                     <div class="bar"></div>
                     <div class="fill"></div>
                 </div>
             </div>
 
-            <button mat-icon-button> <mat-icon>more_vert</mat-icon></button>
+            <button mat-icon-button [routerLink]="['/user/my-courses/', studentCourse.course.id]"> <mat-icon color="light">open_in_new</mat-icon></button>
         </div> 
 
     </mat-card-header>
-    <mat-card-content>
-        <span class="mat-headline-5 mat-text-light-dark">{{course.title}}</span>
+    <mat-card-content class="mt-2" style="z-index: 2; height: 150px;">
+        <span class="mat-headline-5 mat-text-light">{{studentCourse.course.title}}</span>
         <br>
-        <span class=" my-5 mat-text-light-dark">{{course.description}}</span>
+        <span class=" my-5 mat-text-light">{{studentCourse.course.description}}</span>
     </mat-card-content>
     <mat-card-footer class="m-3 p-3 mat-bg-light rounded-2 opacity-8">
         <div fxLayout="row" fxLayoutAlign="space-between center">
 
             <div fxLayout="row" fxLayoutAlign="center center">
                 <img src="/assets/images/icons/book.png" class="img-radius-sx mx-2" > 
-                <span class="f-w-500"> | </span>
+                <span class="f-w-500"> | {{studentCourse.course.lecturesCount}} {{'lecture'|translate}}</span>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center">
                 <mat-icon class="icon-sm mx-2" color="dark">calendar_today</mat-icon>
-                <span class="f-w-500"> | </span>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <mat-icon class="icon-sm mx-2" color="dark">supervisor_account</mat-icon>
-                <span class="f-w-500"> | {{course.enrolledStudentsCount}}</span>
-            </div>
+                <span class="f-w-500"> | {{studentCourse.enrolledAt | dateConverter}} </span>
+            </div> 
 
 
         </div>

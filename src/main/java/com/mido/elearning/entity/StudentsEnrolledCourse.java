@@ -34,8 +34,11 @@ public class StudentsEnrolledCourse {
     @JoinColumn(name = "course_id")
     private Course course;
 
-
     private LocalDateTime enrolledAt;
     private int progress;
+
+    @OneToOne
+    @JoinColumn(name = "last_viewed_lecture_id")
+    private Lecture lastViewedLecture;
 
 }

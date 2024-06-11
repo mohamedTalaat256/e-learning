@@ -8,7 +8,12 @@ export class HomeService {
 
   constructor(private http: HttpClient) { }
   getAllData(): Observable<any> {
+
+    if(localStorage.getItem('token') !== null){
+      return this.http.get(baseURL + '/home/isAuthed');
+    }
     return this.http.get(baseURL + '/home');
+
   } 
 
 }

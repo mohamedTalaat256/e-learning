@@ -31,11 +31,6 @@ public class CourseController {
         return AppResponse.generateResponse("course_data", HttpStatus.OK, courseService.findById(id),true);
     }
 
-    @GetMapping("/myEnrolledCourses")
-    public ResponseEntity<Object> getMyEnrolledCourses(){
-        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, studentsEnrolledCourcesRepository.findAll()/*courseService.findMyEnrolledCourses()*/,true);
-    }
-
     @GetMapping("/authors/{authorId}")
     public ResponseEntity<Object> findByAuthorId(@PathVariable Long authorId){
         return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findByAuthorId(authorId),true);
@@ -58,10 +53,11 @@ public class CourseController {
         return AppResponse.generateResponse("you_profile_image_updated_success", HttpStatus.OK,  courseService.enRollToCourse(courseId)  ,true);
     }
 
-    @GetMapping("/video")
-    public ResponseEntity<Object> getVideo(){
-        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, studentsEnrolledCourcesRepository.findAll()/*courseService.findMyEnrolledCourses()*/,true);
+    @GetMapping("/myCourses")
+    public ResponseEntity<Object> myCourses(){
+        return AppResponse.generateResponse("all_Courses", HttpStatus.OK, courseService.findMyCourses(),true);
     }
+
     /*
 
 

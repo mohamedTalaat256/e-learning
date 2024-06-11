@@ -3,8 +3,8 @@ import { Lecture } from "../model/lecture.model";
 
 export const baseURL = 'http://localhost:8090/api'
 export const imagePlaceholder: string = '/assets/images/image_placeholder.png';
-export const profileImagesUrls='http://localhost:8090/media/images/'; 
-export const imagesUrls='http://localhost:8090/media/images/'; 
+export const profileImagesUrls='http://localhost:8090/media/images/';
+export const imagesUrls='http://localhost:8090/media/images/';
 export const VIDEOS_URL='http://localhost:8090/media/videos/';
 export const LECTURE_STREAM_URL= baseURL+'/lectures/stream/';
 
@@ -69,7 +69,10 @@ export const EMPTY_LECTUER:Lecture = {
     length: 0,
     coverImage: '',
     video: 0,
-    course: EMPTY_COURSE
+    course: EMPTY_COURSE,
+    likesCount: 0,
+    commentsCount: 0,
+    lectureOrder: 1
 }
 
 export enum constant {

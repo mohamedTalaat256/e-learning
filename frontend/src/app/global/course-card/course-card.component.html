@@ -47,7 +47,13 @@
 
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between">
             <app-rating-star [rating]="course.rating" ></app-rating-star>
-            <button mat-stroked-button color="primary" class="rounded-2" [routerLink]="['/user/buy-course',course.id]">
+            <button *ngIf="course.isEnrolled" mat-stroked-button color="primary" class="rounded-2" [routerLink]="['/user/my-courses',course.id]">
+                <span class="mat-text-secondary">
+                    {{'view_course'|translate}}
+                </span>
+            </button>
+            
+            <button *ngIf="!course.isEnrolled" mat-stroked-button color="primary" class="rounded-2" [routerLink]="['/user/buy-course',course.id]">
                 <span class="mat-text-secondary">
                     {{'enroll'|translate}}
                 </span>
