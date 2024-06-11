@@ -35,20 +35,26 @@ export class PaymentComponent implements OnInit {
     const payment = {
       name: this.course.title,
       currency: Currency.EGY,
-      // amount on cents *10 => to be on dollar
       amount: this.course.price,
       quantity: 1,
       cancelUrl:  'http://localhost:4200/cancel',
       successUrl: 'http://localhost:4200/success',
     };
 
-    this.paymentService.pay(payment).pipe(take(1)).subscribe({
+     this.paymentService.pay(payment).pipe(take(1)).subscribe({
       next:(response: any)=>{
-        console.log(response);
-
-        stripe.redirectToCheckout({
-          sessionId: response.data.id,
+        
+        console.log(response.data);
+        
+      
+        
+        stripe.initEmbeddedCheckout({
+          clientSecret: 'pi_3PQ5pXBVDibabXHi1L1rZMUB_secret_9Ec8x1e95EOm31hAjKNsTO1av'
         });
+
+/*         stripe.redirectToCheckout({
+          sessionId: response.data.id,
+        }) */;
         if(response.ok){
           Swal.fire({ 
             icon: "success",

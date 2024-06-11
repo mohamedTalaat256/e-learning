@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,6 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
+@EntityListeners({AuditingEntityListener.class})
 public class Course {
 
     @Id
@@ -43,6 +46,7 @@ public class Course {
 
     @ManyToOne()
     @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @CreatedBy
     private AppUser author;
 
     @OneToMany( mappedBy = "course", fetch = FetchType.LAZY)

@@ -3,6 +3,7 @@ package com.mido.elearning.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,6 +32,7 @@ public class Review {
 
     @ManyToOne()
     @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @CreatedBy
     private AppUser author;
 
     @ManyToOne()

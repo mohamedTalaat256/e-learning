@@ -3,6 +3,8 @@ package com.mido.elearning.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -15,6 +17,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @ToString
+@EntityListeners({AuditingEntityListener.class})
+
 public class StudentsEnrolledCourse {
 
     @Id
@@ -23,6 +27,7 @@ public class StudentsEnrolledCourse {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
+    @CreatedBy
     private AppUser student;
 
     @ManyToOne(cascade = CascadeType.ALL)

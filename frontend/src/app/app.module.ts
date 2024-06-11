@@ -61,6 +61,7 @@ import { toCeil } from './pip/toCeil';
 import { DateConverter } from './pip/dateConverter';
 import { DatePipe } from '@angular/common';
 import { PaymentComponent } from './global/payment/payment.component';
+import { StripeModule } from 'stripe-angular';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -136,7 +137,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
+    StripeModule.forRoot("pk_test_51LYUvnBVDibabXHisH0GvAI2H39DwKOoMLKVVVTNvqu4niaeCnMpQdJVkGQlPrOpDqjn6n6JBUpZt6tpr8swrH4u00IWn8PtCa")
   ],
   providers: [
     DatePipe,

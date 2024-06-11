@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ReviewMapper {
-    private final UserRepository userRepository;
 
     public static ReviewDto entityToDto(Review entity){
 
@@ -29,14 +28,14 @@ public class ReviewMapper {
             return Review.builder().id(dto.getId())
                     .contentText(dto.getContentText())
                     .lecture(new Lecture(dto.getLecture().getId()))
-                    .author(new AppUser(dto.getAuthor().getId()))
+                    //.author(new AppUser(dto.getAuthor().getId()))
                     .ratingValue(dto.getRatingValue())
                     .build();
         }
         return Review.builder().id(dto.getId())
                 .contentText(dto.getContentText())
                 .course(new Course(dto.getCourse().getId()))
-                .author(new AppUser(dto.getAuthor().getId()))
+                //.author(new AppUser(dto.getAuthor().getId()))
                 .ratingValue(dto.getRatingValue())
                 .build();
     }

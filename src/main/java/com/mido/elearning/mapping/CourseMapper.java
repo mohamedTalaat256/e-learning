@@ -57,7 +57,7 @@ public class CourseMapper {
                 .discount(dto.getDiscount())
                 .discountStartDate(dto.getDiscountStartDate())
                 .discountEndDate(dto.getDiscountEndDate())
-                .author( new AppUser(dto.getAuthor().getId()))
+               // .author( new AppUser(dto.getAuthor().getId()))
                 .coverImage(dto.getCoverImage())
                 //.studentsEnrolledCourse(enrolledStudents)
                 .rating(dto.getRating())
@@ -68,17 +68,7 @@ public class CourseMapper {
     }
 
 
-    public  CourseDto uploadRequestToDto(CourseUploadRequest courseUploadRequest, String coverImage) throws IOException {
-
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        if (user instanceof UserDetails userDetails) {
-            String username = userDetails.getUsername();
-
-            Optional<AppUser> appUser =	userRepository.findByUsername(username);
-            if (!appUser.isPresent()) {
-                throw new UsernameNotFoundException("can_not_upload_the_course_because_uploader_user_not_found ");
-            }
+    public static CourseDto uploadRequestToDto(CourseUploadRequest courseUploadRequest, String coverImage) throws IOException {
 
             return CourseDto.builder().title(courseUploadRequest.getTitle())
                     .description(courseUploadRequest.getDescription())
@@ -88,15 +78,14 @@ public class CourseMapper {
                     .discount(courseUploadRequest.getDiscount())
                     .discountStartDate(courseUploadRequest.getDiscountStartDate())
                     .discountEndDate(courseUploadRequest.getDiscountEndDate())
-                    .author(UserMapper.entityToPublicUserDto(appUser.get()))
+                   // .author(UserMapper.entityToPublicUserDto(appUser.get()))
                     .coverImage(coverImage)
                     .rating(0)
                     .reviewsCount(0)
                     .lecturesCount(0)
                     .enrolledStudentsCount(0)
                     .build();
-        }
-        throw new InternalServerErrorException("internal_server_error");
+
     }
 
 }

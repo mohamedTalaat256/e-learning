@@ -38,7 +38,7 @@ public class CourseServiceImpl implements CourseService {
     public CourseDto save(CourseUploadRequest courseUploadRequest, MultipartFile coverImageFile) throws IOException {
 
         String courseCoverImageName = FileUtils.SaveFileAndGetName(coverImageFile, courseUploadRequest.getTitle());
-        CourseDto courseDto = courseMapper.uploadRequestToDto(courseUploadRequest, courseCoverImageName);
+        CourseDto courseDto = CourseMapper.uploadRequestToDto(courseUploadRequest, courseCoverImageName);
         courseDto.setLecturesCount(0);
         courseDto.setEnrolledStudentsCount(0);
         courseDto.setReviewsCount(0);

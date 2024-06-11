@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { EMPTY_COURSE, FormMode, ReviewType, dialog_h_md, dialog_w_md, imagePlaceholder, imagesUrls, profileImagesUrls } from 'src/app/constants/constants';
 import { AppResponse } from 'src/app/model/app_response.model';
@@ -9,6 +9,7 @@ import { CourseService } from 'src/app/service/courses.service';
 import Swal from 'sweetalert2';
 import { ReviewDialogFormComponent } from '../review-dialog-form/review-dialog-form.component';
 import { take } from 'rxjs';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-buy-course',
@@ -27,6 +28,8 @@ export class BuyCourseComponent implements OnInit {
     private translate: TranslateService,
     private courseService: CourseService,
     private dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router
   
   ){}
 
@@ -57,21 +60,27 @@ export class BuyCourseComponent implements OnInit {
 
 
   openAddReviewDialog(){
-    const data = {
-      title: this.translate.instant('leave_review'),
-      formMode: FormMode.CREATE,
-      data: this.course,
-      reviewType: ReviewType.COURSE
-    };
-    const dialogRef = this.dialog.open(ReviewDialogFormComponent, {
-      width: dialog_w_md,
-      height: dialog_h_md,
-      data: data
-    });
- 
-    dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-     this.course.reviews.push(result);
-    });
+
+    if(this.authService.isAuthenticated()){
+      const data = {
+        title: this.translate.instant('leave_review'),
+        formMode: FormMode.CREATE,
+        data: this.course,
+        reviewType: ReviewType.COURSE
+      };
+      const dialogRef = this.dialog.open(ReviewDialogFormComponent, {
+        width: dialog_w_md,
+        height: dialog_h_md,
+        data: data
+      });
+   
+      dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
+       this.course.reviews.push(result);
+      });
+    }else{
+      this.router.navigate(['/login']);
+    }
+    
   }
 
 }
