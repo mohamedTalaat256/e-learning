@@ -39,6 +39,7 @@ public class PaymentServiceImpl {
                 PaymentIntentCreateParams.builder()
                         .setAmount(2000L)
                         .setCurrency("usd")
+                        .setCustomer("1")
                         .addAllPaymentMethodType(Collections.singletonList("card"))
                         .build();
 

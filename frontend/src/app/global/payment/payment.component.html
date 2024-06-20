@@ -1,6 +1,26 @@
-<p>payment works!</p>
-<p>{{course.price}}</p>
+ 
+ <button mat-raised-button class="rounded-2 px-5 py-2 btn-payment"  (click)="preparePayment()">Pay {{course.price}}</button>
 
-<button mat-raised-button color="primary" (click)="pay()">
-    Buy it for $999
-  </button>
+ <div>
+  <ng-container *ngIf="true">
+    <div class="shadow-sm m-2 p-5 rounded-1"> 
+      <!-- Stripe -->
+      <form id="payment-form" class="w-full">
+        <div id="link-authentication-element"> 
+        </div>
+        <div id="payment-element"> 
+        </div>
+        <button mat-raised-button class="rounded-2 px-5 py-2 btn-payment"  id="submit" (click)="makePayment()">
+          <div class="spinner hidden" id="spinner"></div>
+          <span id="button-text"> Pay  {{course.price}}  </span>
+        </button>
+        <div id="payment-message" class="hidden"></div>
+      </form> 
+    </div>
+  </ng-container>
+ <!--  <ng-container *ngIf="payment.openSuccess">
+    <div>
+      <h1>Thank you successfully Paid</h1>
+    </div>
+  </ng-container> -->
+</div>

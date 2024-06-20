@@ -3,9 +3,8 @@ import { take } from 'rxjs';
 import { AppResponse } from 'src/app/model/app_response.model';
 import { Course } from 'src/app/model/course.model';
 import { PaymentService } from 'src/app/service/payment.service';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
-import { Currency } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-payment',
@@ -15,89 +14,91 @@ import { Currency } from 'src/app/constants/constants';
 export class PaymentComponent implements OnInit {
 
 
-  @Input() course:Course;
+  @Input() course: Course;
 
-
-  constructor(private paymentService:PaymentService,
-  ){
+  elements;
+  stripe;
+  clientSecret;
+  openStripe: boolean = false;
+  constructor(private paymentService: PaymentService,
+  ) {
 
   }
 
   ngOnInit(): void {
-    
+    this.invokeStripe();
+
   }
-  stripePromise = loadStripe("pk_test_51LYUvnBVDibabXHisH0GvAI2H39DwKOoMLKVVVTNvqu4niaeCnMpQdJVkGQlPrOpDqjn6n6JBUpZt6tpr8swrH4u00IWn8PtCa");
 
- 
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://js.stripe.com/v3/';
+      script.onload = () => {
+        this.stripe = (<any>window).Stripe('pk_test_51LYUvnBVDibabXHisH0GvAI2H39DwKOoMLKVVVTNvqu4niaeCnMpQdJVkGQlPrOpDqjn6n6JBUpZt6tpr8swrH4u00IWn8PtCa');
+      };
+      window.document.body.appendChild(script);
+    }
+  }
 
-  async pay(): Promise<void> {
-    const stripe = await this.stripePromise;
-    const payment = {
-      name: this.course.title,
-      currency: Currency.EGY,
-      amount: this.course.price,
-      quantity: 1,
-      cancelUrl:  'http://localhost:4200/cancel',
-      successUrl: 'http://localhost:4200/success',
+
+
+  preparePayment() {
+    const data = { via: 'stripe' };
+    this.paymentService.getClientSecret(data).subscribe(
+      {
+        next: (response: AppResponse) => {
+          this.clientSecret = response.data;
+          this.initialize();
+        },
+        error: (error: AppResponse) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.status + " " + error.statusText
+          });
+        }
+      });
+  }
+
+
+
+
+
+  async initialize() {
+    const clientSecret = this.clientSecret;
+    const appearance = {
+      theme: 'stripe',
     };
+    this.elements = this.stripe.elements({ appearance, clientSecret });
 
-     this.paymentService.pay(payment).pipe(take(1)).subscribe({
-      next:(response: any)=>{
-        
-        console.log(response.data);
-        
-      
-        
-        stripe.initEmbeddedCheckout({
-          clientSecret: 'pi_3PQ5pXBVDibabXHi1L1rZMUB_secret_9Ec8x1e95EOm31hAjKNsTO1av'
-        });
-
-/*         stripe.redirectToCheckout({
-          sessionId: response.data.id,
-        }) */;
-        if(response.ok){
-          Swal.fire({ 
-            icon: "success",
-            title: response.message,
-            showConfirmButton: true,
-            timer: 1500
-          });
-        }
-      },
-      error:(error: AppResponse)=>{ 
-        Swal.fire({ 
-          icon: "error",
-          title: error.message,
-          showConfirmButton: true,
-          timer: 1500
-        });
-      }
-    }); 
+    const paymentElementOptions = {
+      layout: 'tabs',
+    };
+    const paymentElement = this.elements.create(
+      'payment',
+      paymentElementOptions
+    );
+    paymentElement.mount('#payment-element');
   }
 
 
-  cancel(id: string){
-    this.paymentService.cancel(id).pipe(take(1)).subscribe({
-      next:(response: any)=>{
-        if(response.ok){
-          Swal.fire({ 
-            icon: "success",
-            title: response.message,
-            showConfirmButton: true,
-            timer: 1500
-          });
-        }
+  async makePayment() {
+    let elements = this.elements;
+    const res = await this.stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: 'localhost:8090/api/stripe/payment/checkout',
+        receipt_email: '',
       },
-      error:(error: AppResponse)=>{ 
-        Swal.fire({ 
-          icon: "error",
-          title: error.message,
-          showConfirmButton: true,
-          timer: 1500
-        });
-      }
-    }); 
+    });
+
+    console.log(res.error.message);
   }
+
+
 
 
 

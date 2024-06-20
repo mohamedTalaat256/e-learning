@@ -17,6 +17,6 @@ export class AppComponent {
     }
     translate.use(localStorage.getItem('language'));
     
-  }
+  }z
 
 }

@@ -11,9 +11,9 @@ export class PaymentService {
 
   
 
-  public pay(requestbody: any): Observable<any> {
+  public getClientSecret(requestbody: any): Observable<any> {
 
-    return this.http.post<any>(baseURL+`/stripe/paymentintent`, requestbody);
+    return this.http.post<any>(baseURL+`/stripe/getClientSecret`, requestbody);
   }
 
   public confirm(id: string): Observable<any> {

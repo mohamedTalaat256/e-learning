@@ -20,7 +20,7 @@ public class PaymentController {
     PaymentServiceImpl paymentService;
 
 
-    @PostMapping("/paymentintent")
+    @PostMapping("/getClientSecret")
     public ResponseEntity<Object> payment(@RequestBody PaymentIntentDto dto) throws StripeException {
 
         //String paymentStr = paymentIntent.toJson();
