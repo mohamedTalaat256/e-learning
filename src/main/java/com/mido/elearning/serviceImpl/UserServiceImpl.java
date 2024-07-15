@@ -117,9 +117,9 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     }
 
     public AppUser getCurrentAuthUser() {
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userRepository.findByUsername( user.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("This User Not found with selected user name :- " + user.getUsername()));
+
+        AppUserDetail user = (AppUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new AppUser(user.getId());
     }
 
     public AppUser save(UserDto registerRequest) {

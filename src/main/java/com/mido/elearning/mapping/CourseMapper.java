@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class CourseMapper {
-    private final UserRepository userRepository;
+
 
     public static CourseDto entityToDto(Course entity){
 
@@ -57,7 +57,7 @@ public class CourseMapper {
                 .discount(dto.getDiscount())
                 .discountStartDate(dto.getDiscountStartDate())
                 .discountEndDate(dto.getDiscountEndDate())
-               // .author( new AppUser(dto.getAuthor().getId()))
+                .author( new AppUser(dto.getAuthor().getId()))
                 .coverImage(dto.getCoverImage())
                 //.studentsEnrolledCourse(enrolledStudents)
                 .rating(dto.getRating())
@@ -70,6 +70,7 @@ public class CourseMapper {
 
     public static CourseDto uploadRequestToDto(CourseUploadRequest courseUploadRequest, String coverImage) throws IOException {
 
+
             return CourseDto.builder().title(courseUploadRequest.getTitle())
                     .description(courseUploadRequest.getDescription())
                     .hours(courseUploadRequest.getHours())
@@ -78,7 +79,7 @@ public class CourseMapper {
                     .discount(courseUploadRequest.getDiscount())
                     .discountStartDate(courseUploadRequest.getDiscountStartDate())
                     .discountEndDate(courseUploadRequest.getDiscountEndDate())
-                   // .author(UserMapper.entityToPublicUserDto(appUser.get()))
+                    //.author(UserMapper.entityToPublicUserDto(appUser.get()))
                     .coverImage(coverImage)
                     .rating(0)
                     .reviewsCount(0)

@@ -5,6 +5,7 @@ import { Course } from 'src/app/model/course.model';
 import { PaymentService } from 'src/app/service/payment.service';
 import Swal from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
+import { baseURL } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-payment',
@@ -26,6 +27,7 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.course);
     this.invokeStripe();
 
   }
@@ -46,7 +48,10 @@ export class PaymentComponent implements OnInit {
 
 
   preparePayment() {
-    const data = { via: 'stripe' };
+    const data = { via: 'stripe',
+      courseId: this.course.id
+
+    };
     this.paymentService.getClientSecret(data).subscribe(
       {
         next: (response: AppResponse) => {
@@ -87,15 +92,22 @@ export class PaymentComponent implements OnInit {
 
   async makePayment() {
     let elements = this.elements;
+
+
+    let intentId = this.elements._commonOptions.clientSecret.id;
+
+    console.log(intentId);
+
     const res = await this.stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'localhost:8090/api/stripe/payment/checkout',
-        receipt_email: '',
+        return_url: 'http://localhost:4200/user/payment-success/',
+        //return_url: 'localhost:8090/api/stripe/confirm/'+ intentId,
+        receipt_email: 'midoen713@gmail.com',
       },
     });
 
-    console.log(res.error.message);
+    console.log(res);
   }
 
 

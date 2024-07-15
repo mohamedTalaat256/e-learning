@@ -9,9 +9,6 @@ import lombok.Setter;
 @Setter
 public class PaymentIntentDto {
 
-     String description;
-     int amount;
-
-     Currency currency;
-
+     private String via;
+     private Long courseId;
 }

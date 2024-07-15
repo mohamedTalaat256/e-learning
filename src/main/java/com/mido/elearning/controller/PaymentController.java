@@ -21,11 +21,9 @@ public class PaymentController {
 
 
     @PostMapping("/getClientSecret")
-    public ResponseEntity<Object> payment(@RequestBody PaymentIntentDto dto) throws StripeException {
+    public ResponseEntity<Object> payment(@RequestBody PaymentIntentDto data) throws StripeException {
 
-        //String paymentStr = paymentIntent.toJson();
-
-        return AppResponse.generateResponse("review_added_success", HttpStatus.OK, paymentService.checkout() ,true);
+        return AppResponse.generateResponse("review_added_success", HttpStatus.OK, paymentService.checkout(data.getCourseId()) ,true);
     }
 
 

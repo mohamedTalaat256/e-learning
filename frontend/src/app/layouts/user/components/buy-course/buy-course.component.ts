@@ -30,12 +30,12 @@ export class BuyCourseComponent implements OnInit {
     private dialog: MatDialog,
     private authService: AuthService,
     private router: Router
-  
+
   ){}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.getCourse(params['courseId']); });
-     
+
   }
 
 
@@ -47,15 +47,15 @@ export class BuyCourseComponent implements OnInit {
         this.course.rating = Math.ceil(this.course.rating);
       },
       error: (error: Error) => {
-        Swal.fire({ 
+        Swal.fire({
           icon: "error",
           title: error.message,
           showConfirmButton: true,
-         
+
         });
       }
     });
-    
+
   }
 
 
@@ -73,14 +73,16 @@ export class BuyCourseComponent implements OnInit {
         height: dialog_h_md,
         data: data
       });
-   
+
       dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
-       this.course.reviews.push(result);
+        if(result && result !== null){
+          this.course.reviews.push(result);
+        }
       });
     }else{
       this.router.navigate(['/login']);
     }
-    
+
   }
 
 }

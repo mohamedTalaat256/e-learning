@@ -26,7 +26,6 @@ import { MyCommunityComponent } from './layouts/admin/components/my-community/my
 import { NgApexchartsModule } from "ng-apexcharts";
 import { CourseDialogFormComponent  } from './layouts/admin/components/course-dialog-form/course-dialog-form.component';
 import { RatingStarComponent } from './global/rating-star/rating-star.component';
-
 import { UsersComponent } from './layouts/admin/components/users/users.component';
 import { ValidationMsgComponent } from './global/validation-msg/validation-msg.component';
 import { AdminDashboardComponent } from './layouts/admin/components/dashboard/admin-dashboard.component';
@@ -63,6 +62,8 @@ import { DatePipe } from '@angular/common';
 import { PaymentComponent } from './global/payment/payment.component';
 import { CourseOverviewComponent } from './layouts/user/components/course-overview/course-overview.component';
 import { UserToolBarComponent } from './layouts/user/components/user-tool-bar/user-tool-bar.component';
+import { NavBarComponent } from './layouts/public/components/nav-bar/nav-bar.component';
+import { PaymentSuccessComponent } from './layouts/public/components/payment-success/payment-success.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -116,7 +117,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     InputStarRatingComponent,
     ReviewDialogFormComponent,
     PaymentComponent,
-    UserToolBarComponent
+    UserToolBarComponent,
+    NavBarComponent,
+    PaymentSuccessComponent
   ],
   imports: [
     MatSidenavModule,

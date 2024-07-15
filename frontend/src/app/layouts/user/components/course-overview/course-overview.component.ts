@@ -53,7 +53,7 @@ export class CourseOverviewComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
   ) {}
- 
+
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -135,7 +135,7 @@ export class CourseOverviewComponent implements OnInit {
     .findReviewsByLectureId(lectureId)
     .pipe(take(1))
     .subscribe({
-      next: (response: AppResponse) => {  
+      next: (response: AppResponse) => {
         this.currentLecture.reviews = response.data;
       },
       error: (error: Error) => {
@@ -165,13 +165,13 @@ export class CourseOverviewComponent implements OnInit {
       height: '300px',
       data: data
     });
- 
+
     dialogRef.afterClosed().pipe(take(1)).subscribe(result => {
 
-      if(result){
+      if(result && result !== null){
         this.currentLecture.reviews.push(result);
       }
-    
+
     });
   }
 }

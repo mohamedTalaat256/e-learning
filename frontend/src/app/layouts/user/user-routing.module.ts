@@ -8,6 +8,7 @@ import { Page404Component } from 'src/app/global/page404/page404.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { BuyCourseComponent } from './components/buy-course/buy-course.component';
 import { CourseOverviewComponent } from './components/course-overview/course-overview.component';
+import { PaymentSuccessComponent } from '../public/components/payment-success/payment-success.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path:'my-courses/:courseId', component: CourseOverviewComponent},
       { path: 'buy-course/:courseId', component: BuyCourseComponent },
       {path:'enroll-to-course', component: UserDashboardComponent},
+      {path:'payment-success', component: PaymentSuccessComponent},
       { path: '**', pathMatch :'full' , component: Page404Component},
     ],
     canActivate: [userGuardService]

@@ -63,13 +63,14 @@ export class ReviewDialogFormComponent implements OnInit {
       .subscribe({
         next: (response: AppResponse) => {
           if (response.ok) {
-            this.dialogRef.close(response.data);
+
             Swal.fire({
               icon: 'success',
               title: this.tranlate.instant(response.message),
               showConfirmButton: false,
               timer: 1500,
             });
+            this.dialogRef.close(response.data);
           }
         },
         error: (error: AppResponse) => {

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-   // private final UserServiceImpl userService;
+    private final UserServiceImpl userService;
     private final CourseRepository courseRepository;
     private final LectureRepository lectureRepository;
 
@@ -51,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto save(ReviewDto reviewDto, ReviewType reviewType) {
 
 
-     //   reviewDto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
+        reviewDto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
 
         Review courseReview = reviewRepository.save(ReviewMapper.dtoToEntity(reviewDto));
 
@@ -62,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         ReviewDto dto = ReviewMapper.entityToDto(courseReview);
-       // dto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
+        dto.setAuthor(UserMapper.entityToPublicUserDto(userService.getCurrentAuthUser()));
 
         return dto;
     }

@@ -2,7 +2,10 @@ package com.mido.elearning.serviceImpl;
 
 
 import com.mido.elearning.Dto.PaymentIntentDto;
+import com.mido.elearning.entity.AppUser;
+import com.mido.elearning.entity.Course;
 import com.mido.elearning.enums.Currency;
+import com.mido.elearning.mapping.CourseMapper;
 import com.stripe.Stripe;
 import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
@@ -15,6 +18,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.PaymentMethodCreateParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +32,12 @@ public class PaymentServiceImpl {
 
     String secretKey ="sk_test_51LYUvnBVDibabXHi0Ay8kwZHh30CH4rl1UDGWqDqRNsXIVv9opL4UbW0LPVwWfT6mgQvxFkP3834prD0BRYTS4RC00ai21Y63S";
 
+
+    @Autowired
+    UserServiceImpl userService;
+
+    @Autowired
+    CourseServiceImpl courseService;
 
     public String getClientSecret() throws StripeException {
         Stripe.apiKey = secretKey;
@@ -52,7 +62,7 @@ public class PaymentServiceImpl {
 
         PaymentIntent paymentIntent = PaymentIntent.retrieve(id);
         Map<String, Object> params = new HashMap<>();
-        params.put("payment_method", "payment_card_visa");
+        params.put("payment_method", "card");
         paymentIntent.confirm(params);
         return paymentIntent;
     }
@@ -64,23 +74,24 @@ public class PaymentServiceImpl {
         return paymentIntent;
     }
 
-    public String checkout() throws StripeException {
+    public String checkout(Long courseId) throws StripeException {
+
+        AppUser user = userService.getCurrentAuthUser();
+        Course courseDate = CourseMapper.dtoToEntity(courseService.findById(courseId));
 
 
         Stripe.apiKey = secretKey;
-        String clientBaseURL = "localhost:4200";
-
 
         CustomerCreateParams customerCreateParams = CustomerCreateParams.builder()
-                .setName("mohamed")
-                .setEmail("mido@gmail.com")
+                .setName(user.getFirstName() + " "+ user.getLastName())
+                .setEmail(user.getEmail())
                 .build();
 
         Customer customer = Customer.create(customerCreateParams);
 
             PaymentIntentCreateParams params =
                 PaymentIntentCreateParams.builder()
-                        .setAmount(100L)
+                        .setAmount(courseDate.getPrice().longValue())
                         .setCurrency("usd")
                         .setCustomer(customer.getId())
                         .setAutomaticPaymentMethods(
@@ -93,7 +104,6 @@ public class PaymentServiceImpl {
 
         PaymentIntent paymentIntent = PaymentIntent.create(params);
 
-        // Send the client secret from the payment intent to the client
         return paymentIntent.getClientSecret();
     }
 }
